@@ -4,10 +4,10 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class Roles extends Component
+class AsignarController extends Component
 {
     public function render()
     {
-        return view('livewire.roles');
+        return view('livewire.asignar');
     }
 }

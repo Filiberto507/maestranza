@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Livewire\PermisosController;
+use App\Http\Livewire\RolesController;
+use App\Http\Livewire\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +23,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('roles', RolesController::class);
+Route::get('permisos', PermisosController::class);
+Route::get('users', UsersController::class);
