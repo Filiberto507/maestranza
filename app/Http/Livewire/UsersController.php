@@ -104,6 +104,10 @@ class UsersController extends Component
             'password.required' => 'Ingresa el password',
             'password.min' => 'El password debe tener al menos 3 catacteres'
         ];
+
+        //dd($this->profile,$this->name,$this->phone);
+
+        //dd($usar = User::select('*') );
         //validar los datos
         $this->validate($rules, $messages);
         //crear el usuario
@@ -115,7 +119,7 @@ class UsersController extends Component
             'profile' => $this->profile,
             'password' => bcrypt($this->password)
         ]);
-
+        dd($user);
         //para el rol
         //$user->syncRoles($this->profile);
         //validar img
@@ -161,7 +165,8 @@ class UsersController extends Component
         //validamos 
         $this->validate($rules, $messages);
         $user = User::find($this->selected_id);
-        //dd($this->profile);
+        //dd($user);
+        //dd($this->profile,$this->name,$this->phone);
         $user->Update([
             'name' => $this->name,
             'email' => $this->email,
@@ -170,16 +175,18 @@ class UsersController extends Component
             'profile' => $this->profile,
             'password' => bcrypt($this->password)
         ]);
-
+        //$user->save();
         //para el rol
-       // $user->syncRoles($this->profile);
-         /*//validar img
+        //$user->syncRoles($this->profile);
+         //validar img
+         //dd($user);
          if($this->image)
          {
              $customFileName = uniqid() . '_.' . $this->image->extension();
              $this->image->storeAs('public/users', $customFileName);
              $imageTemp = $user->image;
              $user->image = $customFileName;
+             
              $user->save();   
             // validar si existe una imagen
              if($imageTemp !=null)
@@ -191,7 +198,7 @@ class UsersController extends Component
                 }
              }
 
-         }*/
+         }
  
          $this->resetUI();
          $this->emit('user-updated', 'Usuario Actualizado');
