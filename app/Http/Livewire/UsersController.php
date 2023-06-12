@@ -86,8 +86,8 @@ class UsersController extends Component
         $rules = [
             'name' => 'required|min:3',
             'email' => 'required|unique:users|email',
-            //'status' => 'required|not_in:Elegir',
-            //'profile' => 'required|not_in:Elegir',
+            'status' => 'required|not_in:Elegir',
+            'profile' => 'required|not_in:Elegir',
             'password' => 'required|min:3'
         ];
 
@@ -97,10 +97,10 @@ class UsersController extends Component
             'email.required' => 'Ingrese el corre',
             'email.email' => 'Ingrese un correo valido',
             'email.unique' => 'El email ya existe en el sistema',
-            //'status.required' => 'Seleccione el estatus del usuario',
-            //'status.not_in' => 'Selecciona el estatus',
-           // 'profile.required' => 'Selecciona el perfil/role del usuario',
-            //'profile.not_in' => 'Selecciona un perfil/role distinto a Elegir',
+            'status.required' => 'Seleccione el estatus del usuario',
+            'status.not_in' => 'Selecciona el estatus',
+            'profile.required' => 'Selecciona el perfil/role del usuario',
+            'profile.not_in' => 'Selecciona un perfil/role distinto a Elegir',
             'password.required' => 'Ingresa el password',
             'password.min' => 'El password debe tener al menos 3 catacteres'
         ];
@@ -110,14 +110,14 @@ class UsersController extends Component
         $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
-            //'phone' => $this->phone,
-            //'status' => $this->status,
-            //'profile' => $this->profile,
+            'phone' => $this->phone,
+            'status' => $this->status,
+            'profile' => $this->profile,
             'password' => bcrypt($this->password)
         ]);
 
         //para el rol
-       // $user->syncRoles($this->profile);
+        //$user->syncRoles($this->profile);
         //validar img
         /*if($this->image)
         {
@@ -134,12 +134,13 @@ class UsersController extends Component
     //metodo actualizar
     public function Update()
     {
+        
         $rules = [
             //validar para que no exista el mismo correo
             'email' => "required|email|unique:users,email,{$this->selected_id}",
             'name' => 'required|min:3',
-            //'status' => 'required|not_in:Elegir',
-            //'profile' => 'required|not_in:Elegir',
+            'status' => 'required|not_in:Elegir',
+            'profile' => 'required|not_in:Elegir',
             'password' => 'required|min:3'
         ];
 
@@ -149,10 +150,10 @@ class UsersController extends Component
             'email.required' => 'Ingrese el corre',
             'email.email' => 'Ingrese un correo valido',
             'email.unique' => 'El email ya existe en el sistema',
-            //'status.required' => 'Seleccione el estatus del usuario',
-            //'status.not_in' => 'Selecciona el estatus',
-            //'profile.required' => 'Selecciona el perfil/role del usuario',
-            //'profile.not_in' => 'Selecciona un perfil/role distinto a Elegir',
+            'status.required' => 'Seleccione el estatus del usuario',
+            'status.not_in' => 'Selecciona el estatus',
+            'profile.required' => 'Selecciona el perfil/role del usuario',
+            'profile.not_in' => 'Selecciona un perfil/role distinto a Elegir',
             'password.required' => 'Ingresa el password',
             'password.min' => 'El password debe tener al menos 3 catacteres'
         ];
@@ -160,18 +161,19 @@ class UsersController extends Component
         //validamos 
         $this->validate($rules, $messages);
         $user = User::find($this->selected_id);
+        //dd($this->profile);
         $user->Update([
             'name' => $this->name,
             'email' => $this->email,
-            //'phone' => $this->phone,
-            //'status' => $this->status,
-           // 'profile' => $this->profile,
+            'phone' => $this->phone,
+            'status' => $this->status,
+            'profile' => $this->profile,
             'password' => bcrypt($this->password)
         ]);
 
-        /*//para el rol
-        $user->syncRoles($this->profile);
-         //validar img
+        //para el rol
+       // $user->syncRoles($this->profile);
+         /*//validar img
          if($this->image)
          {
              $customFileName = uniqid() . '_.' . $this->image->extension();
