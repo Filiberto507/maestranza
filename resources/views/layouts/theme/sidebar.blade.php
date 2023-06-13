@@ -133,7 +133,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{url('cashout')}}" class="menu-toggle" data-active="false">
+                <a href="{{url('acctaller')}}" class="menu-toggle" data-active="false">
                     <div class="base-menu">
                         <div class="base-icons">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -143,7 +143,7 @@
                                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                             </svg>
                         </div>
-                        <span>ARQUEOS</span>
+                        <span>Taller Accesorios</span>
                     </div>
                 </a>
             </li>

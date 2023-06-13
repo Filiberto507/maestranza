@@ -4,16 +4,15 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
-use App\Models\Taller;
 use App\Models\accesoriostaller;
 use Livewire\WithPagination;
 use DB;
 
-class TallerController extends Component
+class AccesoriostallerController extends Component
 {
     use WithPagination;
 
-    public $TallerName, $search, $selected_id, $pageTitle, $componentName, $check=[];
+    public $acctallerName, $search, $selected_id, $pageTitle, $componentName;
     private $pagination = 5;
 
     //traer el paginacion de bootstrap
@@ -26,20 +25,19 @@ class TallerController extends Component
     public function mount()
     {
         $this->pageTitle = 'Listado';
-        $this->componentName = 'Taller';
+        $this->componentName = 'Accesorios Taller';
     }
 
     public function render()
     {
        //validar si el usuario ingreso informacion
         if(strlen($this->search) > 0)
-            $Taller = Taller::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
+            $acctaller = accesoriostaller::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
         else
-        $Taller = Taller::orderBy('name', 'asc')->paginate($this->pagination);
-        
-        return view('livewire.taller.component',[
-            'taller' => $Taller,
-            'acctaller' => accesoriostaller::orderBy('id','asc')->get()
+        $acctaller = accesoriostaller::orderBy('id', 'asc')->paginate($this->pagination);
+
+        return view('livewire.accesoriostaller.component',[
+            'acctaller' => $acctaller
         ])
         //extender de layouts
         ->extends('layouts.theme.app')
@@ -53,10 +51,6 @@ class TallerController extends Component
         $this->search ='';
         $this->selected_id =0;
         $this->resetValidation();
-        $this->emit('taller-close', 'taller cerrar');
-    }
-
-    public function checks(){
-        dd($this->check);
+        $this->emit('acctaller-close', 'acctaller cerrar');
     }
 }

@@ -158,110 +158,20 @@
                         </div>
                     </div>
 
-
+                    @foreach($acctaller as $tall)
                     <div class="col-sm-4">
                         <div class="form-group">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
+                                <input wire:model="check" value="{{$tall->id}}, {{$tall->name}}" class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
+                                
                                 <label class="form-check-label" for="gridCheck">
-                                    Estuche de Herramientas y algo mas
+                                    {{$tall->name}}
                                 </label>
+                                
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Estuche de Herramientas y algo mas
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Estuche de Herramientas y algo mas
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Estuche de Herramientas y algo mas
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Estuche de Herramientas y algo mas
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Estuche de Herramientas y algo mas
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Estuche de Herramientas y algo mas
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Estuche de Herramientas y algo mas
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Estuche de Herramientas y algo mas
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Estuche de Herramientas y algo mas
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <div>
@@ -270,7 +180,7 @@
                             CERRAR
                         </button>
 
-                        @if($selected_id < 1) <button type="button" wire:click.prevent="CreateRole()" class="btn btn-dark close-modal">
+                        @if($selected_id < 1) <button type="button" wire:click.prevent="checks()" class="btn btn-dark close-modal">
                             GUARDAR
                             </button>
                             @else
