@@ -40,6 +40,7 @@
                                 <td class="text-center">
                                     <h6>{{$tall->name}}</h6>
                                 </td>
+                                
                                 <td class="text-center">
                                     <a href="javascript:void(0)" 
                                     wire:click="Edit({{$tall->id}})"
@@ -76,8 +77,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         //evento ocultar la ventana modal y notificar
-        window.livewire.on('role-added', Msg => {
-            $('#theModal').modal('hide')
+        window.livewire.on('taller-ok', Msg => {
+            //llamar a la funcion del backend
+            noty(Msg)
         })
         //evento ocultar la ventana modal y notificar
         window.livewire.on('role-updated', Msg => {
@@ -94,7 +96,7 @@
         })
 
         //evento notificar
-        window.livewire.on('role-error', Msg => {
+        window.livewire.on('taller-error', Msg => {
             noty(Msg)
         })
 

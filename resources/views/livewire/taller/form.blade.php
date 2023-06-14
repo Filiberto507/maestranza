@@ -12,17 +12,30 @@
             <div class="modal-body">
                 <div class="row">
 
-                    <div class="col-sm-12 mt-2">
-                        <h6>Fecha Entrada</h6>
+                    <div class="col-sm-4 mt2">
                         <div class="form-group">
-                            <input type="text" wire:model="dateFrom" class="form-control flatpickr" placeholder="Click para elegir">
+                            <label>Entrada</label>
+                            <input type="time" wire:model.lazy="ingreso" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mt2">
+                        <div class="form-group">
+                            <label>Salida</label>
+                            <input type="time" wire:model.lazy="salida" class="form-control" />
                         </div>
                     </div>
 
-                    <div class="col-sm-12 mt-2">
+                    <div class="col-sm-6 mt-2">
+                        <h6>Fecha Entrada</h6>
+                        <div class="form-group">
+                            <input type="text" wire:model.lazy="fecha_ingreso" class="form-control flatpickr" placeholder="Click para elegir">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 mt-2">
                         <h6>Fecha Salida</h6>
                         <div class="form-group">
-                            <input type="text" wire:model="dateTo" class="form-control flatpickr" placeholder="Click para elegir">
+                            <input type="text" wire:model.lazy="fecha_salida" class="form-control flatpickr" placeholder="Click para elegir">
                         </div>
                     </div>
 
@@ -31,18 +44,7 @@
                         <input id="appt-time" type="time" name="appt-time" value="13:30" />
                     </div> -->
 
-                    <div class="col-sm-4 mt2">
-                        <div class="form-group">
-                            <label>Entrada</label>
-                            <input type="time" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-4 mt2">
-                        <div class="form-group">
-                            <label>Salida</label>
-                            <input type="time" class="form-control" />
-                        </div>
-                    </div>
+
 
                     <div class="col-sm-5">
                         <div class="form-group">
@@ -55,9 +57,9 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" wire:model.lazy="TallerName" class="form-control" placeholder="ej: Admin" maxlength="255">
+                                <input type="text" wire:model.lazy="name" class="form-control" placeholder="Nombre" maxlength="255">
                             </div>
-                            @error('TallerName')
+                            @error('name')
                             <span class="text-danger er"> {{ $message }} </span>
                             @enderror
                         </div>
@@ -74,14 +76,14 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" wire:model.lazy="TallerName" class="form-control" placeholder="ej: Admin" maxlength="255">
+                                <input type="text" wire:model.lazy="vehiculo" class="form-control" placeholder="Vehiculo" maxlength="255">
                             </div>
-                            @error('TallerName')
+                            @error('vehiculo')
                             <span class="text-danger er"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
-                    
+
                     <div class="col-sm-4 ">
                         <div class="form-group">
                             <div class="input-group">
@@ -93,9 +95,9 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" wire:model.lazy="TallerName" class="form-control" placeholder="Kilometraje" maxlength="255">
+                                <input type="text" wire:model.lazy="color" class="form-control" placeholder="color" maxlength="255">
                             </div>
-                            @error('TallerName')
+                            @error('color')
                             <span class="text-danger er"> {{ $message }} </span>
                             @enderror
                         </div>
@@ -112,9 +114,9 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" wire:model.lazy="TallerName" class="form-control" placeholder="ej: Admin" maxlength="255">
+                                <input type="text" wire:model.lazy="dependencia" class="form-control" placeholder="Dependencia" maxlength="255">
                             </div>
-                            @error('TallerName')
+                            @error('dependencia')
                             <span class="text-danger er"> {{ $message }} </span>
                             @enderror
                         </div>
@@ -131,9 +133,9 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" wire:model.lazy="TallerName" class="form-control" placeholder="Vehiculo" maxlength="255">
+                                <input type="text" wire:model.lazy="placa" class="form-control" placeholder="Placa" maxlength="255">
                             </div>
-                            @error('TallerName')
+                            @error('placa')
                             <span class="text-danger er"> {{ $message }} </span>
                             @enderror
                         </div>
@@ -150,29 +152,38 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" wire:model.lazy="TallerName" class="form-control" placeholder="Color" maxlength="255">
+                                <input type="text" wire:model.lazy="kilometraje" class="form-control" placeholder="Kilometraje" maxlength="255">
                             </div>
-                            @error('TallerName')
+                            @error('kilometraje')
                             <span class="text-danger er"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
+
+                   
 
                     @foreach($acctaller as $tall)
                     <div class="col-sm-4">
                         <div class="form-group">
                             <div class="form-check">
                                 <input wire:model="check" value="{{$tall->id}}, {{$tall->name}}" class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
-                                
+
                                 <label class="form-check-label" for="gridCheck">
                                     {{$tall->name}}
                                 </label>
-                                
+
                             </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
+
+                <div class="col-sm-12 mt-2">
+                        <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Orden Trabajo</label>
+                                <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>  
+                    </div>
 
                 <div>
                     <div class="modal-footer">
@@ -180,7 +191,7 @@
                             CERRAR
                         </button>
 
-                        @if($selected_id < 1) <button type="button" wire:click.prevent="checks()" class="btn btn-dark close-modal">
+                        @if($selected_id < 1) <button type="button" wire:click.prevent="create_taller()" class="btn btn-dark close-modal">
                             GUARDAR
                             </button>
                             @else

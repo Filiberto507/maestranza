@@ -10,6 +10,12 @@ class Taller extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+       'ingreso', 'salida', 'fecha_ingreso','fecha_salida', 'name','vehiculo','color','dependencia','placa','kilometraje','ordentrabajo'
     ];
+
+    public function tallerdetalle()
+    {
+        return $this->hasMany(tallerdetalle::class);
+
+    }
 }

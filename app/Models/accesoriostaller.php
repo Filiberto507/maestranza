@@ -11,5 +11,11 @@ class accesoriostaller extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function accesoriostaller()
+    {
+        return $this->hasMany(accesoriostaller::class);
+
+    }
 }
 

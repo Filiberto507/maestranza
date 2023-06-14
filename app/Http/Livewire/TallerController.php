@@ -6,7 +6,9 @@ use App\Models\User;
 use Livewire\Component;
 use App\Models\Taller;
 use App\Models\accesoriostaller;
+use App\Models\tallerdetalle;
 use Livewire\WithPagination;
+use Carbon\Carbon;
 use DB;
 
 class TallerController extends Component
@@ -14,6 +16,8 @@ class TallerController extends Component
     use WithPagination;
 
     public $TallerName, $search, $selected_id, $pageTitle, $componentName, $check=[];
+    public $ingreso, $salida, $fecha_ingreso, $fecha_salida, $name, $vehiculo, $color, 
+            $dependencia, $placa, $kilometraje, $ordentrabajo;
     private $pagination = 5;
 
     //traer el paginacion de bootstrap
@@ -49,14 +53,132 @@ class TallerController extends Component
 
     public function resetUI()
     {
+        //dd($this->check);
         $this->TallerName ='';
+        $this->ingreso='';
+        $this->salida='';
+        $this->fecha_ingreso='';
+        $this->fecha_salida='';
+        $this->name='';
+        $this->vehiculo='';
+        $this->color='';
+        $this->dependencia='';
+        $this->placa='';
+        $this->kilometraje='';
+        $this->ordentrabajo='';
+        $this->check=[];
         $this->search ='';
         $this->selected_id =0;
+        //dd($this->check);
         $this->resetValidation();
         $this->emit('taller-close', 'taller cerrar');
     }
 
     public function checks(){
         dd($this->check);
+    }
+
+    public function create_taller(){
+        //dd($this->check);
+        // dd($this->TallerName ,
+        // $this->ingreso,
+        // $this->salida,
+        // $this->fecha_ingreso,
+        // $this->fecha_salida,
+        // $this->name,
+        // $this->vehiculo,
+        // $this->color,
+        // $this->dependencia,
+        // $this->placa,
+        // $this->kilometraje,
+        // $this->ordentrabajo,
+        // $this->check);
+        try {
+            //guardar 
+            $talleres = Taller::create([
+
+                'ingreso' => $this->ingreso,
+                'salida' => $this->salida,
+                'fecha_ingreso' => $this->fecha_ingreso,
+                'fecha_salida' => $this->fecha_salida,
+                'name' => $this->name,
+                'vehiculo' => $this->vehiculo,
+                'color' => $this->color,
+                'dependencia' => $this->dependencia,
+                'placa' => $this->placa,
+                'kilometraje' => $this->kilometraje,
+                'ordentrabajo' => $this->ordentrabajo,
+                //'user_id' => Auth()->user()->id
+            ]);
+            //dd($talleres->id);
+            //validar si se guardo
+            if($talleres)
+            {
+                //guardar detalle de recepcion
+                $items = $this->check;
+                
+                foreach ($items as $item) {
+                    
+                    tallerdetalle::create([
+                        
+                        'acctaller_id' => $item[0],
+                        'taller_id' => $talleres->id
+                    ]);
+                    
+                }
+            }
+            //confirma la transaccion
+           DB::commit();
+
+           //limpiar el carrito y reinicar las variables
+
+           
+            $this->emit('taller-ok','recepcion registrada con exito');
+            //$this->emit('print-ticket', $talleres->id);
+            $this->resetUI();
+        } catch (Exception $e) {
+            //borrar las acciones incompletas
+            DB::rollback();
+            $this->emit('taller-error', $e->getMessage());
+
+        }
+    }
+
+    public function Edit(Taller $taller)
+    {
+         //dd($this->check);
+        //dd($taller);
+
+        $this->selected_id = $taller->id;
+        $this->ingreso = $taller->ingreso;
+        $this->salida = $taller->salida;
+        $this->fecha_ingreso = $taller->fecha_ingreso;
+        $this->fecha_salida = $taller->fecha_salida;
+        $this->name = $taller->name;
+        $this->vehiculo = $taller->vehiculo;
+        $this->color = $taller->color;
+        $this->dependencia = $taller->dependencia;
+        $this->placa = $taller->placa;
+        $this->kilometraje = $taller->kilometraje;
+        $this->ordentrabajo = $taller->ordentrabajo;
+        $acctaller = accesoriostaller::orderBy('id', 'asc')->get();
+
+        //dd($acctaller);
+        foreach ($acctaller as $tall) {
+
+            $tallerherr= Taller::find($this->selected_id)->first('id');
+            //dd($tallerherr->id);
+            //buscar si tiene asginado ese permiso
+            //$tieneherr= tallerdetalle::find($tallerherr->id)->get();
+            $tieneherr = tallerdetalle::where('taller_id', $tallerherr->id && $tall->id=='acctaller_id')->get();
+            //dd($tieneherr);
+            if($tieneherr){
+                $tall->checked = 1;
+            }
+            
+        }
+        dd($acctaller);
+
+        $this->emit('show-modal', 'open!');
     }
 }
