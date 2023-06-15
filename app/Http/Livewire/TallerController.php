@@ -17,7 +17,7 @@ class TallerController extends Component
 
     public $TallerName, $search, $selected_id, $pageTitle, $componentName, $check=[];
     public $ingreso, $salida, $fecha_ingreso, $fecha_salida, $name, $vehiculo, $color, 
-            $dependencia, $placa, $kilometraje, $ordentrabajo;
+            $dependencia, $placa, $kilometraje, $ordentrabajo, $acctaller, $acctaller2;
     private $pagination = 5;
 
     //traer el paginacion de bootstrap
@@ -40,10 +40,12 @@ class TallerController extends Component
             $Taller = Taller::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
         else
         $Taller = Taller::orderBy('name', 'asc')->paginate($this->pagination);
+        $this->acctaller = accesoriostaller::orderBy('id','asc')->get();
+        //dd($acctaller);
         
         return view('livewire.taller.component',[
             'taller' => $Taller,
-            'acctaller' => accesoriostaller::orderBy('id','asc')->get()
+            'acctaller' => $this->acctaller
         ])
         //extender de layouts
         ->extends('layouts.theme.app')
@@ -79,6 +81,7 @@ class TallerController extends Component
     }
 
     public function create_taller(){
+        //dd($this->acctaller);
         //dd($this->check);
         // dd($this->TallerName ,
         // $this->ingreso,
@@ -112,16 +115,16 @@ class TallerController extends Component
             ]);
             //dd($talleres->id);
             //validar si se guardo
-            if($talleres)
-            {
+            if($talleres){
                 //guardar detalle de recepcion
                 $items = $this->check;
-                
+                //dump($items);
                 foreach ($items as $item) {
-                    
+                    //dump(explode(',', $item)[0]);
+                    //explide -> divide una cadena usando un separador que definas en este caso la ,
                     tallerdetalle::create([
                         
-                        'acctaller_id' => $item[0],
+                        'acctaller_id' => explode(',', $item)[0],
                         'taller_id' => $talleres->id
                     ]);
                     
@@ -161,23 +164,31 @@ class TallerController extends Component
         $this->placa = $taller->placa;
         $this->kilometraje = $taller->kilometraje;
         $this->ordentrabajo = $taller->ordentrabajo;
-        $acctaller = accesoriostaller::orderBy('id', 'asc')->get();
+        $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
 
         //dd($acctaller);
-        foreach ($acctaller as $tall) {
+        foreach ($acctalleres as $tall) {
 
-            $tallerherr= Taller::find($this->selected_id)->first('id');
+            $tallerid= Taller::find($this->selected_id)->first();
             //dd($tallerherr->id);
+            $tallerherramientas = tallerdetalle::where('taller_id',$tallerid->id )->get();
+            //dd($tallerherramientas);
+            //dd($tallobtherramientas);
             //buscar si tiene asginado ese permiso
             //$tieneherr= tallerdetalle::find($tallerherr->id)->get();
-            $tieneherr = tallerdetalle::where('taller_id', $tallerherr->id && $tall->id=='acctaller_id')->get();
-            //dd($tieneherr);
-            if($tieneherr){
+            $obtenercheck =$tallerherramientas->where( 'acctaller_id', $tall->id)->first();
+            //dd($obtenercheck);
+            //$this->roles()->where('nombre', $nombreRol)->exists();
+            //dump($obtenercheck);
+             if($obtenercheck){
+                //dump($obtenercheck);
                 $tall->checked = 1;
-            }
-            
+                //$acctalleres->pull($tall->id);
+             }
+             
         }
-        dd($acctaller);
+        $this->acctaller2=$acctalleres;
+        //dd($this->acctaller);
 
         $this->emit('show-modal', 'open!');
     }

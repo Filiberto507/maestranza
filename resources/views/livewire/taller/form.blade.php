@@ -161,12 +161,13 @@
                     </div>
 
                    
-
+                @if($selected_id==null)
                     @foreach($acctaller as $tall)
                     <div class="col-sm-4">
                         <div class="form-group">
                             <div class="form-check">
-                                <input wire:model="check" value="{{$tall->id}}, {{$tall->name}}" class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="gridCheck">
+                                <input wire:model.lazy="check" value="{{$tall->id}}, {{$tall->name}}" class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="{{$tall->id}}"
+                                {{ $tall->checked == 1 ? 'checked': '' }}>
 
                                 <label class="form-check-label" for="gridCheck">
                                     {{$tall->name}}
@@ -177,6 +178,26 @@
                     </div>
                     @endforeach
                 </div>
+                @else
+                    @foreach($acctaller2 as $tall)
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input wire:model="check" value="{{$tall->id}}, {{$tall->name}}" class="form-check-input" type="checkbox" style="width:20px; height:20px;" 
+                                id="{{$tall->id}}"
+                                @if ($tall->checked == 1) checked @endif>
+
+                                <label class="form-check-label" for="gridCheck">
+                                    {{$tall->name}}
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                
+                @endif
+                
 
                 <div class="col-sm-12 mt-2">
                         <div class="form-group">
