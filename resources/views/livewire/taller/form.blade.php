@@ -161,14 +161,14 @@
                     </div>
 
                    
-                @if($selected_id==null)
+              
                     @foreach($acctaller as $tall)
                     <div class="col-sm-4">
                         <div class="form-group">
                             <div class="form-check">
-                                <input wire:model.lazy="check" value="{{$tall->id}}, {{$tall->name}}" class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="{{$tall->id}}"
-                                {{ $tall->checked == 1 ? 'checked': '' }}>
-
+                                <input wire:model="check"  value="{{$tall->id}}, {{$tall->name}}" class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="{{$tall->id}}"
+                                 >
+                                
                                 <label class="form-check-label" for="gridCheck">
                                     {{$tall->name}}
                                 </label>
@@ -178,25 +178,7 @@
                     </div>
                     @endforeach
                 </div>
-                @else
-                    @foreach($acctaller2 as $tall)
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input wire:model="check" value="{{$tall->id}}, {{$tall->name}}" class="form-check-input" type="checkbox" style="width:20px; height:20px;" 
-                                id="{{$tall->id}}"
-                                @if ($tall->checked == 1) checked @endif>
-
-                                <label class="form-check-label" for="gridCheck">
-                                    {{$tall->name}}
-                                </label>
-
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
                 
-                @endif
                 
 
                 <div class="col-sm-12 mt-2">
@@ -216,7 +198,7 @@
                             GUARDAR
                             </button>
                             @else
-                            <button type="button" wire:click.prevent="UpdateRole()" class="btn btn-dark close-modal">
+                            <button type="button" wire:click.prevent="UpdateTaller()" class="btn btn-dark close-modal">
                                 ACTUALIZAR
                             </button>
                             @endif

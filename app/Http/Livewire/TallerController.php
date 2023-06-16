@@ -31,15 +31,18 @@ class TallerController extends Component
     {
         $this->pageTitle = 'Listado';
         $this->componentName = 'Taller';
+    //     $this->check=[
+    //         "12, Estuche de Herramientas",
+    // "18, Luz de Placa"
+    //     ];
     }
-
     public function render()
     {
        //validar si el usuario ingreso informacion
         if(strlen($this->search) > 0)
             $Taller = Taller::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
         else
-        $Taller = Taller::orderBy('name', 'asc')->paginate($this->pagination);
+        $Taller = Taller::orderBy('id', 'desc')->paginate($this->pagination);
         $this->acctaller = accesoriostaller::orderBy('id','asc')->get();
         //dd($acctaller);
         
@@ -146,6 +149,7 @@ class TallerController extends Component
 
         }
     }
+   
 
     public function Edit(Taller $taller)
     {
@@ -168,28 +172,95 @@ class TallerController extends Component
 
         //dd($acctaller);
         foreach ($acctalleres as $tall) {
-
-            $tallerid= Taller::find($this->selected_id)->first();
+            //buscado el id del taller 
+            $tallerid= Taller::find($this->selected_id);
             //dd($tallerherr->id);
+            //obtenemos todos los id de las herramientas que tiene el taller id
             $tallerherramientas = tallerdetalle::where('taller_id',$tallerid->id )->get();
             //dd($tallerherramientas);
-            //dd($tallobtherramientas);
-            //buscar si tiene asginado ese permiso
-            //$tieneherr= tallerdetalle::find($tallerherr->id)->get();
+           
+            //buscamos si existe esa herramienta agregado o no
             $obtenercheck =$tallerherramientas->where( 'acctaller_id', $tall->id)->first();
-            //dd($obtenercheck);
-            //$this->roles()->where('nombre', $nombreRol)->exists();
             //dump($obtenercheck);
+            //exists sirve para obtener valor en boleano
+            //$this->roles()->where('nombre', $nombreRol)->exists();
+
+            // verificar si tenemos datos en obtenercheck
              if($obtenercheck){
-                //dump($obtenercheck);
+                //dump($obtenercheck->acctaller_id);
+                $addcheck=accesoriostaller::find($obtenercheck->acctaller_id);
+                //dump($addcheck);
                 $tall->checked = 1;
+                $this->check [] = 
+                     $addcheck->id.", ".
+                     $addcheck->name
+                ;
+                
                 //$acctalleres->pull($tall->id);
              }
              
         }
-        $this->acctaller2=$acctalleres;
+        //dd($this->check);
+        $this->acctaller=$acctalleres;
         //dd($this->acctaller);
 
         $this->emit('show-modal', 'open!');
+    }
+
+    public function UpdateTaller(){
+
+        dd($this->check);
+        //buscar por el id 
+        $talleres = Taller::find($this->selected_id);
+        
+        try {
+            //guardar 
+            $talleres->update([
+
+                'ingreso' => $this->ingreso,
+                'salida' => $this->salida,
+                'fecha_ingreso' => $this->fecha_ingreso,
+                'fecha_salida' => $this->fecha_salida,
+                'name' => $this->name,
+                'vehiculo' => $this->vehiculo,
+                'color' => $this->color,
+                'dependencia' => $this->dependencia,
+                'placa' => $this->placa,
+                'kilometraje' => $this->kilometraje,
+                'ordentrabajo' => $this->ordentrabajo,
+                //'user_id' => Auth()->user()->id
+            ]);
+            //dd($talleres->id);
+            //validar si se guardo
+            if($talleres){
+                //guardar detalle de checkbox de recepcion
+                $items = $this->check;
+                //dump($items);
+                foreach ($items as $item) {
+                    //dump(explode(',', $item)[0]);
+                    //explide -> divide una cadena usando un separador que definas en este caso la ,
+                    tallerdetalle::updated([
+                        
+                        'acctaller_id' => explode(',', $item)[0],
+                        'taller_id' => $talleres->id
+                    ]);
+                    
+                }
+            }
+            //confirma la transaccion
+           DB::commit();
+
+           //limpiar el carrito y reinicar las variables
+
+           
+            $this->emit('taller-ok','recepcion registrada con exito');
+            //$this->emit('print-ticket', $talleres->id);
+            $this->resetUI();
+        } catch (Exception $e) {
+            //borrar las acciones incompletas
+            DB::rollback();
+            $this->emit('taller-error', $e->getMessage());
+
+        }
     }
 }
