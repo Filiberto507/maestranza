@@ -160,15 +160,14 @@
                         </div>
                     </div>
 
-                   
-              
+
+
                     @foreach($acctaller as $tall)
                     <div class="col-sm-4">
                         <div class="form-group">
                             <div class="form-check">
-                                <input wire:model="check"  value="{{$tall->id}}, {{$tall->name}}" class="form-check-input" type="checkbox" style="width:20px; height:20px;" id="{{$tall->id}}"
-                                 >
-                                
+                                <input wire:model="check" value="{{$tall->id}}, {{$tall->name}}" class=" miCheckbox form-check-input" type="checkbox" style="width:20px; height:20px;" id="{{$tall->id}}">
+
                                 <label class="form-check-label" for="gridCheck">
                                     {{$tall->name}}
                                 </label>
@@ -178,15 +177,15 @@
                     </div>
                     @endforeach
                 </div>
-                
-                
+
+
 
                 <div class="col-sm-12 mt-2">
-                        <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Orden Trabajo</label>
-                                <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>  
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Orden Trabajo</label>
+                        <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
+                </div>
 
                 <div>
                     <div class="modal-footer">
@@ -201,6 +200,8 @@
                             <button type="button" wire:click.prevent="UpdateTaller()" class="btn btn-dark close-modal">
                                 ACTUALIZAR
                             </button>
+
+                            <button onclick="mostrarValores()">Mostrar Valores</button>
                             @endif
                     </div>
                 </div>
@@ -267,4 +268,18 @@
 
 
             });
+
+            //funcion para obtener los checks
+            function mostrarValores() {
+                var checkboxes = document.getElementsByClassName("miCheckbox");
+                var valoresSeleccionados = [];  
+
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].checked) {
+                        valoresSeleccionados.push(checkboxes[i].value);
+                    }
+                }
+
+                console.log(valoresSeleccionados);
+            }
         </script>
