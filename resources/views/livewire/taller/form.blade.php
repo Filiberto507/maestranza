@@ -57,7 +57,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" wire:model.lazy="name" class="form-control" placeholder="Nombre" maxlength="255">
+                                <input type="text" id="conductor" wire:model.lazy="name" class="form-control" placeholder="Nombre" maxlength="255">
                             </div>
                             @error('name')
                             <span class="text-danger er"> {{ $message }} </span>
@@ -76,7 +76,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" wire:model.lazy="vehiculo" class="form-control" placeholder="Vehiculo" maxlength="255">
+                                <input type="text" id="vehiculo" wire:model.lazy="vehiculo" class="form-control" placeholder="Vehiculo" maxlength="255">
                             </div>
                             @error('vehiculo')
                             <span class="text-danger er"> {{ $message }} </span>
@@ -95,7 +95,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" wire:model.lazy="color" class="form-control" placeholder="color" maxlength="255">
+                                <input type="text" id="color" wire:model.lazy="color" class="form-control" placeholder="color" maxlength="255">
                             </div>
                             @error('color')
                             <span class="text-danger er"> {{ $message }} </span>
@@ -114,7 +114,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" wire:model.lazy="dependencia" class="form-control" placeholder="Dependencia" maxlength="255">
+                                <input type="text" id="dependencia" wire:model.lazy="dependencia" class="form-control" placeholder="Dependencia" maxlength="255">
                             </div>
                             @error('dependencia')
                             <span class="text-danger er"> {{ $message }} </span>
@@ -133,7 +133,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" wire:model.lazy="placa" class="form-control" placeholder="Placa" maxlength="255">
+                                <input type="text" id="placa" wire:model.lazy="placa" class="form-control" placeholder="Placa" maxlength="255">
                             </div>
                             @error('placa')
                             <span class="text-danger er"> {{ $message }} </span>
@@ -152,7 +152,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" wire:model.lazy="kilometraje" class="form-control" placeholder="Kilometraje" maxlength="255">
+                                <input type="text" id="kilometraje" wire:model.lazy="kilometraje" class="form-control" placeholder="Kilometraje" maxlength="255">
                             </div>
                             @error('kilometraje')
                             <span class="text-danger er"> {{ $message }} </span>
@@ -176,9 +176,68 @@
                         </div>
                     </div>
                     @endforeach
+
+
+                    
+
                 </div>
 
-
+                <div class="row">
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Orden Trabajo</label>
+                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Orden Trabajo</label>
+                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Orden Trabajo</label>
+                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Orden Trabajo</label>
+                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Orden Trabajo</label>
+                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Orden Trabajo</label>
+                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Orden Trabajo</label>
+                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Orden Trabajo</label>
+                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Orden Trabajo</label>
+                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-sm-12 mt-2">
                     <div class="form-group">
@@ -272,14 +331,22 @@
             //funcion para obtener los checks
             function mostrarValores() {
                 var checkboxes = document.getElementsByClassName("miCheckbox");
-                var valoresSeleccionados = [];  
+                var vehiculo = document.getElementById('vehiculo').value;
+                var conductor = document.getElementById('conductor').value;
+                var color = document.getElementById('color').value;
+                var dependencia = document.getElementById('dependencia').value;
+                var placa = document.getElementById('placa').value;
+                var kilometraje = document.getElementById('kilometraje').value;
+                var valoresSeleccionados = [];
 
                 for (var i = 0; i < checkboxes.length; i++) {
                     if (checkboxes[i].checked) {
                         valoresSeleccionados.push(checkboxes[i].value);
+                        console.log(valoresSeleccionados);
                     }
                 }
 
-                console.log(valoresSeleccionados);
+                //console.log(vehiculo, conductor, color, dependencia, placa, kilometraje, valoresSeleccionados);
+                //console.log(valoresSeleccionados);
             }
         </script>
