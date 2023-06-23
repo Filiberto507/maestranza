@@ -39,15 +39,11 @@ Route::get('permisos', PermisosController::class);
 Route::get('users', UsersController::class);
 Route::get('asignar', AsignarController::class);
 Route::get('taller', TallerController::class);
-<<<<<<< HEAD
+
 Route::get('accesorios', AccesoriosController::class);
 
 
 
-//Route Hooks - Do not delete//
-=======
 Route::get('acctaller', AccesoriostallerController::class);
 Route::get('conductor', ConductorController::class);
 
-//select2
->>>>>>> ae8fc263512454be4fa8e7b0b7c14cfe839afcc7

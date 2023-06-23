@@ -24,7 +24,7 @@ class DependenciasController extends Component
     {
         $this->pageTitle ='Listado';
         $this->componentName = 'Dependencias';
-        $this->status ='Elegir';
+        
     }
 
     public function render()
@@ -34,7 +34,9 @@ class DependenciasController extends Component
         else
             $Data= Dependencia::orderBy('id', 'asc')->paginate($this->pagination);
 
-        $Data = Dependencia::All();
+        
+
+
         return view('livewire.dependencias.component',['Dependencias'=>$Data])
         ->extends('layouts.theme.app')
         ->section('content');
@@ -51,16 +53,16 @@ class DependenciasController extends Component
         $this->emit('show-modal', 'show modal');
         
     }*/
-    public function Edt(Dependencia $Dependencias)
+    public function Edit(Dependencia $Dependencias)
     {
-       dd($Dependencias);
+       //dd($Dependencias);
         $this->selected_id = $Dependencias->id;
         $this->nombre = $Dependencias->nombre;
         $this->emit('show-modal', 'SHOW MODAL');
     }
     public function Store()
     {
-        dd('hola');
+        
         $rules = [
             'nombre' => 'required|min:3|unique:dependencias,nombre',
         ];
@@ -75,9 +77,9 @@ class DependenciasController extends Component
         $this->validate($rules, $messages);
 
         $Dependencias=Dependencia::create(['nombre' => $this->nombre]);
-        dd($Dependencias);
+       // dd($Dependencias);
         $this->resetUI();
-        $this->emit('dep-added', 'Se registro la dependencia con exito');
+        $this->emit('dependencia-added', 'Se registro la dependencia con exito');
         
         
     }
@@ -89,5 +91,6 @@ class DependenciasController extends Component
         $this->resetValidation();
         //para regresar a la pagina principal
         $this->resetPage();
+        $this->emit('dependencia-close', 'dependencia cerrar');
     }
 }
