@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\AccesoriostallerController;
 use App\Http\Livewire\AsignarController;
+use App\Http\Livewire\ConductorController;
 use App\Http\Livewire\PermisosController;
 use App\Http\Livewire\RolesController;
 use App\Http\Livewire\TallerController;
@@ -32,3 +33,6 @@ Route::get('users', UsersController::class);
 Route::get('asignar', AsignarController::class);
 Route::get('taller', TallerController::class);
 Route::get('acctaller', AccesoriostallerController::class);
+Route::get('conductor', ConductorController::class);
+
+//select2

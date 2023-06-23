@@ -137,6 +137,11 @@
         window.livewire.on('user-withsales', Msg => {
             noty(Msg)
         })
+        //cerrar usuario
+        window.livewire.on('user-close', Msg => {
+            $('#theModal').modal('hide')
+        })
+        
     });
 
     //funcion de ventana emergente de confirmacion para eliminar

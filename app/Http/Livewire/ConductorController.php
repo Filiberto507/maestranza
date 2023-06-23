@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class ConductorController extends Component
 {
-    public $componentName, $pageTitle, $search, $select_id, $name;
+    public $componentName, $pageTitle, $search, $selected_id, $name, $telefono, $status;
     private $pagination = 5;
 
     public function PaginationView(){
@@ -34,5 +34,19 @@ class ConductorController extends Component
         ])
         ->extends('layouts.theme.app')
         ->section('content');
+    }
+
+
+
+    //limpiar los inputs
+    public function resetUI()
+    {
+        $this->name ='';
+        $this->telefono ='';
+        $this->status ='';
+        $this->search ='';
+        $this->selected_id =0;
+        $this->resetValidation();
+        $this->emit('acctaller-close', 'acctaller cerrar');
     }
 }

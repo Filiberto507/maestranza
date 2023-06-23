@@ -11,6 +11,7 @@ class Conductor extends Model
     //modelo conductor
     protected $fillable = [
         'name',
+        'telefono',
         'status'
     ];
 }
