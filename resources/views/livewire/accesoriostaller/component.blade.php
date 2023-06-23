@@ -32,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($taller as $tall )
+                            @foreach($acctaller as $tall )
                             <tr>
                                 <td>
                                     <h6>{{$tall->id}}</h6>
@@ -40,7 +40,6 @@
                                 <td class="text-center">
                                     <h6>{{$tall->name}}</h6>
                                 </td>
-                                
                                 <td class="text-center">
                                     <a href="javascript:void(0)" 
                                     wire:click="Edit({{$tall->id}})"
@@ -66,37 +65,36 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{$taller->links()}}
+                    {{$acctaller->links()}}
                 </div>
             </div>
         </div>
     </div>
-    @include('livewire.taller.form')
+    @include('livewire.accesoriostaller.form')
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         //evento ocultar la ventana modal y notificar
-        window.livewire.on('taller-ok', Msg => {
-            //llamar a la funcion del backend
-            noty(Msg)
+        window.livewire.on('acctaller-added', Msg => {
+            $('#theModal').modal('hide')
         })
         //evento ocultar la ventana modal y notificar
-        window.livewire.on('role-updated', Msg => {
+        window.livewire.on('acctaller-updated', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
         //evento  notificar
-        window.livewire.on('role-deleted', Msg => {
+        window.livewire.on('acctaller-deleted', Msg => {
             noty(Msg)
         })
         //evento notificar
-        window.livewire.on('role-exists', Msg => {
+        window.livewire.on('acctaller-exists', Msg => {
             noty(Msg)
         })
 
         //evento notificar
-        window.livewire.on('taller-error', Msg => {
+        window.livewire.on('acctaller-error', Msg => {
             noty(Msg)
         })
 
@@ -110,7 +108,7 @@
             $('#theModal').modal('show')
         });
         //cerrar
-        window.livewire.on('taller-close', Msg =>{
+        window.livewire.on('acctaller-close', Msg =>{
             $('#theModal').modal('hide')
             noty(Msg)
         });

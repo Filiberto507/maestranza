@@ -8,13 +8,14 @@
  <script src="{{ asset('assets/js/app.js') }}"></script>
 
  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
  <script>
      $(document).ready(function() {
          App.init();
      });
  </script>
+  <script src="{{ asset('plugins/highlight/highlight.pack.js') }}"></script>
  <script src="{{ asset('assets/js/custom.js') }}"></script>
  <!-- END GLOBAL MANDATORY SCRIPTS -->
 
@@ -40,5 +41,9 @@
  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 
  <script src="{{ asset('plugins/flatpickr/flatpickr.js') }}"></script>    
+
+ <!-- select2 -->
+ <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>   
+ <script src="{{ asset('plugins/select2/custom-select2.js') }}"></script>   
 
  @livewireScripts

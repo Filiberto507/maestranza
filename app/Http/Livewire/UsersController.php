@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Livewire;
-
-
 use Spatie\Permission\Models\Role;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -60,6 +58,7 @@ class UsersController extends Component
         $this->resetValidation();
         //para regresar a la pagina principal
         $this->resetPage();
+        $this->emit('user-close', 'usuario cerrado');
     }
 
     public function Edit(User $user)
@@ -104,10 +103,6 @@ class UsersController extends Component
             'password.required' => 'Ingresa el password',
             'password.min' => 'El password debe tener al menos 3 catacteres'
         ];
-
-        //dd($this->profile,$this->name,$this->phone);
-
-        //dd($usar = User::select('*') );
         //validar los datos
         $this->validate($rules, $messages);
         //crear el usuario
@@ -119,17 +114,17 @@ class UsersController extends Component
             'profile' => $this->profile,
             'password' => bcrypt($this->password)
         ]);
-        dd($user);
+
         //para el rol
-        //$user->syncRoles($this->profile);
+        $user->syncRoles($this->profile);
         //validar img
-        /*if($this->image)
+        if($this->image)
         {
             $customFileName = uniqid() . '_.' . $this->image->extension();
             $this->image->storeAs('public/users', $customFileName);
             $user->image = $customFileName;
             $user->save();   
-        }*/
+        }
 
         $this->resetUI();
         $this->emit('user-added', 'Usuario Registrado');
@@ -138,7 +133,6 @@ class UsersController extends Component
     //metodo actualizar
     public function Update()
     {
-        
         $rules = [
             //validar para que no exista el mismo correo
             'email' => "required|email|unique:users,email,{$this->selected_id}",
@@ -165,8 +159,6 @@ class UsersController extends Component
         //validamos 
         $this->validate($rules, $messages);
         $user = User::find($this->selected_id);
-        //dd($user);
-        //dd($this->profile,$this->name,$this->phone);
         $user->Update([
             'name' => $this->name,
             'email' => $this->email,
@@ -175,18 +167,16 @@ class UsersController extends Component
             'profile' => $this->profile,
             'password' => bcrypt($this->password)
         ]);
-        //$user->save();
+
         //para el rol
-        //$user->syncRoles($this->profile);
+       // $user->syncRoles($this->profile);
          //validar img
-         //dd($user);
          if($this->image)
          {
              $customFileName = uniqid() . '_.' . $this->image->extension();
              $this->image->storeAs('public/users', $customFileName);
              $imageTemp = $user->image;
              $user->image = $customFileName;
-             
              $user->save();   
             // validar si existe una imagen
              if($imageTemp !=null)
@@ -208,15 +198,15 @@ class UsersController extends Component
     public function Destroy(User $user)
     {
         if($user){
-            //$sale = Sale::where('user_id', $user->id)->count();
+            $sale = Sale::where('user_id', $user->id)->count();
             //validar si tiene ventas el usuario
-            /*if($sale > 0 ) {
+            if($sale > 0 ) {
                 $this->emit('user-withsales'. 'No es posible eliminar el usuario por que tiene ventas registradas');
-            } else {*/
+            } else {
                 $user->delete();
                 $this->resetUI();
                 $this->emit('user-deleted', 'Usuario Eliminado');
-            //}
+            }
         }
     }
 }

@@ -1,9 +1,9 @@
-<div class="row sales layout-top-spacing">
+<div class="row sales layout-top-spacing" style="background: #000000">
     <div class="col-sm-12">
-        <div class="widget widget-chart-one">
+        <div class="widget widget-chart-one" style="background: #3b3f5c">
             <div class="widget-heading">
                 <h4 class="card-title">
-                    <b>{{$componentName}} | {{$pageTitle}}</b>
+                    <b style="color: #fff">{{$componentName}} | {{$pageTitle}}</b>
                 </h4>
                 <ul class="tabs tab-pills">
                     <li>
@@ -17,43 +17,53 @@
             @include('common.searchbox')
             <div class="widget-content">
                 <div class="table-responsive">
-                    <table class="table table-bordered table striped mt-1">
-                        <thead class="text-white" >
+                    <table class="table table-dark table-bordered table-hover mt-1">
+                        <thead class="text-white" style="background:#3b3f5c;">
                             <tr>
-                                <th class="table-th text-while">
-                                    ID
+                                <th class="table-th text-white ">
+                                    CONDUCTOR
+                                    
                                 </th>
-                                <th class="table-th text-while">
-                                    DESCRIPCION
+                                <th class="table-th text-white text-center">
+                                    TELEFONO
                                 </th>
-                                <th class="table-th text-while">
+                                <th class="table-th text-white text-center">
+                                    ESTATUS
+                                </th>
+                                <th class="table-th text-white text-center">
                                     ACCTIONS
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($taller as $tall )
+                            @foreach ($conductor as $c)
+                                
+                            
                             <tr>
                                 <td>
-                                    <h6>{{$tall->id}}</h6>
+                                    <h6> {{ $c->name }} </h6>
                                 </td>
+                                <td class="text-center" >
+                                    <h6> {{ $c->phone }} </h6>
+                                </td>
+
                                 <td class="text-center">
-                                    <h6>{{$tall->name}}</h6>
+                                    <span class="badge {{$c->status == 'Active' ? 'badge-success' : 'badge-danger'}} text-uppercase" >
+                                    {{$c->status}}
+                                    </span>
                                 </td>
-                                
+
                                 <td class="text-center">
                                     <a href="javascript:void(0)" 
-                                    wire:click="Edit({{$tall->id}})"
-                                    class="btn btn-dark mtmoble" title="Editar Registro">
+                                    wire:click="Edit({{$c->id}})"
+                                    class="btn btn-dark mtmoble" title="Edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                         </svg>
                                     </a>
 
-                                    <a href="javascript:void(0)"
-                                        onclick="Confirm('{{$tall->id}}')"
-                                        class="btn btn-dark" title="Eliminar Registro">
+                                    <a href="javascript:void(0)" onclick="Confirm('{{ $c->id }}')"  class="btn btn-dark" title="Delete">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
                                             <polyline points="3 6 5 6 21 6"></polyline>
                                             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -66,56 +76,47 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{$taller->links()}}
+                    {{$conductor->links()}}
                 </div>
             </div>
         </div>
     </div>
-    @include('livewire.taller.form')
+    @include('livewire.conductor.form')
+    
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function(){
-        //evento ocultar la ventana modal y notificar
-        window.livewire.on('taller-ok', Msg => {
-            //llamar a la funcion del backend
-            noty(Msg)
-        })
-        //evento ocultar la ventana modal y notificar
-        window.livewire.on('role-updated', Msg => {
+        //ocultar el modal
+        window.livewire.on('conductor-added', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
-        //evento  notificar
-        window.livewire.on('role-deleted', Msg => {
+        //ocultar el modal
+        window.livewire.on('conductor-updated', Msg => {
+            $('#theModal').modal('hide')
             noty(Msg)
         })
-        //evento notificar
-        window.livewire.on('role-exists', Msg => {
-            noty(Msg)
-        })
-
-        //evento notificar
-        window.livewire.on('taller-error', Msg => {
+        //
+        window.livewire.on('conductor-deleted', Msg => {
             noty(Msg)
         })
 
-        //evento ocultar la ventana modal 
+        //ocultar el modal
         window.livewire.on('hide-modal', Msg => {
             $('#theModal').modal('hide')
         })
-
-        //evento mostrar
-        window.livewire.on('show-modal', msg =>{
+        //mostrar el modal
+        window.livewire.on('show-modal', Msg => {
             $('#theModal').modal('show')
-        });
-        //cerrar
-        window.livewire.on('taller-close', Msg =>{
-            $('#theModal').modal('hide')
+        })
+        //
+        window.livewire.on('conductor-withsales', Msg => {
             noty(Msg)
-        });
+        })
     });
-    //confimar eliminar
+
+    //funcion de ventana emergente de confirmacion para eliminar
     function Confirm(id)
     {   
         
@@ -128,9 +129,11 @@
             cancelButtonColor: '#fff',
             confirmButtonColor: '#3B3F5C',
             confirmButtonText: 'Aceptar'
+            
         }).then(function(result){
             if(result.value){
-                window.livewire.emit('destroy', id)
+                console.log('hola');
+                window.livewire.emit('deleteRow', id)
                 swal.close()
             }
         })
