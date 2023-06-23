@@ -5,6 +5,10 @@ use App\Http\Livewire\PermisosController;
 use App\Http\Livewire\RolesController;
 use App\Http\Livewire\TallerController;
 use App\Http\Livewire\UsersController;
+use App\Http\Livewire\VehiculosController;
+use App\Http\Livewire\DiagnosticoController;
+use App\Http\Livewire\DependenciasController;
+use App\Http\Livewire\AccesoriosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +29,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('dependencias', DependenciasController::class);
+Route::get('vehiculos', VehiculosController::class);
+Route::get('diagnostico',DiagnosticoController::class);
 Route::get('roles', RolesController::class);
 Route::get('permisos', PermisosController::class);
 Route::get('users', UsersController::class);
 Route::get('asignar', AsignarController::class);
 Route::get('taller', TallerController::class);
+Route::get('accesorios', AccesoriosController::class);
+
+
+
+//Route Hooks - Do not delete//

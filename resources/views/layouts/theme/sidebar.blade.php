@@ -22,7 +22,7 @@
             </li>
             @endcan
             <li class="">
-                <a href="{{url('products')}}" class="menu-toggle" data-active="false">
+                <a href="{{url('vehiculos')}}" class="menu-toggle" data-active="false">
                     <div class="base-menu">
                         <div class="base-icons">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -34,12 +34,23 @@
                                 <line x1="7" y1="7" x2="7.01" y2="7"></line>
                             </svg>
                         </div>
-                        <span>PRODUCTOS</span>
+                        <span>VEHICULOS</span>
                     </div>
                 </a>
             </li>
             <li class="">
-                <a href="{{url('pos')}}" class="menu-toggle" data-active="false">
+                <a href="{{url('accesorios')}}" class="menu-toggle" data-active="false">
+                    <div class="base-menu">
+                        <div class="base-icons">
+                            <link rel="shortcut icon" type="image/png" href="{{ asset('/img/retro.png') }}">
+                            <link rel="shortcut icon" sizes="192x192" href="{{ asset('/img/retro.png') }}">
+                        </div>
+                        <span>ACCESORIOS</span>
+                    </div>
+                </a>
+            </li>
+            <li class="">
+                <a href="{{url('ventas')}}" class="menu-toggle" data-active="false">
                     <div class="base-menu">
                         <div class="base-icons">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

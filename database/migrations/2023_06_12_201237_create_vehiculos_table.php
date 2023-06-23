@@ -16,10 +16,9 @@ return new class extends Migration
         Schema::create('vehiculos', function (Blueprint $table) {
             $table->id();
             $table->char('placa',10);
-            $table->string('tipo',45);
-            $table->string('nombre',45);
-            $table->string('marca',45);
             $table->string('modelo',45);
+            $table->string('marca',45);
+            $table->integer('año');
             $table->string('color',45);
             $table->string('cilindrada',45);
             $table->string('chasis',45);
