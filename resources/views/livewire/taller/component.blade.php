@@ -5,20 +5,28 @@
                 <h4 class="card-title">
                     <b>{{$componentName}} | {{$pageTitle}}</b>
                 </h4>
-                <ul class="tabs tab-pills">
-                    <li>
-                        <a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal" data-target="#theModal">
-                            Agregar
-                        </a>
-                    </li>
-                </ul>
+
+                <div class="input-group">
+                    <div class="col-sm-8">
+                    <select class="custom-select  basic ">
+                        <option selected="selected">orange</option>
+                        <option>white melon</option>
+                        <option>purple melons</option>
+                    </select>
+                    </div>
+                    
+                    <div class="input-group-append">
+                        <button class="btn tabmenu bg-dark" data-toggle="modal" data-target="#theModal" type="button">Agregar</button>
+                    </div>
+                </div>
+
 
             </div>
             @include('common.searchbox')
             <div class="widget-content">
                 <div class="table-responsive">
                     <table class="table table-bordered table striped mt-1">
-                        <thead class="text-white" >
+                        <thead class="text-white">
                             <tr>
                                 <th class="table-th text-while">
                                     ID
@@ -40,20 +48,16 @@
                                 <td class="text-center">
                                     <h6>{{$tall->name}}</h6>
                                 </td>
-                                
+
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" 
-                                    wire:click="Edit({{$tall->id}})"
-                                    class="btn btn-dark mtmoble" title="Editar Registro">
+                                    <a href="javascript:void(0)" wire:click="Edit({{$tall->id}})" class="btn btn-dark mtmoble" title="Editar Registro">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                         </svg>
                                     </a>
 
-                                    <a href="javascript:void(0)"
-                                        onclick="Confirm('{{$tall->id}}')"
-                                        class="btn btn-dark" title="Eliminar Registro">
+                                    <a href="javascript:void(0)" onclick="Confirm('{{$tall->id}}')" class="btn btn-dark" title="Eliminar Registro">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
                                             <polyline points="3 6 5 6 21 6"></polyline>
                                             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -75,7 +79,7 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function(){
+    document.addEventListener('DOMContentLoaded', function() {
         //evento ocultar la ventana modal y notificar
         window.livewire.on('taller-ok', Msg => {
             //llamar a la funcion del backend
@@ -106,19 +110,18 @@
         })
 
         //evento mostrar
-        window.livewire.on('show-modal', msg =>{
+        window.livewire.on('show-modal', msg => {
             $('#theModal').modal('show')
         });
         //cerrar
-        window.livewire.on('taller-close', Msg =>{
+        window.livewire.on('taller-close', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         });
     });
     //confimar eliminar
-    function Confirm(id)
-    {   
-        
+    function Confirm(id) {
+
         swal({
             title: 'CONFIRMAR',
             text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
@@ -128,11 +131,15 @@
             cancelButtonColor: '#fff',
             confirmButtonColor: '#3B3F5C',
             confirmButtonText: 'Aceptar'
-        }).then(function(result){
-            if(result.value){
+        }).then(function(result) {
+            if (result.value) {
                 window.livewire.emit('destroy', id)
                 swal.close()
             }
         })
     }
+
+    var ss = $(".basic").select2({
+        tags: true,
+    });
 </script>

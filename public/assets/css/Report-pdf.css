@@ -1,0 +1,158 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.img-go{
+width: 200px;
+}
+
+h2{
+margin: 0;
+text-align: center;
+padding: 10px;
+background-color: #333;
+color: white;
+}
+.fecha-title{
+margin: 0;
+padding: 5px;
+background-color: #333;
+color: white;
+}
+
+td {
+  padding: 5px;
+}
+
+.columna1 {
+  width: 25%;
+}
+
+.columna2 {
+  width: 50%;
+}
+
+.columna3 {
+  width: 25%;
+  vertical-align: top;
+}
+
+.columna3 div {
+ 
+}
+
+.columna3 h2 {
+  margin-bottom: 2px;
+}
+
+.columna3 p {
+  margin: 0;
+}
+
+/* checkbox */
+
+
+
+.table-check {
+  background-color: cornflowerblue;
+  
+  padding: 5px;
+  table-layout: fixed;
+}
+
+.table-check td {
+  width: 33.33%;
+  vertical-align: top;
+}
+.checkbox-item {
+  
+  
+  margin-bottom: 10px;
+}
+input[type="checkbox"] {
+  width: 50px;
+  height: 23px;
+  margin-right: 10px;
+  margin-bottom: -10px;
+  appearance: none;
+  border: 1px solid #000;
+background-color: #fff;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #000;
+}
+input[type="checkbox"]::before {
+  display: none;
+}
+
+label {
+  
+  font-size: 15px;
+  white-space: nowrap;
+}
+/*informacion del usuario*/
+
+.info {
+  
+}
+
+.info-th {
+  
+}
+
+.info-td {
+  
+}
+
+.input-info[type="text"] {
+  border: none;
+  box-shadow: 0px 2px 0px 0px black;
+  
+  width: 100%;
+}
+
+/*auto*/
+
+.auto {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.auto-th, .auto-td {
+  padding: 10px;
+  text-align: center;
+  
+}
+
+.auto-th {
+  background-color: #f2f2f2;
+}
+
+.car-image {
+  width: 100px;
+  height: auto;
+}
+
+.container {
+  width: 300px;
+}
+
+.label {
+  float: left;
+  width: 80px;
+}
+
+.text {
+  
+  overflow: hidden;
+}
+
+.text::after {
+  content: "";
+  display: block;
+  border-bottom: 2px solid black;
+  margin-top: 5px;
+}
