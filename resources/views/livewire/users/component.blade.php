@@ -1,9 +1,9 @@
 <div class="row sales layout-top-spacing" style="background: #000000">
     <div class="col-sm-12">
-        <div class="widget widget-chart-one" style="background: #3b3f5c">
+        <div class="widget widget-chart-one" >
             <div class="widget-heading">
                 <h4 class="card-title">
-                    <b style="color: #fff">{{$componentName}} | {{$pageTitle}}</b>
+                    <b >{{$componentName}} | {{$pageTitle}}</b>
                 </h4>
                 <ul class="tabs tab-pills">
                     <li>
@@ -17,7 +17,7 @@
             @include('common.searchbox')
             <div class="widget-content">
                 <div class="table-responsive">
-                    <table class="table table-dark table-bordered table-hover mt-1">
+                    <table class="table table-bordered table striped mt-1">
                         <thead class="text-white" style="background:#3b3f5c;">
                             <tr>
                                 <th class="table-th text-white ">
@@ -43,12 +43,12 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                             @foreach ($data as $r)
                                 
                             
-                            <tr>
-                                <td>
+                            <tr >
+                                <td >
                                     <h6> {{ $r->name }} </h6>
                                 </td>
                                 <td class="text-center" >
@@ -63,7 +63,7 @@
                                 </td>
 
                                 <td class="text-center">
-                                    <span class="badge {{$r->status == 'Active' ? 'badge-success' : 'badge-danger'}} text-uppercase" >
+                                    <span class="badge {{$r->status == 'Active' ? 'badge-danger' : 'badge-success'}} text-uppercase" >
                                     {{$r->status}}
                                     </span>
                                 </td>

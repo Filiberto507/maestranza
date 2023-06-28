@@ -26,7 +26,7 @@
                                 <th class="table-th text-while">
                                     DESCRIPCION
                                 </th>
-                                <th class="table-th text-while">
+                                <th class="table-th text-while text-center">
                                     ACCTIONS
                                 </th>
                             </tr>
@@ -37,7 +37,7 @@
                                 <td>
                                     <h6>{{$role->id}}</h6>
                                 </td>
-                                <td class="text-center">
+                                <td >
                                     <h6>{{$role->name}}</h6>
                                 </td>
                                 <td class="text-center">

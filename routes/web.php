@@ -34,10 +34,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('dependencias', DependenciasController::class);
 Route::get('vehiculos', VehiculosController::class);
 Route::get('diagnostico',DiagnosticoController::class);
-Route::get('roles', RolesController::class);
-Route::get('permisos', PermisosController::class);
-Route::get('users', UsersController::class);
-Route::get('asignar', AsignarController::class);
+Route::get('roles', RolesController::class)->middleware('role:Admin');
+Route::get('permisos', PermisosController::class)->middleware('role:Admin');
+Route::get('users', UsersController::class)->middleware('role:Admin');
+Route::get('asignar', AsignarController::class)->middleware('role:Admin');  
 Route::get('taller', TallerController::class);
 
 Route::get('accesorios', AccesoriosController::class);
