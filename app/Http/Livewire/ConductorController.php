@@ -10,15 +10,17 @@ use Livewire\Component;
 class ConductorController extends Component
 {
     public $componentName, $pageTitle, $search, $selected_id, $name, $telefono, $status;
-    public $filas = [];
+    public $filas = [], $filas2 =[];
 
     private $pagination = 5;
 
-    public function PaginationView(){
+    public function PaginationView()
+    {
         return 'vendor.livewire.bootstrap';
     }
 
-    public function mount(){
+    public function mount()
+    {
         $this->pageTitle = 'Listado';
         $this->componentName = 'Conductores';
     }
@@ -26,16 +28,16 @@ class ConductorController extends Component
     public function render()
     {
         //validar datos
-        if(strlen($this->search) > 0)
-            $conductor = Conductor::where('name', 'like', '%'. $this->search. '%')->paginate($this->pagination);
+        if (strlen($this->search) > 0)
+            $conductor = Conductor::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
         else
             $conductor = Conductor::orderby('id', 'asc')->paginate($this->pagination);
 
-        return view('livewire.conductor.component',[
+        return view('livewire.conductor.component', [
             'conductor' => $conductor
         ])
-        ->extends('layouts.theme.app')
-        ->section('content');
+            ->extends('layouts.theme.app')
+            ->section('content');
     }
 
     public function Store()
@@ -58,9 +60,9 @@ class ConductorController extends Component
             'name' => $this->name,
             'telefono' => $this->telefono,
             'status' => $this->status
-            
+
         ]);
-        
+
 
         $this->emit('conductor-added', 'Se registro el conductor con exito');
         $this->resetUI();
@@ -83,7 +85,7 @@ class ConductorController extends Component
 
     public function algo()
     {
-        
+
         $this->emit('show-modal', ' Show modal');
     }
 
@@ -110,32 +112,53 @@ class ConductorController extends Component
             'status' => $this->status
         ]);
         //guardar rol 
-       $Conductor->save();
+        $Conductor->save();
 
-       $this->emit('conductor-updated', 'Se actualizo el conductor con exito');
-       $this->resetUI();
+        $this->emit('conductor-updated', 'Se actualizo el conductor con exito');
+        $this->resetUI();
     }
 
     //limpiar los inputs
     public function resetUI()
     {
-        $this->name ='';
-        $this->telefono ='';
-        $this->status ='';
-        $this->search ='';
-        $this->selected_id =0;
+        $this->name = '';
+        $this->telefono = '';
+        $this->status = '';
+        $this->search = '';
+        $this->selected_id = 0;
         $this->resetValidation();
         $this->emit('conductor-close', 'conductor cerrar');
     }
 
-    public function agregarFila()
-{
-    $this->filas[] = [
-        'items' => '',
-        'descriptions' => '',
-    ];
+    public function agregarFila($variable)
+    {
+        if (count($this->filas) == 3) {
+            dd($this->filas, $this->filas2);
+        }
 
-    
-}
+        switch ($variable) {
+            case '1':
+                $this->filas[] = [
+                    'items' => '',
+                    'descriptions' => '',
+                ];
+                break;
 
+            case '2':
+                $this->filas2[] = [
+                    'items' => '',
+                    'descriptions' => '',
+                ];
+                break;
+            default:
+                # code...
+                break;
+        }
+    }
+
+    public function eliminarFila($index)
+    {
+        unset($this->filas[$index]);
+        $this->filas = array_values($this->filas); // Reindexar el arreglo
+    }
 }

@@ -6,7 +6,7 @@
                     <b>{{$componentName}} | {{$pageTitle}}</b>
                 </h4>
 
-                <div class="input-group">
+                <div class="input-group flex">
                     <div class="col-sm-8" wire:ignore>
                         <select class="form-control basic" wire:model="vehiculoselectedName" id="select2-dropdown">
                             <option value="" selected disabled>Elige</option>
@@ -15,11 +15,17 @@
                             @endforeach
                         </select>
                     </div>
+                    <br>
+                    <br>
+                    <br>
 
-                    <div class="input-group-append">
-                        <button class="btn tabmenu bg bg-dark" wire:click="showDatos" data-toggle="modal" data-target="#theModal" type="button">Agregar</button>
+                    <div class="input-group-append" style="margin-left: 60px;">
+                        <button class="btn btn-dark" wire:click="showDatos" data-toggle="modal" data-target="#theModal" type="button">Agregar</button>
                     </div>
                 </div>
+
+               
+
 
 
             </div>
@@ -42,7 +48,7 @@
                                 <th class="table-th text-while text-center">
                                     DEPENDENCIA
                                 </th>
-                                
+
                                 <th class="table-th text-while">
                                     ACCTIONS
                                 </th>
@@ -106,14 +112,14 @@
         //idselect y name
         //$('#select2-dropdown').select2() //inicializador
         //capturamos values when change event
-        
-        $('#select2-dropdown').on('change', function (e) {
+
+        $('#select2-dropdown').on('change', function(e) {
             console.log($('#select2-dropdown option:selected').text());
             var pId = $('#select2-dropdown').select2("val") // get vehiculo id
             var pName = $('#select2-dropdown option:selected').text() // get name vehiculo
-            console.log(pId,pName);
-            
-            @this.set('vehiculoselectedId', pId)// set vehiculo od selected
+            console.log(pId, pName);
+
+            @this.set('vehiculoselectedId', pId) // set vehiculo od selected
             @this.set('vehiculoselectedName', pName)
         });
 

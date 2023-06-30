@@ -64,7 +64,7 @@
 
                     <div class="col-sm-3 text-center ">
                         <div class="form-group">
-                        <label></label>
+                            <label></label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -84,7 +84,7 @@
 
                     <div class="col-sm-4 ">
                         <div class="form-group">
-                        <label></label>
+                            <label></label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -180,6 +180,80 @@
 
 
                 </div>
+                <div class="widget-content">
+                    <div class="table-responsive">
+                        <table class="table  table-bordered table-hover mt-1">
+                            <thead>
+                                <tr>
+                                    <th>IZQUIERDO</th>
+                                    <th>CENTRO</th>
+                                    <th>DERECHO</th>
+                                    <th>PARACHOQUES</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                </tr>
+
+                                <tr>
+                                    <td><textarea wire:model="estadovehiculo" name="" id="" rows="3"></textarea></td>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                </tr>
+
+                                <tr>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                </tr>
+
+                                <tr>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                </tr>
+
+                                <tr>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                </tr>
+
+                                <tr>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                </tr>
+
+                                <tr>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                    <td><img class="img-go" src="assets/img/" alt="Imagen del vehículo" width="100px"></td>
+                                </tr>
+
+                                <tr>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
 
                 <!-- <div class="row">
                     <div class="col-sm-3 ">
@@ -264,7 +338,7 @@
                             CERRAR
                         </button>
 
-                       
+
                         @if($selected_id < 1) <button type="button" wire:click.prevent="create_taller()" class="btn btn-dark close-modal">
                             GUARDAR
                             </button>
@@ -281,86 +355,86 @@
         </div>
     </div>
 </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                flatpickr(document.getElementsByClassName('flatpickr'), {
-                    enableTime: false,
-                    dateFormat: 'Y-m-d',
-                    locale: {
-                        firstDayofWeek: 1,
-                        weekdays: {
-                            shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
-                            longhand: [
-                                "Domingo",
-                                "Lunes",
-                                "Martes",
-                                "Miércoles",
-                                "Jueves",
-                                "Viernes",
-                                "Sábado",
-                            ],
-                        },
-                        months: {
-                            shorthand: [
-                                "Ene",
-                                "Feb",
-                                "Mar",
-                                "Abr",
-                                "May",
-                                "Jun",
-                                "Jul",
-                                "Ago",
-                                "Sep",
-                                "Oct",
-                                "Nov",
-                                "Dic",
-                            ],
-                            longhand: [
-                                "Enero",
-                                "Febrero",
-                                "Marzo",
-                                "Abril",
-                                "Mayo",
-                                "Junio",
-                                "Julio",
-                                "Agosto",
-                                "Septiembre",
-                                "Octubre",
-                                "Noviembre",
-                                "Diciembre",
-                            ],
-                        },
-                    }
-                })
-
-                //eventos
-                window.livewire.on('show-modal', Msg => {
-                    $('#modalDetails').modal('show')
-                })
-
-
-
-            });
-
-            //funcion para obtener los checks
-            function mostrarValores() {
-                var checkboxes = document.getElementsByClassName("miCheckbox");
-                var vehiculo = document.getElementById('vehiculo').value;
-                var conductor = document.getElementById('conductor').value;
-                var color = document.getElementById('color').value;
-                var dependencia = document.getElementById('dependencia').value;
-                var placa = document.getElementById('placa').value;
-                var kilometraje = document.getElementById('kilometraje').value;
-                var valoresSeleccionados = [];
-
-                for (var i = 0; i < checkboxes.length; i++) {
-                    if (checkboxes[i].checked) {
-                        valoresSeleccionados.push(checkboxes[i].value);
-                        console.log(valoresSeleccionados);
-                    }
-                }
-
-                //console.log(vehiculo, conductor, color, dependencia, placa, kilometraje, valoresSeleccionados);
-                //console.log(valoresSeleccionados);
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr(document.getElementsByClassName('flatpickr'), {
+            enableTime: false,
+            dateFormat: 'Y-m-d',
+            locale: {
+                firstDayofWeek: 1,
+                weekdays: {
+                    shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+                    longhand: [
+                        "Domingo",
+                        "Lunes",
+                        "Martes",
+                        "Miércoles",
+                        "Jueves",
+                        "Viernes",
+                        "Sábado",
+                    ],
+                },
+                months: {
+                    shorthand: [
+                        "Ene",
+                        "Feb",
+                        "Mar",
+                        "Abr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Ago",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dic",
+                    ],
+                    longhand: [
+                        "Enero",
+                        "Febrero",
+                        "Marzo",
+                        "Abril",
+                        "Mayo",
+                        "Junio",
+                        "Julio",
+                        "Agosto",
+                        "Septiembre",
+                        "Octubre",
+                        "Noviembre",
+                        "Diciembre",
+                    ],
+                },
             }
-        </script>
+        })
+
+        //eventos
+        window.livewire.on('show-modal', Msg => {
+            $('#modalDetails').modal('show')
+        })
+
+
+
+    });
+
+    //funcion para obtener los checks
+    function mostrarValores() {
+        var checkboxes = document.getElementsByClassName("miCheckbox");
+        var vehiculo = document.getElementById('vehiculo').value;
+        var conductor = document.getElementById('conductor').value;
+        var color = document.getElementById('color').value;
+        var dependencia = document.getElementById('dependencia').value;
+        var placa = document.getElementById('placa').value;
+        var kilometraje = document.getElementById('kilometraje').value;
+        var valoresSeleccionados = [];
+
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                valoresSeleccionados.push(checkboxes[i].value);
+                console.log(valoresSeleccionados);
+            }
+        }
+
+        //console.log(vehiculo, conductor, color, dependencia, placa, kilometraje, valoresSeleccionados);
+        //console.log(valoresSeleccionados);
+    }
+</script>

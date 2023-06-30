@@ -9,6 +9,7 @@ use App\Models\accesoriostaller;
 use App\Models\Conductor;
 use App\Models\tallerdetalle;
 use Livewire\WithPagination;
+use Carbon\Carbon;
 use DB;
 
 class TallerController extends Component
@@ -20,7 +21,10 @@ class TallerController extends Component
         $dependencia, $placa, $kilometraje, $ordentrabajo, $acctaller, $acctaller2;
     //select2
     public $vehiculoselectedId, $vehiculoselectedName;
-    public $selectedOption = '';
+
+    //estado de vehiculo img
+    public $estadovehiculo=[];
+    
     //numero de filas por pagina
     private $pagination = 5;
 
@@ -35,6 +39,9 @@ class TallerController extends Component
     {
         $this->pageTitle = 'Listado';
         $this->componentName = 'Taller';
+        $this->fecha_ingreso = Carbon::parse(Carbon::now())->format('m-d-Y');
+        $this->ingreso = Carbon::parse(Carbon::now())->format('H:i');
+
         //dd($this->ingreso, $this->fecha_ingreso);
         //     $this->check=[
         //         "12, Estuche de Herramientas",
@@ -54,7 +61,7 @@ class TallerController extends Component
         return view('livewire.taller.component', [
             'taller' => $Taller,
             'acctaller' => $this->acctaller,
-            'conductor' => Conductor::orderby('name','asc')->get()
+            'conductor' => Conductor::orderby('name', 'asc')->get()
         ])
             //extender de layouts
             ->extends('layouts.theme.app')
@@ -80,10 +87,10 @@ class TallerController extends Component
         $this->check = [];
         $this->search = '';
         $this->selected_id = 0;
-        
+
         $this->resetValidation();
         $this->resetPage();
-        
+
         $this->emit('tallers-close', 'taller cerrar');
         //dd($this->check);
     }
@@ -95,6 +102,7 @@ class TallerController extends Component
 
     public function create_taller()
     {
+        dd($this->estadovehiculo);
         //dd($this->acctaller);
         //dd($this->check);
         // dd($this->TallerName ,
@@ -180,6 +188,7 @@ class TallerController extends Component
         $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
 
         //dd($acctaller);
+        //foreach para agregar si tiene el checked
         foreach ($acctalleres as $tall) {
             //buscado el id del taller 
             $tallerid = Taller::find($this->selected_id);
@@ -207,6 +216,23 @@ class TallerController extends Component
                 //$acctalleres->pull($tall->id);
             }
         }
+
+        //separar el arreglo
+        //$acctalleres = range(1, 30); // Arreglo con 30 elementos
+        //dd($acctalleres);
+        
+
+        //la funcion chunk divide el segmento segun el rango especificado
+        $segmentos = $acctalleres->chunk($acctalleres->count() / 3);
+        //dd($segmentos);
+
+        $primeros10 = $segmentos[0];
+        $segundos10 = $segmentos[1];
+        //la funcion collect + concat ayudar a concadenar una coleccion
+        $ultimos10 = collect($segmentos[2])->concat($segmentos[3]);
+
+        dd($primeros10, $segundos10, $ultimos10);
+
         //dd($this->check);
         $this->acctaller = $acctalleres;
         //dd($this->acctaller);
@@ -272,8 +298,9 @@ class TallerController extends Component
 
     public function showDatos()
     {
-        dd($this->vehiculoselectedName, $this->vehiculoselectedId);
+        //dd($this->vehiculoselectedName, $this->vehiculoselectedId);
     }
 
-    
+    //crear arrays para los diferentes columnas que seran como 11 y cada array tendra el id al lugar
+    //que pertenece para luego realizar un array merger e insertar todos los datos en descripcion-vehiculo
 }
