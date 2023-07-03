@@ -1,9 +1,9 @@
-<div class="row sales layout-top-spacing" style="background: #000000">
+<div class="row sales layout-top-spacing" >
     <div class="col-sm-12">
-        <div class="widget widget-chart-one" style="background: #3b3f5c">
+        <div class="widget widget-chart-one" >
             <div class="widget-heading">
                 <h4 class="card-title">
-                    <b style="color: #fff">{{$componentName}} | {{$pageTitle}}</b>
+                    <b >{{$componentName}} | {{$pageTitle}}</b>
                 </h4>
                 <ul class="tabs tab-pills">
                     <li>
@@ -17,7 +17,7 @@
             @include('common.searchbox')
             <div class="widget-content">
                 <div class="table-responsive">
-                    <table class="table table-dark table-bordered table-hover mt-1">
+                    <table class="table  table-bordered table-hover mt-1">
                         <thead class="text-white" style="background:#3b3f5c;">
                             <tr>
                                 <th class="table-th text-white ">
@@ -44,11 +44,11 @@
                                     <h6> {{ $c->name }} </h6>
                                 </td>
                                 <td class="text-center" >
-                                    <h6> {{ $c->phone }} </h6>
+                                    <h6> {{ $c->telefono }} </h6>
                                 </td>
 
                                 <td class="text-center">
-                                    <span class="badge {{$c->status == 'Active' ? 'badge-success' : 'badge-danger'}} text-uppercase" >
+                                    <span class="badge {{$c->status == 'ACTIVE' ? 'badge-success' : 'badge-danger'}} text-uppercase" >
                                     {{$c->status}}
                                     </span>
                                 </td>
@@ -110,6 +110,12 @@
         window.livewire.on('show-modal', Msg => {
             $('#theModal').modal('show')
         })
+
+        //cerrar
+        window.livewire.on('conductor-close', Msg =>{
+            $('#theModal').modal('hide')
+            noty(Msg)
+        });
         //
         window.livewire.on('conductor-withsales', Msg => {
             noty(Msg)

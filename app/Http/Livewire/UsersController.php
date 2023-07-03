@@ -169,7 +169,7 @@ class UsersController extends Component
         ]);
 
         //para el rol
-       // $user->syncRoles($this->profile);
+        $user->syncRoles($this->profile);
          //validar img
          if($this->image)
          {

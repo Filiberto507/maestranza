@@ -6,19 +6,26 @@
                     <b>{{$componentName}} | {{$pageTitle}}</b>
                 </h4>
 
-                <div class="input-group">
-                    <div class="col-sm-8">
-                    <select class="custom-select  basic ">
-                        <option selected="selected">orange</option>
-                        <option>white melon</option>
-                        <option>purple melons</option>
-                    </select>
+                <div class="input-group flex">
+                    <div class="col-sm-8" wire:ignore>
+                        <select class="form-control basic" wire:model="vehiculoselectedName" id="select2-dropdown">
+                            <option value="" selected disabled>Elige</option>
+                            @foreach ($acctaller as $acc)
+                            <option value="{{ $acc->id }}" selected>{{ $acc->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    
-                    <div class="input-group-append">
-                        <button class="btn tabmenu bg-dark" data-toggle="modal" data-target="#theModal" type="button">Agregar</button>
+                    <br>
+                    <br>
+                    <br>
+
+                    <div class="input-group-append" style="margin-left: 60px;">
+                        <button class="btn btn-dark" wire:click="showDatos" data-toggle="modal" data-target="#theModal" type="button">Agregar</button>
                     </div>
                 </div>
+
+               
+
 
 
             </div>
@@ -31,9 +38,17 @@
                                 <th class="table-th text-while">
                                     ID
                                 </th>
-                                <th class="table-th text-while">
-                                    DESCRIPCION
+                                <th class="table-th text-while text-center">
+                                    VEHICULO
                                 </th>
+
+                                <th class="table-th text-while text-center">
+                                    CONDUCTOR
+                                </th>
+                                <th class="table-th text-while text-center">
+                                    DEPENDENCIA
+                                </th>
+
                                 <th class="table-th text-while">
                                     ACCTIONS
                                 </th>
@@ -46,7 +61,15 @@
                                     <h6>{{$tall->id}}</h6>
                                 </td>
                                 <td class="text-center">
+                                    <h6>{{$tall->vehiculo}} - {{$tall->placa}}</h6>
+                                </td>
+
+                                <td class="text-center">
                                     <h6>{{$tall->name}}</h6>
+                                </td>
+
+                                <td class="text-center">
+                                    <h6>{{$tall->dependencia}}</h6>
                                 </td>
 
                                 <td class="text-center">
@@ -80,6 +103,27 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+
+
+        //     document.getElementById('miSelect').addEventListener('change', function(event) {
+        //     Livewire.emit('vehiculoselectedId', event.target.value);
+        // });
+
+        //idselect y name
+        //$('#select2-dropdown').select2() //inicializador
+        //capturamos values when change event
+
+        $('#select2-dropdown').on('change', function(e) {
+            console.log($('#select2-dropdown option:selected').text());
+            var pId = $('#select2-dropdown').select2("val") // get vehiculo id
+            var pName = $('#select2-dropdown option:selected').text() // get name vehiculo
+            console.log(pId, pName);
+
+            @this.set('vehiculoselectedId', pId) // set vehiculo od selected
+            @this.set('vehiculoselectedName', pName)
+        });
+
+
         //evento ocultar la ventana modal y notificar
         window.livewire.on('taller-ok', Msg => {
             //llamar a la funcion del backend
@@ -114,7 +158,7 @@
             $('#theModal').modal('show')
         });
         //cerrar
-        window.livewire.on('taller-close', Msg => {
+        window.livewire.on('tallers-close', msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         });
@@ -137,9 +181,16 @@
                 swal.close()
             }
         })
-    }
+    };
 
-    var ss = $(".basic").select2({
-        tags: true,
-    });
+
+
+    // document.addEventListener('livewire:load', function () {
+    //     $('#select2-dropdown').on('change', function (e) {
+    //         console.log($('#select2-dropdown option:selected').text());
+    //         Livewire.emit('optionSelected', e.target.value);
+    //     });
+    // });
+
+    //
 </script>
