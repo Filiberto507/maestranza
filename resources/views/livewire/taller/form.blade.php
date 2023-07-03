@@ -203,10 +203,10 @@
                                 </tr>
 
                                 <tr>
-                                    <td><textarea wire:model="estadovehiculo" name="" id="" rows="3"></textarea></td>
-                                    <td><textarea name="" id="" rows="3"></textarea></td>
-                                    <td><textarea name="" id="" rows="3"></textarea></td>
-                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea wire:model="estadovehiculo.{{ 0 }}.descripcion" name="" id="" rows="3"></textarea></td>
+                                    <td><textarea wire:model="estadovehiculo.{{ 1 }}.descripcion" name="" id="" rows="3"></textarea></td>
+                                    <td><textarea wire:model="estadovehiculo.{{ 2 }}.descripcion" name="" id="" rows="3"></textarea></td>
+                                    <td><textarea wire:model="estadovehiculo.{{ 3 }}.descripcion" name="" id="" rows="3"></textarea></td>
                                 </tr>
 
                                 <tr>
@@ -217,10 +217,10 @@
                                 </tr>
 
                                 <tr>
-                                    <td><textarea name="" id="" rows="3"></textarea></td>
-                                    <td><textarea name="" id="" rows="3"></textarea></td>
-                                    <td><textarea name="" id="" rows="3"></textarea></td>
-                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea wire:model="estadovehiculo.{{ 4 }}.descripcion" name="" id="" rows="3"></textarea></td>
+                                    <td><textarea wire:model="estadovehiculo.{{ 5 }}.descripcion" name="" id="" rows="3"></textarea></td>
+                                    <td><textarea wire:model="estadovehiculo.{{ 6 }}.descripcion" name="" id="" rows="3"></textarea></td>
+                                    <td><textarea wire:model="estadovehiculo.{{ 7 }}.descripcion" name="" id="" rows="3"></textarea></td>
                                 </tr>
 
                                 <tr>
@@ -231,10 +231,10 @@
                                 </tr>
 
                                 <tr>
-                                    <td><textarea name="" id="" rows="3"></textarea></td>
-                                    <td><textarea name="" id="" rows="3"></textarea></td>
-                                    <td><textarea name="" id="" rows="3"></textarea></td>
-                                    <td><textarea name="" id="" rows="3"></textarea></td>
+                                    <td><textarea wire:model="estadovehiculo.{{ 9 }}.descripcion" name="" id="" rows="3"></textarea></td>
+                                    <td><textarea wire:model="estadovehiculo.{{ 10 }}.descripcion" name="" id="" rows="3"></textarea></td>
+                                    <td><textarea wire:model="estadovehiculo.{{ 11 }}.descripcion" name="" id="" rows="3"></textarea></td>
+                                    <td><textarea wire:model="estadovehiculo.{{ 12 }}.descripcion" name="" id="" rows="3"></textarea></td>
                                 </tr>
 
                                 <tr>

@@ -87,6 +87,7 @@ class TallerController extends Component
         $this->check = [];
         $this->search = '';
         $this->selected_id = 0;
+        $this->estadovehiculo=[];
 
         $this->resetValidation();
         $this->resetPage();
@@ -102,10 +103,19 @@ class TallerController extends Component
 
     public function create_taller()
     {
+        /* para eliminar casillas que esten vacias 
+        foreach ($this->estadovehiculo as $value) {
+            //dump($value["descripcion"]);
+            if($value["descripcion"] == ""){
+                $this->estadovehiculo = array_filter($this->estadovehiculo, function ($value) {
+                    return !empty($value["descripcion"]);
+                });
+            }
+        }*/
         dd($this->estadovehiculo);
         //dd($this->acctaller);
         //dd($this->check);
-        // dd($this->TallerName ,
+        // dd($this->TallerName,
         // $this->ingreso,
         // $this->salida,
         // $this->fecha_ingreso,
@@ -130,7 +140,7 @@ class TallerController extends Component
                 'vehiculo' => $this->vehiculo,
                 'color' => $this->color,
                 'dependencia' => $this->dependencia,
-                'placa' => $this->placa,
+                'placa' => strtoupper($this->placa),
                 'kilometraje' => $this->kilometraje,
                 'ordentrabajo' => $this->ordentrabajo,
                 //'user_id' => Auth()->user()->id
