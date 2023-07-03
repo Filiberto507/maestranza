@@ -12,11 +12,6 @@
                         </a>
                     </li>
                 </ul>
-                <ul>
-                    @foreach ($item as $i )
-                      <li>{{$i['cant']}}{{$i['desc']}}</li>
-                    @endforeach
-                  </ul>
             </div>
             @include('common.searchbox')
             <div class="widget-content">
@@ -29,9 +24,6 @@
                                 </th>
                                 <th class="table-th text-while">
                                     FECHA
-                                </th>
-                                <th class="table-th text-while">
-                                    ITEM
                                 </th>
                                 <th class="table-th text-while">
                                     DESCRIPCION
@@ -56,10 +48,6 @@
                                 </td>
                                 <td class="text-center">
                                     <h6>{{$diag->fecha}}</h6>
-                                </td>
-                                <td class="text-center">
-                                    <a href="/home"><h6>{{$diag->item}}</h6></a>
-                                    
                                 </td>
                                 <td class="text-center">
                                     <h6>{{$diag->descripcion}}</h6>

@@ -33,30 +33,36 @@
                         </div>
                     </div>
      
-                    <div class="container">
-                      <div class="row">
-                        <label for="exampleFormControlTextarea1" class="form-label">Item</label>
-                        <div class="col-lg-4">
-                          <div class="card">
-                            <div class="card-body">
-                              <div class="form-group">
-                                <input type="text" name="dato[]" placeholder="insert data"
-                                class="form-control datoInput">
-                              </div>
-                            </div>
-                          </div>
+                    <table class="table  table-bordered table-hover mt-1">
+        <thead>
+            <tr>
+                <th>Items</th>
+                <th>Descripción</th>
+                
+                <th> 
+                    <button class="btn btn-primary" wire:click="agregarFila({{1}})">
+                        <div class="base-icons">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
                         </div>
-                        
-                        <div class="col-lg-8">
-                          <div class="card">
-                            <div class="card-body">
-                              <div class="form-group">
-                                <input type="text" name="desc[]" placeholder="insert data"
-                                class="form-control descInput">
-                              </div>
-                            </div>
-                          </div>
-                    </div>
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($filas as $index => $fila)
+            <tr>
+                <td><input name="item" class="form-control" type="text" wire:model="filas.{{ $index }}.items" /></td>
+                <td><input name="desc" class="form-control" type="text" wire:model="filas.{{ $index }}.descriptions" /></td>
+                <td><button class="btn btn-danger" wire:click="eliminarFila({{ $index }})">Eliminar</button></td>
+            </tr>
+            @endforeach
+
+            
+        </tbody>
+    </table>
 
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">

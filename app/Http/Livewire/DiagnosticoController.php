@@ -6,6 +6,7 @@ use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\Diagnosticos;
 use App\Models\Vehiculos;
+use App\Http\Livewire\array_field;
 use DB;
 
 class DiagnosticoController extends Component
@@ -14,7 +15,7 @@ class DiagnosticoController extends Component
     
     public $fecha,$observaciones,$vehiculos_id,
            $search,$selected_id,$pageTitle,$componentName;
-    public $item = [], $descripcion =[];
+    public $filas = [],$descripcion=[];
     private $pagination=6;
 
     
@@ -59,8 +60,6 @@ class DiagnosticoController extends Component
        //dd($Dependencias);
         $this->selected_id = $Diagnostico->id;
         $this->fecha = $Diagnostico->fecha;
-        $this->item=$Diagnostico->item;
-        $this->descripcion=$Diagnostico->descripcion;
         $this->observaciones=$Diagnostico->observaciones;
         $this->vehiculos_id=$Diagnostico->vehiculos_id;
         $this->emit('show-modal', 'SHOW MODAL');
@@ -73,8 +72,6 @@ class DiagnosticoController extends Component
         
         $rules = [
             'fecha' => 'required',
-            'item' => 'required',
-            'descripcion' => 'required|min:3',
             'observaciones' => 'required|min:3',
             'vehiculos_id' => 'required',
             
@@ -90,12 +87,23 @@ class DiagnosticoController extends Component
         $this->validate($rules, $messages);
 
         $Diagnostico=Diagnosticos::create(['fecha' => $this->fecha,
-                                      'item'=>$this->item,
                                       'descripcion'=>$this->descripcion,
                                       'observaciones'=>$this->observaciones,
                                       'vehiculos_id' => $this->vehiculos_id]);
                                       
-                                      
+                                     /* if ($Diagnostico) {
+
+                                        $items = $this->descripcion;
+
+                                        foreach ($items as $item) {
+                                            Diagnosticos::create([
+                        
+                                                'descripcion' => implode(', ', $item),
+                                            ]);
+                                        }
+                                    }
+                                    //confirma la transaccion
+                                    DB::commit();    */                 
        // dd($Dependencias);
         $this->resetUI();
         $this->emit('diagnostico-added', 'Se registro el diagnostico con exito');
@@ -105,8 +113,6 @@ class DiagnosticoController extends Component
     public function resetUI()
     {
         $this->fecha ='';
-        $this->item ='';
-        $this->descripcion ='';
         $this->observaciones ='';
         $this->search ='';
         $this->vehiculos_id='Elegir';
@@ -120,8 +126,6 @@ class DiagnosticoController extends Component
     {
         $rules = [
             'fecha' => 'required',
-            'item' => 'required',
-            'descripcion' => 'required|min:3',
             'observaciones' => 'required|min:3',
             'vehiculos_id' => 'required',
             
@@ -137,8 +141,6 @@ class DiagnosticoController extends Component
         $this->validate($rules, $messages);
         $Diagnostico =Diagnosticos::find($this->selected_id);
         $Diagnostico ->update(['fecha' => $this->fecha,
-                                      'item'=>$this->item,
-                                      'descripcion'=>$this->descripcion,
                                       'observaciones'=>$this->observaciones,
                                       'vehiculos_id' => $this->vehiculos_id]);
                                       
@@ -155,5 +157,50 @@ class DiagnosticoController extends Component
         $this->resetUI();
         $this->emit('diagnostico-deleted', 'Se elimino el diagnostico');
     
+    }
+    public function agregarFila($variable)
+    {
+        if (count($this->filas) == 7) {
+            dd($this->filas);
+        }
+
+        switch ($variable) {
+            case '1':
+                $this->filas[] = [
+                    'items' => '',
+                    'descriptions' => '',
+                ];
+                break;
+
+            case '2':
+                $this->filas2[] = [
+                    'items' => '',
+                    'descriptions' => '',
+                ];
+                break;
+            default:
+                # code...
+                break;
+        }
+    }
+
+    public function eliminarFila($index)
+    {
+        unset($this->filas[$index]);
+        $this->filas = array_values($this->filas); // Reindexar el arreglo
+    }
+    public function crearDescripcion(Request $request)
+    {
+    
+        // Obtener los valores de los inputs
+        $item = $request->input('item');
+        $desc = $request->input('desc');
+
+        // Crear el array y guardar los valores
+        $descripcion['item'] = $item;
+        $descripcion['desc'] = $desc;
+        $descripcion = [$item, $desc];
+
+        //return $descripcion;
     }
 }

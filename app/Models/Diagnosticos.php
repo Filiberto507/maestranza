@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Diagnosticos extends Model
 {
     use HasFactory;
-    protected $fillable=['fecha','item','descripcion','observaciones','vehiculos_id'];
+    protected $fillable=['fecha','descripcion','observaciones','vehiculos_id'];
 }
