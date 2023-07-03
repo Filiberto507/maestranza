@@ -72,6 +72,21 @@
             @enderror
         </div>
     </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+            <label>Asignar Dependencia</label>
+            <select wire:model.lazy="dependencias_id" class="form-control" id="select2-dropdown" >
+                <option value="Elegir" selected> Elegir </option>
+                @foreach($Dependencias as $dep)
+                <option value="{{$dep->id}}" selected> {{$dep->nombre}} </option>
+                @endforeach
+            </select>
+            @error('dependencias_id') <span class="text-danger er">{{ $message}} </span>
+
+            @enderror
+        </div>
+    </div>
+        
 
 </div>
 @include('common.modalFooter')

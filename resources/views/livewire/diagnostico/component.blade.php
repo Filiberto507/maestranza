@@ -12,7 +12,11 @@
                         </a>
                     </li>
                 </ul>
-
+                <ul>
+                    @foreach ($item as $i )
+                      <li>{{$i['cant']}}{{$i['desc']}}</li>
+                    @endforeach
+                  </ul>
             </div>
             @include('common.searchbox')
             <div class="widget-content">
@@ -34,14 +38,18 @@
                                 </th>
                                 <th class="table-th text-while">
                                     OBSERVACIONES
-                                </th> 
+                                </th>
+                                <th class="table-th text-while">
+                                    PLACA VEHICULO
+                                </th>
+                                
                                 <th class="table-th text-while">
                                     ACCTIONS
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($Diagnostico as $diag )
+                            @foreach($Diagnosticos as $diag )
                             <tr>
                                 <td>
                                     <h6>{{$diag->id}}</h6>
@@ -50,7 +58,8 @@
                                     <h6>{{$diag->fecha}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$diag->item}}</h6>
+                                    <a href="/home"><h6>{{$diag->item}}</h6></a>
+                                    
                                 </td>
                                 <td class="text-center">
                                     <h6>{{$diag->descripcion}}</h6>
@@ -58,7 +67,12 @@
                                 <td class="text-center">
                                     <h6>{{$diag->observaciones}}</h6>
                                 </td>
-                                
+                                <td class="text-center">
+                                    @foreach ( $Vehiculos as $v )
+                                    <h6>{{$v->placa}}</h6>
+                                    @endforeach
+                                    
+                                </td> 
                                 <td class="text-center">
                                     <a href="javascript:void(0)" 
                                     wire:click="Edit({{$diag->id}})"
@@ -95,25 +109,25 @@
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         //evento ocultar la ventana modal y notificar
-        window.livewire.on('role-added', Msg => {
+        window.livewire.on('diagnostico-added', Msg => {
             $('#theModal').modal('hide')
         })
         //evento ocultar la ventana modal y notificar
-        window.livewire.on('role-updated', Msg => {
+        window.livewire.on('diagnostico-updated', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
         //evento  notificar
-        window.livewire.on('role-deleted', Msg => {
+        window.livewire.on('diagnostico-deleted', Msg => {
             noty(Msg)
         })
         //evento notificar
-        window.livewire.on('role-exists', Msg => {
+        window.livewire.on('diagnostico-exists', Msg => {
             noty(Msg)
         })
 
         //evento notificar
-        window.livewire.on('role-error', Msg => {
+        window.livewire.on('diagnostico-error', Msg => {
             noty(Msg)
         })
 
@@ -127,7 +141,7 @@
             $('#theModal').modal('show')
         });
         //cerrar
-        window.livewire.on('taller-close', Msg =>{
+        window.livewire.on('diagnostico-close', Msg =>{
             $('#theModal').modal('hide')
             noty(Msg)
         });

@@ -33,10 +33,10 @@
                                     MARCA
                                 </th>
                                 <th class="table-th text-while">
-                                    AÑO
+                                    COLOR
                                 </th>
                                 <th class="table-th text-while">
-                                    COLOR
+                                    AÑO
                                 </th>
                                 <th class="table-th text-while">
                                     CILINDRADA
@@ -48,43 +48,55 @@
                                     MOTOR
                                 </th>
                                 <th class="table-th text-while">
+                                    DEPENDENCIA
+                                </th>
+                                <th class="table-th text-while">
                                     ACCTIONS
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($Vehiculos as $vehiculo )
+                            @foreach($Vehiculos as $v )
                             <tr>
                                 <td>
-                                    <h6>{{$vehiculo->id}}</h6>
+                                    <h6>{{$v->id}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$vehiculo->placa}}</h6>
+                                    <h6>{{$v->placa}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$vehiculo->modelo}}</h6>
+                                    <h6>{{$v->modelo}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$vehiculo->marca}}</h6>
+                                    <h6>{{$v->marca}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$vehiculo->año}}</h6>
+                                    <h6>{{$v->color}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$vehiculo->color}}</h6>
+                                    <h6>{{$v->año}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$vehiculo->cilindrada}}</h6>
+                                    <h6>{{$v->cilindrada}}</h6>
+                                </td>}
+                                <td class="text-center">
+                                    <h6>{{$v->chasis}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$vehiculo->chasis}}</h6>
+                                    <h6>{{$v->motor}}</h6>
                                 </td>
+                                
                                 <td class="text-center">
-                                    <h6>{{$vehiculo->motor}}</h6>
+                                    @foreach ( $Dependencias as $dep )
+                                    <h6>{{$dep->nombre}}</h6>
+                                    @endforeach
+                                    
                                 </td>
+                                
+                                
                                 <td class="text-center">
                                     <a href="javascript:void(0)" 
-                                    wire:click="Edit({{$vehiculo->id}})"
+                                    wire:click="Edit({{$v->id}})"
                                     class="btn btn-dark mtmoble" title="Editar Registro">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -93,7 +105,7 @@
                                     </a>
 
                                     <a href="javascript:void(0)"
-                                        onclick="Confirm('{{$vehiculo->id}}')"
+                                        onclick="Confirm('{{$v->id}}')"
                                         class="btn btn-dark" title="Eliminar Registro">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
                                             <polyline points="3 6 5 6 21 6"></polyline>
@@ -118,25 +130,25 @@
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         //evento ocultar la ventana modal y notificar
-        window.livewire.on('role-added', Msg => {
+        window.livewire.on('vehiculo-added', Msg => {
             $('#theModal').modal('hide')
         })
         //evento ocultar la ventana modal y notificar
-        window.livewire.on('role-updated', Msg => {
+        window.livewire.on('vehiculo-updated', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
         //evento  notificar
-        window.livewire.on('role-deleted', Msg => {
+        window.livewire.on('vehiculo-deleted', Msg => {
             noty(Msg)
         })
         //evento notificar
-        window.livewire.on('role-exists', Msg => {
+        window.livewire.on('vehiculo-exists', Msg => {
             noty(Msg)
         })
 
         //evento notificar
-        window.livewire.on('role-error', Msg => {
+        window.livewire.on('vehiculo-error', Msg => {
             noty(Msg)
         })
 
@@ -150,7 +162,7 @@
             $('#theModal').modal('show')
         });
         //cerrar
-        window.livewire.on('taller-close', Msg =>{
+        window.livewire.on('vehiculo-close', Msg =>{
             $('#theModal').modal('hide')
             noty(Msg)
         });

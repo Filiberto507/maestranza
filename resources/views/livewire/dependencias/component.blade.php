@@ -24,7 +24,7 @@
                                     ID
                                 </th>
                                 <th class="table-th text-while">
-                                    DESCRIPCION
+                                    DEPENDENCIA
                                 </th>
                                 <th class="table-th text-while">
                                     ACCTIONS
@@ -65,7 +65,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{$Dependencias->links()}}
+                    
                 </div>
             </div>
         </div>
@@ -128,7 +128,7 @@
             confirmButtonText: 'Aceptar'
         }).then(function(result){
             if(result.value){
-                window.livewire.emit('destroy', id)
+                window.livewire.emit('deleteRow', id)
                 swal.close()
             }
         })

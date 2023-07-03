@@ -42,7 +42,7 @@
           GUARDAR
         </button>
         @else
-        <button type="button" wire:click.prevent="UpdateRole()" class="btn btn-dark close-modal" >
+        <button type="button" wire:click.prevent="Update()" class="btn btn-dark close-modal" >
           ACTUALIZAR
         </button>
         @endif

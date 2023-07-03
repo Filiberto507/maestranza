@@ -24,7 +24,7 @@
                                     ID
                                 </th>
                                 <th class="table-th text-while">
-                                    NOMBRE
+                                    ACCESORIO
                                 </th>
                                 <th class="table-th text-while">
                                     ACCTIONS
@@ -32,18 +32,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($Accesorios as $accs )
+                            @foreach($Dependencias as $d )
                             <tr>
                                 <td>
-                                    <h6>{{$accs->id}}</h6>
+                                    <h6>{{$d->id}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$accs->nombre}}</h6>
+                                    <h6>{{$d->nombre}}</h6>
                                 </td>
-                                
                                 <td class="text-center">
                                     <a href="javascript:void(0)" 
-                                    wire:click="Edit({{$accs->id}})"
+                                    wire:click="Edit({{$d->id}})"
                                     class="btn btn-dark mtmoble" title="Editar Registro">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -52,7 +51,7 @@
                                     </a>
 
                                     <a href="javascript:void(0)"
-                                        onclick="Confirm('{{$accs->id}}')"
+                                        onclick="Confirm('{{$d->id}}')"
                                         class="btn btn-dark" title="Eliminar Registro">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
                                             <polyline points="3 6 5 6 21 6"></polyline>
@@ -71,31 +70,31 @@
             </div>
         </div>
     </div>
-    @include('livewire.accesorios.form')
+    @include('livewire.dependencias.form')
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         //evento ocultar la ventana modal y notificar
-        window.livewire.on('role-added', Msg => {
+        window.livewire.on('dependencia-added', Msg => {
             $('#theModal').modal('hide')
         })
         //evento ocultar la ventana modal y notificar
-        window.livewire.on('role-updated', Msg => {
+        window.livewire.on('dependencia-updated', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
         //evento  notificar
-        window.livewire.on('role-deleted', Msg => {
+        window.livewire.on('dependencia-deleted', Msg => {
             noty(Msg)
         })
         //evento notificar
-        window.livewire.on('role-exists', Msg => {
+        window.livewire.on('dependencia-exists', Msg => {
             noty(Msg)
         })
 
         //evento notificar
-        window.livewire.on('role-error', Msg => {
+        window.livewire.on('dependencia-error', Msg => {
             noty(Msg)
         })
 
@@ -109,7 +108,7 @@
             $('#theModal').modal('show')
         });
         //cerrar
-        window.livewire.on('taller-close', Msg =>{
+        window.livewire.on('dependencia-close', Msg =>{
             $('#theModal').modal('hide')
             noty(Msg)
         });
@@ -129,7 +128,7 @@
             confirmButtonText: 'Aceptar'
         }).then(function(result){
             if(result.value){
-                window.livewire.emit('destroy', id)
+                window.livewire.emit('deleteRow', id)
                 swal.close()
             }
         })

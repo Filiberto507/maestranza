@@ -93,4 +93,12 @@ class DependenciasController extends Component
         $this->resetPage();
         $this->emit('dependencia-close', 'dependencia cerrar');
     }
+    protected $listeners=['deleteRow'=>'Destroy'];
+    public function Destroy($id)
+    {
+        $Dependencias=Dependencia::find($id);
+        $Dependencias->delete();
+        $this->resetUI();
+        $this->emit('dependencia-deleted', 'Se elimino la dependencia');
+    }
 }
