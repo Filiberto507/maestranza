@@ -1,4 +1,4 @@
-@can('vista-dash')
+@can('vista_dash')
 <div class="sidebar-wrapper sidebar-theme" >
 
     <nav id="compactSidebar" >

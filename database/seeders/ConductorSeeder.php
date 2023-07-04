@@ -16,20 +16,28 @@ class ConductorSeeder extends Seeder
     public function run()
     {
         //conductores
+
+        //GOBERNACION
         Conductor::create([ 
-            'name' => 'Marco Flores',
+            'name' => 'ROMAN TOMAS MATIAS',
             'telefono' => '64585469',
             'status' => 'ACTIVE',
         ]);
 
         Conductor::create([ 
-            'name' => 'Pedro Rojas',
-            'telefono' => '75856545',
+            'name' => 'WILIAN SANCHEZ CABRERA',
+            'telefono' => '64585469',
             'status' => 'LOCKED',
         ]);
-
+        //GABINETE
         Conductor::create([ 
-            'name' => 'Ronaldo Fuentes',
+            'name' => 'FRANKLIN VALLEJOS FERNANDEZ',
+            'telefono' => '75856545',
+            'status' => 'ACTIVE',
+        ]);
+        //ASESORIA DE GESTION INSTITUCIONAL Y RELACIONAMIENTO
+        Conductor::create([ 
+            'name' => 'LUIS BRUNO MONTESINOS VARGAS',
             'telefono' => '65369636',
             'status' => 'ACTIVE',
         ]);

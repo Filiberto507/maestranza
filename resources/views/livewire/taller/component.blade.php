@@ -9,9 +9,9 @@
                 <div class="input-group flex">
                     <div class="col-sm-8" wire:ignore>
                         <select class="form-control basic" wire:model="vehiculoselectedName" id="select2-dropdown">
-                            <option value="" selected disabled>Elige</option>
-                            @foreach ($acctaller as $acc)
-                            <option value="{{ $acc->id }}" selected>{{ $acc->name }}</option>
+                            <option value="Elegir" selected >Elegir</option>
+                            @foreach ($vehiculodatos as $ve)
+                            <option value="{{ $ve->id }}" >{{ $ve->placa }} | {{ $ve->marca }} | {{$ve->dependencia}} </option>
                             @endforeach
                         </select>
                     </div>

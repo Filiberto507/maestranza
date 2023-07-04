@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dependencias', function (Blueprint $table) {
+        Schema::create('estadovehiculos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',255);
+            $table->longText('descripcion');
+            $table->unsignedBigInteger('vehiculo_id');
+            $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dependencias');
+        Schema::dropIfExists('estadovehiculos');
     }
 };

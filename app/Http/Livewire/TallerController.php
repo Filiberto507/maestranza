@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Taller;
 use App\Models\accesoriostaller;
 use App\Models\Conductor;
+use App\Models\Vehiculos;
 use App\Models\tallerdetalle;
 use Livewire\WithPagination;
 use Carbon\Carbon;
@@ -20,11 +21,11 @@ class TallerController extends Component
     public $ingreso, $salida, $fecha_ingreso, $fecha_salida, $name, $vehiculo, $color,
         $dependencia, $placa, $kilometraje, $ordentrabajo, $acctaller, $acctaller2;
     //select2
-    public $vehiculoselectedId, $vehiculoselectedName;
+    public $vehiculoselectedId, $vehiculoselectedName, $vehiculodatos;
 
     //estado de vehiculo img
     public $estadovehiculo=[];
-    
+
     //numero de filas por pagina
     private $pagination = 5;
 
@@ -39,7 +40,7 @@ class TallerController extends Component
     {
         $this->pageTitle = 'Listado';
         $this->componentName = 'Taller';
-        $this->fecha_ingreso = Carbon::parse(Carbon::now())->format('m-d-Y');
+        $this->fecha_ingreso = Carbon::parse(Carbon::now())->format('Y-m-d');
         $this->ingreso = Carbon::parse(Carbon::now())->format('H:i');
 
         //dd($this->ingreso, $this->fecha_ingreso);
@@ -56,11 +57,20 @@ class TallerController extends Component
         else
             $Taller = Taller::orderBy('id', 'desc')->paginate($this->pagination);
         $this->acctaller = accesoriostaller::orderBy('id', 'asc')->get();
+
+        $this->vehiculodatos = Vehiculos::join('dependencias as d','d.id', 'vehiculos.dependencias_id')
+        ->select('vehiculos.*', 'd.nombre as dependencia')
+        ->orderby('id', 'desc')
+        ->get();
+
+        //dd($this->vehiculodatos);
+       
         //dd($acctaller);
 
         return view('livewire.taller.component', [
             'taller' => $Taller,
             'acctaller' => $this->acctaller,
+            'vehiculodatos' => $this->vehiculodatos,
             'conductor' => Conductor::orderby('name', 'asc')->get()
         ])
             //extender de layouts
@@ -103,7 +113,7 @@ class TallerController extends Component
 
     public function create_taller()
     {
-        /* para eliminar casillas que esten vacias 
+        /* para eliminar casillas que esten vacias
         foreach ($this->estadovehiculo as $value) {
             //dump($value["descripcion"]);
             if($value["descripcion"] == ""){
@@ -112,7 +122,7 @@ class TallerController extends Component
                 });
             }
         }*/
-        dd($this->estadovehiculo);
+        //dd($this->estadovehiculo);
         //dd($this->acctaller);
         //dd($this->check);
         // dd($this->TallerName,
@@ -129,7 +139,7 @@ class TallerController extends Component
         // $this->ordentrabajo,
         // $this->check);
         try {
-            //guardar 
+            //guardar
             $talleres = Taller::create([
 
                 'ingreso' => $this->ingreso,
@@ -200,7 +210,7 @@ class TallerController extends Component
         //dd($acctaller);
         //foreach para agregar si tiene el checked
         foreach ($acctalleres as $tall) {
-            //buscado el id del taller 
+            //buscado el id del taller
             $tallerid = Taller::find($this->selected_id);
             //dd($tallerherr->id);
             //obtenemos todos los id de las herramientas que tiene el taller id
@@ -230,7 +240,7 @@ class TallerController extends Component
         //separar el arreglo
         //$acctalleres = range(1, 30); // Arreglo con 30 elementos
         //dd($acctalleres);
-        
+
 
         //la funcion chunk divide el segmento segun el rango especificado
         $segmentos = $acctalleres->chunk($acctalleres->count() / 3);
@@ -241,7 +251,7 @@ class TallerController extends Component
         //la funcion collect + concat ayudar a concadenar una coleccion
         $ultimos10 = collect($segmentos[2])->concat($segmentos[3]);
 
-        dd($primeros10, $segundos10, $ultimos10);
+        //dd($primeros10, $segundos10, $ultimos10);
 
         //dd($this->check);
         $this->acctaller = $acctalleres;
@@ -254,11 +264,11 @@ class TallerController extends Component
     {
 
         //dd($this->check);
-        //buscar por el id 
+        //buscar por el id
         $talleres = Taller::find($this->selected_id);
 
         try {
-            //guardar 
+            //guardar
             $talleres->update([
 
                 'ingreso' => $this->ingreso,
@@ -308,7 +318,16 @@ class TallerController extends Component
 
     public function showDatos()
     {
+        //dd($this->vehiculoselectedId);
         //dd($this->vehiculoselectedName, $this->vehiculoselectedId);
+        $findvehiculo = Vehiculos::join('dependencias as d','d.id', 'vehiculos.dependencias_id')
+        ->select('vehiculos.*', 'd.nombre as dependencia')
+        ->where('vehiculos.id', $this->vehiculoselectedId)
+        ->first();
+        //dd($findvehiculo);
+        $this->placa = $findvehiculo->placa;
+        $this->vehiculo = $findvehiculo->marca;
+        $this->color = $findvehiculo->color;
     }
 
     //crear arrays para los diferentes columnas que seran como 11 y cada array tendra el id al lugar
