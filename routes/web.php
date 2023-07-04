@@ -39,11 +39,7 @@ Route::get('permisos', PermisosController::class)->middleware('role:Admin');
 Route::get('users', UsersController::class)->middleware('role:Admin');
 Route::get('asignar', AsignarController::class)->middleware('role:Admin');  
 Route::get('taller', TallerController::class);
-
 Route::get('accesorios', AccesoriosController::class);
-
-
-
 Route::get('acctaller', AccesoriostallerController::class);
 Route::get('conductor', ConductorController::class);
 
