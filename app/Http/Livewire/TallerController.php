@@ -40,8 +40,7 @@ class TallerController extends Component
     {
         $this->pageTitle = 'Listado';
         $this->componentName = 'Taller';
-        $this->fecha_ingreso = Carbon::parse(Carbon::now())->format('Y-m-d');
-        $this->ingreso = Carbon::parse(Carbon::now())->format('H:i');
+        $this->vehiculoselectedName = 'Elegir';
 
         //dd($this->ingreso, $this->fecha_ingreso);
         //     $this->check=[
@@ -65,7 +64,7 @@ class TallerController extends Component
 
         //dd($this->vehiculodatos);
        
-        //dd($acctaller);
+        //dd($this->vehiculoselectedName);
 
         return view('livewire.taller.component', [
             'taller' => $Taller,
@@ -97,6 +96,7 @@ class TallerController extends Component
         $this->check = [];
         $this->search = '';
         $this->selected_id = 0;
+        $this->vehiculoselectedName= null;
         $this->estadovehiculo=[];
 
         $this->resetValidation();
@@ -113,6 +113,7 @@ class TallerController extends Component
 
     public function create_taller()
     {
+       // dd($this->vehiculoselectedId);
         /* para eliminar casillas que esten vacias
         foreach ($this->estadovehiculo as $value) {
             //dump($value["descripcion"]);
@@ -153,9 +154,10 @@ class TallerController extends Component
                 'placa' => strtoupper($this->placa),
                 'kilometraje' => $this->kilometraje,
                 'ordentrabajo' => $this->ordentrabajo,
+                'vehiculo_id' => $this->vehiculoselectedId,
                 //'user_id' => Auth()->user()->id
             ]);
-            //dd($talleres->id);
+            //dd($talleres);
             //validar si se guardo
             if ($talleres) {
                 //guardar detalle de recepcion
@@ -167,7 +169,7 @@ class TallerController extends Component
                     tallerdetalle::create([
 
                         'acctaller_id' => explode(',', $item)[0],
-                        'taller_id' => $talleres->id
+                        'vehiculo_id' => $talleres->vehiculo_id
                     ]);
                 }
             }
@@ -214,7 +216,7 @@ class TallerController extends Component
             $tallerid = Taller::find($this->selected_id);
             //dd($tallerherr->id);
             //obtenemos todos los id de las herramientas que tiene el taller id
-            $tallerherramientas = tallerdetalle::where('taller_id', $tallerid->id)->get();
+            $tallerherramientas = tallerdetalle::where('vehiculo_id', $tallerid->vehiculo_id)->get();
             //dd($tallerherramientas);
 
             //buscamos si existe esa herramienta agregado o no
@@ -318,6 +320,10 @@ class TallerController extends Component
 
     public function showDatos()
     {
+
+        
+        $this->fecha_ingreso = Carbon::parse(Carbon::now())->format('Y-m-d');
+        $this->ingreso = Carbon::parse(Carbon::now())->format('H:i');
         //dd($this->vehiculoselectedId);
         //dd($this->vehiculoselectedName, $this->vehiculoselectedId);
         $findvehiculo = Vehiculos::join('dependencias as d','d.id', 'vehiculos.dependencias_id')
@@ -328,6 +334,40 @@ class TallerController extends Component
         $this->placa = $findvehiculo->placa;
         $this->vehiculo = $findvehiculo->marca;
         $this->color = $findvehiculo->color;
+
+        //obtencion de los accesorios que tiene el vehiculo
+        $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
+
+        //dd($acctaller);
+        //foreach para agregar si tiene el checked
+        foreach ($acctalleres as $tall) {
+            //buscado el id del taller
+            //dd($tallerherr->id);
+            //obtenemos todos los id de las herramientas que tiene el taller id
+            $tallerherramientas = tallerdetalle::where('vehiculo_id', $this->vehiculoselectedId)->get();
+            //dd($tallerherramientas);
+
+            //buscamos si existe esa herramienta agregado o no
+            $obtenercheck = $tallerherramientas->where('acctaller_id', $tall->id)->first();
+            //dump($obtenercheck);
+            //exists sirve para obtener valor en boleano
+            //$this->roles()->where('nombre', $nombreRol)->exists();
+
+            // verificar si tenemos datos en obtenercheck
+            if ($obtenercheck) {
+                //dump($obtenercheck->acctaller_id);
+                $addcheck = accesoriostaller::find($obtenercheck->acctaller_id);
+                //dump($addcheck);
+                $tall->checked = 1;
+                $this->check[] =
+                    $addcheck->id . ", " .
+                    $addcheck->name;
+
+                //$acctalleres->pull($tall->id);
+            }
+        }
+
+        $this->acctaller = $acctalleres;
     }
 
     //crear arrays para los diferentes columnas que seran como 11 y cada array tendra el id al lugar

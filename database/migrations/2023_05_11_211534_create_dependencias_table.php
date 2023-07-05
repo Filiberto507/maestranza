@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tallerdetalles', function (Blueprint $table) {
+        Schema::create('dependencias', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('acctaller_id');
-            $table->foreign('acctaller_id')->references('id')->on('accesoriostallers');
-            $table->unsignedBigInteger('vehiculo_id');
-            $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
+            $table->string('nombre',255);
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tallerdetalles');
+        Schema::dropIfExists('dependencias');
     }
 };

@@ -9,73 +9,82 @@
 <table>
         <tr>
             <td class="columna1">
-                <img class="img-go" src="/img/img-go.png" alt="Imagen del vehículo">
+                <img class="img-go" src="assets/img/img-go.png" alt="Imagen del vehículo">
             </td>
             <td class="columna2">
                 <h2>Recepción de vehículo</h2>
                 <table>
                     <tr>
                         <td>Hora de entrada</td>
-                        <td>XX:XX AM/PM</td>
+                        <td>{{$hora_ingreso}}</td>
                     </tr>
                     <tr>
                         <td>Hora de salida</td>
-                        <td>XX:XX AM/PM</td>
+                        @if($hora_salida != null)
+                        <td>{{$hora_salida}}</td>
+                        @else
+                        <td>En Curso</td>
+                        @endif
                     </tr>
                 </table>
             </td>
             <td class="columna3">
                 <div>
                     <p class="fecha-title">Número de formulario</h2>
-                    <p>123456789</p>
+                    <p>123</p>
                 </div>
                 <div>
                     <p class="fecha-title">Fecha Entrada</h2>
                     <p>Día, Mes, Año</p>
-                    <p>XX-XX-XX</p>
+                    <p>{{$fecha_ingreso}}</p>
                 </div>
                 <div>
                     <p class="fecha-title">Fecha Salida</h2>
                     <p>Día, Mes, Año</p>
-                    <p>XX-XX-XX</p>
+                    @if($fecha_salida != null)
+                    <p>{{$fecha_salida}}</p>
+                    @else
+                    <p>En Curso</p>
+                    @endif
                 </div>
             </td>
         </tr>
     </table>
     <h2>AREA DE TRANSPORTE - TALLER DE MAESTRANZA</h2>
-
+    
     <table class="info">
+    
         <tr>
           <th class="info-th">Nombre:</th>
           <td class="info-td"><div class="text">
-            Rojas Tomas Garcia  oscar
+            {{$nombre}}
           </div></td>
           <th class="info-th">Vehiculo:</th>
           <td class="info-td"><div class="text">
-            Rojas Tomas 
+            {{$vehiculo}}
           </div></td>
           <th class="info-th">Color:</th>
           <td class="info-td"><div class="text">
-            Rojas Tomas 
+            {{$color}}
           </div></td>
         </tr>
         <tr>
           <th class="info-th">Stria/Dir:</th>
           <td class="info-td"><div class="text">
-            Rojas Tomas Garcia oscar
+            {{$dependencia}}
           </div></td>
           <th class="info-th">Placa:</th>
           <td class="info-td"><div class="text">
-            Rojas Tomas 
+            {{$placa}}
           </div></td>
           <th class="info-th">Kilometraje:</th>
           <td class="info-td"><div class="text">
-            Rojas Tomas 
+            {{$kilometraje}}
           </div></td>
         </tr>
         
     </table>
-      
+    
 
     <table class="table-check" ">
         <tr>

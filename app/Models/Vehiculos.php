@@ -9,4 +9,16 @@ class Vehiculos extends Model
 {
     use HasFactory;
     protected $fillable=['placa','modelo','marca','color','año','cilindrada','chasis','motor','dependencias_id','conductors_id'];
+
+    public function taller()
+    {
+        return $this->hasMany(taller::class);
+
+    }
+
+    public function tallerdetalle()
+    {
+        return $this->hasMany(tallerdetalle::class);
+
+    }
 }

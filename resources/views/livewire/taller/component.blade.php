@@ -6,25 +6,29 @@
                     <b>{{$componentName}} | {{$pageTitle}}</b>
                 </h4>
 
-                <div class="input-group flex">
+                <div class="input-group mb-4">
                     <div class="col-sm-8" wire:ignore>
+                        <label class="text-center">Asignar Vehiculo</label>
                         <select class="form-control basic" wire:model="vehiculoselectedName" id="select2-dropdown">
-                            <option value="Elegir" selected >Elegir</option>
+                            <option value="Elegir" selected>Elegir</option>
                             @foreach ($vehiculodatos as $ve)
-                            <option value="{{ $ve->id }}" >{{ $ve->placa }} | {{ $ve->marca }} | {{$ve->dependencia}} </option>
+                            <option value="{{ $ve->id }}">{{ $ve->placa }} | {{ $ve->marca }} | {{$ve->dependencia}} </option>
                             @endforeach
                         </select>
                     </div>
-                    <br>
-                    <br>
-                    <br>
 
-                    <div class="input-group-append" style="margin-left: 60px;">
+                    @if($vehiculoselectedName != "Elegir")
+                    <div class="input-group-append" style="margin-left: 60px; margin-top:25px; padding-top: 10px;">
                         <button class="btn btn-dark" wire:click="showDatos" data-toggle="modal" data-target="#theModal" type="button">Agregar</button>
                     </div>
+                    @else
+                    <div class="input-group-append" style="margin-left: 60px; margin-top:25px; padding-top: 10px;">
+                        <button class="btn btn-dark" disabled wire:click="showDatos" data-toggle="modal" data-target="#theModal" type="button">Agregar</button>
+                    </div>
+                    @endif
                 </div>
 
-               
+
 
 
 
@@ -86,6 +90,13 @@
                                             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                                             <line x1="10" y1="11" x2="10" y2="17"></line>
                                             <line x1="14" y1="11" x2="14" y2="17"></line>
+                                        </svg>
+                                    </a>
+                                    <a href="{{ url('report/pdf' . '/' . $tall->id) }}" class="btn btn-danger"  target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer">
+                                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                                            <rect x="6" y="14" width="12" height="8"></rect>
                                         </svg>
                                     </a>
                                 </td>
@@ -158,8 +169,9 @@
             $('#theModal').modal('show')
         });
         //cerrar
-        window.livewire.on('tallers-close', msg => {
+        window.livewire.on('tallers-close', Msg => {
             $('#theModal').modal('hide')
+            $('#select2-dropdown').val('Elegir').trigger('change');
             noty(Msg)
         });
     });
