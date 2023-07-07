@@ -136,6 +136,7 @@ label {
   height: auto;
 }
 
+/*border del nombre*/
 .container {
   width: 300px;
 }
@@ -146,7 +147,6 @@ label {
 }
 
 .text {
-  
   overflow: hidden;
 }
 
@@ -155,4 +155,35 @@ label {
   display: block;
   border-bottom: 2px solid black;
   margin-top: 5px;
+}
+
+/*contenedor de parrafo*/
+
+.container-parrafo {
+  
+  margin: 0 auto;
+  border: 8px solid black;
+  border-radius: 5%;
+  padding: 20px;
+}
+
+.paragraph {
+  position: relative;
+  padding-bottom: 1px;
+}
+
+.paragraph::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+}
+
+/*para las firmas*/
+
+.firma{
+  margin-top: 70px;
 }

@@ -106,12 +106,9 @@
             <td class=" check-colum" ">
                 <div class=" checkbox-item">
         <label for="checkbox1">{{$pr->name}}</label>
-        <input type="checkbox" id="checkbox1" name="checkbox1" 
-        value="{{ $permiso->id }}" 
-        {{ $pr->checked == 1 ? 'checked': '' }}
-        >
+        <input type="checkbox" id="checkbox1" name="checkbox1" value="{{ $permiso->id }}" {{ $pr->checked == 1 ? 'checked': '' }}>
         </div>
-       
+
         <!-- Repite las siguientes líneas de código para agregar más elementos -->
         </td>
         @endforeach
@@ -178,6 +175,28 @@
             </tr>
         </table>
 
+
+        <div class="container-parrafo">
+            <div class="paragraph">
+                <p>Aquí está el primer párrafo .</p>
+            </div>
+            <div class="paragraph">
+                <p>Aquí está el segundo párrafo.</p>
+            </div>
+            <div class="paragraph">
+                <p>Aquí está el tercer párrafo.</p>
+            </div>
+        </div>
+
+
+
+        <table class="firma">
+            <tr>
+                <th>CONDUCTOR DE VEHICULO INGRESO</th>
+                <th>MECANICO DE MAESTRANZA</th>
+                <th>CONDUCTOR DE VEHICULO SALIDA</th>
+            </tr>
+        </table>
 
         <div class="container">
             <span class="label">Nombre:</span>

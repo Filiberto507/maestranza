@@ -150,7 +150,6 @@ class TallerController extends Component
                 'ingreso' => $this->ingreso,
                 'salida' => $this->salida,
                 'fecha_ingreso' => $this->fecha_ingreso,
-                'fecha_salida' => $this->fecha_salida,
                 'name' => $this->name,
                 'vehiculo' => $this->vehiculo,
                 'color' => $this->color,
@@ -222,6 +221,10 @@ class TallerController extends Component
         $this->placa = $taller->placa;
         $this->kilometraje = $taller->kilometraje;
         $this->ordentrabajo = $taller->ordentrabajo;
+        //separar el texto para el pdf
+        $separador = "\n"; // Usar salto de línea
+        $separada = explode($separador, $this->ordentrabajo);
+        //dd($separada);
         $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
 
         //dd($acctaller);
