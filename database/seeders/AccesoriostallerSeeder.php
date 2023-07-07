@@ -95,5 +95,100 @@ class AccesoriostallerSeeder extends Seeder
             'name' => 'Limpia Parabrisas',
             
         ]);
+
+        accesoriostaller::create([
+            'name' => 'Tapa de Tanque',
+            
+        ]);
+        
+        accesoriostaller::create([
+            'name' => 'Sobre Pisos',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Antenas',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Emblema de Motor',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Cabezales',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Emblemas',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Medidor de Aceite',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Bocina',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Llanta de Auxilio',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Tapas de Depositos',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Espejos',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Cobertor de Llantas',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Extintor',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Luz Exterior',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Plato de Seguridad',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Triangulo',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Fundas',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Perno de Seguridad',
+            
+        ]);
+
+        accesoriostaller::create([
+            'name' => 'Botiquin',
+            
+        ]);
     }
 }

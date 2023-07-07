@@ -5,16 +5,25 @@ table {
 }
 
 .img-go{
-width: 200px;
+width: 100px;
+margin-left: 50px;
 }
 
-h2{
+h3{
 margin: 0;
 text-align: center;
 padding: 10px;
 background-color: #333;
 color: white;
 }
+
+h2{
+  margin: 0;
+  text-align: center;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  }
 .fecha-title{
 margin: 0;
 padding: 5px;
@@ -31,10 +40,11 @@ td {
 }
 
 .columna2 {
-  width: 50%;
+  width: 30%;
 }
 
 .columna3 {
+  background: cornflowerblue;
   width: 25%;
   vertical-align: top;
 }
@@ -54,27 +64,27 @@ td {
 /* checkbox */
 
 
-
 .table-check {
   background-color: cornflowerblue;
-  
   padding: 5px;
   table-layout: fixed;
+  width: 100%;
 }
 
 .table-check td {
   width: 33.33%;
   vertical-align: top;
 }
+
 .checkbox-item {
-  
-  
   margin-bottom: 10px;
+  white-space: nowrap;
 }
+
 input[type="checkbox"] {
   width: 50px;
   height: 23px;
-  margin-right: 10px;
+  margin-right: 0px;
   margin-bottom: -10px;
   appearance: none;
   border: 1px solid #000;
@@ -86,12 +96,6 @@ input[type="checkbox"]:checked {
 }
 input[type="checkbox"]::before {
   display: none;
-}
-
-label {
-  
-  font-size: 15px;
-  white-space: nowrap;
 }
 /*informacion del usuario*/
 
@@ -162,26 +166,25 @@ label {
 .container-parrafo {
   
   margin: 0 auto;
-  border: 8px solid black;
+  border: 8px solid cornflowerblue;
   border-radius: 5%;
   padding: 20px;
 }
 
 .paragraph {
-  position: relative;
-  padding-bottom: 1px;
+  overflow: hidden;
 }
 
 .paragraph::after {
   content: "";
-  position: absolute;
-  left: 0;
-  bottom: 10px;
-  width: 100%;
-  height: 2px;
-  background-color: black;
+  display: block;
+  border-bottom: 2px solid black;
+  margin-top: 15px;
 }
 
+.par{
+  margin-bottom: -10px;
+}
 /*para las firmas*/
 
 .firma{

@@ -16,13 +16,19 @@ use App\Models\accesoriostaller;
 
 class ExportController extends Controller
 {
-    public $check=[];
+    public $check = [];
     public function reportPDF($id)
     {
 
         $tallerdatos = Taller::find($id);
         //datos para el reporte
+
+        /*$cadena = $tallerdatos->fecha_ingreso;
+        $separador = "-";
+        $s = explode($separador, $cadena);*/
+        
         $fecha_ingreso = $tallerdatos->fecha_ingreso;
+        //dd($fecha_ingreso);
         $fecha_salida = $tallerdatos->fecha_salida;
         $hora_ingreso = $tallerdatos->ingreso;
         $hora_salida = $tallerdatos->salida;
@@ -65,7 +71,34 @@ class ExportController extends Controller
             }
         }
 
-        //la funcion chunk divide el segmento segun el rango especificado
+        //dd($acctalleres);
+
+        // Colecciones separadas
+        $primeros10 = collect();
+        $segundos10 = collect();
+        $ultimos10 = collect();
+        $a = 0;
+        $b = 1;
+        $c = 2;
+        foreach ($acctalleres as $key => $value) {
+            if ($key == $a) {
+                $primeros10->push($value);
+                $a = $a + 3;
+            }
+
+            if ($key == $b) {
+                $segundos10->push($value);
+                $b = $b + 3;
+            }
+
+            if ($key == $c) {
+                $ultimos10->push($value);
+                $c = $c + 3;
+            }
+        }
+        //dd($primeros10, $segundos10, $ultimos10);   
+
+        /*//la funcion chunk divide el segmento segun el rango especificado
         $segmentos = $acctalleres->chunk($acctalleres->count() / 3);
         //dd($segmentos);
 
@@ -73,16 +106,30 @@ class ExportController extends Controller
         $segundos10 = $segmentos[1];
         //la funcion collect + concat ayudar a concadenar una coleccion
         $ultimos10 = collect($segmentos[2])->concat($segmentos[3]);
-
+        */
 
         //validar la palabra user
         //$user = $id == 0 ? 'Todos' : User::find($userId)->name;
         //usar lo importado del PDF
         //loadView = pasando la vista
-        $pdf = PDF::loadView('pdf.reporte1', compact('tallerdatos','hora_ingreso', 'hora_salida', 'fecha_ingreso', 'fecha_salida' , 'primeros10', 
-        'segundos10', 'ultimos10', 'nombre', 'vehiculo', 'color', 'dependencia', 'placa', 'kilometraje'));
+        $pdf = PDF::setPaper([0, 0, 609.45, 935.43])->loadView('pdf.reporte1', compact(
+            'tallerdatos',
+            'hora_ingreso',
+            'hora_salida',
+            'fecha_ingreso',
+            'fecha_salida',
+            'primeros10',
+            'segundos10',
+            'ultimos10',
+            'nombre',
+            'vehiculo',
+            'color',
+            'dependencia',
+            'placa',
+            'kilometraje'
+        ));
         //visualizar en el navegador
-        return $pdf->stream('salesReport.pdf'); 
+        return $pdf->stream('salesReport.pdf');
         //para descargar el reporte en pdf
         //return $pdf->download('salesReport.pdf');
     }
