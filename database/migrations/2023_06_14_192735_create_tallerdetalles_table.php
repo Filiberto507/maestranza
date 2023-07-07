@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('acctaller_id');
             $table->foreign('acctaller_id')->references('id')->on('accesoriostallers');
-            $table->unsignedBigInteger('vehiculo_id');
-            $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
+            $table->unsignedBigInteger('taller_id');
+            $table->foreign('taller_id')->references('id')->on('tallers');
             $table->timestamps();
         });
     }

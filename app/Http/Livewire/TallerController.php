@@ -11,6 +11,7 @@ use App\Models\Vehiculos;
 use App\Models\tallerdetalle;
 use Livewire\WithPagination;
 use Carbon\Carbon;
+use App\Models\Estadovehiculo;
 use DB;
 
 class TallerController extends Component
@@ -25,6 +26,7 @@ class TallerController extends Component
 
     //estado de vehiculo img
     public $estadovehiculo=[];
+    
 
     //numero de filas por pagina
     private $pagination = 5;
@@ -114,15 +116,17 @@ class TallerController extends Component
     public function create_taller()
     {
        // dd($this->vehiculoselectedId);
-        /* para eliminar casillas que esten vacias
+        // para eliminar casillas que esten vacias
+       // dd($this->estadovehiculo);
         foreach ($this->estadovehiculo as $value) {
-            //dump($value["descripcion"]);
+            
             if($value["descripcion"] == ""){
                 $this->estadovehiculo = array_filter($this->estadovehiculo, function ($value) {
                     return !empty($value["descripcion"]);
                 });
             }
-        }*/
+           
+        }
         //dd($this->estadovehiculo);
         //dd($this->acctaller);
         //dd($this->check);
@@ -169,8 +173,19 @@ class TallerController extends Component
                     tallerdetalle::create([
 
                         'acctaller_id' => explode(',', $item)[0],
-                        'vehiculo_id' => $talleres->vehiculo_id
+                        'taller_id' => $talleres->id
                     ]);
+                }
+
+                //estado vehiculo
+                foreach ($this->estadovehiculo as $key => $value) {
+                    //agregamos a la tabla 
+                    Estadovehiculo::create([
+                        'descripcion' => $value["descripcion"],
+                        'taller_id' => $talleres->id,
+                        'key' => $key
+                    ]);
+
                 }
             }
             //confirma la transaccion
@@ -216,7 +231,7 @@ class TallerController extends Component
             $tallerid = Taller::find($this->selected_id);
             //dd($tallerherr->id);
             //obtenemos todos los id de las herramientas que tiene el taller id
-            $tallerherramientas = tallerdetalle::where('vehiculo_id', $tallerid->vehiculo_id)->get();
+            $tallerherramientas = tallerdetalle::where('taller_id', $tallerid->id)->get();
             //dd($tallerherramientas);
 
             //buscamos si existe esa herramienta agregado o no
@@ -259,6 +274,16 @@ class TallerController extends Component
         $this->acctaller = $acctalleres;
         //dd($this->acctaller);
 
+        //traer las descripciones de los estados del vehiculo
+
+        $datosestadovehiculo = Estadovehiculo::where('taller_id',$this->selected_id)->get();
+
+        foreach ($datosestadovehiculo as $value) {
+            $this->estadovehiculo[$value->key] = [
+                'descripcion' => $value->descripcion,
+            ];
+        }
+        //dd($this->estadovehiculo);
         $this->emit('show-modal', 'open!');
     }
 
@@ -335,7 +360,7 @@ class TallerController extends Component
         $this->vehiculo = $findvehiculo->marca;
         $this->color = $findvehiculo->color;
 
-        //obtencion de los accesorios que tiene el vehiculo
+       /* //obtencion de los accesorios que tiene el vehiculo
         $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
 
         //dd($acctaller);
@@ -367,7 +392,7 @@ class TallerController extends Component
             }
         }
 
-        $this->acctaller = $acctalleres;
+        $this->acctaller = $acctalleres;*/
     }
 
     //crear arrays para los diferentes columnas que seran como 11 y cada array tendra el id al lugar

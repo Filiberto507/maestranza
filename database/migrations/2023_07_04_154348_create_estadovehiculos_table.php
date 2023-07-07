@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('estadovehiculos', function (Blueprint $table) {
             $table->id();
             $table->longText('descripcion');
-            $table->unsignedBigInteger('vehiculo_id');
-            $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
+            $table->integer('key');
+            $table->unsignedBigInteger('taller_id');
+            $table->foreign('taller_id')->references('id')->on('tallers');
             $table->timestamps();
         });
     }

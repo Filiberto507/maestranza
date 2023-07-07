@@ -10,6 +10,12 @@ class Estadovehiculo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'descripcion', 'vehiculo_id'
+        'descripcion', 'key', 'taller_id'
      ];
+
+     public function taller()
+    {
+        return $this->belongsTo(Taller::class);
+
+    }
 }

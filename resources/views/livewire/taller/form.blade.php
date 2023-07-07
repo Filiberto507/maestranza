@@ -74,7 +74,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" disabled  id="vehiculo" wire:model.lazy="vehiculo" class="form-control" placeholder="Vehiculo" maxlength="255">
+                                <input type="text" disabled id="vehiculo" wire:model.lazy="vehiculo" class="form-control" placeholder="Vehiculo" maxlength="255">
                             </div>
                             @error('vehiculo')
                             <span class="text-danger er"> {{ $message }} </span>
@@ -132,7 +132,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" id="placa" wire:model.lazy="placa" class="form-control" placeholder="Placa" maxlength="255" disabled >
+                                <input type="text" id="placa" wire:model.lazy="placa" class="form-control" placeholder="Placa" maxlength="255" disabled>
                             </div>
                             @error('placa')
                             <span class="text-danger er"> {{ $message }} </span>
@@ -203,6 +203,7 @@
                                 </tr>
 
                                 <tr>
+                                   
                                     <td><textarea placeholder="Descripcion" wire:model="estadovehiculo.{{ 0 }}.descripcion" name="" id="" rows="3"></textarea></td>
                                     <td><textarea placeholder="Descripcion" wire:model="estadovehiculo.{{ 1 }}.descripcion" name="" id="" rows="3"></textarea></td>
                                     <td><textarea placeholder="Descripcion" wire:model="estadovehiculo.{{ 2 }}.descripcion" name="" id="" rows="3"></textarea></td>
@@ -235,7 +236,7 @@
                                     <td><textarea placeholder="Descripcion" wire:model="estadovehiculo.{{ 11 }}.descripcion" name="" id="" rows="3"></textarea></td>
                                 </tr>
 
-                              
+
 
                             </tbody>
                         </table>

@@ -16,6 +16,7 @@ use App\Models\accesoriostaller;
 
 class ExportController extends Controller
 {
+    public $check=[];
     public function reportPDF($id)
     {
 
@@ -41,7 +42,7 @@ class ExportController extends Controller
             //buscado el id del taller
             //dd($tallerherr->id);
             //obtenemos todos los id de las herramientas que tiene el taller id
-            $tallerherramientas = tallerdetalle::where('vehiculo_id', $tallerdatos->vehiculo_id)->get();
+            $tallerherramientas = tallerdetalle::where('taller_id', $tallerdatos->id)->get();
             //dd($tallerherramientas);
 
             //buscamos si existe esa herramienta agregado o no

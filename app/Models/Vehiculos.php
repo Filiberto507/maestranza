@@ -16,9 +16,5 @@ class Vehiculos extends Model
 
     }
 
-    public function tallerdetalle()
-    {
-        return $this->hasMany(tallerdetalle::class);
-
-    }
+    
 }
