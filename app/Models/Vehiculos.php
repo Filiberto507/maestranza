@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Vehiculos extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
+
     protected $fillable=['placa','clase','marca','tipo_vehiculo','color','combustible_capacidad',
                          'motor','chasis','modelo','cilindrada','estado','dependencias_id'];
 
@@ -18,8 +18,7 @@ class Vehiculos extends Model
         return $this->belongsTo(Diagnostico::class);
  
     }
-=======
-    protected $fillable=['placa','modelo','marca','color','año','cilindrada','chasis','motor','dependencias_id','conductors_id'];
+
 
     public function taller()
     {
@@ -28,5 +27,5 @@ class Vehiculos extends Model
     }
 
     
->>>>>>> 28c9ba3e4fa59a190db3b7933bb417cc0b58c6e0
+
 }
