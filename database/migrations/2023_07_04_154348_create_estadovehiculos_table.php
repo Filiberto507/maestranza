@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dependencias', function (Blueprint $table) {
+        Schema::create('estadovehiculos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',45);
+            $table->longText('descripcion');
+            $table->integer('key');
+            $table->unsignedBigInteger('taller_id');
+            $table->foreign('taller_id')->references('id')->on('tallers');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dependencias');
+        Schema::dropIfExists('estadovehiculos');
     }
 };

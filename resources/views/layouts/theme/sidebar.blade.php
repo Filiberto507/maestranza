@@ -1,4 +1,4 @@
-@can('vista-dash')
+@can('vista_dash')
 <div class="sidebar-wrapper sidebar-theme" >
 
     <nav id="compactSidebar" >
@@ -102,7 +102,7 @@
                 </a>
             </li>
             @endcan
-            @can('vista_usuarios')
+            @can('vista_usuario')
             <li class="">
                 <a href="{{url('users')}}" class="menu-toggle" data-active="false">
                     <div class="base-menu">

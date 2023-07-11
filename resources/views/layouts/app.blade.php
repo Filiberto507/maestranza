@@ -7,22 +7,25 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@hasSection('title') @yield('title') | @endif {{ config('app.name', 'Laravel') }}</title>
+    <title>Maeztranza</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Scripts -->
-    @vite(['resources/js/app.js'])
-    @livewireStyles
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+   
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                   MAESTRANZA
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -30,11 +33,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-					@auth()
-                    <ul class="navbar-nav mr-auto">
-						<!--Nav Bar Hooks - Do not delete!!-->
+                    <ul class="navbar-nav me-auto">
+
                     </ul>
-					@endauth()
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -79,14 +80,5 @@
             @yield('content')
         </main>
     </div>
-    @livewireScripts
-    <script type="module">
-        const addModal = new bootstrap.Modal('#createDataModal');
-        const editModal = new bootstrap.Modal('#updateDataModal');
-        window.addEventListener('closeModal', () => {
-           addModal.hide();
-           editModal.hide();
-        })
-    </script>
 </body>
 </html>

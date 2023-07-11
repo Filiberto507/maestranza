@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExportController;
 use App\Http\Livewire\AccesoriostallerController;
 use App\Http\Livewire\AsignarController;
 use App\Http\Livewire\ConductorController;
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
@@ -42,4 +43,7 @@ Route::get('taller', TallerController::class);
 Route::get('accesorios', AccesoriosController::class);
 Route::get('acctaller', AccesoriostallerController::class);
 Route::get('conductor', ConductorController::class);
+
+//reporten PDF
+Route::get('report/pdf/{id}', [ExportController::class, 'reportPDF']);
 

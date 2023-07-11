@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('tallers', function (Blueprint $table) {
             $table->id();
             $table->time('ingreso');
-            $table->time('salida');
+            $table->time('salida')->nullable();
             $table->date('fecha_ingreso');
-            $table->date('fecha_salida');
+            $table->date('fecha_salida')->nullable();
             $table->string('name',255);
             $table->string('vehiculo',255);
             $table->string('color',255);
@@ -26,7 +26,8 @@ return new class extends Migration
             $table->string('placa',255);
             $table->string('kilometraje',255);
             $table->string('ordentrabajo',255);
-           
+            $table->unsignedBigInteger('vehiculo_id');
+            $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
             $table->timestamps();
         });
     }

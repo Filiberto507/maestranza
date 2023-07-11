@@ -25,5 +25,16 @@ class RoleSeeder extends Seeder
             'name' => 'Empleado',
             
         ]);
+
+        Role::create([
+            'name' => 'Responsable de Transporte',
+            
+        ]);
+
+
+        Role::create([
+            'name' => 'Tecnico-Mecanico',
+            
+        ]);
     }
 }

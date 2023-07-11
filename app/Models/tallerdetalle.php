@@ -19,7 +19,7 @@ class tallerdetalle extends Model
      }
      public function taller()
      {
-         return $this->belongsTo(taller::class);
+         return $this->belongsTo(Taller::class);
  
      }
 }
