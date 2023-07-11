@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
+        
         Schema::create('diagnosticos', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            $table->text('descripcion',800);
-            $table->text('observaciones',450);
+            $table->longText('observaciones');
+            $table->string('dependencia',255);
+            $table->string('conductor',255);
             $table->unsignedBigInteger('vehiculos_id');
- 
             $table->foreign('vehiculos_id')->references('id')->on('vehiculos');
             $table->timestamps();
         });

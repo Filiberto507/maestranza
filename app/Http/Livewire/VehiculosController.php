@@ -13,7 +13,7 @@ class VehiculosController extends Component
 {
     use WithPagination;
 
-    public $placa,$modelo,$marca,$año,$color,$cilindrada,$chasis,$motor,$dependencias_id,$conductors_id,
+    public $placa,$clase,$tipo_vehiculo,$combustible_capacidad,$modelo,$marca,$color,$cilindrada,$chasis,$motor,$estado,$dependencias_id,
            $search,$selected_id,$pageTitle,$componentName;
     private $pagination=5;
 
@@ -62,28 +62,34 @@ class VehiculosController extends Component
        //dd($Dependencias);
         $this->selected_id = $Vehiculos->id;
         $this->placa = $Vehiculos->placa;
+        $this->clase = $Vehiculos->clase;
         $this->modelo=$Vehiculos->modelo;
         $this->marca=$Vehiculos->marca;
+        $this->tipo_vehiculo = $Vehiculos->tipo_vehiculo;
         $this->color=$Vehiculos->color;
-        $this->año=$Vehiculos->año;
+        $this->combustible_capacidad = $Vehiculos->combustible_capacidad;
         $this->cilindrada=$Vehiculos->cilindrada;
         $this->chasis=$Vehiculos->chasis;
         $this->motor=$Vehiculos->motor;
+        $this->estado = $Vehiculos->estado;
         $this->dependencias_id=$Vehiculos->dependencias_id;
         $this->emit('show-modal', 'SHOW MODAL');
     }
     public function Store()
     {
-        
+      /*
         $rules = [
             'placa' => 'required|min:3|unique:vehiculos,placa',
-            'modelo' => 'required|min:3',
+            'clase' => 'required|min:3',
             'marca' => 'required|min:3',
+            'tipo_vehiculo' => 'required|min:3',
             'color' => 'required|min:3',
-            'año' => 'required|min:3',
-            'cilindrada' => 'required|min:3',
-            'chasis' => 'required|min:3|unique:vehiculos,chasis',
+            'combustible_capacidad' => 'required|min:3',
             'motor' => 'required|min:3|unique:vehiculos,motor',
+            'chasis' => 'required|min:3|unique:vehiculos,chasis',
+            'modelo' => 'required|min:3',
+            'cilindrada' => 'required|min:3',
+            'estado' => 'required|min:3',
             'dependencias_id' => 'required',
             //'conductors_id' => 'required',
         ];
@@ -95,16 +101,19 @@ class VehiculosController extends Component
             
         ];
 
-        $this->validate($rules, $messages);
+        $this->validate($rules, $messages);*/
 
         $Vehiculos=Vehiculos::create(['placa' => $this->placa,
-                                      'modelo'=>$this->modelo,
+                                      'clase' => $this->clase,
                                       'marca'=>$this->marca,
+                                      'tipo_vehiculo'=>$this->tipo_vehiculo,
                                       'color'=>$this->color,
-                                      'año'=>$this->año,
-                                      'cilindrada'=>$this->cilindrada,
-                                      'chasis'=>$this->chasis,
+                                      'combustible_capacidad' => $this->combustible_capacidad,
                                       'motor'=>$this->motor,
+                                      'chasis'=>$this->chasis,
+                                      'modelo'=>$this->modelo,
+                                      'cilindrada'=>$this->cilindrada,
+                                      'estado'=>$this->estado,
                                       'dependencias_id' => $this->dependencias_id]);
                                       //'conductors_id' => $this->conductors_id]);
                                       

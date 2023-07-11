@@ -27,25 +27,34 @@
                                     PLACA
                                 </th>
                                 <th class="table-th text-while">
-                                    MODELO
+                                    CLASE
                                 </th>
                                 <th class="table-th text-while">
                                     MARCA
                                 </th>
                                 <th class="table-th text-while">
+                                    TIPO DE VEHICULO
+                                </th>
+                                <th class="table-th text-while">
                                     COLOR
                                 </th>
                                 <th class="table-th text-while">
-                                    AÑO
+                                    COMBUSTIBLE Y CAPACIDAD
+                                </th>
+                                <th class="table-th text-while">
+                                    NRO MOTOR
+                                </th>
+                                <th class="table-th text-while">
+                                    NRO CHASIS
+                                </th>
+                                <th class="table-th text-while">
+                                    MODELO
                                 </th>
                                 <th class="table-th text-while">
                                     CILINDRADA
                                 </th>
                                 <th class="table-th text-while">
-                                    CHASIS
-                                </th>
-                                <th class="table-th text-while">
-                                    MOTOR
+                                    ESTADO
                                 </th>
                                 <th class="table-th text-while">
                                     DEPENDENCIA
@@ -65,25 +74,34 @@
                                     <h6>{{$v->placa}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$v->modelo}}</h6>
+                                    <h6>{{$v->clase}}</h6>
                                 </td>
                                 <td class="text-center">
                                     <h6>{{$v->marca}}</h6>
                                 </td>
                                 <td class="text-center">
+                                    <h6>{{$v->tipo_vehiculo}}</h6>
+                                </td>
+                                <td class="text-center">
                                     <h6>{{$v->color}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$v->año}}</h6>
-                                </td>
-                                <td class="text-center">
-                                    <h6>{{$v->cilindrada}}</h6>
-                                </td>}
-                                <td class="text-center">
-                                    <h6>{{$v->chasis}}</h6>
+                                    <h6>{{$v->combustible_capacidad}}</h6>
                                 </td>
                                 <td class="text-center">
                                     <h6>{{$v->motor}}</h6>
+                                </td>
+                                <td class="text-center">
+                                    <h6>{{$v->chasis}}</h6>
+                                </td>}
+                                <td class="text-center">
+                                    <h6>{{$v->modelo}}</h6>
+                                </td>
+                                <td class="text-center">
+                                    <h6>{{$v->cilindrada}}</h6>
+                                </td>
+                                <td class="text-center">
+                                    <h6>{{$v->estado}}</h6>
                                 </td>
                                 
                                 <td class="text-center">

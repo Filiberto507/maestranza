@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vehiculos extends Model
+class DiagnosticoItem extends Model
 {
     use HasFactory;
-    protected $fillable=['placa','clase','marca','tipo_vehiculo','color','combustible_capacidad',
-                         'motor','chasis','modelo','cilindrada','estado','dependencias_id'];
+    protected $fillable=['item','descripcion','diagnosticos_id'];
 
     public function diagnostico()
     {
@@ -17,4 +16,5 @@ class Vehiculos extends Model
         return $this->belongsTo(Diagnostico::class);
  
     }
+    
 }

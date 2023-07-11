@@ -26,6 +26,15 @@
                                     FECHA
                                 </th>
                                 <th class="table-th text-while">
+                                    DEPENDENCIA
+                                </th>
+                                <th class="table-th text-while">
+                                    CONDUCTOR
+                                </th>
+                                <th class="table-th text-while">
+                                    ITEM
+                                </th>
+                                <th class="table-th text-while">
                                     DESCRIPCION
                                 </th>
                                 <th class="table-th text-while">
@@ -50,6 +59,15 @@
                                     <h6>{{$diag->fecha}}</h6>
                                 </td>
                                 <td class="text-center">
+                                    <h6>{{$diag->dependencia}}</h6>
+                                </td>
+                                <td class="text-center">
+                                    <h6>{{$diag->conductor}}</h6>
+                                </td>
+                                <td class="text-center">
+                                    <h6>{{$diag->item}}</h6>
+                                </td>
+                                <td class="text-center">
                                     <h6>{{$diag->descripcion}}</h6>
                                 </td>
                                 <td class="text-center">
@@ -58,9 +76,9 @@
                                 <td class="text-center">
                                     @foreach ( $Vehiculos as $v )
                                     <h6>{{$v->placa}}</h6>
-                                    @endforeach
-                                    
+                                    @endforeach 
                                 </td> 
+                                
                                 <td class="text-center">
                                     <a href="javascript:void(0)" 
                                     wire:click="Edit({{$diag->id}})"
