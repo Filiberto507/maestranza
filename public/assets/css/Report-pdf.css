@@ -61,11 +61,18 @@ td {
   margin: 0;
 }
 
+/*fecha*/
+.fecha-td{
+  border: solid 4px cornflowerblue;
+  background-color: #fff;
+}
+
 /* checkbox */
 
 
 .table-check {
-  background-color: cornflowerblue;
+  background-color: #cdd2cb;
+  /*#cdd2cb*/
   padding: 5px;
   table-layout: fixed;
   width: 100%;

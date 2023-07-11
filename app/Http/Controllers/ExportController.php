@@ -12,6 +12,7 @@ use App\Models\Vehiculos;
 use App\Models\Taller;
 use App\Models\tallerdetalle;
 use App\Models\accesoriostaller;
+use App\Models\Estadovehiculo;
 
 
 class ExportController extends Controller
@@ -22,7 +23,13 @@ class ExportController extends Controller
 
         $tallerdatos = Taller::find($id);
         //datos para el reporte
+        $datosestadovehiculo=[];
 
+        for ($i=0; $i < 11; $i++) { 
+            $datosestadovehiculo[$i] = [
+                
+            ];
+        }
         /*$cadena = $tallerdatos->fecha_ingreso;
         $separador = "-";
         $s = explode($separador, $cadena);*/
@@ -38,7 +45,20 @@ class ExportController extends Controller
         $dependencia = $tallerdatos->dependencia;
         $placa = $tallerdatos->placa;
         $kilometraje = $tallerdatos->kilometraje;
+        $estadovehiculo = Estadovehiculo::where('taller_id', $id)->get();
 
+        foreach ($estadovehiculo as $value) {
+            $datosestadovehiculo[$value->key] = [
+                'descripcion' => $value->descripcion,
+            ];
+        }
+        $ordentrabajo = $tallerdatos->ordentrabajo;
+
+        $separador = "\n"; // Usar salto de línea
+        $separarord = explode($separador, $ordentrabajo);
+       // dd($separarord);
+
+        
         //obtener los checks
         $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
 
@@ -126,7 +146,9 @@ class ExportController extends Controller
             'color',
             'dependencia',
             'placa',
-            'kilometraje'
+            'kilometraje',
+            'datosestadovehiculo',
+            'separarord'
         ));
         //visualizar en el navegador
         return $pdf->stream('salesReport.pdf');
