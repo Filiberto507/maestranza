@@ -36,7 +36,7 @@ class VehiculosController extends Component
 
         $Vehiculos=Vehiculos::join('Dependencias as dep','dep.id','Vehiculos.dependencias_id')
         //->join('Conductor as c','c.id','Vehiculos.conductors_id')
-        ->select('Vehiculos.*','dep.id as dependencias')
+        ->select('Vehiculos.*','dep.id as dependencias','dep.nombre')
         ->where('Vehiculos.placa','like','%'.$this->search.'%')
         ->orWhere('dep.id','like','%'.$this->search.'%')
         ->orderBy('Vehiculos.placa','asc')
@@ -44,7 +44,7 @@ class VehiculosController extends Component
         else
         $Vehiculos=Vehiculos::join('Dependencias as dep','dep.id','Vehiculos.dependencias_id')
         //->join('Conductor as c','c.id','Vehiculos.conductors_id','c.id as conductors')
-        ->select('Vehiculos.*','dep.id as dependencias')
+        ->select('Vehiculos.*','dep.id as dependencias','dep.nombre')
         ->orderBy('Vehiculos.placa','asc')
         ->paginate($this->pagination);
 

@@ -30,7 +30,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::get('diagnostico/pdf', [DiagnosticoController::class, 'pdf'])->name('diagnostico.pdf');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('dependencias', DependenciasController::class);
 Route::get('vehiculos', VehiculosController::class);

@@ -12,7 +12,6 @@
                         </a>
                     </li>
                 </ul>
-
             </div>
             @include('common.searchbox')
             <div class="widget-content">
@@ -105,10 +104,7 @@
                                 </td>
                                 
                                 <td class="text-center">
-                                    @foreach ( $Dependencias as $dep )
-                                    <h6>{{$dep->nombre}}</h6>
-                                    @endforeach
-                                    
+                                    <h6>{{$v->nombre}}</h6>
                                 </td>
                                 
                                 

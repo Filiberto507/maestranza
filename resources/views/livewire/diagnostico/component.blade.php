@@ -32,12 +32,6 @@
                                     CONDUCTOR
                                 </th>
                                 <th class="table-th text-while">
-                                    ITEM
-                                </th>
-                                <th class="table-th text-while">
-                                    DESCRIPCION
-                                </th>
-                                <th class="table-th text-while">
                                     OBSERVACIONES
                                 </th>
                                 <th class="table-th text-while">
@@ -65,18 +59,10 @@
                                     <h6>{{$diag->conductor}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$diag->item}}</h6>
-                                </td>
-                                <td class="text-center">
-                                    <h6>{{$diag->descripcion}}</h6>
-                                </td>
-                                <td class="text-center">
                                     <h6>{{$diag->observaciones}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    @foreach ( $Vehiculos as $v )
-                                    <h6>{{$v->placa}}</h6>
-                                    @endforeach 
+                                    <h6>{{$diag->placa}}</h6>
                                 </td> 
                                 
                                 <td class="text-center">

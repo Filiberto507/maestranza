@@ -71,7 +71,7 @@
             @foreach ($filas as $index => $fila)
             <tr>
                 <td><input type="text" class="form-control" wire:model="filas.{{ $index }}.items" /></td>
-                <td><textarea class="form-control" wire:model="filas.{{ $index }}.descriptions" name="" id="" col="100"  rows="3"></textarea></td>
+                <td><textarea class="form-control" wire:model="filas.{{ $index }}.descriptions" name="" id="" col="100"  rows="2"></textarea></td>
                 <td><button class="btn btn-danger" wire:click="eliminarFila({{ $index }})">Eliminar</button></td>
             </tr>
             @endforeach
@@ -80,7 +80,7 @@
     <div class="col-sm-12 col-md-8">
       <div class="form-group">
           <label>Observaciones</label>
-          <textarea wire:model.lazy="observaciones" class="form-control" name="" id="" cols="30" rows="5" placeholder="..."></textarea>
+          <textarea wire:model.lazy="observaciones" class="form-control" name="" id="" cols="100" rows="4" placeholder="..."></textarea>
           @error('observaciones') <span class="text-danger er">{{ $message}} </span>
 
           @enderror

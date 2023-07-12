@@ -37,21 +37,21 @@ class DiagnosticoController extends Component
         if(strlen($this->search) > 0 )
 
         $Diagnostico=Diagnostico::join('Vehiculos as v','v.id','Diagnosticos.vehiculos_id')
-        ->select('Diagnosticos.*','v.id as vehiculos')
+        ->select('Diagnosticos.*','v.id as vehiculos','v.placa')
         ->where('Diagnosticos.fecha','like','%'.$this->search.'%')
         ->orWhere('v.id','like','%'.$this->search.'%')
         ->orderBy('Diagnostico.fecha','asc')
         ->paginate($this->pagination);
         else
         $Diagnostico=Diagnostico::join('Vehiculos as v','v.id','Diagnosticos.vehiculos_id')
-        ->select('Diagnosticos.*','v.id as vehiculos')
+        ->select('Diagnosticos.*','v.id as vehiculos','v.placa')
         ->orderBy('Diagnosticos.fecha','asc')
         ->paginate($this->pagination);
         //dd($Diagnostico);
 
         return view('livewire.diagnostico.component',[
             'Diagnosticos'=>$Diagnostico,
-            'Vehiculos'=> Vehiculos::orderBy('placa','asc')->get(),
+            'Vehiculos'=> Vehiculos::orderBy('id','asc')->get(),
             //'Conductor'=> Conductor::orderBy('name','asc')->get()
         ])
         ->extends('layouts.theme.app')
@@ -201,18 +201,16 @@ foreach($filas as $f)
         unset($this->filas[$index]);
         $this->filas = array_values($this->filas); // Reindexar el arreglo
     }
-
-
-    public function delete ($id)
-    {
-        $query = Category::find($id);
-        $query->delete();
-    }
     public function pdf()
     {
-        $Diagnostico=Diagnostico::all();
-        $DiagnosticoItem=DiagnosticoItem::all();
-        $pdf = Pdf::loadView('livewire.diagnostico.pdf', compact('Diagnostico','DiagnosticoItem'));
+        $id=1;
+        $Diagnostico=Diagnostico::join('Vehiculos as v','v.id','Diagnosticos.vehiculos_id')
+        ->select('Diagnosticos.*','v.id as vehiculos','v.placa','v.marca')
+        ->where('Diagnosticos.id',$id)->first();
+        //dd($Diagnostico);
+        $DiagnosticoItem=DiagnosticoItem::where('diagnosticos_id',$id)->get();
+        $Vehiculos=Vehiculos::all();
+        $pdf = Pdf::loadView('livewire.diagnostico.pdf', compact('Diagnostico','DiagnosticoItem','Vehiculos'));
         return $pdf->stream();
         //si se quiere descargar
         //return $pdf->download('reporteDisagnostico.pdf');
