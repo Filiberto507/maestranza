@@ -13,6 +13,7 @@ use App\Http\Livewire\DiagnosticoController;
 use App\Http\Livewire\DependenciasController;
 use App\Http\Livewire\AccesoriosController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth/login');
+    if(Auth::user()=='')
+    {
+        return view('auth/login');
+    }
+    else{
+        return view('home');
+    }
+    
 });
 
 Auth::routes();
