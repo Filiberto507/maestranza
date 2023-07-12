@@ -201,6 +201,10 @@ class TallerController extends Component
         }
     }
 
+    protected $listeners =[
+        'destroy' => 'Destroy',
+        'resetUI' => 'resetUi'
+    ];
 
     public function Edit(Taller $taller)
     {
@@ -356,19 +360,14 @@ class TallerController extends Component
 
     public function Destroy($id)
     {
+       // dd($id);
         //defininar permisos 
         //cantidad de permisos que tiene
-        $permissionsCount = Role::find($id)->permissions->count();
-        //dd($permissionsCount);
-        if($permissionsCount > 0)
-        {
-            $this->emit('role-error', 'No se puede eliminar el rol por que tiene permisos asociados');
-            //para detener el flujo de procesos
-            return;
-        }
-
-        Role::find($id)->delete();
-        $this->emit('role-deleted', 'Se elimino el role con exito');
+        tallerdetalle::where('taller_id', $id)->delete();
+        Estadovehiculo::where('taller_id', $id)->delete();
+        Taller::find($id)->delete();
+        
+        $this->emit('taller-deleted', 'Se elimino la RECEPCION DE VEHICULO con exito');
         
     }
 

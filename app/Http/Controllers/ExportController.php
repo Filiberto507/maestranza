@@ -132,7 +132,9 @@ class ExportController extends Controller
         //$user = $id == 0 ? 'Todos' : User::find($userId)->name;
         //usar lo importado del PDF
         //loadView = pasando la vista
-        $pdf = PDF::setPaper([0, 0, 609.45, 935.43])->loadView('pdf.reporte1', compact(
+        // tamaño oficio -> 609.45, 935.43
+        //ajuste perfecto en 73 al imprimir
+        $pdf = PDF::setPaper([0, 0, 680, 1170])->loadView('pdf.reporte1', compact(
             'tallerdatos',
             'hora_ingreso',
             'hora_salida',

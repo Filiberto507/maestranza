@@ -12,7 +12,7 @@
                         <select class="form-control basic" wire:model="vehiculoselectedName" id="select2-dropdown">
                             <option value="Elegir" selected>Elegir</option>
                             @foreach ($vehiculodatos as $ve)
-                            <option value="{{ $ve->id }}">{{ $ve->placa }} | {{ $ve->marca }} | {{$ve->dependencia}} </option>
+                            <option value="{{ $ve->id }}">{{ $ve->placa }} | {{ $ve->marca }} </option>
                             @endforeach
                         </select>
                     </div>
@@ -146,7 +146,7 @@
             noty(Msg)
         })
         //evento  notificar
-        window.livewire.on('role-deleted', Msg => {
+        window.livewire.on('taller-deleted', Msg => {
             noty(Msg)
         })
         //evento notificar
