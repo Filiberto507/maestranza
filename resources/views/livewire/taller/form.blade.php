@@ -1,6 +1,6 @@
 <div wire:ignore.self class="modal fade" id="theModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+        <div class="modal-content" id="modal" value="5">
             <div class="modal-header bg-dark">
                 <h5 class="modal-title text-white">
                     <b>{{$componentName}}</b> | {{ $selected_id > 0 ? 'EDITAR' : 'CREAR'}}
@@ -49,7 +49,7 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label>Asignar Conductor</label>
-                            <select wire:model.lazy="name" class="form-control" id="select2-dropdown">
+                            <select wire:model.lazy="name" class="form-control">
                                 <option value="Elegir" selected> Elegir </option>
                                 @foreach($conductor as $role)
                                 <option value="{{$role->name}}" selected> {{$role->name}} </option>
@@ -203,7 +203,7 @@
                                 </tr>
 
                                 <tr>
-                                   
+
                                     <td><textarea placeholder="Descripcion" wire:model="estadovehiculo.{{ 0 }}.descripcion" name="" id="" rows="3"></textarea></td>
                                     <td><textarea placeholder="Descripcion" wire:model="estadovehiculo.{{ 1 }}.descripcion" name="" id="" rows="3"></textarea></td>
                                     <td><textarea placeholder="Descripcion" wire:model="estadovehiculo.{{ 2 }}.descripcion" name="" id="" rows="3"></textarea></td>
@@ -244,81 +244,15 @@
                 </div>
 
 
-                <!-- <div class="row">
-                    <div class="col-sm-3 ">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">IZQUIERDO</label>
-                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 ">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">DERECHO</label>
-                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 ">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">CENTRO</label>
-                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 ">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">PARACHOQUE</label>
-                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 ">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">IZQUIERDO</label>
-                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 ">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">DERECHO</label>
-                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 ">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">CENTRO</label>
-                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 ">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">PARACHOQUE</label>
-                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 ">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">IZQUIERDO</label>
-                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 ">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">DERECHO</label>
-                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 ">
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">CENTRO</label>
-                            <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="1"></textarea>
-                        </div>
-                    </div>
-
-                </div> -->
 
                 <div class="col-sm-12 mt-2">
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Orden Trabajo</label>
                         <textarea class="form-control" wire:model.lazy="ordentrabajo" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
+                    @error('ordentrabajo') <span class="text-danger er">{{ $message}} </span>
+
+                    @enderror
                 </div>
 
                 <div>
@@ -336,7 +270,7 @@
                                 ACTUALIZAR
                             </button>
 
-                            <button onclick="mostrarValores()">Mostrar Valores</button>
+                            <!-- <button onclick="mostrarValores()">Mostrar Valores</button> -->
                             @endif
                     </div>
                 </div>
@@ -405,6 +339,9 @@
 
     });
 
+    //fuera del modal evento
+    
+
     //funcion para obtener los checks
     function mostrarValores() {
         var checkboxes = document.getElementsByClassName("miCheckbox");
@@ -426,4 +363,6 @@
         //console.log(vehiculo, conductor, color, dependencia, placa, kilometraje, valoresSeleccionados);
         //console.log(valoresSeleccionados);
     }
+    
+    
 </script>

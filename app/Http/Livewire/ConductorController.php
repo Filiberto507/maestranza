@@ -12,6 +12,8 @@ class ConductorController extends Component
     public $componentName, $pageTitle, $search, $selected_id, $name, $telefono, $status;
     public $filas = [], $filas2 =[];
 
+    use WithPagination;
+
     private $pagination = 5;
 
     public function PaginationView()

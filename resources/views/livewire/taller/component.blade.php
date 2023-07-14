@@ -92,7 +92,7 @@
                                             <line x1="14" y1="11" x2="14" y2="17"></line>
                                         </svg>
                                     </a>
-                                    <a href="{{ url('report/pdf' . '/' . $tall->id) }}" class="btn btn-danger"  target="_blank">
+                                    <a href="{{ url('report/pdf' . '/' . $tall->id) }}" class="btn btn-danger" target="_blank">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer">
                                             <polyline points="6 9 6 2 18 2 18 9"></polyline>
                                             <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
@@ -115,7 +115,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
 
-
+        var isModalOpen = false;
         //     document.getElementById('miSelect').addEventListener('change', function(event) {
         //     Livewire.emit('vehiculoselectedId', event.target.value);
         // });
@@ -133,6 +133,8 @@
             @this.set('vehiculoselectedId', pId) // set vehiculo od selected
             @this.set('vehiculoselectedName', pName)
         });
+
+
 
 
         //evento ocultar la ventana modal y notificar
@@ -165,8 +167,11 @@
         })
 
         //evento mostrar
-        window.livewire.on('show-modal', msg => {
+        window.livewire.on('show-modal', Msg => {
+            isModalOpen = true
             $('#theModal').modal('show')
+            noty(Msg)
+
         });
         //cerrar
         window.livewire.on('tallers-close', Msg => {
@@ -174,7 +179,33 @@
             $('#select2-dropdown').val('Elegir').trigger('change');
             noty(Msg)
         });
+
+        //limpiar bug de saltado
+        var modal = document.getElementById('modal');
+
+        // Capturar el evento de clic fuera del modal
+        document.addEventListener('click', function(event) {
+            //console.log(isModalOpen);
+            // Verificar si el clic ocurrió fuera del modal
+            if ( isModalOpen == true && !modal.contains(event.target)) {
+                // Ejecutar la lógica de cierre del modal aquí
+                // Por ejemplo, puedes agregar o quitar una clase para ocultar el modal
+                //console.log(isModalOpen);
+                limpiar()
+                isModalOpen = false
+            }
+            
+        });
+
     });
+
+    //resetui
+    function limpiar() {
+        console.log("hola")
+        window.livewire.emit('resetUI')
+        
+    }
+    
     //confimar eliminar
     function Confirm(id) {
 

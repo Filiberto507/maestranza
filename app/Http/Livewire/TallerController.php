@@ -43,6 +43,7 @@ class TallerController extends Component
         $this->pageTitle = 'Listado';
         $this->componentName = 'Taller';
         $this->vehiculoselectedName = 'Elegir';
+        $this->name = 'Elegir';
 
         //dd($this->ingreso, $this->fecha_ingreso);
         //     $this->check=[
@@ -54,7 +55,7 @@ class TallerController extends Component
     {
         //validar si el usuario ingreso informacion
         if (strlen($this->search) > 0)
-            $Taller = Taller::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
+            $Taller = Taller::where('placa', 'like', '%' . $this->search . '%')->paginate($this->pagination);
         else
             $Taller = Taller::orderBy('id', 'desc')->paginate($this->pagination);
         $this->acctaller = accesoriostaller::orderBy('id', 'asc')->get();
@@ -80,6 +81,10 @@ class TallerController extends Component
             ->section('content');
     }
 
+    protected $listeners =[
+        'destroy' => 'Destroy',
+        'resetUI' => 'resetUI',
+    ];
     public function resetUI()
     {
         //dd($this->check);
@@ -142,6 +147,26 @@ class TallerController extends Component
         // $this->kilometraje,
         // $this->ordentrabajo,
         // $this->check);
+        $rules = [
+            'name' => 'required|not_in:Elegir',
+            'dependencia' => 'required|min:3',
+            'kilometraje' => 'required|min:3',
+            'ordentrabajo' => 'required|min:3'
+        ];
+
+        $messages =[
+            'name.required' => 'ingrese el nombre',
+            'name.not_in' => 'Seleccione el conductor',
+            'dependencia.required' => 'Ingrese la dependencia',
+            'dependencia.min' => 'Dependencia debe tener al menos 3 caracteres',
+            'kilometraje.required' => 'Agregue el kilometraje',
+            'kilometraje.min' => 'Kilometraje debe tener al menos 3 caracteres',
+            'ordentrabajo.required' => 'Es requerido la orden de trabajo a realizar',
+            'ordentrabajo.min' => 'Orden de Trabajo debe tener al menos 3 caracteres'
+        ];
+        //validar los datos
+        $this->validate($rules, $messages);
+
         try {
             //guardar
             $talleres = Taller::create([
@@ -201,10 +226,7 @@ class TallerController extends Component
         }
     }
 
-    protected $listeners =[
-        'destroy' => 'Destroy',
-        'resetUI' => 'resetUi'
-    ];
+    
 
     public function Edit(Taller $taller)
     {
@@ -277,7 +299,7 @@ class TallerController extends Component
 
         //dd($this->check);
         $this->acctaller = $acctalleres;
-        //dd($this->acctaller);
+        //dd($this->check);
 
         //traer las descripciones de los estados del vehiculo
 
@@ -294,6 +316,7 @@ class TallerController extends Component
 
     public function UpdateTaller()
     {
+        //eliminar casillas vacias que tengamos
         foreach ($this->estadovehiculo as $value) {
 
             if ($value["descripcion"] == "") {
@@ -429,7 +452,8 @@ class TallerController extends Component
     //funcion para eliminar los checks que se quitaron
     public function eliminarcheck($checksbd, $checksnuevos)
     {
-
+        //en este doble foreach se buscara la existencia de los checks que tengamos
+        //donde el primer foreach sera lo de la bd y luego los $this->check 
         foreach ($checksbd as $item) {
             $datonuevo = null;
             foreach ($checksnuevos as $value) {
@@ -440,7 +464,7 @@ class TallerController extends Component
                     break;
                 }
             }
-
+            //si es null, significa que ese elemento ya no existe en la bd y se borra
             if ($datonuevo == null) {
                 //dump($datonuevo);
                 $item->delete();
@@ -451,18 +475,19 @@ class TallerController extends Component
     //funcion para agregar los nuevos checks a la bd
     public function agregarcheck($checksbd, $checksnuevos, $idtaller)
     {
-
+        //en este doble foreach se buscara la existencia de los checks que tengamos
+        //donde el primer foreach sera los $this->check y luego lo de la bd
         foreach ($checksnuevos as $item) {
             $datonuevo = null;
             foreach ($checksbd as $value) {
-
+                
                 if ($value->acctaller_id == explode(',', $item)[0]) {
                     $datonuevo = explode(',', $value)[0];
                     // dd($item->id, explode(',', $value)[0] );
                     break;
                 }
             }
-
+            // si es null no se encontro, significa que es un nuevo check ah agregar
             if ($datonuevo == null) {
                 //dump($datonuevo);
 
@@ -478,7 +503,8 @@ class TallerController extends Component
     //funcion para eliminar comentarios del estado del auto que ya no estan
     public function eliminarestadoauto($estadoautobd, $estadoautonew, $idtaller)
     {
-
+        //en este doble foreach se buscara la existencia de los checks que tengamos
+        //donde el primer foreach sera lo de la bd y luego los $this->estadoauto 
         foreach ($estadoautobd as $item) {
             $datonuevo = null;
             foreach ($estadoautonew as $key => $value) {
@@ -488,11 +514,12 @@ class TallerController extends Component
                     break;
                 }
             }
-
+            //si es null, significa que el dato ya no existe en el nuevo estadoauto y se borra
             if ($datonuevo == null) {
                 //dump($datonuevo);
                 $item->delete();
             }
+            // si se tiene datos, cambiamos el anterior datos por los otros nuevos del estado auto
             else{
                 //dump($value);
                 $item->update([
@@ -508,7 +535,8 @@ class TallerController extends Component
     //funcion para agregar los comentarios nuevos del estado del auto
     public function agregarestadoauto($estadoautobd, $estadoautonew, $idtaller)
     {
-
+        //en este doble foreach se buscara la existencia de los checks que tengamos
+        //donde el primer foreach sera los $this->estadoauto y luego lo de la bd
         foreach ($estadoautonew as $key => $item) {
             $datonuevo = null;
             foreach ($estadoautobd as $value) {
@@ -518,7 +546,7 @@ class TallerController extends Component
                     break;
                 }
             }
-
+            //si es null, significa que tenemos nuevos datos y los agregamos
             if ($datonuevo == null) {
                 //dump($datonuevo);
 
