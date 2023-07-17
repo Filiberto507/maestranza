@@ -36,9 +36,6 @@
                                     ESTATUS
                                 </th>
                                 <th class="table-th text-white text-center">
-                                    IMAGEN
-                                </th>
-                                <th class="table-th text-white text-center">
                                     ACCTIONS
                                 </th>
                             </tr>
@@ -68,14 +65,6 @@
                                     </span>
                                 </td>
 
-                                <td class="text-center">
-                                    
-                                        <img src="{{ asset('storage/users/' . $r->image) }}" alt="imagen" class="card-img-top img-fluid">
-                                    
-                                    <span>
-                                        
-                                    </span>
-                                </td>
                                 <td class="text-center">
                                     <a href="javascript:void(0)" 
                                     wire:click="Edit({{$r->id}})"

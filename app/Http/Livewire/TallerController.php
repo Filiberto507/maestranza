@@ -12,6 +12,7 @@ use App\Models\tallerdetalle;
 use Livewire\WithPagination;
 use Carbon\Carbon;
 use App\Models\Estadovehiculo;
+use Database\Seeders\TallerDetallerSeeder;
 use DB;
 
 class TallerController extends Component
@@ -232,7 +233,7 @@ class TallerController extends Component
     {
         //dd($this->check);
         //dd($taller);
-
+        
         $this->selected_id = $taller->id;
         $this->ingreso = $taller->ingreso;
         $this->salida = $taller->salida;
@@ -410,8 +411,13 @@ class TallerController extends Component
         $this->placa = $findvehiculo->placa;
         $this->vehiculo = $findvehiculo->marca;
         $this->color = $findvehiculo->color;
-
+        
         /* //obtencion de los accesorios que tiene el vehiculo
+        //para traer el id del ultimo taller del vehiculo que se tiene el id
+        $ultivehiculo = Taller::where('vehiculo_id', 3)
+        ->orderBy('id', 'desc')
+        ->first();
+
         $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
 
         //dd($acctaller);
@@ -445,9 +451,6 @@ class TallerController extends Component
 
         $this->acctaller = $acctalleres;*/
     }
-
-    //crear arrays para los diferentes columnas que seran como 11 y cada array tendra el id al lugar
-    //que pertenece para luego realizar un array merger e insertar todos los datos en descripcion-vehiculo
 
     //funcion para eliminar los checks que se quitaron
     public function eliminarcheck($checksbd, $checksnuevos)

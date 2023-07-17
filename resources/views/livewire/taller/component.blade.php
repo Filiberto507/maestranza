@@ -115,6 +115,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
 
+        //esta variable es para el modal 
         var isModalOpen = false;
         //     document.getElementById('miSelect').addEventListener('change', function(event) {
         //     Livewire.emit('vehiculoselectedId', event.target.value);
@@ -164,6 +165,7 @@
         //evento ocultar la ventana modal 
         window.livewire.on('hide-modal', Msg => {
             $('#theModal').modal('hide')
+            noty(Msg)
         })
 
         //evento mostrar
@@ -176,6 +178,7 @@
         //cerrar
         window.livewire.on('tallers-close', Msg => {
             $('#theModal').modal('hide')
+            isModalOpen = false
             $('#select2-dropdown').val('Elegir').trigger('change');
             noty(Msg)
         });
@@ -188,8 +191,7 @@
             //console.log(isModalOpen);
             // Verificar si el clic ocurrió fuera del modal
             if ( isModalOpen == true && !modal.contains(event.target)) {
-                // Ejecutar la lógica de cierre del modal aquí
-                // Por ejemplo, puedes agregar o quitar una clase para ocultar el modal
+                // Llamamos a la funcion limpiar para que se cierre correctamente
                 //console.log(isModalOpen);
                 limpiar()
                 isModalOpen = false

@@ -49,9 +49,8 @@
 
                     </tr>
                     <tr>
-
                         <td class="fecha-td">
-                            <p>123</p>
+                            <p>{{$tallerdatos->id}}</p>
                         </td>
                         <td class="fecha-td">
                             <p>{{substr($fecha_ingreso, 8, 2)}}</p>
@@ -68,19 +67,26 @@
                     </tr>
 
                     <tr>
-
+                        @if($fecha_salida != null)
                         <td>
                             <p></p>
                         </td>
                         <td class="fecha-td">
-                            <p>{{substr($fecha_ingreso, 8, 2)}}</p>
+                            <p>{{substr($fecha_salida, 8, 2)}}</p>
                         </td>
                         <td class="fecha-td">
-                            <p>{{substr($fecha_ingreso, 5, 2)}}</p>
+                            <p>{{substr($fecha_salida, 5, 2)}}</p>
                         </td>
                         <td class="fecha-td">
-                            <p>{{substr($fecha_ingreso, 0, 4)}}</p>
+                            <p>{{substr($fecha_salida, 0, 4)}}</p>
                         </td>
+                        @else
+                        <td></td>
+                        <td>En</td>
+                        <td>Curso</td>
+                        <td></td>
+                        @endif
+                        
                         <td>
                             <p class="fecha-title">salida</p>
                         </td>
@@ -189,154 +195,154 @@
 
     <h4 class="title-auto">ESTADO EXTERIOR DEL AUTO</h4>
 
-        <table class="auto">
-            <tr>
-                <th class="auto-th">IZQUIERDO</th>
-                <th class="auto-th-c">  CENTRO </th>
-                <th class="auto-th"> DERECHO </th>
-                <th class="auto-th">PARACHOQUES</th>
-            </tr>
-            <tr>
-                <td class="auto-td-img"><img class="car-image" src="assets/img/iz-1.jpg" alt="Imagen 2"></td>
-                <td class="auto-td-img"><img class="car-image" src="assets/img/cen-1.jpg" alt="Imagen 2"></td>
-                <td class="auto-td-img"><img class="car-image" src="assets/img/der-1.jpg" alt="Imagen 2"></td>
-                <td class="auto-td-img"><img class="car-image" src="assets/img/par-1.jpg" alt="Imagen 2"></td>
-            </tr>
+    <table class="auto">
+        <tr>
+            <th class="auto-th">IZQUIERDO</th>
+            <th class="auto-th-c"> CENTRO </th>
+            <th class="auto-th"> DERECHO </th>
+            <th class="auto-th">PARACHOQUES</th>
+        </tr>
+        <tr>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/iz-1.jpg" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/cen-1.jpg" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/der-1.jpg" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/par-1.jpg" alt="Imagen 2"></td>
+        </tr>
 
-            <tr>
-                <td class="auto-td">
-                    @if($datosestadovehiculo[0] == [])
-                    sin novedad
-                    @else
-                    {{$datosestadovehiculo[0]['descripcion']}}
-                    @endif
-                </td>
-                <!-- <td class="auto-td"><img class="car-image" src="imagen2.jpg" alt="Imagen 2"></td> -->
-                <td class="auto-td">
-                    @if($datosestadovehiculo[1] == [])
-                    sin novedad
-                    @else
-                    {{$datosestadovehiculo[1]['descripcion']}}
-                    @endif
-                </td>
+        <tr>
+            <td class="auto-td">
+                @if($datosestadovehiculo[0] == [])
+                sin novedad
+                @else
+                {{$datosestadovehiculo[0]['descripcion']}}
+                @endif
+            </td>
+            <!-- <td class="auto-td"><img class="car-image" src="imagen2.jpg" alt="Imagen 2"></td> -->
+            <td class="auto-td">
+                @if($datosestadovehiculo[1] == [])
+                sin novedad
+                @else
+                {{$datosestadovehiculo[1]['descripcion']}}
+                @endif
+            </td>
 
-                <td class="auto-td">
-                    @if($datosestadovehiculo[2] == [])
-                    sin novedad
-                    @else
-                    {{$datosestadovehiculo[2]['descripcion']}}
-                    @endif
-                </td>
+            <td class="auto-td">
+                @if($datosestadovehiculo[2] == [])
+                sin novedad
+                @else
+                {{$datosestadovehiculo[2]['descripcion']}}
+                @endif
+            </td>
 
-                <td class="auto-td">
-                    @if($datosestadovehiculo[3] == [])
-                    sin novedad
-                    @else
-                    {{$datosestadovehiculo[3]['descripcion']}}
-                    @endif
-                </td>
+            <td class="auto-td">
+                @if($datosestadovehiculo[3] == [])
+                sin novedad
+                @else
+                {{$datosestadovehiculo[3]['descripcion']}}
+                @endif
+            </td>
 
-            </tr>
+        </tr>
 
-            <tr>
-                <td class="auto-td-img"><img class="car-image" src="assets/img/iz-2.jpg" alt="Imagen 2"></td>
-                <td class="auto-td-img"><img class="car-image" src="assets/img/cen-2.jpg" alt="Imagen 2"></td>
-                <td class="auto-td-img"><img class="car-image" src="assets/img/der-2.jpg" alt="Imagen 2"></td>
-                <td class="auto-td-img"><img class="car-image" src="assets/img/par-2.jpg" alt="Imagen 2"></td>
-            </tr>
+        <tr>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/iz-2.jpg" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/cen-2.jpg" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/der-2.jpg" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/par-2.jpg" alt="Imagen 2"></td>
+        </tr>
 
-            <tr>
-                <td class="auto-td">
-                    @if($datosestadovehiculo[4] == [])
-                    sin novedad
-                    @else
-                    {{$datosestadovehiculo[4]['descripcion']}}
-                    @endif
-                </td>
-                <!-- <td class="auto-td"><img class="car-image" src="imagen2.jpg" alt="Imagen 2"></td> -->
-                <td class="auto-td">
-                    @if($datosestadovehiculo[5] == [])
-                    sin novedad
-                    @else
-                    {{$datosestadovehiculo[5]['descripcion']}}
-                    @endif
-                </td>
+        <tr>
+            <td class="auto-td">
+                @if($datosestadovehiculo[4] == [])
+                sin novedad
+                @else
+                {{$datosestadovehiculo[4]['descripcion']}}
+                @endif
+            </td>
+            <!-- <td class="auto-td"><img class="car-image" src="imagen2.jpg" alt="Imagen 2"></td> -->
+            <td class="auto-td">
+                @if($datosestadovehiculo[5] == [])
+                sin novedad
+                @else
+                {{$datosestadovehiculo[5]['descripcion']}}
+                @endif
+            </td>
 
-                <td class="auto-td">
-                    @if($datosestadovehiculo[6] == [])
-                    sin novedad
-                    @else
-                    {{$datosestadovehiculo[6]['descripcion']}}
-                    @endif
-                </td>
+            <td class="auto-td">
+                @if($datosestadovehiculo[6] == [])
+                sin novedad
+                @else
+                {{$datosestadovehiculo[6]['descripcion']}}
+                @endif
+            </td>
 
-                <td class="auto-td">
-                    @if($datosestadovehiculo[7] == [])
-                    sin novedad
-                    @else
-                    {{$datosestadovehiculo[7]['descripcion']}}
-                    @endif
-                </td>
+            <td class="auto-td">
+                @if($datosestadovehiculo[7] == [])
+                sin novedad
+                @else
+                {{$datosestadovehiculo[7]['descripcion']}}
+                @endif
+            </td>
 
-            </tr>
+        </tr>
 
-            <tr>
-                <td class="auto-td-img"><img class="car-image" src="assets/img/iz-3.jpg" alt="Imagen 2"></td>
-                <td class="auto-td-img"><img class="car-image" src="assets/img/cen-3.jpg" alt="Imagen 2"></td>
-                <td class="auto-td-img"><img class="car-image" src="assets/img/der-3.jpg" alt="Imagen 2"></td>
-            </tr>
+        <tr>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/iz-3.jpg" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/cen-3.jpg" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/der-3.jpg" alt="Imagen 2"></td>
+        </tr>
 
-            <tr>
-                <td class="auto-td">
-                    @if($datosestadovehiculo[8] == [])
-                    sin novedad
-                    @else
-                    {{$datosestadovehiculo[8]['descripcion']}}
-                    @endif
-                </td>
-                <!-- <td class="auto-td"><img class="car-image" src="imagen2.jpg" alt="Imagen 2"></td> -->
-                <td class="auto-td">
-                    @if($datosestadovehiculo[9] == [])
-                    sin novedad
-                    @else
-                    {{$datosestadovehiculo[9]['descripcion']}}
-                    @endif
-                </td>
+        <tr>
+            <td class="auto-td">
+                @if($datosestadovehiculo[8] == [])
+                sin novedad
+                @else
+                {{$datosestadovehiculo[8]['descripcion']}}
+                @endif
+            </td>
+            <!-- <td class="auto-td"><img class="car-image" src="imagen2.jpg" alt="Imagen 2"></td> -->
+            <td class="auto-td">
+                @if($datosestadovehiculo[9] == [])
+                sin novedad
+                @else
+                {{$datosestadovehiculo[9]['descripcion']}}
+                @endif
+            </td>
 
-                <td class="auto-td">
-                    @if($datosestadovehiculo[10] == [])
-                    sin novedad
-                    @else
-                    {{$datosestadovehiculo[10]['descripcion']}}
-                    @endif
-                </td>
+            <td class="auto-td">
+                @if($datosestadovehiculo[10] == [])
+                sin novedad
+                @else
+                {{$datosestadovehiculo[10]['descripcion']}}
+                @endif
+            </td>
 
 
 
-            </tr>
-        </table>
+        </tr>
+    </table>
 
-        <h4 class="title-orden">ORDEN DE TRABAJO</h4>
-        <div class="container-parrafo">
-            @foreach ( $separarord as $ord)
-            <div class="paragraph">
-                <p class="par">{{$ord}}</p>
-            </div>
-            @endforeach
-            
+    <h4 class="title-orden">ORDEN DE TRABAJO</h4>
+    <div class="container-parrafo">
+        @foreach ( $separarord as $ord)
+        <div class="paragraph">
+            <p class="par">{{$ord}}</p>
         </div>
+        @endforeach
+
+    </div>
 
 
 
-        <table class="firma">
-            <tr>
-                <th>CONDUCTOR DE VEHICULO INGRESO</th>
-                <th>MECANICO DE MAESTRANZA</th>
-                <th>CONDUCTOR DE VEHICULO SALIDA</th>
-            </tr>
-        </table>
+    <table class="firma">
+        <tr>
+            <th>CONDUCTOR DE VEHICULO INGRESO</th>
+            <th>MECANICO DE MAESTRANZA</th>
+            <th>CONDUCTOR DE VEHICULO SALIDA</th>
+        </tr>
+    </table>
 
-        <!-- <div class="container">
+    <!-- <div class="container">
             <span class="label">Nombre:</span>
             <div class="text">
                 Aquí está tu texto.
