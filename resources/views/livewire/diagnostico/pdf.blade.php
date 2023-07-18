@@ -15,9 +15,13 @@
         <th><div class="imagen3"><img src="assets/img/img-go.png" alt="" ></div></th>
     </tr>
   </table>
-  <div>
-    <h1 class="encabezado">TALLER MAESTRANZA</h1>
-  </div>
+  <table class="tablaEncabezado">
+    <tr>
+        <th width="18%"><label for="" class="nro" >Nro: {{$Diagnostico->id}}</label></th>
+        <th width="60%"><h1 class="encabezado">TALLER MAESTRANZA</h1></th>
+        <th width="22%"><label for="" class="fecha">Fecha: {{$Diagnostico->fecha}}</label></th>
+    </tr>
+  </table>
   <div style="text-align: center;" class="contImg">
     <img src="assets/img/toyota.png" class="img1">
     <img src="assets/img/hilux.png" class="img2">
@@ -25,14 +29,6 @@
   
     <table class="tableDatos">
         <tbody>
-            <tr>
-                <td>
-                    <label for="">Nro: {{$Diagnostico->id}}</label>
-                </td>
-                <td>
-                    <label for="">Fecha: {{$Diagnostico->fecha}}</label>
-                </td>
-            </tr>
             <tr>
                 <td>
                     <label for="">Dependencia: {{$Diagnostico->dependencia}}</label>
@@ -72,7 +68,7 @@
             <tbody>
             @foreach ($DiagnosticoItem as $di)
             <tr class="datos">
-                <td>
+                <td class="item">
                     {{$di->item}} 
                 </td>
                 <td>
@@ -82,10 +78,12 @@
             </tr>
             @endforeach
             </tbody>
+            <tfoot class="tfoot">
+                <tr>
+                  <td colspan="2" ><strong>OBSERVACIONES: </strong> {{$Diagnostico->observaciones}}</td>
+                </tr>
+              </tfoot>
         </table>
-                <strong>Observaciones:</strong>
-                <textarea name="" id="" cols="30" rows="10">{{$Diagnostico->observaciones}}</textarea>
-
     <footer>
         <div style="text-align: center;  margin-top:30px;">
             <strong>TALLER MAESTRANZA telf. 4707726</strong><br>
@@ -122,11 +120,6 @@
 </body>
 </html>
 <style>
-    .encabezado{
-    text-align: center;
-    color: black;
-    
-}
 .tablaImage{
     width: 100%;
 }
@@ -139,6 +132,20 @@ img{
     
 }
 .imagen3{
+    text-align: right;
+}
+.tablaEncabezado{
+    width: 100%;
+}
+.nro{
+    text-align: left;
+    border:1px solid;
+}
+.encabezado{
+    text-align: center;
+    border-bottom: 2px solid ;
+}
+.fecha{
     text-align: right;
 }
 .titulo{
@@ -170,7 +177,7 @@ img{
 }
 .tableDatos{
     width: 100%;
-    border-collapse: separate;
+    border-collapse: collapse;
 }
 .tableDatos td{
     border: 1px solid;
@@ -184,11 +191,11 @@ img{
 }
 .datos{
     text-align: left;
-    
 }
-textarea{
-    font-family: inherit;
-    font-size: 100%;
+.item{
+    text-align: center;
+}
+.tableItem tfoot{
     border: 1px solid;
 }
 .contImg{

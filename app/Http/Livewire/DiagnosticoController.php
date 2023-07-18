@@ -16,7 +16,7 @@ class DiagnosticoController extends Component
     
     public $fecha,$observaciones,$dependencia,$conductor,$vehiculos_id,
            $search,$selected_id,$pageTitle,$componentName;
-    public $filas = [],$filas2=[];
+    public $filas = [];
     private $pagination=6;
 
     
@@ -40,12 +40,12 @@ class DiagnosticoController extends Component
         ->select('Diagnosticos.*','v.id as vehiculos','v.placa')
         ->where('Diagnosticos.fecha','like','%'.$this->search.'%')
         ->orWhere('v.id','like','%'.$this->search.'%')
-        ->orderBy('Diagnostico.fecha','asc')
+        ->orderBy('Diagnostico.id','asc')
         ->paginate($this->pagination);
         else
         $Diagnostico=Diagnostico::join('Vehiculos as v','v.id','Diagnosticos.vehiculos_id')
         ->select('Diagnosticos.*','v.id as vehiculos','v.placa')
-        ->orderBy('Diagnosticos.fecha','asc')
+        ->orderBy('Diagnosticos.id','asc')
         ->paginate($this->pagination);
         //dd($Diagnostico);
 
@@ -58,41 +58,50 @@ class DiagnosticoController extends Component
         ->section('content');
         
     }
-    public function Edit(Diagnostico $Diagnostico)
+    public function Edit($id)
     {
        //dd($Dependencias);
+       $Diagnostico=Diagnostico::find($id);
         $this->selected_id = $Diagnostico->id;
         $this->fecha = $Diagnostico->fecha;
         $this->observaciones=$Diagnostico->observaciones;
         $this->dependencia=$Diagnostico->dependencia;
         $this->conductor=$Diagnostico->conductor;
         $this->vehiculos_id=$Diagnostico->vehiculos_id;
+        $DiagnosticoItem=DiagnosticoItem::where('diagnosticos_id',$id)->get();
+        //dd($DiagnosticoItem);
+           foreach($DiagnosticoItem as $d)
+            {
+                //dd($d->item);
+               $this->filas[]= [
+                    'items' => $d->item,
+                    'descriptions' => $d->descripcion,
+                ];
+            }    
+        //dd($this->filas);
         $this->emit('show-modal', 'SHOW MODAL');
     }
-
-    
-
     public function Store(Request $request)
-    {/*
+    {
+        //dd($this->filas);
         $request->validate([
             'fecha' => 'required',
-            'item' => 'required',
             'observaciones' => 'required|min:3',
             'dependencia' => 'required|min:3',
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
         ]);
         $messages =[
-            'fecha.required' => 'ingrese el nombre',
-            'nombre.unique'=> 'ya existe el nombre de la dependencia',
-            'nombre.min' => 'El nombre tiene que tener al menos 3 caracteres',     
+            'fecha.required' => 'seleccione una fecha',
+            'observaciones.required' => 'Ingrese las Observaciones',
+            'Observaciones.min'=> 'El campo tiene que tener al menos 3 caracteres',   
             
         ];
 foreach($filas as $f)
 {
-    dump($f);
+    //dump($f);
 }
-        $this->validate($rules, $messages);*/
+        $this->validate($rules, $messages);
         //dd($this->filas);
 
         $Diagnostico=Diagnostico::create(['fecha' => $this->fecha,
@@ -123,6 +132,7 @@ foreach($filas as $f)
         $this->conductor ='';
         $this->search ='';
         $this->vehiculos_id='Elegir';
+        $this->filas=[];
         $this->selected_id =0;
         $this->resetValidation();
         //para regresar a la pagina principal
@@ -131,6 +141,7 @@ foreach($filas as $f)
     }
     public function Update()
     {
+        dd($this->filas);
         $rules = [
             'fecha' => 'required',
             'observaciones' => 'required|min:3',
@@ -142,8 +153,8 @@ foreach($filas as $f)
 
         $messages =[
             'fecha.required' => 'ingresela fecha',
-            'fecha.unique'=> 'ya existe el nombre de la placa',
-            'fecha.min' => 'El nombre tiene que tener al menos 3 caracteres',     
+            'observaciones.required'=> 'ingrese las observaciones',
+            'observaciones.min' => 'El campo tiene que tener al menos 3 caracteres',     
             
         ];
 
@@ -154,17 +165,19 @@ foreach($filas as $f)
                                       'dependencia' => $this->dependencia,
                                       'conductor' => $this->conductor,
                                       'vehiculos_id' => $this->vehiculos_id]);
-                                      
+                                        
        // dd($Dependencias);
         $this->resetUI();
         $this->emit('diagnostico-updated', 'Se actualizo el diagnostico con exito');
     }
-    protected $listeners=['deleteRow'=>'Destroy'];
+    
+    protected $listeners=['destroy'=>'Destroy'];
 
-    public function Destroy(Diagnostico $Diagnostico)
+    public function Destroy($id)
     {
-        $this->selected_id = $Diagnostico->id;
-        $Diagnostico ->delete();
+        //dd('hola');
+        DiagnosticoItem::where('diagnosticos_id', $id)->delete();
+        Diagnostico::find($id)->delete();
         $this->resetUI();
         $this->emit('diagnostico-deleted', 'Se elimino el diagnostico');
     
@@ -172,20 +185,13 @@ foreach($filas as $f)
     
     public function agregarFila($variable)
     {
-        if (count($this->filas) == 7) {
+        if (count($this->filas) == 10) {
             dd($this->filas);
         }
 
         switch ($variable) {
             case '1':
                 $this->filas[] = [
-                    'items' => '',
-                    'descriptions' => '',
-                ];
-                break;
-
-            case '2':
-                $this->filas2[] = [
                     'items' => '',
                     'descriptions' => '',
                 ];
@@ -199,11 +205,10 @@ foreach($filas as $f)
     public function eliminarFila($index)
     {
         unset($this->filas[$index]);
-        $this->filas = array_values($this->filas); // Reindexar el arreglo
+        $this->filas = $this->filas; // Reindexar el arreglo
     }
-    public function pdf()
+    public function pdf($id)
     {
-        $id=1;
         $Diagnostico=Diagnostico::join('Vehiculos as v','v.id','Diagnosticos.vehiculos_id')
         ->select('Diagnosticos.*','v.id as vehiculos','v.placa','v.marca')
         ->where('Diagnosticos.id',$id)->first();

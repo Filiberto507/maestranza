@@ -16,8 +16,8 @@
             @include('common.searchbox')
             <div class="widget-content">
                 <div class="table-responsive">
-                    <table class="table table-bordered table striped mt-1">
-                        <thead class="text-white" >
+                    <table class="table table-bordered table striped mt-1" width="100%">
+                        <thead class="text-white" width="100%" >
                             <tr>
                                 <th class="table-th text-while">
                                     ID
@@ -37,9 +37,9 @@
                                 <th class="table-th text-while">
                                     COLOR
                                 </th>
-                                <th class="table-th text-while">
+                                <!--<th class="table-th text-while">
                                     COMBUSTIBLE Y CAPACIDAD
-                                </th>
+                                </th>-->
                                 <th class="table-th text-while">
                                     NRO MOTOR
                                 </th>
@@ -84,9 +84,9 @@
                                 <td class="text-center">
                                     <h6>{{$v->color}}</h6>
                                 </td>
-                                <td class="text-center">
+                                <!--<td class="text-center">
                                     <h6>{{$v->combustible_capacidad}}</h6>
-                                </td>
+                                </td>-->
                                 <td class="text-center">
                                     <h6>{{$v->motor}}</h6>
                                 </td>
@@ -102,12 +102,9 @@
                                 <td class="text-center">
                                     <h6>{{$v->estado}}</h6>
                                 </td>
-                                
                                 <td class="text-center">
                                     <h6>{{$v->nombre}}</h6>
                                 </td>
-                                
-                                
                                 <td class="text-center">
                                     <a href="javascript:void(0)" 
                                     wire:click="Edit({{$v->id}})"

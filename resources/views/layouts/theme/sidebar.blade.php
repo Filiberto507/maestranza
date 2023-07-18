@@ -35,13 +35,13 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{url('accesorios')}}" class="menu-toggle" data-active="false">
+                <a href="{{url('dependencias')}}" class="menu-toggle" data-active="false">
                     <div class="base-menu">
                         <div class="base-icons">
                             <link rel="shortcut icon" type="image/png" href="{{ asset('/img/retro.png') }}">
                             <link rel="shortcut icon" sizes="192x192" href="{{ asset('/img/retro.png') }}">
                         </div>
-                        <span>ACCESORIOS</span>
+                        <span>DEPENDENCIAS</span>
                     </div>
                 </a>
             </li>

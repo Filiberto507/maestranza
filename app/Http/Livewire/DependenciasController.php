@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Dependencia;
+use App\Models\Vehiculos;
 use DB;
 
 class DependenciasController extends Component
@@ -13,7 +14,7 @@ class DependenciasController extends Component
 
     public $nombre,
            $search,$selected_id,$pageTitle,$componentName;
-    private $pagination=3;
+    private $pagination=6;
 
     function paginationView()
     {
@@ -83,6 +84,26 @@ class DependenciasController extends Component
         
         
     }
+    public function Update()
+    {
+        $rules = [
+            'nombre' => 'required|min:3|unique:dependencias,nombre'
+        ];
+
+        $messages =[
+            'nombre.required' => 'ingrese el nombre',
+            'nombre.unique'=> 'ya existe el nombre de la dependencia',
+            'nombre.min' => 'El nombre tiene que tener al menos 3 caracteres',     
+            
+        ];
+
+        $this->validate($rules, $messages);
+        $Dependencias =Dependencia::find($this->selected_id);
+        $Dependencias ->update(['nombre' => $this->nombre]);                        
+       // dd($Dependencias);
+        $this->resetUI();
+        $this->emit('dependencia-updated', 'Se actualizo la dependencia con exito');
+    }
     public function resetUI()
     {
         $this->nombre ='';
@@ -94,11 +115,18 @@ class DependenciasController extends Component
         $this->emit('dependencia-close', 'dependencia cerrar');
     }
     protected $listeners=['deleteRow'=>'Destroy'];
-    public function Destroy($id)
+    public function Destroy(Dependencia $Dependencias)
     {
-        $Dependencias=Dependencia::find($id);
-        $Dependencias->delete();
-        $this->resetUI();
-        $this->emit('dependencia-deleted', 'Se elimino la dependencia');
+        if($Dependencias){
+            $data = Vehiculos::where('dependencias_id', $Dependencias->id)->count();
+            //validar si tiene vehiculos asignados
+            if($data > 0 ) {
+                $this->emit('dependencia-deleted','No es posible eliminar la dependencia por que tiene vehiculos asignados');
+            } else {
+                $Dependencias->delete();
+                $this->resetUI();
+                $this->emit('dependencia-deleted', 'Usuario Eliminado');
+            }
+        }
     }
 }

@@ -13,7 +13,6 @@ use App\Http\Livewire\DiagnosticoController;
 use App\Http\Livewire\DependenciasController;
 use App\Http\Livewire\AccesoriosController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,18 +26,11 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    if(Auth::user()=='')
-    {
-        return view('auth/login');
-    }
-    else{
-        return view('home');
-    }
-    
+    return view('auth/login');
 });
 
 Auth::routes();
-Route::get('diagnostico/pdf', [DiagnosticoController::class, 'pdf'])->name('diagnostico.pdf');
+Route::get('diagnostico/pdf/{id}', [DiagnosticoController::class, 'pdf']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('dependencias', DependenciasController::class);
 Route::get('vehiculos', VehiculosController::class);
@@ -48,7 +40,6 @@ Route::get('permisos', PermisosController::class)->middleware('role:Admin');
 Route::get('users', UsersController::class)->middleware('role:Admin');
 Route::get('asignar', AsignarController::class)->middleware('role:Admin');  
 Route::get('taller', TallerController::class);
-Route::get('accesorios', AccesoriosController::class);
 Route::get('acctaller', AccesoriostallerController::class);
 Route::get('conductor', ConductorController::class);
 
