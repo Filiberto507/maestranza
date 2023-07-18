@@ -173,7 +173,6 @@ class TallerController extends Component
             $talleres = Taller::create([
 
                 'ingreso' => $this->ingreso,
-                'salida' => $this->salida,
                 'fecha_ingreso' => $this->fecha_ingreso,
                 'name' => $this->name,
                 'vehiculo' => $this->vehiculo,

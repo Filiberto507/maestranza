@@ -24,10 +24,19 @@ class UserSeeder extends Seeder
         ]);
         
         User::create([
-            'name' => 'Fabiana Mendez',
+            'name' => 'Fabio Mendez',
             'phone' => '78896369',
             'email' => 'fabim@gmail.com',
-            'profile' => 'Empleado',
+            'profile' => 'Tecnico-Mecanico',
+            'status' => 'ACTIVE',
+            'password' => bcrypt('123')
+        ]);
+
+        User::create([
+            'name' => 'Carlos Rojas',
+            'phone' => '78896385',
+            'email' => 'carlos@gmail.com',
+            'profile' => 'Responsable de Transporte',
             'status' => 'ACTIVE',
             'password' => bcrypt('123')
         ]);
