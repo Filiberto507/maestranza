@@ -30,4 +30,10 @@ class Taller extends Model
         return $this->hasMany(Estadovehiculo::class);
 
     }
+
+    public function trabajoreazliado()
+    {
+        return $this->belongsTo(TrabajoRealizadoTaller::class);
+
+    }
 }

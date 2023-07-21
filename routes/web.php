@@ -12,6 +12,7 @@ use App\Http\Livewire\VehiculosController;
 use App\Http\Livewire\DiagnosticoController;
 use App\Http\Livewire\DependenciasController;
 use App\Http\Livewire\AccesoriosController;
+use App\Http\Livewire\TrabajoRealizadoTallerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,7 +43,11 @@ Route::get('asignar', AsignarController::class)->middleware('role:Admin');
 Route::get('taller', TallerController::class);
 Route::get('acctaller', AccesoriostallerController::class);
 Route::get('conductor', ConductorController::class);
+Route::get('trabajorealizadotaller', TrabajoRealizadoTallerController::class);
 
 //reporten PDF
 Route::get('report/pdf/{id}', [ExportController::class, 'reportPDF']);
+
+//redirect de taller cuando este habilitado salida
+Route::get('/trabajotaller', TrabajoRealizadoTallerController::class);
 

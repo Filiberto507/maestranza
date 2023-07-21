@@ -315,7 +315,8 @@ class TallerController extends Component
     }
 
     public function UpdateTaller()
-    {
+    {   
+        //dd($this->fecha_salida, $this->salida);
         //eliminar casillas vacias que tengamos
         foreach ($this->estadovehiculo as $value) {
 
@@ -373,6 +374,12 @@ class TallerController extends Component
 
             $this->emit('taller-ok', 'recepcion actualizada con exito');
             //$this->emit('print-ticket', $talleres->id);
+            
+            if(($this->fecha_salida != null) && ($this->salida != null)){
+                //dd("hola");
+                //return redirect()->route('trabajorealizadotaller');
+            }
+
             $this->resetUI();
         } catch (Exception $e) {
             //borrar las acciones incompletas
