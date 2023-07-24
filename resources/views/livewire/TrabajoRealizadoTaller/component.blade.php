@@ -99,7 +99,7 @@
                                             <line x1="14" y1="11" x2="14" y2="17"></line>
                                         </svg>
                                     </a>
-                                    <a href="{{ url('report/pdf' . '/' . $tall->id) }}" class="btn btn-danger" target="_blank">
+                                    <a href="{{ url('reportrabajo/pdf' . '/' . $tall->id) }}" class="btn btn-danger" target="_blank">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer">
                                             <polyline points="6 9 6 2 18 2 18 9"></polyline>
                                             <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
@@ -115,7 +115,7 @@
                 </div>
             </div>
 
-            
+
         </div>
     </div>
     @include('livewire.TrabajoRealizadoTaller.form')
@@ -145,7 +145,7 @@
         });
 
 
-
+        
 
         //evento ocultar la ventana modal y notificar
         window.livewire.on('trabajo-ok', Msg => {
@@ -157,6 +157,14 @@
             $('#theModal').modal('hide')
             noty(Msg)
         })
+
+        //crear trabajo
+        window.livewire.on('trabajo-added', Msg => {
+            $('#theModal').modal('hide')
+            noty(Msg)
+            location.reload()
+        })
+
         //evento  notificar
         window.livewire.on('trabajo-deleted', Msg => {
             noty(Msg)
@@ -199,13 +207,13 @@
         document.addEventListener('click', function(event) {
             //console.log(isModalOpen);
             // Verificar si el clic ocurrió fuera del modal
-            if ( isModalOpen == true && !modal.contains(event.target)) {
+            if (isModalOpen == true && !modal.contains(event.target)) {
                 // Llamamos a la funcion limpiar para que se cierre correctamente
                 //console.log(isModalOpen);
                 limpiar()
                 isModalOpen = false
             }
-            
+
         });
 
     });
@@ -214,9 +222,9 @@
     function limpiar() {
         console.log("hola")
         window.livewire.emit('resetUI')
-        
+
     }
-    
+
     //confimar eliminar
     function Confirm(id) {
 

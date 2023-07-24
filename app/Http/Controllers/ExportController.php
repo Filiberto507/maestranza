@@ -13,6 +13,7 @@ use App\Models\Taller;
 use App\Models\tallerdetalle;
 use App\Models\accesoriostaller;
 use App\Models\Estadovehiculo;
+use App\Models\TrabajoRealizadoTaller;
 
 
 class ExportController extends Controller
@@ -154,6 +155,65 @@ class ExportController extends Controller
         ));
         //visualizar en el navegador
         return $pdf->stream('salesReport.pdf');
+        //para descargar el reporte en pdf
+        //return $pdf->download('salesReport.pdf');
+    }
+
+    public function reportTrabajo($id)
+    {
+
+        $tallerdatos = TrabajoRealizadoTaller::find($id);
+        //datos para el reporte
+        /*$cadena = $tallerdatos->fecha_ingreso;
+        $separador = "-";
+        $s = explode($separador, $cadena);*/
+        
+        $fecha_ingreso = $tallerdatos->fecha_ingreso;
+        //dd($fecha_ingreso);
+        $fecha_salida = $tallerdatos->fecha_salida;
+        $vehiculo = $tallerdatos->vehiculo;
+        $placa = $tallerdatos->placa;
+        $dependencia = $tallerdatos->dependencia;
+        $responsable = $tallerdatos->responsable;
+        $km_ingreso = $tallerdatos->km_ingreso;
+        $km_salida = $tallerdatos->km_salida;
+        $descripcion = $tallerdatos->descripcion;
+        $observaciones  = $tallerdatos->observaciones;
+
+
+        // Longitud deseada para cada fragmento
+        $longitud = 111;
+
+        // Utiliza str_split para dividir el texto en fragmentos de la longitud especificada
+        $fragmentos = str_split($descripcion, $longitud);
+
+        // Recorre cada fragmento y utiliza explode para dividirlos por un salto de línea
+        $trabajorealizado = [];
+        foreach ($fragmentos as $fragmento) {
+            $trabajorealizado = array_merge($trabajorealizado, explode("\n", $fragmento));
+        }
+
+
+        //validar la palabra user
+        //$user = $id == 0 ? 'Todos' : User::find($userId)->name;
+        //usar lo importado del PDF
+        //loadView = pasando la vista
+        // tamaño oficio -> 609.45, 935.43
+        //ajuste perfecto en 73 al imprimir
+        $pdf = PDF::setPaper([0, 0, 680, 1170])->loadView('pdf.trabajo', compact(
+            'fecha_ingreso',
+            'fecha_salida',
+            'vehiculo',
+            'placa',
+            'dependencia',
+            'responsable',
+            'km_ingreso',
+            'km_salida',
+            'trabajorealizado',
+            'observaciones'
+        ));
+        //visualizar en el navegador
+        return $pdf->stream('Trabjo-Realizado.pdf');
         //para descargar el reporte en pdf
         //return $pdf->download('salesReport.pdf');
     }

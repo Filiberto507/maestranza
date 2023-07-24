@@ -1,0 +1,61 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: auto;
+  }
+  
+.img-go{
+    width: 200px;
+    text-align: center;
+  }
+  /*titulo*/
+  h2{
+  margin: 0;
+  text-align: center;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  }
+
+  /*Datos del taller*/
+
+  .datos {
+    border-collapse: collapse;
+    margin: 20px auto ;
+    width: 700px;
+  }
+
+  .datos th, .datos td {
+    border: 1px solid black;
+    padding: 8px;
+  }
+
+  /*texto*/
+
+  .custom-table {
+    border-collapse: collapse;
+    width: auto;
+    border: 1px solid black;
+
+  }
+
+  .custom-table tfoot {
+    border-collapse: collapse;
+    border: 1px solid black;
+
+  }
+
+  .custom-table td {
+    border-bottom: thin dashed;
+    padding: 10px;
+  }
+
+  .dashed-border {
+    content: "";
+    display: block;
+    border-bottom: 1px dashed black;
+    
+  }
+
+
+  

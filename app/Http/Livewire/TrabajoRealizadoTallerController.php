@@ -51,9 +51,14 @@ class TrabajoRealizadoTallerController extends Component
         else
          $trabajo = TrabajoRealizadoTaller::orderBy('id', 'asc')->paginate($this->pagination);
 
-     $this->vehiculodatos = Taller::orderby('id', 'desc')
-         ->get();
 
+     $this->vehiculodatos = Taller::leftJoin('trabajo_realizado_tallers as tr', 'tr.taller_id', 'tallers.id')
+        ->select('tallers.*')
+        ->whereNull('taller_id')
+        ->orderby('id', 'desc')
+        ->get();
+
+    //dd($this->vehiculodatos);
      //dd($this->vehiculodatos);
 
      //dd($this->vehiculoselectedName);
@@ -92,11 +97,14 @@ class TrabajoRealizadoTallerController extends Component
         $this->name = '';
         $this->vehiculo = '';
         $this->dependencia = '';
+        $this->responsable = '';
         $this->placa = '';
         $this->check = [];
         $this->search = '';
         $this->selected_id = 0;
         $this->vehiculoselectedName = null;
+        $this->km_ingreso = '';
+        $this->km_salida = '';
         $this->descripcion = '';
         $this->observacion=' ';
 
@@ -159,7 +167,7 @@ class TrabajoRealizadoTallerController extends Component
         //dd($this->responsable);
         
           //crear el usuario
-        $user = TrabajoRealizadoTaller::create([
+        $trabajosr = TrabajoRealizadoTaller::create([
             'vehiculo' => $this->vehiculo,
             'placa' => $this->placa,
             'responsable' => $this->responsable,

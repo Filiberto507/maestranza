@@ -12,7 +12,9 @@ use App\Http\Livewire\VehiculosController;
 use App\Http\Livewire\DiagnosticoController;
 use App\Http\Livewire\DependenciasController;
 use App\Http\Livewire\AccesoriosController;
+use App\Http\Livewire\ReporteTallerController;
 use App\Http\Livewire\TrabajoRealizadoTallerController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +30,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth/login');
+    if(Auth::user()=='')
+    {
+        return view('auth/login');
+    }
+    else{
+        return view('home');
+    }
+
 });
 
 Auth::routes();
@@ -44,9 +54,11 @@ Route::get('taller', TallerController::class);
 Route::get('acctaller', AccesoriostallerController::class);
 Route::get('conductor', ConductorController::class);
 Route::get('trabajorealizadotaller', TrabajoRealizadoTallerController::class);
+Route::get('reportemaestranza', ReporteTallerController::class);
 
 //reporten PDF
 Route::get('report/pdf/{id}', [ExportController::class, 'reportPDF']);
+Route::get('reportrabajo/pdf/{id}', [ExportController::class, 'reportTrabajo']);
 
 //redirect de taller cuando este habilitado salida
 Route::get('/trabajotaller', TrabajoRealizadoTallerController::class);
