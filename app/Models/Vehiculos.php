@@ -18,6 +18,12 @@ class Vehiculos extends Model
         return $this->belongsTo(Diagnostico::class);
  
     }
+    public function diagnostico_area_transporte()
+    {
+        
+        return $this->belongsTo(Diagnostico_area_transporte::class);
+ 
+    }
 
 
     public function taller()

@@ -6,17 +6,16 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 use Livewire\Component;
-use App\Models\Diagnostico;
-use App\Models\Conductor;
-use App\Models\DiagnosticoItem;
+use App\Models\Diagnostico_area_transporte;
+use App\Models\Diagnostico_servicio;
 use App\Models\Vehiculos;
 use DB;
 
-class DiagnosticoController extends Component
+class DiagnosticoAreaTransporteController extends Component
 {
     use WithPagination;
 
-    public $fecha, $observaciones, $dependencia, $conductor, $vehiculos_id,
+    public $fecha, $conclusion, $dependencia,$conductor, $vehiculos_id,
         $search, $selected_id, $pageTitle, $componentName;
     public $filas = [];
     private $pagination = 6;
@@ -30,7 +29,8 @@ class DiagnosticoController extends Component
     function mount()
     {
         $this->pageTitle = 'Listado';
-        $this->componentName = 'Diagnostico';
+        $this->componentName = 'Diagnostico Area de Transportes';
+        $this->diagnosticos_id='Elegir';
         $this->vehiculos_id = 'Elegir';
     }
 
@@ -38,21 +38,21 @@ class DiagnosticoController extends Component
     {
         if (strlen($this->search) > 0)
 
-            $Diagnostico = Diagnostico::join('Vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
-                ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa')
-                ->where('Diagnosticos.fecha', 'like', '%' . $this->search . '%')
+            $DiagnosticoAreaT = Diagnostico_area_transporte::join("Vehiculos as v", "v.id", "Diagnostico_area_transportes.vehiculos_id")
+                ->select('Diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.placa','v.tipo_vehiculo','v.cilindrada','v.chasis','v.motor')
+                ->where('Diagnostico_area_transportes.fecha', 'like', '%' . $this->search . '%')
                 ->orWhere('v.id', 'like', '%' . $this->search . '%')
-                ->orderBy('Diagnostico.id', 'asc')
+                ->orderBy('Diagnostico_area_transportes.id', 'asc')
                 ->paginate($this->pagination);
         else
-            $Diagnostico = Diagnostico::join('Vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
-                ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa')
-                ->orderBy('Diagnosticos.id', 'asc')
-                ->paginate($this->pagination);
+        $DiagnosticoAreaT = Diagnostico_area_transporte::join("Vehiculos as v", "v.id", "Diagnostico_area_transportes.vehiculos_id")
+        ->select('Diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.placa','v.tipo_vehiculo','v.cilindrada','v.chasis','v.motor')
+        ->orderBy('Diagnostico_area_transportes.id', 'asc')
+        ->paginate($this->pagination);
         //dd($Diagnostico);
 
-        return view('livewire.diagnostico.component', [
-            'Diagnosticos' => $Diagnostico,
+        return view('livewire.diagnostico_area_transporte.component', [
+            'Diagnostico_area_transportes' => $DiagnosticoAreaT,
             'Vehiculos' => Vehiculos::orderBy('id', 'asc')->get(),
             //'Conductor'=> Conductor::orderBy('name','asc')->get()
         ])
@@ -62,20 +62,21 @@ class DiagnosticoController extends Component
     public function Edit($id)
     {
         //dd($Dependencias);
-        $Diagnostico = Diagnostico::find($id);
-        $this->selected_id = $Diagnostico->id;
-        $this->fecha = $Diagnostico->fecha;
-        $this->observaciones = $Diagnostico->observaciones;
-        $this->dependencia = $Diagnostico->dependencia;
-        $this->conductor = $Diagnostico->conductor;
-        $this->vehiculos_id = $Diagnostico->vehiculos_id;
-        $DiagnosticoItem = DiagnosticoItem::where('diagnosticos_id', $id)->get();
+        $DiagnosticoAreaT = Diagnostico_area_transporte::find($id);
+        $this->selected_id = $DiagnosticoAreaT->id;
+        $this->fecha = $DiagnosticoAreaT->fecha;
+        $this->dependencia = $DiagnosticoAreaT->dependencia;
+        $this->conductor = $DiagnosticoAreaT->conductor;
+        $this->conclusion = $DiagnosticoAreaT->conclusion;
+        $this->vehiculos_id = $DiagnosticoAreaT->vehiculos_id;
+        $DiagnosticoServicio = Diagnostico_servicio::where('diagnostico_area_transportes_id', $id)->get();
         //dd($DiagnosticoItem);
-        foreach ($DiagnosticoItem as $d) {
+        foreach ($DiagnosticoServicio as $d) {
             //dd($d->item);
             $this->filas[] = [
-                'items' => $d->item,
-                'descriptions' => $d->descripcion,
+                'item'=>$d->item,
+                'cantidad' => $d->cantidad,
+                'servicio' => $d->servicio,
             ];
         }
         //dd($this->filas);
@@ -86,47 +87,48 @@ class DiagnosticoController extends Component
         //dd($this->filas);
         $rules = [
             'fecha' => 'required',
-            'observaciones' => 'required|min:3',
+            'conclusion' => 'required|min:3',
             'dependencia' => 'required|min:3',
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
         ];
         $messages = [
             'fecha.required' => 'seleccione una fecha',
-            'observaciones.required' => 'Ingrese las Observaciones',
-            'Observaciones.min' => 'El campo tiene que tener al menos 3 caracteres',
+            'conclusion.required' => 'Ingrese las conclusion',
+            'conclusion.min' => 'El campo tiene que tener al menos 3 caracteres',
 
         ];
 
         $this->validate($rules, $messages);
         //dd($this->filas);
 
-        $Diagnostico = Diagnostico::create([
+        $DiagnosticoAreaT = Diagnostico_area_transporte::create([
             'fecha' => $this->fecha,
             'dependencia' => $this->dependencia,
             'conductor' => $this->conductor,
             'vehiculos_id' => $this->vehiculos_id,
-            'observaciones' => $this->observaciones
+            'conclusion' => $this->conclusion
         ]);
-        if ($Diagnostico) {
+        if ($DiagnosticoAreaT) {
 
             foreach ($this->filas as $f) {
-                DiagnosticoItem::create([
-                    'item' => $f['items'],
-                    'descripcion' => $f['descriptions'],
-                    'diagnosticos_id' => $Diagnostico->id
+                Diagnostico_servicio::create([
+                    'item'=>$f['item'],
+                    'cantidad' => $f['cantidad'],
+                    'servicio' => $f['servicio'],
+                    'diagnostico_area_transportes_id' => $DiagnosticoAreaT->id
                 ]);
             }
         }
         // dd($Dependencias);
         $this->resetUI();
-        $this->emit('diagnostico-added', 'Se registro la dependencia con exito');
+        $this->emit('diagnostico_area_transporte-added', 'Se registro el diagnostico con exito');
     }
 
     public function resetUI()
     {
         $this->fecha = '';
-        $this->observaciones = '';
+        $this->conclusion = '';
         $this->dependencia = '';
         $this->conductor = '';
         $this->search = '';
@@ -136,14 +138,14 @@ class DiagnosticoController extends Component
         $this->resetValidation();
         //para regresar a la pagina principal
         $this->resetPage();
-        $this->emit('diagnostico-close', 'vehiculo cerrar');
+        $this->emit('diagnostico_area_transporte-close', 'vehiculo cerrar');
     }
     public function Update()
     {
         //dd($this->filas);
         $rules = [
             'fecha' => 'required',
-            'observaciones' => 'required|min:3',
+            'conclusion' => 'required|min:3',
             'dependencia' => 'required|min:3',
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
@@ -152,23 +154,23 @@ class DiagnosticoController extends Component
 
         $messages = [
             'fecha.required' => 'ingresela fecha',
-            'observaciones.required' => 'ingrese las observaciones',
-            'observaciones.min' => 'El campo tiene que tener al menos 3 caracteres',
+            'conclusion.required' => 'ingrese las conclusiones',
+            'conclusion.min' => 'El campo tiene que tener al menos 3 caracteres',
 
         ];
 
         $this->validate($rules, $messages);
-        $Diagnostico = Diagnostico::find($this->selected_id);
-        $Diagnostico->update([
+        $DiagnosticoAreaT = Diagnostico_area_transporte::find($this->selected_id);
+        $DiagnosticoAreaT->update([
             'fecha' => $this->fecha,
-            'observaciones' => $this->observaciones,
+            'conclusion' => $this->conclusion,
             'dependencia' => $this->dependencia,
             'conductor' => $this->conductor,
             'vehiculos_id' => $this->vehiculos_id
         ]);
 
-        if ($Diagnostico) {
-            $itemdiag= DiagnosticoItem::where('diagnosticos_id', $this->selected_id)->get();
+        if ($DiagnosticoAreaT) {
+            $itemdiag= Diagnostico_servicio::where('diagnostico_area_transportes_id', $this->selected_id)->get();
             //dd($itemdiag);
             $this->AgregarItem($itemdiag, $this->filas, $this->selected_id);
             $this->EliminarItem($itemdiag, $this->filas, $this->selected_id);
@@ -176,7 +178,7 @@ class DiagnosticoController extends Component
 
         // dd($Dependencias);
         $this->resetUI();
-        $this->emit('diagnostico-updated', 'Se actualizo el diagnostico con exito');
+        $this->emit('diagnostico_area_transporte-updated', 'Se actualizo el diagnostico con exito');
     }
 
     protected $listeners = ['destroy' => 'Destroy'];
@@ -184,23 +186,23 @@ class DiagnosticoController extends Component
     public function Destroy($id)
     {
         //dd('hola');
-        DiagnosticoItem::where('diagnosticos_id', $id)->delete();
-        Diagnostico::find($id)->delete();
+        Diagnostico_servicio::where('diagnostico_area_transportes_id', $id)->delete();
+        Diagnostico_area_transporte::find($id)->delete();
         $this->resetUI();
-        $this->emit('diagnostico-deleted', 'Se elimino el diagnostico');
+        $this->emit('diagnostico_area_transporte-deleted', 'Se elimino el diagnostico');
     }
 
     public function agregarFila($variable)
     {
-        if (count($this->filas) == 10) {
+        if (count($this->filas) == 30) {
             dd($this->filas);
         }
-
         switch ($variable) {
             case '1':
                 $this->filas[] = [
-                    'items' => '',
-                    'descriptions' => '',
+                    'item'=>'',
+                    'cantidad' => '',
+                    'servicio' => '',
                 ];
                 break;
             default:
@@ -214,20 +216,20 @@ class DiagnosticoController extends Component
         unset($this->filas[$index]);
         $this->filas = $this->filas; // Reindexar el arreglo
     }
+    
     public function pdf($id)
     {
-        $Diagnostico = Diagnostico::join('Vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
-            ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa', 'v.marca')
-            ->where('Diagnosticos.id', $id)->first();
+        $DiagnosticoAreaT = Diagnostico_area_transporte::join('Vehiculos as v', 'v.id', 'Diagnostico_area_transportes.vehiculos_id')
+            ->select('Diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.placa', 'v.marca','v.tipo_vehiculo','v.cilindrada','v.chasis','v.motor')
+            ->where('Diagnostico_area_transportes.id', $id)->first();
         //dd($Diagnostico);
-        $DiagnosticoItem = DiagnosticoItem::where('diagnosticos_id', $id)->get();
+        $Diagnostico_servicio = Diagnostico_servicio::where('diagnostico_area_transportes_id', $id)->get();
         $Vehiculos = Vehiculos::all();
-        $pdf = Pdf::loadView('livewire.diagnostico.pdf', compact('Diagnostico', 'DiagnosticoItem', 'Vehiculos'));
+        $pdf = Pdf::loadView('livewire.diagnostico_area_transporte.pdf', compact('DiagnosticoAreaT', 'Diagnostico_servicio', 'Vehiculos'));
         return $pdf->stream();
         //si se quiere descargar
         //return $pdf->download('reporteDisagnostico.pdf');
     }
-
 
     public function EliminarItem($itembd, $itemnew, $iditem)
     {
@@ -247,10 +249,10 @@ class DiagnosticoController extends Component
 
             else{
                 $item->update([
-
-                    'item' => $value['items'],
-                    'descripcion' => $value['descriptions'],
-                    'diagnosticos_id' => $iditem
+                    'item'=>$value['item'],
+                    'cantidad' => $value['cantidad'],
+                    'servicio' => $value['servicio'],
+                    'diagnostico_area_transportes_id' => $iditem
                 ]);
             }
         }
@@ -270,10 +272,11 @@ class DiagnosticoController extends Component
 
             if ($itemnuevo == null) {
                 
-                DiagnosticoItem::create([
-                    'item' => $item['items'],
-                    'descripcion' => $item['descriptions'],
-                    'diagnosticos_id' => $iditem
+                Diagnostico_servicio::create([
+                    'item'=>$item['item'],
+                    'cantidad' => $item['cantidad'],
+                    'servicio' => $item['servicio'],
+                    'diagnostico_area_transportes_id' => $iditem
                 ]);
             }
         }

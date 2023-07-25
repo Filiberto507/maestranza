@@ -18,7 +18,7 @@
   <table class="tablaEncabezado">
     <tr>
         <th width="18%"><label for="" class="nro" >Nro: {{$Diagnostico->id}}</label></th>
-        <th width="60%"><h1 class="encabezado">TALLER MAESTRANZA</h1></th>
+        <th width="60%"><h1 class="encabezado"><u>TALLER MAESTRANZA</u></h1></th>
         <th width="22%"><label for="" class="fecha">Fecha: {{$Diagnostico->fecha}}</label></th>
     </tr>
   </table>
@@ -50,7 +50,7 @@
     </table>
     <div class="contenedorP">
         <div class="contenedorH">
-        <h3 class="subtitulo">EVALUACIÓN Y DIAGNÓSTICO DEL VEHICULO</h3>
+        <h3 class="subtitulo">EVALUACIÓN Y DIAGNÓSTICO DEL VEHÍCULO</h3>
         </div>
     </div>
         <table class="tableItem">
@@ -60,7 +60,7 @@
                         ITEM
                     </th>
                     <th width="80%">
-                        DESCRIPCION
+                        DESCRIPCIÓN
                     </th>
                     
                 </tr>
@@ -143,7 +143,6 @@ img{
 }
 .encabezado{
     text-align: center;
-    border-bottom: 2px solid ;
 }
 .fecha{
     text-align: right;

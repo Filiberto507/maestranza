@@ -24,7 +24,7 @@
     <div class="col-sm-12 col-md-6">
         <div class="form-group">
             <label>Conductor</label>
-            <input id="Conductor" type="text" wire:model.lazy="Conductor" class="form-control" placeholder="ej: Crismar Rodrigo">
+            <input type="text" wire:model.lazy="conductor" class="form-control" placeholder="ej: Crismar Rodrigo">
             @error('conductor') <span class="text-danger er">{{ $message}} </span>
 
             @enderror
@@ -38,7 +38,7 @@
       <select wire:model.lazy="vehiculos_id" class="form-control" id="select2-dropdown" >
           <option value="Elegir" selected> Elegir </option>
           @foreach($Vehiculos as $v)
-          <option value="{{$v->id}}" selected> {{$v->placa}}</option>
+          <option value="{{$v->id}}" selected> {{$v->placa}},{{$v->marca}}</option>
           @endforeach
       </select>
       @error('vehiculos_id') <span class="text-danger er">{{ $message}} </span>
@@ -50,8 +50,9 @@
     <table class="table  table-bordered table-hover mt-1">
         <thead>
             <tr>
-                <th>Items</th>
-                <th>Descripción</th>
+                <th class="col-sm-12 col-md-3">Item</th>
+                <th class="col-sm-12 col-md-3">Cantidad</th>
+                <th class="col-sm-12 col-md-6">Servicio</th>
                 
                 <th> 
                     <button class="btn btn-primary" wire:click="agregarFila({{1}})">
@@ -70,8 +71,9 @@
         <tbody>
             @foreach ($filas as $index => $fila)
             <tr>
-                <td><input type="text" class="form-control" wire:model="filas.{{ $index }}.items" /></td>
-                <td><textarea class="form-control" wire:model="filas.{{ $index }}.descriptions" name="" id="" col="100"  rows="2"></textarea></td>
+                <td><input type="text" class="form-control" wire:model="filas.{{ $index }}.item" /></td>
+                <td><input type="text" class="form-control" wire:model="filas.{{ $index }}.cantidad" /></td>
+                <td><textarea class="form-control" wire:model="filas.{{ $index }}.servicio" name="" id="" col="100"  rows="2"></textarea></td>
                 <td><button class="btn btn-danger" wire:click="eliminarFila({{ $index }})">Eliminar</button></td>
             </tr>
             @endforeach
@@ -79,9 +81,9 @@
     </table>
     <div class="col-sm-12 col-md-8">
       <div class="form-group">
-          <label>Observaciones</label>
-          <textarea wire:model.lazy="observaciones" class="form-control" name="" id="" cols="100" rows="4" placeholder="..."></textarea>
-          @error('observaciones') <span class="text-danger er">{{ $message}} </span>
+          <label>Conclusion</label>
+          <textarea wire:model.lazy="conclusion" class="form-control" name="" id="" cols="100" rows="3" placeholder="...">hola</textarea>
+          @error('conclusion') <span class="text-danger er">{{ $message}} </span>
 
           @enderror
       </div>
@@ -121,3 +123,8 @@
 </div>
 
 @include('common.modalFooter')
+<style>
+    .bolded{
+        .bolded { font-weight: bold; }
+    }
+</style>
