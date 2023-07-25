@@ -47,9 +47,11 @@ class TrabajoRealizadoTallerController extends Component
     {
          //validar si el usuario ingreso informacion
          if (strlen($this->search) > 0)
-         $trabajo = TrabajoRealizadoTaller::where('placa', 'like', '%' . $this->search . '%')->paginate($this->pagination);
+         $trabajo = TrabajoRealizadoTaller::where('placa', 'like', '%' . $this->search . '%')
+         ->orderBy('id', 'desc')
+         ->paginate($this->pagination);
         else
-         $trabajo = TrabajoRealizadoTaller::orderBy('id', 'asc')->paginate($this->pagination);
+         $trabajo = TrabajoRealizadoTaller::orderBy('id', 'desc')->paginate($this->pagination);
 
 
      $this->vehiculodatos = Taller::leftJoin('trabajo_realizado_tallers as tr', 'tr.taller_id', 'tallers.id')
@@ -57,7 +59,7 @@ class TrabajoRealizadoTallerController extends Component
         ->whereNull('taller_id')
         ->orderby('id', 'desc')
         ->get();
-
+        
     //dd($this->vehiculodatos);
      //dd($this->vehiculodatos);
 
@@ -114,6 +116,11 @@ class TrabajoRealizadoTallerController extends Component
         $this->emit('trabajos-close', 'taller cerrar');
         //dd($this->check);
     }
+
+    protected $listeners =[
+        'destroy' => 'Destroy',
+        'resetUI' => 'resetUi'
+    ];
 
     public function Edit(TrabajoRealizadoTaller $trabajosr)
     {
@@ -276,5 +283,16 @@ class TrabajoRealizadoTallerController extends Component
         }
 
         $this->acctaller = $acctalleres;*/
+    }
+
+    public function Destroy($id)
+    {
+      // dd($id);
+        //defininar permisos 
+        //cantidad de permisos que tiene
+        TrabajoRealizadoTaller::where('taller_id', $id)->delete();
+        
+        $this->emit('rabajo-deleted', 'Se elimino Trabajo Realizado DE VEHICULO con exito');
+        
     }
 }

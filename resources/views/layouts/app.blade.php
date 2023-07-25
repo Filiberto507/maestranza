@@ -23,10 +23,11 @@
    
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container" style="background-color: #4FC3F7;">
                 <a class="navbar-brand" href="{{ url('/') }}">
                    MAESTRANZA
                 </a>
+                <img src="assets/img/escudo.png" alt="" width="50px" height="50px">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

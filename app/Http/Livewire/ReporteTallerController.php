@@ -63,11 +63,13 @@ class ReporteTallerController extends Component
             $to = Carbon::parse($this->dateTo)->format('Y-m-d') . ' 23:59:59';
             $Taller = Taller::where('placa', 'like', '%' . $this->search . '%')
             ->whereBetween('created_at', [$from,$to])
+            ->orderBy('id', 'desc')
             ->get();
         }
             
         elseif(strlen($this->search) > 0){
             $Taller = Taller::where('placa', 'like', '%' . $this->search . '%')
+            ->oderBy('id', 'desc')
             ->get();
             //dd($Taller);
             

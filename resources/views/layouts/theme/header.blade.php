@@ -1,9 +1,9 @@
 <div class="header-container fixed-top" >
-    <header class="header navbar navbar-expand-sm" style="background: #ece6f6">
+    <header class="header navbar navbar-expand-sm" style="background: #4FC3F7">
         <ul class="navbar-item flex-row" >
             <li class="nav-item theme-logo">
                 <a href="{{url('/home')}}">
-                    <img src="assets/img/90x90.jpg" class="navbar-logo" alt="logo">
+                    <img src="assets/img/escudo.png" class="navbar-logo" alt="logo">
                 </a>
             </li>
         </ul>

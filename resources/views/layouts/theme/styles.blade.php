@@ -54,7 +54,7 @@
     }
     /*sidebar background*/
     .sidebar-theme #compactSidebar {
-        background: #2069a8!important;
+        background: #1d1e1e!important;
     }
 
     /*sidebar collapse background de la ambuerguesa*/

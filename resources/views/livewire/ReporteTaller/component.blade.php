@@ -6,10 +6,11 @@
             </div>
             <div class="widget-content">
                 <div class="row">
-                    <div class="col-sm-12 col-md-3">
-                        <div class="row">
+                    <div class="">
+                        <div class="form-row">
 
-                            <div class="row justify-content-between">
+                            <div class="form-group col-md-4">
+                            <h6 class="text-center">Buscar por PLACA</h6>
                                 <div class="col-lg-12 col-md-4 col-sm-12">
                                     <div class="input-group mb-4">
                                         <div class="input-group-prepend">
@@ -21,21 +22,21 @@
 
                                             </span>
                                         </div>
-                                        <input type="text" wire:model="search" placeholder="Buscar" class="form-control">
+                                        <input type="text" wire:model="search" placeholder="5563-CUH" class="form-control">
                                     </div>
                                 </div>
                             </div>
 
 
 
-                            <div class="col-sm-12 mt-2">
+                            <div class="form-group col-md-3">
                                 <h6>Fecha desde</h6>
                                 <div class="form-group">
                                     <input type="text" wire:model="dateFrom" class="form-control flatpickr" placeholder="Click para elegir">
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 mt-2">
+                            <div class="form-group col-md-3">
                                 <h6>Fecha hasta</h6>
                                 <div class="form-group">
                                     <input type="text" wire:model="dateTo" class="form-control flatpickr" placeholder="Click para elegir">
@@ -45,31 +46,35 @@
 
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-9">
+                    <div class="widget-content">
                         <!-- TABLA -->
                         <div class="table-responsive">
                             <!-- Anterior table: table table-bordered border-primary table striped mt-1  -->
-                            <table class="table table-hover  mb-4">
+                            <table class="table table-bordered">
                                 <thead class="text-white" style="background:#3b3f5c;">
                                     <tr>
                                         <th class="table-th text-white text-center">
-                                            ID
+                                           ID
                                         </th>
                                         <th class="table-th text-white text-center">
-                                            VEHICULO
+                                           VEHICULO
                                         </th>
                                         <th class="table-th text-white text-center">
                                             CONDUCTOR
                                         </th>
                                         <th class="table-th text-white text-center">
-                                            REPORTE
+                                           RESPONSABLE
                                         </th>
                                         <th class="table-th text-white text-center">
-                                            FECHA
+                                           REPORTE
                                         </th>
-                                        <th class="table-th text-white text-center" width="50px">
+                                        <th class="table-th text-white text-center">
+                                           FECHA
+                                        </th>
+                                        <th class="table-th text-white text-center">
                                             PDF
                                         </th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,8 +92,11 @@
                                             <td class="text-center">
                                                 <h6>{{$d->vehiculo}} - {{$d->placa}}</h6>
                                             </td>
-                                            <td class="text-center">
+                                            <td class="text-center" >
                                                 <h6>{{$d->name}}</h6>
+                                            </td>
+                                            <td class="text-center">
+                                                <h6></h6>
                                             </td>
                                             <td class="text-center">
                                                 <h6>TALLER</h6>
@@ -119,6 +127,9 @@
                                                 <h6>{{$tr->vehiculo}} - {{$tr->placa}}</h6>
                                             </td>
                                             <td class="text-center">
+                                                <h6></h6>
+                                            </td>
+                                            <td class="text-center">
                                                 <h6>{{$tr->responsable}}</h6>
                                             </td>
                                             <td class="text-center">
@@ -128,7 +139,7 @@
                                                 <h6>{{\Carbon\Carbon::parse($tr->created_at)->format('d-m-Y')}}</h6>
                                             </td>
                                             <td class="text-center" width="50px">
-                                                <a href="{{ url('report/pdf' . '/' . $tr->id) }}" class="btn btn-danger" target="_blank">
+                                                <a href="{{ url('reportrabajo/pdf' . '/' . $tr->id) }}" class="btn btn-danger" target="_blank">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer">
                                                         <polyline points="6 9 6 2 18 2 18 9"></polyline>
                                                         <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
@@ -139,8 +150,8 @@
                                         </tr>
                                         @endforeach
                                         <tr style="color: #3b3f5c;">
-                                            <td colspan="6">
-                                                ===================================================================================================================================================
+                                            <td colspan="10">
+                                                =======================================================================================================================================================
                                             </td> <!-- Línea divisoria entre talleres -->
                                         </tr>
                                         @endforeach

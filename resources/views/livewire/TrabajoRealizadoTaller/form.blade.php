@@ -82,7 +82,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" id="dependencia" wire:model.lazy="dependencia" class="form-control" placeholder="DEPENDENCIA" maxlength="255">
+                                <input type="text" disabled ="dependencia" wire:model.lazy="dependencia" class="form-control" placeholder="DEPENDENCIA" maxlength="255">
                             </div>
                             @error('dependencia')
                             <span class="text-danger er"> {{ $message }} </span>

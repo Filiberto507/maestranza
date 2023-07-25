@@ -11,13 +11,13 @@
     <table>
         <tr>
             <td class="">
-                <img class="img-go" src="/img/img-go.png" alt="Imagen del vehículo">
+                <img class="img-bo" src="assets/img/Bolivia.png" alt="Imagen bolivia">
             </td>
             <td class="">
-                <img class="img-go" src="/img/img-go.png" alt="Imagen del vehículo">
+                <img class="img-co" src="assets/img/cochabamba.jpg" alt="Imagen del cochabamba">
             </td>
             <td class="">
-                <img class="img-go" src="/img/img-go.png" alt="Imagen del vehículo">
+                <img class="img-go" src="assets/img/img-go.png" alt="Imagen del gobernacion">
             </td>
         </tr>
     </table>
@@ -26,63 +26,68 @@
     <table class="datos">
         <tr>
             <td class="columna1">
-                Tipo Vehiculo: VAGONETA-NISSAN-PATROL
+                Tipo Vehiculo: {{$vehiculo}}
             </td>
             <td class="columna2">
-                Placa: 5235-ABC
+                Placa: {{$placa}}
             </td>
         </tr>
         <tr>
             <td>
-                SECR./DIR./UNIDAD: S.D.D.P.T
+                SECR./DIR./UNIDAD: {{$dependencia}}
             </td>
             <td>
-                Responsable: ROLANDO FLORES 
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                Km. INGRESO:
-            </td>
-            <td>
-                Fecha:
+                Responsable: {{$responsable}}
             </td>
         </tr>
 
         <tr>
             <td>
-                Km. SALIDA;
+                Km. INGRESO: {{$km_ingreso}}
             </td>
             <td>
-                Fecha;
+                Fecha: {{$fecha_ingreso}}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Km. SALIDA; {{$km_salida}}
+            </td>
+            <td>
+                Fecha; {{$fecha_salida}}
             </td>
         </tr>
     </table>
-
+    <h2>TRABAJOS REALIZADOS (TALLER INTERNO MAESTRANZA)</h2>
     <table class="custom-table">
         <tr>
           <td>
-            <p class="dashed-border">
-                Aquí está tu párrafo con un borde discontinuo en la parte inferior, y seguirá correctamente incluso si el texto es más largo y se sube hacia arriba.
-              </p>  
-              <p class="dashed-border">
-                Aquí está tu párrafo con un borde discontinuo en la parte inferior, y seguirá correctamente incluso si el texto es más largo y se sube hacia arriba.
-              </p>  
-              <p class="dashed-border">
-                Aquí está tu párrafo con un borde discontinuo en la parte inferior, y seguirá correctamente incluso si el texto es más largo y se sube hacia arriba.
-              </p>  
-                
+            @foreach($trabajorealizado as $tra)
+                <p class="dashed-border">
+                    {{$tra}}
+                </p>  
+            @endforeach     
           </td>
         </tr>
         <tfoot>
             <tr>
-                <td>Observaciones: </td>
+                <td>Observaciones: Aquí está tu párrafo con un borde discontinuo en la parte inferior, y seguirá correctamente incluso si el texto es más largo y se sube hacia arriba.</td>
             </tr>
         </tfoot>
       </table>
 
-      
+      <table class="firma">
+        <tr>
+            <th>TECNICO MECANICO</th>
+            <th>CONDUCTOR
+            </th>
+        </tr>
+        <tr>
+            <td></td>
+            <td>{{$taller->name}}</td>
+        </tr>
+    </table>
   
 </body>
 

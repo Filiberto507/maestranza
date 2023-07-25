@@ -43,6 +43,9 @@
                                     ID
                                 </th>
                                 <th class="table-th text-while text-center">
+                                    FECHA
+                                </th>
+                                <th class="table-th text-while text-center">
                                     VEHICULO
                                 </th>
 
@@ -52,6 +55,7 @@
                                 <th class="table-th text-while text-center">
                                     DEPENDENCIA
                                 </th>
+                                
 
                                 <th class="table-th text-while">
                                     ACCTIONS
@@ -63,6 +67,9 @@
                             <tr>
                                 <td>
                                     <h6>{{$tall->id}}</h6>
+                                </td>
+                                <td class="text-center">
+                                    <h6>{{$tall->fecha_ingreso}}</h6>
                                 </td>
                                 <td class="text-center">
                                     <h6>{{$tall->vehiculo}} - {{$tall->placa}}</h6>

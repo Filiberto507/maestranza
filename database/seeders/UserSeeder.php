@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             'name' => 'Fabio Mendez',
             'phone' => '78896369',
             'email' => 'fabim@gmail.com',
-            'profile' => 'Tecnico-Mecanico',
+            'profile' => 'Responsable de Transporte',
             'status' => 'ACTIVE',
             'password' => bcrypt('123')
         ]);
@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             'name' => 'Carlos Rojas',
             'phone' => '78896385',
             'email' => 'carlos@gmail.com',
-            'profile' => 'Responsable de Transporte',
+            'profile' => 'Tecnico-Mecanico',
             'status' => 'ACTIVE',
             'password' => bcrypt('123')
         ]);

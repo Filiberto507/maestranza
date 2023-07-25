@@ -24,17 +24,15 @@ class ExportController extends Controller
 
         $tallerdatos = Taller::find($id);
         //datos para el reporte
-        $datosestadovehiculo=[];
+        $datosestadovehiculo = [];
 
-        for ($i=0; $i < 11; $i++) { 
-            $datosestadovehiculo[$i] = [
-                
-            ];
+        for ($i = 0; $i < 11; $i++) {
+            $datosestadovehiculo[$i] = [];
         }
         /*$cadena = $tallerdatos->fecha_ingreso;
         $separador = "-";
         $s = explode($separador, $cadena);*/
-        
+
         $fecha_ingreso = $tallerdatos->fecha_ingreso;
         //dd($fecha_ingreso);
         $fecha_salida = $tallerdatos->fecha_salida;
@@ -57,9 +55,9 @@ class ExportController extends Controller
 
         $separador = "\n"; // Usar salto de línea
         $separarord = explode($separador, $ordentrabajo);
-       // dd($separarord);
+        // dd($separarord);
 
-        
+
         //obtener los checks
         $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
 
@@ -168,6 +166,8 @@ class ExportController extends Controller
         $separador = "-";
         $s = explode($separador, $cadena);*/
         
+        $taller=Taller::find($tallerdatos->taller_id);
+        //$conductor = $taller->name;
         $fecha_ingreso = $tallerdatos->fecha_ingreso;
         //dd($fecha_ingreso);
         $fecha_salida = $tallerdatos->fecha_salida;
@@ -182,17 +182,21 @@ class ExportController extends Controller
 
 
         // Longitud deseada para cada fragmento
-        $longitud = 111;
+        // Longitud deseada para cada fragmento
+        $longitud = 110;
 
-        // Utiliza str_split para dividir el texto en fragmentos de la longitud especificada
-        $fragmentos = str_split($descripcion, $longitud);
-
-        // Recorre cada fragmento y utiliza explode para dividirlos por un salto de línea
+        // Divide el texto por el salto de línea
+        $lineas = explode("\n", $descripcion);
+        //dump($lineas);
+        // Inicializa un arreglo para los fragmentos finales
         $trabajorealizado = [];
-        foreach ($fragmentos as $fragmento) {
-            $trabajorealizado = array_merge($trabajorealizado, explode("\n", $fragmento));
-        }
 
+        // Recorre cada línea y utiliza str_split para dividir por longitud
+        foreach ($lineas as $linea) {
+            $fragmentos_linea = str_split($linea, $longitud);
+            $trabajorealizado = array_merge($trabajorealizado, $fragmentos_linea);
+        }
+       //dd($trabajorealizado);
 
         //validar la palabra user
         //$user = $id == 0 ? 'Todos' : User::find($userId)->name;
@@ -200,7 +204,7 @@ class ExportController extends Controller
         //loadView = pasando la vista
         // tamaño oficio -> 609.45, 935.43
         //ajuste perfecto en 73 al imprimir
-        $pdf = PDF::setPaper([0, 0, 680, 1170])->loadView('pdf.trabajo', compact(
+        $pdf = PDF::loadView('pdf.trabajo', compact(
             'fecha_ingreso',
             'fecha_salida',
             'vehiculo',
@@ -210,7 +214,8 @@ class ExportController extends Controller
             'km_ingreso',
             'km_salida',
             'trabajorealizado',
-            'observaciones'
+            'observaciones',
+            'taller'
         ));
         //visualizar en el navegador
         return $pdf->stream('Trabjo-Realizado.pdf');

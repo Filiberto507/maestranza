@@ -68,7 +68,7 @@ class RoleHasPermissionSeeder extends Seeder
         ]);
 
         RoleHasPermission::create([ 
-            'permission_id' => 1,
+            'permission_id' => 4,
             'role_id' => 3,
         ]);
 
@@ -78,7 +78,7 @@ class RoleHasPermissionSeeder extends Seeder
         ]);
 
         RoleHasPermission::create([ 
-            'permission_id' => 4,
+            'permission_id' => 1,
             'role_id' => 4,
         ]);
 

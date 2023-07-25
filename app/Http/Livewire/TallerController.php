@@ -56,7 +56,9 @@ class TallerController extends Component
     {
         //validar si el usuario ingreso informacion
         if (strlen($this->search) > 0)
-            $Taller = Taller::where('placa', 'like', '%' . $this->search . '%')->paginate($this->pagination);
+            $Taller = Taller::where('placa', 'like', '%' . $this->search . '%')
+            ->orderBy('id', 'desc')
+            ->paginate($this->pagination);
         else
             $Taller = Taller::orderBy('id', 'desc')->paginate($this->pagination);
         $this->acctaller = accesoriostaller::orderBy('id', 'asc')->get();
@@ -418,21 +420,21 @@ class TallerController extends Component
         $this->vehiculo = $findvehiculo->marca;
         $this->color = $findvehiculo->color;
         
-        /* //obtencion de los accesorios que tiene el vehiculo
+         //obtencion de los accesorios que tiene el vehiculo
         //para traer el id del ultimo taller del vehiculo que se tiene el id
-        $ultivehiculo = Taller::where('vehiculo_id', 3)
+        $ultivehiculo = Taller::where('vehiculo_id', $this->vehiculoselectedId)
         ->orderBy('id', 'desc')
         ->first();
-
+        //dd($ultivehiculo);
         $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
-
-        //dd($acctaller);
+        if($ultivehiculo){
+            //dd($acctaller);
         //foreach para agregar si tiene el checked
         foreach ($acctalleres as $tall) {
             //buscado el id del taller
             //dd($tallerherr->id);
             //obtenemos todos los id de las herramientas que tiene el taller id
-            $tallerherramientas = tallerdetalle::where('vehiculo_id', $this->vehiculoselectedId)->get();
+            $tallerherramientas = tallerdetalle::where('taller_id', $ultivehiculo->id)->get();
             //dd($tallerherramientas);
 
             //buscamos si existe esa herramienta agregado o no
@@ -455,7 +457,19 @@ class TallerController extends Component
             }
         }
 
-        $this->acctaller = $acctalleres;*/
+        $this->acctaller = $acctalleres;
+
+        //traer las descripciones de los estados del vehiculo
+
+        $datosestadovehiculo = Estadovehiculo::where('taller_id', $ultivehiculo->id)->get();
+
+        foreach ($datosestadovehiculo as $value) {
+            $this->estadovehiculo[$value->key] = [
+                'descripcion' => $value->descripcion,
+            ];
+        }   
+        }
+        
     }
 
     //funcion para eliminar los checks que se quitaron

@@ -1,7 +1,7 @@
 @can('vista_dash')
-<div class="sidebar-wrapper sidebar-theme" >
+<div class="sidebar-wrapper sidebar-theme">
 
-    <nav id="compactSidebar" >
+    <nav id="compactSidebar">
         <ul class="menu-categories">
             @can('asdsad')
             <li class="active">
@@ -20,6 +20,7 @@
                 </a>
             </li>
             @endcan
+            @can('vista_dependencias')
             <li class="">
                 <a href="{{url('vehiculos')}}" class="menu-toggle" data-active="false">
                     <div class="base-menu">
@@ -73,6 +74,7 @@
                     </div>
                 </a>
             </li>
+            @endcan
             @can('vista_roles')
             <li class="">
                 <a href="{{url('roles')}}" class="menu-toggle" data-active="false">
@@ -88,6 +90,7 @@
                 </a>
             </li>
             @endcan
+            @can('vista_asignar')
             <li class="">
                 <a href="{{url('permisos')}}" class="menu-toggle" data-active="false">
                     <div class="base-menu">
@@ -101,7 +104,7 @@
                     </div>
                 </a>
             </li>
-            @can('vista_asignar')
+
             <li class="">
                 <a href="{{url('asignar')}}" class="menu-toggle" data-active="false">
                     <div class="base-menu">
@@ -133,6 +136,21 @@
                 </a>
             </li>
             @endcan
+            @can('vista_dependencias')
+            <li class="">
+                <a href="{{url('reportemaestranza')}}" class="menu-toggle" data-active="false">
+                    <div class="base-menu">
+                        <div class="base-icons">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-disc">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </div>
+                        <span>REPORTE TALLER</span>
+                    </div>
+                </a>
+            </li>
+
             <li class="">
                 <a href="{{url('conductor')}}" class="menu-toggle" data-active="false">
                     <div class="base-menu">
@@ -148,7 +166,8 @@
                     </div>
                 </a>
             </li>
-        @can('Vista_taller')
+            @endcan
+            @can('Vista_taller')
             <li class="">
                 <a href="{{url('taller')}}" class="menu-toggle" data-active="false">
                     <div class="base-menu">
@@ -177,8 +196,6 @@
                 </a>
             </li>
 
-            
-        @endcan
             <li class="">
                 <a href="{{url('acctaller')}}" class="menu-toggle" data-active="false">
                     <div class="base-menu">
@@ -192,7 +209,10 @@
                     </div>
                 </a>
             </li>
-            
+
+            @endcan
+
+
 
         </ul>
     </nav>
