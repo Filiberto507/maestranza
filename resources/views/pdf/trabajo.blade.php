@@ -26,7 +26,7 @@
     <table class="datos">
         <tr>
             <td class="columna1">
-                Tipo Vehiculo: {{$vehiculo}}
+                Tipo Vehiculo: {{$taller->clase}} {{$vehiculo}} {{$taller->tipo_vehiculo}} 
             </td>
             <td class="columna2">
                 Placa: {{$placa}}

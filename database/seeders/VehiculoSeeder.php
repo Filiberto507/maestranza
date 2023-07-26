@@ -20,6 +20,8 @@ class VehiculoSeeder extends Seeder
             'placa' => '3453-CUX',
             'modelo' => '2014',
             'marca' => 'NISSAN',
+            'clase' => 'VAGONETA',
+            'tipo_vehiculo' => 'PATROL',
             'color' => 'BEIGE',
             'dependencias_id' => '1'
         ]);
@@ -52,6 +54,8 @@ class VehiculoSeeder extends Seeder
             'placa' => '4756-YUH',
             'modelo' => '2018',
             'marca' => 'SUZUKI',
+            'clase' => 'JEEP',
+            'tipo_vehiculo' => 'JIMNY',
             'color' => 'AZUL',
             'dependencias_id' => '2'
         ]);
@@ -60,6 +64,8 @@ class VehiculoSeeder extends Seeder
             'placa' => '3453-CIP',
             'modelo' => '2013',
             'marca' => 'NISSAN',
+            'clase' => 'VAGONETA',
+            'tipo_vehiculo' => 'X-TRAIL',
             'color' => 'ROJO',
             'dependencias_id' => '3'
         ]);

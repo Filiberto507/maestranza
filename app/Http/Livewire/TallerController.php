@@ -20,8 +20,11 @@ class TallerController extends Component
     use WithPagination;
 
     public $TallerName, $search, $selected_id, $pageTitle, $componentName, $check = [];
-    public $ingreso, $salida, $fecha_ingreso, $fecha_salida, $name, $vehiculo, $color,
+    public $ingreso, $salida, $fecha_ingreso, $fecha_salida, $conductorname, $vehiculo, $color,
         $dependencia, $placa, $kilometraje, $ordentrabajo, $acctaller, $acctaller2;
+    
+    //vehiculo
+    public $clase, $tipo_vehiculo;
     //select2
     public $vehiculoselectedId, $vehiculoselectedName, $vehiculodatos;
 
@@ -96,7 +99,7 @@ class TallerController extends Component
         $this->salida = '';
         $this->fecha_ingreso = '';
         $this->fecha_salida = '';
-        $this->name = '';
+        $this->conductorname = '';
         $this->vehiculo = '';
         $this->color = '';
         $this->dependencia = '';
@@ -108,6 +111,8 @@ class TallerController extends Component
         $this->selected_id = 0;
         $this->vehiculoselectedName = null;
         $this->estadovehiculo = [];
+        $this->clase = '';
+        $this->tipo_vehiculo = '';
 
         $this->resetValidation();
         $this->resetPage();
@@ -142,7 +147,7 @@ class TallerController extends Component
         // $this->salida,
         // $this->fecha_ingreso,
         // $this->fecha_salida,
-        // $this->name,
+        // $this->conductorname,
         // $this->vehiculo,
         // $this->color,
         // $this->dependencia,
@@ -151,15 +156,15 @@ class TallerController extends Component
         // $this->ordentrabajo,
         // $this->check);
         $rules = [
-            'name' => 'required|not_in:Elegir',
+            'conductorname' => 'required|not_in:Elegir',
             'dependencia' => 'required|min:3',
             'kilometraje' => 'required|min:3',
             'ordentrabajo' => 'required|min:3'
         ];
 
         $messages =[
-            'name.required' => 'ingrese el nombre',
-            'name.not_in' => 'Seleccione el conductor',
+            'conductorname.required' => 'ingrese el nombre',
+            'conductorname.not_in' => 'Seleccione el conductor',
             'dependencia.required' => 'Ingrese la dependencia',
             'dependencia.min' => 'Dependencia debe tener al menos 3 caracteres',
             'kilometraje.required' => 'Agregue el kilometraje',
@@ -176,7 +181,7 @@ class TallerController extends Component
 
                 'ingreso' => $this->ingreso,
                 'fecha_ingreso' => $this->fecha_ingreso,
-                'name' => $this->name,
+                'conductor' => $this->conductorname,
                 'vehiculo' => $this->vehiculo,
                 'color' => $this->color,
                 'dependencia' => $this->dependencia,
@@ -184,6 +189,8 @@ class TallerController extends Component
                 'kilometraje' => $this->kilometraje,
                 'ordentrabajo' => $this->ordentrabajo,
                 'vehiculo_id' => $this->vehiculoselectedId,
+                'clase' => $this->clase,
+                'tipo_vehiculo' => $this->tipo_vehiculo
                 //'user_id' => Auth()->user()->id
             ]);
             //dd($talleres);
@@ -240,13 +247,15 @@ class TallerController extends Component
         $this->salida = $taller->salida;
         $this->fecha_ingreso = $taller->fecha_ingreso;
         $this->fecha_salida = $taller->fecha_salida;
-        $this->name = $taller->name;
+        $this->conductorname = $taller->conductor;
         $this->vehiculo = $taller->vehiculo;
         $this->color = $taller->color;
         $this->dependencia = $taller->dependencia;
         $this->placa = $taller->placa;
         $this->kilometraje = $taller->kilometraje;
         $this->ordentrabajo = $taller->ordentrabajo;
+        $this->clase = $taller->clase;
+        $this->tipo_vehiculo = $taller->tipo_vehiculo;
         //separar el texto para el pdf
         $separador = "\n"; // Usar salto de línea
         $separada = explode($separador, $this->ordentrabajo);
@@ -348,6 +357,8 @@ class TallerController extends Component
                 'placa' => $this->placa,
                 'kilometraje' => $this->kilometraje,
                 'ordentrabajo' => $this->ordentrabajo,
+                'clase' => $this->clase,
+                'tipo_vehiculo' => $this->tipo_vehiculo
                 //'user_id' => Auth()->user()->id
             ]);
             //dd($talleres->id);

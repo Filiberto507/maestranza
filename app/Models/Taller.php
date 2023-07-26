@@ -10,7 +10,8 @@ class Taller extends Model
     use HasFactory;
 
     protected $fillable = [
-       'ingreso', 'salida', 'fecha_ingreso','fecha_salida', 'name','vehiculo','color','dependencia','placa','kilometraje','ordentrabajo', 'vehiculo_id'
+       'ingreso', 'salida', 'fecha_ingreso','fecha_salida', 'conductor','vehiculo','color','dependencia','placa',
+       'kilometraje','ordentrabajo', 'vehiculo_id', 'clase', 'tipo_vehiculo'
     ];
 
     public function tallerdetalle()
@@ -34,6 +35,12 @@ class Taller extends Model
     public function trabajoreazliado()
     {
         return $this->belongsTo(TrabajoRealizadoTaller::class);
+
+    }
+
+    public function diagnotico()
+    {
+        return $this->belongsTo(Diagnostico::class);
 
     }
 }

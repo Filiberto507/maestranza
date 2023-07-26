@@ -167,6 +167,7 @@ class ExportController extends Controller
         $s = explode($separador, $cadena);*/
         
         $taller=Taller::find($tallerdatos->taller_id);
+        dd($taller);
         //$conductor = $taller->name;
         $fecha_ingreso = $tallerdatos->fecha_ingreso;
         //dd($fecha_ingreso);

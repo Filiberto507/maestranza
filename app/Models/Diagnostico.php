@@ -9,7 +9,7 @@ class Diagnostico extends Model
 {
     use HasFactory;
     protected $fillable=['fecha','observaciones',
-                         'dependencia','conductor','vehiculos_id'];
+                         'dependencia','conductor','vehiculos_id', 'taller_id'];
                         
     public function diagnosticoItem()
     {
@@ -22,5 +22,10 @@ class Diagnostico extends Model
 
     }
     
+    public function taller()
+    {
+        return $this->hasMany(Taller::class);
+
+    }
     
 }

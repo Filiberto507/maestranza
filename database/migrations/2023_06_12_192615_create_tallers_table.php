@@ -19,7 +19,7 @@ return new class extends Migration
             $table->time('salida')->nullable();
             $table->date('fecha_ingreso');
             $table->date('fecha_salida')->nullable();
-            $table->string('name',255);
+            $table->string('conductor',255);
             $table->string('vehiculo',255);
             $table->string('color',255);
             $table->string('dependencia',255);
@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('ordentrabajo',255);
             $table->unsignedBigInteger('vehiculo_id');
             $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
+            $table->string('clase',255);
+            $table->string('tipo_vehiculo',255);
             $table->timestamps();
         });
     }

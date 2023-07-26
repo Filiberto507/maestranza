@@ -14,7 +14,7 @@
     <div class="col-sm-12 col-md-6">
         <div class="form-group">
             <label>Dependencia</label>
-            <input type="text" wire:model.lazy="dependencia" class="form-control" placeholder="ej: Gabinete">
+            <input type="text" disabled wire:model.lazy="dependencia" class="form-control" placeholder="ej: Gabinete">
             @error('dependencia') <span class="text-danger er">{{ $message}} </span>
 
             @enderror
@@ -24,7 +24,7 @@
     <div class="col-sm-12 col-md-6">
         <div class="form-group">
             <label>Conductor</label>
-            <input id="Conductor" type="text" wire:model.lazy="Conductor" class="form-control" placeholder="ej: Crismar Rodrigo">
+            <input id="Conductor" disabled type="text" wire:model.lazy="conductor" class="form-control" placeholder="ej: Crismar Rodrigo">
             @error('conductor') <span class="text-danger er">{{ $message}} </span>
 
             @enderror
@@ -35,10 +35,10 @@
 <div class="col-sm-12 col-md-6">
   <div class="form-group">
       <label>Asignar Vehiculo</label>
-      <select wire:model.lazy="vehiculos_id" class="form-control" id="select2-dropdown" >
+      <select wire:model.lazy="vehiculos_id" disabled class="form-control" id="select2-dropdown" >
           <option value="Elegir" selected> Elegir </option>
           @foreach($Vehiculos as $v)
-          <option value="{{$v->id}}" selected> {{$v->placa}}</option>
+          <option value="{{$v->id}}" selected> {{$v->placa}} | {{$v->marca}}</option>
           @endforeach
       </select>
       @error('vehiculos_id') <span class="text-danger er">{{ $message}} </span>

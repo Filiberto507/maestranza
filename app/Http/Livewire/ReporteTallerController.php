@@ -12,6 +12,7 @@ use App\Models\TrabajoRealizadoTaller;
 use App\Models\tallerdetalle;
 use Livewire\WithPagination;
 use Carbon\Carbon;
+use App\Models\Diagnostico;
 use App\Models\Estadovehiculo;
 use Database\Seeders\TallerDetallerSeeder;
 use DB;
@@ -79,6 +80,11 @@ class ReporteTallerController extends Component
                 $Taller = Taller::orderBy('id', 'desc')->get();
         }
         $TrabajoRealizadoTaller = TrabajoRealizadoTaller::orderBy('id', 'desc')->get();
+
+        $Diagnostico = Diagnostico::join('Vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
+        ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa', 'v.marca')
+        ->orderBy('id', 'desc')->get();
+        //dd($Diagnostico);
             
         $this->vehiculodatos = Vehiculos::join('dependencias as d', 'd.id', 'vehiculos.dependencias_id')
             ->select('vehiculos.*', 'd.nombre as dependencia')
@@ -93,6 +99,7 @@ class ReporteTallerController extends Component
             'data' => $Taller,
             'vehiculodatos' => $this->vehiculodatos,
             'TrabajoRealizadoTaller' => $TrabajoRealizadoTaller,
+            'Diagnostico' => $Diagnostico,
             'conductor' => Conductor::orderby('name', 'asc')->get()
         ])
             //extender de layouts

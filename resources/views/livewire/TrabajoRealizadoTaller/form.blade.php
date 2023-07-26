@@ -120,7 +120,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" id="km_ingreso" wire:model.lazy="km_ingreso" class="form-control" placeholder="KM INGRESO" maxlength="255">
+                                <input type="text" disabled id="km_ingreso" wire:model.lazy="km_ingreso" class="form-control" placeholder="KM INGRESO" maxlength="255">
                             </div>
                             @error('km_ingreso')
                             <span class="text-danger er"> {{ $message }} </span>

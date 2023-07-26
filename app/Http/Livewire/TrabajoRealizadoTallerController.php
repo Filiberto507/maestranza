@@ -22,6 +22,9 @@ class TrabajoRealizadoTallerController extends Component
     public $fecha_ingreso, $fecha_salida, $name, $vehiculo, $responsable, $taller_id,
         $dependencia, $placa, $km_ingreso, $km_salida, $descripcion, $observacion;
 
+    //vehiculo
+    public $clase, $tipo_vehiculo;
+
     //select2
     public $vehiculoselectedId, $vehiculoselectedName, $vehiculodatos;
 
@@ -109,6 +112,8 @@ class TrabajoRealizadoTallerController extends Component
         $this->km_salida = '';
         $this->descripcion = '';
         $this->observacion=' ';
+        $this->clase = '';
+        $this->tipo_vehiculo = '';
 
         $this->resetValidation();
         $this->resetPage();
@@ -234,65 +239,28 @@ class TrabajoRealizadoTallerController extends Component
 
 
         $this->fecha_ingreso = Carbon::parse(Carbon::now())->format('Y-m-d');
-        $this->ingreso = Carbon::parse(Carbon::now())->format('H:i');
         //dd($this->vehiculoselectedId);
         //dd($this->vehiculoselectedName, $this->vehiculoselectedId);
         $findvehiculo = taller::where('id', $this->vehiculoselectedId)
             ->first();
         //dd($findvehiculo);
         $this->placa = $findvehiculo->placa;
-        $this->vehiculo = $findvehiculo->vehiculo;
+        $this->vehiculo = $findvehiculo->clase . ' '. $findvehiculo->vehiculo . ' '. $findvehiculo->tipo_vehiculo;
         $this->dependencia = $findvehiculo->dependencia;
         $this->taller_id = $findvehiculo->id;
+        $this->km_ingreso = $findvehiculo->kilometraje;
         
-        /* //obtencion de los accesorios que tiene el vehiculo
-        //para traer el id del ultimo taller del vehiculo que se tiene el id
-        $ultivehiculo = Taller::where('vehiculo_id', 3)
-        ->orderBy('id', 'desc')
-        ->first();
-
-        $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
-
-        //dd($acctaller);
-        //foreach para agregar si tiene el checked
-        foreach ($acctalleres as $tall) {
-            //buscado el id del taller
-            //dd($tallerherr->id);
-            //obtenemos todos los id de las herramientas que tiene el taller id
-            $tallerherramientas = tallerdetalle::where('vehiculo_id', $this->vehiculoselectedId)->get();
-            //dd($tallerherramientas);
-
-            //buscamos si existe esa herramienta agregado o no
-            $obtenercheck = $tallerherramientas->where('acctaller_id', $tall->id)->first();
-            //dump($obtenercheck);
-            //exists sirve para obtener valor en boleano
-            //$this->roles()->where('nombre', $nombreRol)->exists();
-
-            // verificar si tenemos datos en obtenercheck
-            if ($obtenercheck) {
-                //dump($obtenercheck->acctaller_id);
-                $addcheck = accesoriostaller::find($obtenercheck->acctaller_id);
-                //dump($addcheck);
-                $tall->checked = 1;
-                $this->check[] =
-                    $addcheck->id . ", " .
-                    $addcheck->name;
-
-                //$acctalleres->pull($tall->id);
-            }
-        }
-
-        $this->acctaller = $acctalleres;*/
+       
     }
 
     public function Destroy($id)
     {
-      // dd($id);
+       //dd($id);
         //defininar permisos 
         //cantidad de permisos que tiene
-        TrabajoRealizadoTaller::where('taller_id', $id)->delete();
+        TrabajoRealizadoTaller::find($id)->delete();
         
-        $this->emit('rabajo-deleted', 'Se elimino Trabajo Realizado DE VEHICULO con exito');
+        $this->emit('trabajo-deleted', 'Se elimino Trabajo Realizado DE VEHICULO con exito');
         
     }
 }

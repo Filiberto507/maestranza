@@ -10,6 +10,8 @@ use App\Models\Diagnostico;
 use App\Models\Conductor;
 use App\Models\DiagnosticoItem;
 use App\Models\Vehiculos;
+use Carbon\Carbon;
+use App\Models\Taller;
 use DB;
 
 class DiagnosticoController extends Component
@@ -17,9 +19,12 @@ class DiagnosticoController extends Component
     use WithPagination;
 
     public $fecha, $observaciones, $dependencia, $conductor, $vehiculos_id,
-        $search, $selected_id, $pageTitle, $componentName;
+        $search, $selected_id, $pageTitle, $componentName, $taller_id;
     public $filas = [];
     private $pagination = 6;
+
+    //datos select2
+    public $vehiculoselectedId, $vehiculoselectedName, $vehiculodatos;
 
 
     function paginationView()
@@ -32,6 +37,7 @@ class DiagnosticoController extends Component
         $this->pageTitle = 'Listado';
         $this->componentName = 'Diagnostico';
         $this->vehiculos_id = 'Elegir';
+        $this->vehiculoselectedName = 'Elegir';
     }
 
     public function render()
@@ -51,14 +57,22 @@ class DiagnosticoController extends Component
                 ->paginate($this->pagination);
         //dd($Diagnostico);
 
+        $this->vehiculodatos = Taller::leftJoin('diagnosticos as di', 'di.taller_id', 'tallers.id')
+        ->select('tallers.*')
+        ->whereNull('taller_id')
+        ->orderby('id', 'desc')
+        ->get();
+
         return view('livewire.diagnostico.component', [
             'Diagnosticos' => $Diagnostico,
             'Vehiculos' => Vehiculos::orderBy('id', 'asc')->get(),
+            'vehiculodatos' => $this->vehiculodatos
             //'Conductor'=> Conductor::orderBy('name','asc')->get()
         ])
             ->extends('layouts.theme.app')
             ->section('content');
     }
+
     public function Edit($id)
     {
         //dd($Dependencias);
@@ -106,7 +120,8 @@ class DiagnosticoController extends Component
             'dependencia' => $this->dependencia,
             'conductor' => $this->conductor,
             'vehiculos_id' => $this->vehiculos_id,
-            'observaciones' => $this->observaciones
+            'observaciones' => $this->observaciones,
+            'taller_id' => $this->taller_id
         ]);
         if ($Diagnostico) {
 
@@ -133,6 +148,7 @@ class DiagnosticoController extends Component
         $this->vehiculos_id = 'Elegir';
         $this->filas = [];
         $this->selected_id = 0;
+        $this->taller_id = '';
         $this->resetValidation();
         //para regresar a la pagina principal
         $this->resetPage();
@@ -179,7 +195,10 @@ class DiagnosticoController extends Component
         $this->emit('diagnostico-updated', 'Se actualizo el diagnostico con exito');
     }
 
-    protected $listeners = ['destroy' => 'Destroy'];
+    protected $listeners =[
+        'destroy' => 'Destroy',
+        'resetUI' => 'resetUi'
+    ];
 
     public function Destroy($id)
     {
@@ -277,5 +296,25 @@ class DiagnosticoController extends Component
                 ]);
             }
         }
+    }
+
+    public function showDatos()
+    {
+
+
+       // $this->fecha_ingreso = Carbon::parse(Carbon::now())->format('Y-m-d');
+       // $this->ingreso = Carbon::parse(Carbon::now())->format('H:i');
+        //dd($this->vehiculoselectedId);
+        //dd($this->vehiculoselectedName, $this->vehiculoselectedId);
+        $findvehiculo = taller::where('id', $this->vehiculoselectedId)
+            ->first();
+        //dd($this->vehiculoselectedId);
+        
+        $this->conductor = $findvehiculo->conductor;
+        $this->vehiculos_id = $findvehiculo->vehiculo_id;
+        $this->dependencia = $findvehiculo->dependencia;
+        $this->taller_id = $findvehiculo->id;
+        
+        
     }
 }
