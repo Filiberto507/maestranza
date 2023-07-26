@@ -72,7 +72,7 @@
         </tr>
         <tfoot>
             <tr>
-                <td>Observaciones: Aquí está tu párrafo con un borde discontinuo en la parte inferior, y seguirá correctamente incluso si el texto es más largo y se sube hacia arriba.</td>
+                <td>Observaciones: {{$tallerdatos->observaciones}}</td>
             </tr>
         </tfoot>
       </table>
@@ -85,7 +85,7 @@
         </tr>
         <tr>
             <td></td>
-            <td>{{$taller->name}}</td>
+            <td>{{$taller->conductor}}</td>
         </tr>
     </table>
   

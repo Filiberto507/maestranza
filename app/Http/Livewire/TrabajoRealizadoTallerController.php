@@ -59,7 +59,8 @@ class TrabajoRealizadoTallerController extends Component
 
      $this->vehiculodatos = Taller::leftJoin('trabajo_realizado_tallers as tr', 'tr.taller_id', 'tallers.id')
         ->select('tallers.*')
-        ->whereNull('taller_id')
+        ->whereNotNull('tallers.fecha_salida')
+        ->whereNull('tr.taller_id')
         ->orderby('id', 'desc')
         ->get();
         
@@ -163,7 +164,10 @@ class TrabajoRealizadoTallerController extends Component
         $rules = [
             'dependencia' => 'required|min:3',
             'responsable' => 'required|min:3',
-            'descripcion' => 'required|min:3'
+            'descripcion' => 'required|min:3',
+            'observacion' => 'required|min:3',
+            'km_salida' => 'required|min:3',
+            'fecha_salida' => 'required|min:3'
         ];
 
         $messages =[
@@ -172,11 +176,16 @@ class TrabajoRealizadoTallerController extends Component
             'responsable.required' => 'Agregue el responsable',
             'responsable.min' => 'responsable debe tener al menos 3 caracteres',
             'descripcion.required' => 'Es requerido la orden de trabajo a realizar',
-            'descripcion.min' => 'Orden de Trabajo debe tener al menos 3 caracteres'
+            'descripcion.min' => 'Orden de Trabajo debe tener al menos 3 caracteres',
+            'descripcion.required' => 'Es requerido Observacion a realizar',
+            'descripcion.min' => 'Observacion debe tener al menos 3 caracteres',
+            'km_salida.required' => 'Es requerido km_salida a realizar',
+            'km_salida.min' => 'km_salida debe tener al menos 3 caracteres',
+            'fecha_salida.required' => 'Es requerido Fecha Salida a realizar',
+            'fecha_salida.min' => 'Fecha Salida debe tener al menos 3 caracteres',
         ];
         //validar los datos
         $this->validate($rules, $messages);
-        //dd($this->responsable);
         
           //crear el usuario
         $trabajosr = TrabajoRealizadoTaller::create([

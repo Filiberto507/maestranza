@@ -24,6 +24,9 @@
                         <div class="form-group">
                             <input type="text" wire:model.lazy="fecha_salida" class="form-control flatpickr" placeholder="Click para elegir">
                         </div>
+                        @error('fecha_salida')
+                            <span class="text-danger er"> {{ $message }} </span>
+                        @enderror
                     </div>
 
                     <!-- <div class="col-sm-12 mt2">
@@ -33,8 +36,9 @@
 
 
 
-                    <div class="col-sm-6 text-center ">
+                    <div class="col-sm-6">
                         <div class="form-group">
+                        <label>VEHICULO</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -52,8 +56,9 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-4 text-center ">
+                    <div class="col-sm-4">
                         <div class="form-group">
+                        <label>PLACA</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -73,6 +78,7 @@
 
                     <div class="col-sm-6 ">
                         <div class="form-group">
+                        <label>DEPENDENCIA</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -92,6 +98,7 @@
 
                     <div class="col-sm-6 ">
                         <div class="form-group">
+                        <label>RESPONSABLE</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -111,6 +118,7 @@
 
                     <div class="col-sm-4 ">
                         <div class="form-group">
+                        <label>KM INGRESP</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -130,6 +138,7 @@
 
                     <div class="col-sm-4 ">
                         <div class="form-group">
+                        <label>KM SALIDA *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -155,7 +164,7 @@
 
                 <div class="col-sm-12 mt-2">
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">TRABAJO REALIZADO (TALLER INTERNO DE MAESTRANZA)</label>
+                        <label for="exampleFormControlTextarea1">TRABAJO REALIZADO (TALLER INTERNO DE MAESTRANZA) *</label>
                         <textarea class="form-control" wire:model.lazy="descripcion" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
                     @error('descripcion') <span class="text-danger er">{{ $message}} </span>
@@ -165,7 +174,7 @@
 
                 <div class="col-sm-12 mt-2">
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">OBSERVACIONES</label>
+                        <label for="exampleFormControlTextarea1">OBSERVACIONES *</label>
                         <textarea class="form-control" wire:model.lazy="observacion" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
                     @error('observacion') <span class="text-danger er">{{ $message}} </span>

@@ -9,11 +9,14 @@ use App\Models\accesoriostaller;
 use App\Models\Conductor;
 use App\Models\Vehiculos;
 use App\Models\tallerdetalle;
+use App\Models\Dependencia;
 use Livewire\WithPagination;
 use Carbon\Carbon;
 use App\Models\Estadovehiculo;
 use Database\Seeders\TallerDetallerSeeder;
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class TallerController extends Component
 {
@@ -47,7 +50,8 @@ class TallerController extends Component
         $this->pageTitle = 'Listado';
         $this->componentName = 'Taller';
         $this->vehiculoselectedName = 'Elegir';
-        $this->name = 'Elegir';
+        $this->conductorname = 'Elegir';
+        $this->dependencia = 'Elegir';
 
         //dd($this->ingreso, $this->fecha_ingreso);
         //     $this->check=[
@@ -79,7 +83,8 @@ class TallerController extends Component
             'taller' => $Taller,
             'acctaller' => $this->acctaller,
             'vehiculodatos' => $this->vehiculodatos,
-            'conductor' => Conductor::orderby('name', 'asc')->get()
+            'conductor' => Conductor::orderby('name', 'asc')->get(),
+            'dependencias' => Dependencia::orderby('nombre', 'asc')->get()
         ])
             //extender de layouts
             ->extends('layouts.theme.app')
@@ -126,7 +131,7 @@ class TallerController extends Component
         dd($this->check);
     }
 
-    public function create_taller()
+    public function create_taller(Request $request)
     {
         // dd($this->vehiculoselectedId);
         // para eliminar casillas que esten vacias
@@ -155,9 +160,10 @@ class TallerController extends Component
         // $this->kilometraje,
         // $this->ordentrabajo,
         // $this->check);
+        //dd($request);
         $rules = [
             'conductorname' => 'required|not_in:Elegir',
-            'dependencia' => 'required|min:3',
+            'dependencia' => 'required|min:3|not_in:Elegir',
             'kilometraje' => 'required|min:3',
             'ordentrabajo' => 'required|min:3'
         ];
@@ -167,6 +173,7 @@ class TallerController extends Component
             'conductorname.not_in' => 'Seleccione el conductor',
             'dependencia.required' => 'Ingrese la dependencia',
             'dependencia.min' => 'Dependencia debe tener al menos 3 caracteres',
+            'dependencia.not_in' => 'Seleccione la dependencia',
             'kilometraje.required' => 'Agregue el kilometraje',
             'kilometraje.min' => 'Kilometraje debe tener al menos 3 caracteres',
             'ordentrabajo.required' => 'Es requerido la orden de trabajo a realizar',
@@ -174,7 +181,7 @@ class TallerController extends Component
         ];
         //validar los datos
         $this->validate($rules, $messages);
-
+        //dd($this->conductorname);
         try {
             //guardar
             $talleres = Taller::create([
@@ -350,7 +357,7 @@ class TallerController extends Component
                 'salida' => $this->salida,
                 'fecha_ingreso' => $this->fecha_ingreso,
                 'fecha_salida' => $this->fecha_salida,
-                'name' => $this->name,
+                'conductor' => $this->conductorname,
                 'vehiculo' => $this->vehiculo,
                 'color' => $this->color,
                 'dependencia' => $this->dependencia,
@@ -430,6 +437,8 @@ class TallerController extends Component
         $this->placa = $findvehiculo->placa;
         $this->vehiculo = $findvehiculo->marca;
         $this->color = $findvehiculo->color;
+        $this->clase = $findvehiculo->clase;
+        $this->tipo_vehiculo = $findvehiculo->tipo_vehiculo;
         
          //obtencion de los accesorios que tiene el vehiculo
         //para traer el id del ultimo taller del vehiculo que se tiene el id

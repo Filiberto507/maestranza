@@ -59,6 +59,7 @@ class DiagnosticoController extends Component
 
         $this->vehiculodatos = Taller::leftJoin('diagnosticos as di', 'di.taller_id', 'tallers.id')
         ->select('tallers.*')
+        ->whereNotNull('tallers.fecha_salida')
         ->whereNull('taller_id')
         ->orderby('id', 'desc')
         ->get();

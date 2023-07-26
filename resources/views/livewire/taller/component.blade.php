@@ -76,7 +76,7 @@
                                 </td>
 
                                 <td class="text-center">
-                                    <h6>{{$tall->name}}</h6>
+                                    <h6>{{$tall->conductor}}</h6>
                                 </td>
 
                                 <td class="text-center">

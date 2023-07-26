@@ -38,7 +38,7 @@ class ExportController extends Controller
         $fecha_salida = $tallerdatos->fecha_salida;
         $hora_ingreso = $tallerdatos->ingreso;
         $hora_salida = $tallerdatos->salida;
-        $nombre = $tallerdatos->name;
+        $nombre = $tallerdatos->conductor;
         $vehiculo = $tallerdatos->vehiculo;
         $color = $tallerdatos->color;
         $dependencia = $tallerdatos->dependencia;
@@ -165,9 +165,9 @@ class ExportController extends Controller
         /*$cadena = $tallerdatos->fecha_ingreso;
         $separador = "-";
         $s = explode($separador, $cadena);*/
-        
+        //dd($tallerdatos);
         $taller=Taller::find($tallerdatos->taller_id);
-        dd($taller);
+        //dd($taller);
         //$conductor = $taller->name;
         $fecha_ingreso = $tallerdatos->fecha_ingreso;
         //dd($fecha_ingreso);
@@ -216,7 +216,8 @@ class ExportController extends Controller
             'km_salida',
             'trabajorealizado',
             'observaciones',
-            'taller'
+            'taller',
+            'tallerdatos'
         ));
         //visualizar en el navegador
         return $pdf->stream('Trabjo-Realizado.pdf');
