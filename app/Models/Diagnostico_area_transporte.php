@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Diagnostico_area_transporte extends Model
 {
     use HasFactory;
-    protected $fillable=['fecha','conclusion','dependencia','conductor','vehiculos_id'];
+    protected $fillable=['fecha','conclusion','dependencia','conductor','vehiculos_id','taller_id'];
 
     public function diagnostico_servicio()
     {
@@ -18,6 +18,11 @@ class Diagnostico_area_transporte extends Model
     public function vehiculos()
     {
         return $this->hasMany(Vehiculos::class);
+
+    }
+    public function taller()
+    {
+        return $this->hasMany(Taller::class);
 
     }
 }

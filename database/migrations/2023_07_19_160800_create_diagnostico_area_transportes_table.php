@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('conclusion',450);
             $table->unsignedBigInteger('vehiculos_id');
             $table->foreign('vehiculos_id')->references('id')->on('vehiculos');
+            $table->unsignedBigInteger('taller_id');
+            $table->foreign('taller_id')->references('id')->on('tallers');
             $table->timestamps();
         });
     }

@@ -9,17 +9,20 @@ use Livewire\Component;
 use App\Models\Diagnostico_area_transporte;
 use App\Models\Diagnostico_servicio;
 use App\Models\Vehiculos;
+use Carbon\Carbon;
+use App\Models\Taller;
 use DB;
 
 class DiagnosticoAreaTransporteController extends Component
 {
     use WithPagination;
 
-    public $fecha, $conclusion, $dependencia,$conductor, $vehiculos_id,
+    public $fecha, $conclusion, $dependencia,$conductor, $vehiculos_id,$taller_id,
         $search, $selected_id, $pageTitle, $componentName;
     public $filas = [];
     private $pagination = 6;
 
+    public $vehiculoselectedId, $vehiculoselectedName, $vehiculodatos;
 
     function paginationView()
     {
@@ -32,6 +35,7 @@ class DiagnosticoAreaTransporteController extends Component
         $this->componentName = 'Diagnostico Area de Transportes';
         $this->diagnosticos_id='Elegir';
         $this->vehiculos_id = 'Elegir';
+        $this->vehiculoselectedName = 'Elegir';
     }
 
     public function render()
@@ -51,9 +55,16 @@ class DiagnosticoAreaTransporteController extends Component
         ->paginate($this->pagination);
         //dd($Diagnostico);
 
+        $this->vehiculodatos = Taller::leftJoin('diagnosticos as di', 'di.taller_id', 'tallers.id')
+        ->select('tallers.*')
+        ->whereNull('taller_id')
+        ->orderby('id', 'desc')
+        ->get();
+
         return view('livewire.diagnostico_area_transporte.component', [
             'Diagnostico_area_transportes' => $DiagnosticoAreaT,
             'Vehiculos' => Vehiculos::orderBy('id', 'asc')->get(),
+            'vehiculodatos' => $this->vehiculodatos
             //'Conductor'=> Conductor::orderBy('name','asc')->get()
         ])
             ->extends('layouts.theme.app')
@@ -107,18 +118,21 @@ class DiagnosticoAreaTransporteController extends Component
             'dependencia' => $this->dependencia,
             'conductor' => $this->conductor,
             'vehiculos_id' => $this->vehiculos_id,
-            'conclusion' => $this->conclusion
+            'conclusion' => $this->conclusion,
+            'taller_id' => $this->taller_id
         ]);
         if ($DiagnosticoAreaT) {
-
+            $cont=1;
             foreach ($this->filas as $f) {
                 Diagnostico_servicio::create([
-                    'item'=>$f['item'],
+                    'item'=>$cont,
                     'cantidad' => $f['cantidad'],
                     'servicio' => $f['servicio'],
                     'diagnostico_area_transportes_id' => $DiagnosticoAreaT->id
                 ]);
+                $cont++;
             }
+            
         }
         // dd($Dependencias);
         $this->resetUI();
@@ -280,5 +294,24 @@ class DiagnosticoAreaTransporteController extends Component
                 ]);
             }
         }
+    }
+    public function showDatos()
+    {
+
+
+       // $this->fecha_ingreso = Carbon::parse(Carbon::now())->format('Y-m-d');
+       // $this->ingreso = Carbon::parse(Carbon::now())->format('H:i');
+        //dd($this->vehiculoselectedId);
+        //dd($this->vehiculoselectedName, $this->vehiculoselectedId);
+        $findvehiculo = taller::where('id', $this->vehiculoselectedId)
+            ->first();
+        //dd($this->vehiculoselectedId);
+        
+        $this->conductor = $findvehiculo->conductor;
+        $this->vehiculos_id = $findvehiculo->vehiculo_id;
+        $this->dependencia = $findvehiculo->dependencia;
+        $this->taller_id = $findvehiculo->id;
+        
+        
     }
 }

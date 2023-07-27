@@ -5,13 +5,27 @@
                 <h4 class="card-title">
                     <b>{{$componentName}} | {{$pageTitle}}</b>
                 </h4>
-                <ul class="tabs tab-pills">
-                    <li>
-                        <a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal" data-target="#theModal">
-                            Agregar
-                        </a>
-                    </li>
-                </ul>
+                <div class="input-group mb-4">
+                    <div class="col-sm-8" wire:ignore>
+                        <label class="text-center">Asignar Vehiculo</label>
+                        <select class="form-control basic" wire:model="vehiculoselectedName" id="select2-dropdown">
+                            <option value="Elegir" selected>Elegir</option>
+                            @foreach ($vehiculodatos as $ve)
+                            <option value="{{ $ve->id }}">{{ $ve->placa }} | {{ $ve->conductor }} </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    @if($vehiculoselectedName != "Elegir")
+                    <div class="input-group-append" style="margin-left: 60px; margin-top:25px; padding-top: 10px;">
+                        <button class="btn btn-dark" wire:click="showDatos" data-toggle="modal" data-target="#theModal" type="button">Agregar</button>
+                    </div>
+                    @else
+                    <div class="input-group-append" style="margin-left: 60px; margin-top:25px; padding-top: 10px;">
+                        <button class="btn btn-dark" disabled wire:click="showDatos" data-toggle="modal" data-target="#theModal" type="button">Agregar</button>
+                    </div>
+                    @endif
+                </div>
             </div>
             @include('common.searchbox')
             <div class="widget-content">
@@ -131,6 +145,27 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function(){
+
+        //esta variable es para el modal 
+        var isModalOpen = false;
+        //     document.getElementById('miSelect').addEventListener('change', function(event) {
+        //     Livewire.emit('vehiculoselectedId', event.target.value);
+        // });
+
+        //idselect y name
+        //$('#select2-dropdown').select2() //inicializador
+        //capturamos values when change event
+
+        $('#select2-dropdown').on('change', function(e) {
+            console.log($('#select2-dropdown option:selected').text());
+            var pId = $('#select2-dropdown').select2("val") // get vehiculo id
+            var pName = $('#select2-dropdown option:selected').text() // get name vehiculo
+            console.log(pId, pName);
+
+            @this.set('vehiculoselectedId', pId) // set vehiculo od selected
+            @this.set('vehiculoselectedName', pName)
+        });
+
         //evento ocultar la ventana modal y notificar
         window.livewire.on('diagnostico_area_transporte-added', Msg => {
             $('#theModal').modal('hide')
@@ -166,9 +201,34 @@
         //cerrar
         window.livewire.on('diagnostico_area_transporte-close', Msg =>{
             $('#theModal').modal('hide')
+            isModalOpen = false
+            $('#select2-dropdown').val('Elegir').trigger('change');
             noty(Msg)
         });
+        //limpiar bug de saltado
+        var modal = document.getElementById('modal');
+
+        // Capturar el evento de clic fuera del modal
+        document.addEventListener('click', function(event) {
+            //console.log(isModalOpen);
+            // Verificar si el clic ocurrió fuera del modal
+            if (isModalOpen == true && !modal.contains(event.target)) {
+                // Llamamos a la funcion limpiar para que se cierre correctamente
+                //console.log(isModalOpen);
+                limpiar()
+                isModalOpen = false
+            }
+
+        });
     });
+
+    //resetui
+    function limpiar() {
+        console.log("hola")
+        window.livewire.emit('resetUI')
+
+    }
+
     //confimar eliminar
     function Confirm(id)
     {   
