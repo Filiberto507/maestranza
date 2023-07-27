@@ -10,9 +10,11 @@ use App\Models\Conductor;
 use App\Models\Vehiculos;
 use App\Models\tallerdetalle;
 use App\Models\Dependencia;
+use App\Models\Diagnostico;
 use Livewire\WithPagination;
 use Carbon\Carbon;
 use App\Models\Estadovehiculo;
+use App\Models\TrabajoRealizadoTaller;
 use Database\Seeders\TallerDetallerSeeder;
 use DB;
 use Illuminate\Http\Request;
@@ -413,11 +415,24 @@ class TallerController extends Component
        // dd($id);
         //defininar permisos 
         //cantidad de permisos que tiene
-        tallerdetalle::where('taller_id', $id)->delete();
-        Estadovehiculo::where('taller_id', $id)->delete();
-        Taller::find($id)->delete();
-        
-        $this->emit('taller-deleted', 'Se elimino la RECEPCION DE VEHICULO con exito');
+        $diagtaller_id = Diagnostico::where('taller_id', $id)->count();
+        $trabajotaller_id = TrabajoRealizadoTaller::where('taller_id', $id)->count();
+        if(($diagtaller_id > 0) || ($trabajotaller_id > 0))
+        {
+            $this->emit('taller-nodeleted', 'No se puede eliminar, por que se esta usando');
+            //dd($diagtaller_id, $trabajotaller_id);
+        }
+        else{
+            //dd($diagtaller_id, $trabajotaller_id);  
+            tallerdetalle::where('taller_id', $id)->delete();
+            Estadovehiculo::where('taller_id', $id)->delete();
+            Taller::find($id)->delete();
+            
+            $this->emit('taller-deleted', 'Se elimino la RECEPCION DE VEHICULO con exito');
+        }
+
+        //dd('hola');
+       
         
     }
 

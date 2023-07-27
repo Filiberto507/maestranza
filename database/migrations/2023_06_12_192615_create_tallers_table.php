@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('fecha_salida')->nullable();
             $table->string('conductor',255);
             $table->string('vehiculo',255);
-            $table->string('color',255);
+            $table->string('color',255)->nullable();
             $table->string('dependencia',255);
             $table->string('placa',255);
             $table->string('kilometraje',255);

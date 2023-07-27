@@ -63,14 +63,14 @@ class ReporteTallerController extends Component
             $from = Carbon::parse($this->dateFrom)->format('Y-m-d') . ' 00:00:00';
             $to = Carbon::parse($this->dateTo)->format('Y-m-d') . ' 23:59:59';
             $Taller = Taller::where('placa', 'like', '%' . $this->search . '%')
-            ->whereBetween('created_at', [$from,$to])
+            ->whereBetween('fecha_ingreso', [$from,$to])
             ->orderBy('id', 'desc')
             ->get();
         }
             
         elseif(strlen($this->search) > 0){
             $Taller = Taller::where('placa', 'like', '%' . $this->search . '%')
-            ->oderBy('id', 'desc')
+            ->orderBy('id', 'desc')
             ->get();
             //dd($Taller);
             
@@ -79,8 +79,11 @@ class ReporteTallerController extends Component
         else{
                 $Taller = Taller::orderBy('id', 'desc')->get();
         }
-        $TrabajoRealizadoTaller = TrabajoRealizadoTaller::orderBy('id', 'desc')->get();
 
+        $TrabajoRealizadoTaller = TrabajoRealizadoTaller::orderBy('id', 'desc')->get();
+        
+        $algo = TrabajoRealizadoTaller::where('taller_id', 4)->get();
+        //dd($Taller);
         $Diagnostico = Diagnostico::join('Vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
         ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa', 'v.marca')
         ->orderBy('id', 'desc')->get();

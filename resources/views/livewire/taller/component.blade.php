@@ -55,7 +55,7 @@
                                 <th class="table-th text-while text-center">
                                     DEPENDENCIA
                                 </th>
-                                
+
 
                                 <th class="table-th text-while">
                                     ACCTIONS
@@ -155,10 +155,23 @@
             $('#theModal').modal('hide')
             noty(Msg)
         })
-        //evento  notificar
+        //evento  eliminar
         window.livewire.on('taller-deleted', Msg => {
             noty(Msg)
         })
+
+        window.livewire.on('taller-nodeleted', Msg => {
+            // Escucha el evento 'taller-deleted'
+                // Muestra el Swal
+                Swal.fire({
+                    title: 'Taller No eliminado.',
+                    text: 'El taller No se puede eliminar.',
+                    icon: 'success',
+                    timer: 3000 // Opcional: tiempo en milisegundos para que el mensaje se cierre automáticamente
+                })
+            noty(Msg)
+        })
+
         //evento notificar
         window.livewire.on('role-exists', Msg => {
             noty(Msg)
@@ -197,13 +210,13 @@
         document.addEventListener('click', function(event) {
             //console.log(isModalOpen);
             // Verificar si el clic ocurrió fuera del modal
-            if ( isModalOpen == true && !modal.contains(event.target)) {
+            if (isModalOpen == true && !modal.contains(event.target)) {
                 // Llamamos a la funcion limpiar para que se cierre correctamente
                 //console.log(isModalOpen);
                 limpiar()
                 isModalOpen = false
             }
-            
+
         });
 
     });
@@ -212,9 +225,9 @@
     function limpiar() {
         console.log("hola")
         window.livewire.emit('resetUI')
-        
+
     }
-    
+
     //confimar eliminar
     function Confirm(id) {
 
