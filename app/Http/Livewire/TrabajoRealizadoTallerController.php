@@ -8,6 +8,8 @@ use App\Models\accesoriostaller;
 use App\Models\Conductor;
 use App\Models\Vehiculos;
 use App\Models\tallerdetalle;
+use App\Models\Diagnostico;
+use App\Models\DiagnosticoItem;
 use Livewire\WithPagination;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ class TrabajoRealizadoTallerController extends Component
 {
     use WithPagination;
 
-    public $TrabajoName, $search, $selected_id, $pageTitle, $componentName, $check = [];
+    public $TrabajoName, $search, $selected_id, $pageTitle, $componentName, $checkdiagnostico = [], $diagnostico_item;
 
     public $fecha_ingreso, $fecha_salida, $name, $vehiculo, $responsable, $taller_id,
         $dependencia, $placa, $km_ingreso, $km_salida, $descripcion, $observacion;
@@ -115,7 +117,7 @@ class TrabajoRealizadoTallerController extends Component
         $this->observacion=' ';
         $this->clase = '';
         $this->tipo_vehiculo = '';
-
+        $this->diagnostico_item= '';
         $this->resetValidation();
         $this->resetPage();
 
@@ -258,6 +260,55 @@ class TrabajoRealizadoTallerController extends Component
         $this->dependencia = $findvehiculo->dependencia;
         $this->taller_id = $findvehiculo->id;
         $this->km_ingreso = $findvehiculo->kilometraje;
+
+        $diagnostico_taller = Diagnostico::where('taller_id', $this->vehiculoselectedId)->first();
+        //dd($diagnostico_taller);
+        $this->diagnostico_item = DiagnosticoItem::where('diagnosticos_id', $diagnostico_taller->id)->get();
+        dd($this->diagnostico_item);
+
+        foreach ($this->diagnostico_item as $di)
+        {
+            $this->checkdiagnostico[] =
+                    $di->id . ", " .
+                    $di->descripcion;
+        }
+       // dd($this->checkdiagnostico);
+        //para traer el id del ultimo taller del vehiculo que se tiene el id
+        $ultivehiculo = Taller::where('vehiculo_id', $this->vehiculoselectedId)
+        ->orderBy('id', 'desc')
+        ->first();
+        //dd($ultivehiculo);
+        $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
+        if($ultivehiculo){
+            //dd($acctaller);
+        //foreach para agregar si tiene el checked
+        foreach ($acctalleres as $tall) {
+            //buscado el id del taller
+            //dd($tallerherr->id);
+            //obtenemos todos los id de las herramientas que tiene el taller id
+            $tallerherramientas = tallerdetalle::where('taller_id', $ultivehiculo->id)->get();
+            //dd($tallerherramientas);
+
+            //buscamos si existe esa herramienta agregado o no
+            $obtenercheck = $tallerherramientas->where('acctaller_id', $tall->id)->first();
+            //dump($obtenercheck);
+            //exists sirve para obtener valor en boleano
+            //$this->roles()->where('nombre', $nombreRol)->exists();
+
+            // verificar si tenemos datos en obtenercheck
+            if ($obtenercheck) {
+                //dump($obtenercheck->acctaller_id);
+                $addcheck = accesoriostaller::find($obtenercheck->acctaller_id);
+                //dump($addcheck);
+                $tall->checked = 1;
+                $this->check[] =
+                    $addcheck->id . ", " .
+                    $addcheck->name;
+
+                //$acctalleres->pull($tall->id);
+            }
+        }
+        }
         
        
     }

@@ -160,7 +160,20 @@
 
                    
 
+                    @foreach($diagnostico_item as $di)
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input wire:model="checkdiagnostico" value="{{$di->id}}, {{$di->descripcion}}" class=" miCheckbox form-check-input" type="checkbox" style="width:20px; height:20px;" id="{{$di->id}}">
 
+                                <label class="form-check-label" for="gridCheck">
+                                    {{$di->descripcion}}
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
 
                 <div class="col-sm-12 mt-2">
                     <div class="form-group">
