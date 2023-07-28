@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('km_salida', 255);
             $table->date('fecha_ingreso');
             $table->date('fecha_salida');
-            $table->longText('descripcion');
+            $table->longText('descripcion')->nullable();
             $table->longText('observaciones');
             $table->unsignedBigInteger('taller_id');
             $table->foreign('taller_id')->references('id')->on('tallers');

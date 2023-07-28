@@ -19,13 +19,13 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6 mt-2">
+                    <div class="col-sm-6 col-lg-6">
                         <h6>Fecha Salida</h6>
                         <div class="form-group">
                             <input type="text" wire:model.lazy="fecha_salida" class="form-control flatpickr" placeholder="Click para elegir">
                         </div>
                         @error('fecha_salida')
-                            <span class="text-danger er"> {{ $message }} </span>
+                        <span class="text-danger er"> {{ $message }} </span>
                         @enderror
                     </div>
 
@@ -38,7 +38,7 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                        <label>VEHICULO</label>
+                            <label>VEHICULO</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -58,7 +58,7 @@
 
                     <div class="col-sm-4">
                         <div class="form-group">
-                        <label>PLACA</label>
+                            <label>PLACA</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -78,7 +78,7 @@
 
                     <div class="col-sm-6 ">
                         <div class="form-group">
-                        <label>DEPENDENCIA</label>
+                            <label>DEPENDENCIA</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -88,7 +88,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <input type="text" disabled ="dependencia" wire:model.lazy="dependencia" class="form-control" placeholder="DEPENDENCIA" maxlength="255">
+                                <input type="text" disabled="dependencia" wire:model.lazy="dependencia" class="form-control" placeholder="DEPENDENCIA" maxlength="255">
                             </div>
                             @error('dependencia')
                             <span class="text-danger er"> {{ $message }} </span>
@@ -98,7 +98,7 @@
 
                     <div class="col-sm-6 ">
                         <div class="form-group">
-                        <label>RESPONSABLE</label>
+                            <label>RESPONSABLE</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -118,7 +118,7 @@
 
                     <div class="col-sm-4 ">
                         <div class="form-group">
-                        <label>KM INGRESP</label>
+                            <label>KM INGRESP</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -138,7 +138,7 @@
 
                     <div class="col-sm-4 ">
                         <div class="form-group">
-                        <label>KM SALIDA *</label>
+                            <label>KM SALIDA *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -158,151 +158,140 @@
 
 
 
-                   
+                    <label for="exampleFormControlTextarea1">TRABAJO REALIZADO (TALLER INTERNO DE MAESTRANZA) *</label>
+                    @if($diagnostico_item)
 
                     @foreach($diagnostico_item as $di)
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <div class="form-check">
-                                <input wire:model="checkdiagnostico" value="{{$di->id}}, {{$di->descripcion}}" class=" miCheckbox form-check-input" type="checkbox" style="width:20px; height:20px;" id="{{$di->id}}">
-
-                                <label class="form-check-label" for="gridCheck">
-                                    {{$di->descripcion}}
+                                <label class="new-control new-checkbox new-checkbox-text checkbox-primary">
+                                    <input wire:model="checkdiagnostico" value="{{$di->descripcion}}" type="checkbox" class="new-control-input">
+                                    <span class="new-control-indicator"></span><span class="new-chk-content">{{$di->descripcion}}</span>
                                 </label>
 
                             </div>
                         </div>
                     </div>
                     @endforeach
+                    @endif
 
-                <div class="col-sm-12 mt-2">
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">TRABAJO REALIZADO (TALLER INTERNO DE MAESTRANZA) *</label>
-                        <textarea class="form-control" wire:model.lazy="descripcion" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <div class="col-sm-12 mt-2">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">OBSERVACIONES *</label>
+                            <textarea class="form-control" wire:model.lazy="observacion" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        @error('observacion') <span class="text-danger er">{{ $message}} </span>
+
+                        @enderror
                     </div>
-                    @error('descripcion') <span class="text-danger er">{{ $message}} </span>
 
-                    @enderror
-                </div>
-
-                <div class="col-sm-12 mt-2">
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">OBSERVACIONES *</label>
-                        <textarea class="form-control" wire:model.lazy="observacion" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    @error('observacion') <span class="text-danger er">{{ $message}} </span>
-
-                    @enderror
-                </div>
-
-                <div>
-                    <div class="modal-footer">
-                        <button type="button" wire:click.prevent="resetUI()" class="btn btn-dark close-btn text-info" data-desmiss="modal">
-                            CERRAR
-                        </button>
-
-
-                        @if($selected_id < 1) <button type="button" wire:click.prevent="create_trabajo()" class="btn btn-dark close-modal">
-                            GUARDAR
-                            </button>
-                            @else
-                            <button type="button" wire:click.prevent="UpdateTrabajo()" class="btn btn-dark close-modal">
-                                ACTUALIZAR
+                    <div>
+                        <div class="modal-footer">
+                            <button type="button" wire:click.prevent="resetUI()" class="btn btn-dark close-btn text-info" data-desmiss="modal">
+                                CERRAR
                             </button>
 
-                            <!-- <button onclick="mostrarValores()">Mostrar Valores</button> -->
-                            @endif
+
+                            @if($selected_id < 1) <button type="button" wire:click.prevent="create_trabajo()" class="btn btn-dark close-modal">
+                                GUARDAR
+                                </button>
+                                @else
+                                <button type="button" wire:click.prevent="UpdateTrabajo()" class="btn btn-dark close-modal">
+                                    ACTUALIZAR
+                                </button>
+
+                                <!-- <button onclick="mostrarValores()">Mostrar Valores</button> -->
+                                @endif
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        flatpickr(document.getElementsByClassName('flatpickr'), {
-            enableTime: false,
-            dateFormat: 'Y-m-d',
-            locale: {
-                firstDayofWeek: 1,
-                weekdays: {
-                    shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
-                    longhand: [
-                        "Domingo",
-                        "Lunes",
-                        "Martes",
-                        "Miércoles",
-                        "Jueves",
-                        "Viernes",
-                        "Sábado",
-                    ],
-                },
-                months: {
-                    shorthand: [
-                        "Ene",
-                        "Feb",
-                        "Mar",
-                        "Abr",
-                        "May",
-                        "Jun",
-                        "Jul",
-                        "Ago",
-                        "Sep",
-                        "Oct",
-                        "Nov",
-                        "Dic",
-                    ],
-                    longhand: [
-                        "Enero",
-                        "Febrero",
-                        "Marzo",
-                        "Abril",
-                        "Mayo",
-                        "Junio",
-                        "Julio",
-                        "Agosto",
-                        "Septiembre",
-                        "Octubre",
-                        "Noviembre",
-                        "Diciembre",
-                    ],
-                },
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr(document.getElementsByClassName('flatpickr'), {
+                enableTime: false,
+                dateFormat: 'Y-m-d',
+                locale: {
+                    firstDayofWeek: 1,
+                    weekdays: {
+                        shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+                        longhand: [
+                            "Domingo",
+                            "Lunes",
+                            "Martes",
+                            "Miércoles",
+                            "Jueves",
+                            "Viernes",
+                            "Sábado",
+                        ],
+                    },
+                    months: {
+                        shorthand: [
+                            "Ene",
+                            "Feb",
+                            "Mar",
+                            "Abr",
+                            "May",
+                            "Jun",
+                            "Jul",
+                            "Ago",
+                            "Sep",
+                            "Oct",
+                            "Nov",
+                            "Dic",
+                        ],
+                        longhand: [
+                            "Enero",
+                            "Febrero",
+                            "Marzo",
+                            "Abril",
+                            "Mayo",
+                            "Junio",
+                            "Julio",
+                            "Agosto",
+                            "Septiembre",
+                            "Octubre",
+                            "Noviembre",
+                            "Diciembre",
+                        ],
+                    },
+                }
+            })
+
+            //eventos
+            window.livewire.on('show-modal', Msg => {
+                $('#modalDetails').modal('show')
+            })
+
+
+
+        });
+
+        //fuera del modal evento
+
+
+        //funcion para obtener los checks
+        function mostrarValores() {
+            var checkboxes = document.getElementsByClassName("miCheckbox");
+            var vehiculo = document.getElementById('vehiculo').value;
+            var conductor = document.getElementById('conductor').value;
+            var color = document.getElementById('color').value;
+            var dependencia = document.getElementById('dependencia').value;
+            var placa = document.getElementById('placa').value;
+            var kilometraje = document.getElementById('kilometraje').value;
+            var valoresSeleccionados = [];
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    valoresSeleccionados.push(checkboxes[i].value);
+                    console.log(valoresSeleccionados);
+                }
             }
-        })
 
-        //eventos
-        window.livewire.on('show-modal', Msg => {
-            $('#modalDetails').modal('show')
-        })
-
-
-
-    });
-
-    //fuera del modal evento
-    
-
-    //funcion para obtener los checks
-    function mostrarValores() {
-        var checkboxes = document.getElementsByClassName("miCheckbox");
-        var vehiculo = document.getElementById('vehiculo').value;
-        var conductor = document.getElementById('conductor').value;
-        var color = document.getElementById('color').value;
-        var dependencia = document.getElementById('dependencia').value;
-        var placa = document.getElementById('placa').value;
-        var kilometraje = document.getElementById('kilometraje').value;
-        var valoresSeleccionados = [];
-
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-                valoresSeleccionados.push(checkboxes[i].value);
-                console.log(valoresSeleccionados);
-            }
+            //console.log(vehiculo, conductor, color, dependencia, placa, kilometraje, valoresSeleccionados);
+            //console.log(valoresSeleccionados);
         }
-
-        //console.log(vehiculo, conductor, color, dependencia, placa, kilometraje, valoresSeleccionados);
-        //console.log(valoresSeleccionados);
-    }
-    
-    
-</script>
+    </script>

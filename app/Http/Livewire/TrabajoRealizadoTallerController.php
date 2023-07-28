@@ -19,7 +19,8 @@ class TrabajoRealizadoTallerController extends Component
 {
     use WithPagination;
 
-    public $TrabajoName, $search, $selected_id, $pageTitle, $componentName, $checkdiagnostico = [], $diagnostico_item;
+    public $TrabajoName, $search, $selected_id, $pageTitle, $componentName, $checkdiagnostico = []
+    , $diagnostico_item;
 
     public $fecha_ingreso, $fecha_salida, $name, $vehiculo, $responsable, $taller_id,
         $dependencia, $placa, $km_ingreso, $km_salida, $descripcion, $observacion;
@@ -60,16 +61,17 @@ class TrabajoRealizadoTallerController extends Component
 
 
      $this->vehiculodatos = Taller::leftJoin('trabajo_realizado_tallers as tr', 'tr.taller_id', 'tallers.id')
+        ->join('diagnosticos as di', 'di.taller_id', 'tallers.id')
         ->select('tallers.*')
         ->whereNotNull('tallers.fecha_salida')
+        ->whereNotNull('di.taller_id')
         ->whereNull('tr.taller_id')
         ->orderby('id', 'desc')
         ->get();
-        
-    //dd($this->vehiculodatos);
+
      //dd($this->vehiculodatos);
 
-     //dd($this->vehiculoselectedName);
+    //dd($this->diagnostico_item);
 
      return view('livewire.TrabajoRealizadoTaller.component', [
          'trabajor' => $trabajo,
@@ -117,7 +119,8 @@ class TrabajoRealizadoTallerController extends Component
         $this->observacion=' ';
         $this->clase = '';
         $this->tipo_vehiculo = '';
-        $this->diagnostico_item= '';
+        $this->diagnostico_item = '';
+        $this->checkdiagnostico =[];
         $this->resetValidation();
         $this->resetPage();
 
@@ -141,14 +144,22 @@ class TrabajoRealizadoTallerController extends Component
         $this->fecha_salida = $trabajosr->fecha_salida;
         $this->km_ingreso = $trabajosr->km_ingreso;
         $this->km_salida = $trabajosr->km_salida;
-        $this->descripcion = $trabajosr->descripcion;
+        //$this->descripcion = $trabajosr->descripcion;
         $this->observacion = $trabajosr->observaciones;
 
+        $diagnostico_taller = Diagnostico::where('taller_id', $trabajosr->taller_id)->first();
+        //dd($diagnostico_taller);
+        $this->checkdiagnostico = explode('-', $trabajosr->descripcion);
+        //dd($this->checkdiagnostico);
+        $this->diagnostico_item = DiagnosticoItem::where('diagnosticos_id', $diagnostico_taller->id)->get();
+        //dd($this->diagnostico_item);
         $this->emit('show-modal', 'open!');
     }
 
     public function create_trabajo()
-    {
+    {   
+        //guardamos los checks habilitados 
+        $this->descripcion = implode('-',$this->checkdiagnostico);
         //dd("hola");
         // dd($this->TallerName,
         // $this->ingreso,
@@ -166,7 +177,6 @@ class TrabajoRealizadoTallerController extends Component
         $rules = [
             'dependencia' => 'required|min:3',
             'responsable' => 'required|min:3',
-            'descripcion' => 'required|min:3',
             'observacion' => 'required|min:3',
             'km_salida' => 'required|min:3',
             'fecha_salida' => 'required|min:3'
@@ -177,10 +187,8 @@ class TrabajoRealizadoTallerController extends Component
             'dependencia.min' => 'Dependencia debe tener al menos 3 caracteres',
             'responsable.required' => 'Agregue el responsable',
             'responsable.min' => 'responsable debe tener al menos 3 caracteres',
-            'descripcion.required' => 'Es requerido la orden de trabajo a realizar',
-            'descripcion.min' => 'Orden de Trabajo debe tener al menos 3 caracteres',
-            'descripcion.required' => 'Es requerido Observacion a realizar',
-            'descripcion.min' => 'Observacion debe tener al menos 3 caracteres',
+            'observacion.required' => 'Es requerido Observacion a realizar',
+            'observacion.min' => 'Observacion debe tener al menos 3 caracteres',
             'km_salida.required' => 'Es requerido km_salida a realizar',
             'km_salida.min' => 'km_salida debe tener al menos 3 caracteres',
             'fecha_salida.required' => 'Es requerido Fecha Salida a realizar',
@@ -210,19 +218,22 @@ class TrabajoRealizadoTallerController extends Component
 
     public function UpdateTrabajo()
     {
+       
+        if($this->checkdiagnostico ){
+            //dd($this->checkdiagnostico);
+            $this->descripcion = implode('-',$this->checkdiagnostico);
+        }
+        
         $rules = [
             'dependencia' => 'required|min:3',
-            'responsable' => 'required|min:3',
-            'descripcion' => 'required|min:3'
+            'responsable' => 'required|min:3'
         ];
 
         $messages =[
             'dependencia.required' => 'Ingrese la dependencia',
             'dependencia.min' => 'Dependencia debe tener al menos 3 caracteres',
             'responsable.required' => 'Agregue el responsable',
-            'responsable.min' => 'responsable debe tener al menos 3 caracteres',
-            'descripcion.required' => 'Es requerido la orden de trabajo a realizar',
-            'descripcion.min' => 'Orden de Trabajo debe tener al menos 3 caracteres'
+            'responsable.min' => 'responsable debe tener al menos 3 caracteres'
         ];
 
         //validamos 
@@ -264,51 +275,17 @@ class TrabajoRealizadoTallerController extends Component
         $diagnostico_taller = Diagnostico::where('taller_id', $this->vehiculoselectedId)->first();
         //dd($diagnostico_taller);
         $this->diagnostico_item = DiagnosticoItem::where('diagnosticos_id', $diagnostico_taller->id)->get();
-        dd($this->diagnostico_item);
+        //$this->diagnostico_item = accesoriostaller::orderBy('id', 'desc')->get();
+        //dd($this->diagnostico_item);
 
-        foreach ($this->diagnostico_item as $di)
+        /*foreach ($this->diagnostico_item as $di)
         {
             $this->checkdiagnostico[] =
                     $di->id . ", " .
                     $di->descripcion;
-        }
+        }*/
        // dd($this->checkdiagnostico);
-        //para traer el id del ultimo taller del vehiculo que se tiene el id
-        $ultivehiculo = Taller::where('vehiculo_id', $this->vehiculoselectedId)
-        ->orderBy('id', 'desc')
-        ->first();
-        //dd($ultivehiculo);
-        $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
-        if($ultivehiculo){
-            //dd($acctaller);
-        //foreach para agregar si tiene el checked
-        foreach ($acctalleres as $tall) {
-            //buscado el id del taller
-            //dd($tallerherr->id);
-            //obtenemos todos los id de las herramientas que tiene el taller id
-            $tallerherramientas = tallerdetalle::where('taller_id', $ultivehiculo->id)->get();
-            //dd($tallerherramientas);
-
-            //buscamos si existe esa herramienta agregado o no
-            $obtenercheck = $tallerherramientas->where('acctaller_id', $tall->id)->first();
-            //dump($obtenercheck);
-            //exists sirve para obtener valor en boleano
-            //$this->roles()->where('nombre', $nombreRol)->exists();
-
-            // verificar si tenemos datos en obtenercheck
-            if ($obtenercheck) {
-                //dump($obtenercheck->acctaller_id);
-                $addcheck = accesoriostaller::find($obtenercheck->acctaller_id);
-                //dump($addcheck);
-                $tall->checked = 1;
-                $this->check[] =
-                    $addcheck->id . ", " .
-                    $addcheck->name;
-
-                //$acctalleres->pull($tall->id);
-            }
-        }
-        }
+       
         
        
     }

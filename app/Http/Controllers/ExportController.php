@@ -182,8 +182,7 @@ class ExportController extends Controller
         $observaciones  = $tallerdatos->observaciones;
 
 
-        // Longitud deseada para cada fragmento
-        // Longitud deseada para cada fragmento
+        /*// Longitud deseada para cada fragmento
         $longitud = 110;
 
         // Divide el texto por el salto de línea
@@ -196,7 +195,10 @@ class ExportController extends Controller
         foreach ($lineas as $linea) {
             $fragmentos_linea = str_split($linea, $longitud);
             $trabajorealizado = array_merge($trabajorealizado, $fragmentos_linea);
-        }
+        }*/
+        $trabajorealizado = explode('-', $descripcion);
+        $trabajorealizado = array_filter($trabajorealizado);
+        //dd($trabajorealizado);
        //dd($trabajorealizado);
 
         //validar la palabra user

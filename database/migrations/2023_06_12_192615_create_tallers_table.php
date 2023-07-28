@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('dependencia',255);
             $table->string('placa',255);
             $table->string('kilometraje',255);
-            $table->string('ordentrabajo',255);
+            $table->string('ordentrabajo',255)->nullable();
             $table->unsignedBigInteger('vehiculo_id');
             $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
             $table->string('clase',255);
