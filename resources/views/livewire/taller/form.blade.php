@@ -28,14 +28,15 @@
                     <div class="col-sm-6 mt-2">
                         <h6>Fecha Entrada</h6>
                         <div class="form-group">
-                            <input type="text" wire:model.lazy="fecha_ingreso" class="form-control flatpickr" placeholder="Click para elegir">
+                        <input id="basicFlatpickr" wire:model.lazy="fecha_ingreso" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." readonly="readonly">
                         </div>
                     </div>
 
                     <div class="col-sm-6 mt-2">
                         <h6>Fecha Salida</h6>
                         <div class="form-group">
-                            <input type="text" wire:model.lazy="fecha_salida" class="form-control flatpickr" placeholder="Click para elegir">
+                           
+                            <input id="basicFlatpickr2" wire:model.lazy="fecha_salida" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." readonly="readonly">
                         </div>
                     </div>
 
@@ -64,7 +65,7 @@
 
                     <div class="col-sm-3">
                         <div class="form-group">
-                        <label>VEHICULO</label>
+                            <label>VEHICULO</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -277,55 +278,7 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        flatpickr(document.getElementsByClassName('flatpickr'), {
-            enableTime: false,
-            dateFormat: 'Y-m-d',
-            locale: {
-                firstDayofWeek: 1,
-                weekdays: {
-                    shorthand: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
-                    longhand: [
-                        "Domingo",
-                        "Lunes",
-                        "Martes",
-                        "Miércoles",
-                        "Jueves",
-                        "Viernes",
-                        "Sábado",
-                    ],
-                },
-                months: {
-                    shorthand: [
-                        "Ene",
-                        "Feb",
-                        "Mar",
-                        "Abr",
-                        "May",
-                        "Jun",
-                        "Jul",
-                        "Ago",
-                        "Sep",
-                        "Oct",
-                        "Nov",
-                        "Dic",
-                    ],
-                    longhand: [
-                        "Enero",
-                        "Febrero",
-                        "Marzo",
-                        "Abril",
-                        "Mayo",
-                        "Junio",
-                        "Julio",
-                        "Agosto",
-                        "Septiembre",
-                        "Octubre",
-                        "Noviembre",
-                        "Diciembre",
-                    ],
-                },
-            }
-        })
+        
 
         //eventos
         window.livewire.on('show-modal', Msg => {
@@ -337,7 +290,7 @@
     });
 
     //fuera del modal evento
-    
+
 
     //funcion para obtener los checks
     function mostrarValores() {
@@ -360,6 +313,4 @@
         //console.log(vehiculo, conductor, color, dependencia, placa, kilometraje, valoresSeleccionados);
         //console.log(valoresSeleccionados);
     }
-    
-    
 </script>

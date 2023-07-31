@@ -26,6 +26,9 @@
  <link href="{{asset('assets/css/forms/switches.css') }}" rel="stylesheet" type="text/css" />
 <!-- select2 -->
 <link href="{{asset('plugins/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- select --> 
+<link href="{{asset('plugins/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" >
+
 <style>
     aside{
         display: none!important;

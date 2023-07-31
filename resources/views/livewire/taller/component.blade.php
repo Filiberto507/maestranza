@@ -122,6 +122,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
 
+        var f1 = flatpickr(document.getElementById('basicFlatpickr'));
+        var f2 = flatpickr(document.getElementById('basicFlatpickr2'));
+
         //esta variable es para el modal 
         var isModalOpen = false;
         //     document.getElementById('miSelect').addEventListener('change', function(event) {
