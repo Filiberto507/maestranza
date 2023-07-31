@@ -200,7 +200,8 @@ class ExportController extends Controller
         $trabajorealizado = array_filter($trabajorealizado);
         //dd($trabajorealizado);
        //dd($trabajorealizado);
-
+        //dd($taller->clase);
+        //{{$taller->clase}} {{$vehiculo}} {{$taller->tipo_vehiculo}}
         //validar la palabra user
         //$user = $id == 0 ? 'Todos' : User::find($userId)->name;
         //usar lo importado del PDF

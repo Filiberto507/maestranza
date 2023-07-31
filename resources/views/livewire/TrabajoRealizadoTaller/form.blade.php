@@ -15,14 +15,15 @@
                     <div class="col-sm-6 mt-2">
                         <h6>Fecha Entrada</h6>
                         <div class="form-group">
-                            <input type="text" wire:model.lazy="fecha_ingreso" class="form-control flatpickr" placeholder="Click para elegir">
+                            <input id="basicFlatpickr" wire:model.lazy="fecha_ingreso" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." readonly="readonly">
                         </div>
                     </div>
 
                     <div class="col-sm-6 col-lg-6">
                         <h6>Fecha Salida</h6>
                         <div class="form-group">
-                            <input type="text" wire:model.lazy="fecha_salida" class="form-control flatpickr" placeholder="Click para elegir">
+
+                            <input id="basicFlatpickr2" wire:model.lazy="fecha_salida" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." readonly="readonly">
                         </div>
                         @error('fecha_salida')
                         <span class="text-danger er"> {{ $message }} </span>

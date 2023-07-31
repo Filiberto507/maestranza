@@ -60,5 +60,10 @@ class PermissionSeeder extends Seeder
             'name' => 'vista_roles',
             'guard_name' => 'web'
         ]);
+
+        permission::create([   
+            'name' => 'vista_eliminar',
+            'guard_name' => 'web'
+        ]);
     }
 }

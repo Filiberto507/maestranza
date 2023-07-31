@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="{{ asset('assets/css/trabajo.css') }}">
-    
+
     <title>Reporte Trabajo Realizado</title>
 </head>
+
 <body>
     <table>
         <tr>
@@ -26,7 +28,10 @@
     <table class="datos">
         <tr>
             <td class="columna1">
-                Tipo Vehiculo: {{$taller->clase}} {{$vehiculo}} {{$taller->tipo_vehiculo}} 
+                Tipo Vehiculo: {{$vehiculo}} 
+                @php
+                //dd($taller->clase, $vehiculo, $taller->tipo_vehiculo);
+                @endphp
             </td>
             <td class="columna2">
                 Placa: {{$placa}}
@@ -60,24 +65,69 @@
         </tr>
     </table>
     <h2>TRABAJOS REALIZADOS (TALLER INTERNO MAESTRANZA)</h2>
+    @php
+    $totalItems = count($trabajorealizado);
+    $halfItems = ceil($totalItems / 2);
+    $firstColumn = array_slice($trabajorealizado, 0, $halfItems);
+    $secondColumn = array_slice($trabajorealizado, $halfItems);
+    @endphp
     <table class="custom-table">
         <tr>
-          <td>
-            @foreach($trabajorealizado as $tra)
-                <p class="dashed-border">
-                    {{$tra}}
-                </p>  
-            @endforeach     
-          </td>
+            @if($totalItems < 6) <td>
+                <table>
+
+
+                    @foreach ($trabajorealizado as $tra)
+                    <tr>
+                        <td class="dashed-border">
+                            {{ $tra }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
+                </td>
+                @else
+
+                <td class="second-table">
+                    <table>
+
+
+                        @foreach ($firstColumn as $tra)
+                        <tr>
+                            <td class="dashed-border">
+                                {{ $tra }}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        @foreach ($secondColumn as $tra)
+                        <tr>
+                            <td class="dashed-border">
+                                {{ $tra }}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </table>
+                </td>
+                @endif
         </tr>
         <tfoot>
+            @if($totalItems < 6)
             <tr>
                 <td>Observaciones: {{$tallerdatos->observaciones}}</td>
             </tr>
+            @else
+            <tr>
+                <td colspan="2">Observaciones: {{ $tallerdatos->observaciones }}</td>
+            </tr>
+            @endif
         </tfoot>
-      </table>
+    </table>
 
-      <table class="firma">
+    <table class="firma">
         <tr>
             <th>TECNICO MECANICO</th>
             <th>CONDUCTOR
@@ -88,7 +138,7 @@
             <td>{{$taller->conductor}}</td>
         </tr>
     </table>
-  
+
 </body>
 
 </html>

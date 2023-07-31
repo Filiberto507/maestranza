@@ -64,7 +64,7 @@ table {
 
   .custom-table td {
     border-bottom: thin dashed;
-    padding: 0px 10px;
+    padding: 5px 10px;
   }
 
   .dashed-border {
@@ -72,6 +72,14 @@ table {
     display: block;
     border-bottom: 1px dashed black;
     
+  }
+
+  .second-table{
+    border: 1px solid black;
+  }
+
+  .tabla-tra1{
+    border: 1px solid black;
   }
 
   /* firma */

@@ -130,7 +130,7 @@ class TrabajoRealizadoTallerController extends Component
 
     protected $listeners =[
         'destroy' => 'Destroy',
-        'resetUI' => 'resetUi'
+        'resetUI' => 'resetUI'
     ];
 
     public function Edit(TrabajoRealizadoTaller $trabajosr)
