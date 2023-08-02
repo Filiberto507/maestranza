@@ -20,14 +20,14 @@
                                     </select>
                                 </div>
                             </div>
-                            
-                            
+
+
 
                         </div>
                         <br>
                         <br>
                         <div class="row">
-                        <div class="col-sm-12" >
+                            <div class="col-sm-12">
                                 <h6>Elige el tipo de reporte</h6>
                                 <div class="form-group">
                                     <select wire:model="reportType" class="form-control">
@@ -56,9 +56,10 @@
                                     Consultar
                                 </button>
 
-                                <a class="btn btn-dark btn-block {{count($data) < 1? 'disabled' : ''}}" href="{{ url('report/pdf' . '/' . $userId . '/' . $reportType. '/' . $dateFrom. '/' . $dateTo) }}" target="_blank">Generar PDF</a>
+                                <a class="btn btn-dark btn-block {{count($data) < 1? 'disabled' : ''}}" 
+                                href="{{ url('report_responsable/pdf' . '/' . $vehiculoselectedId . '/' . $reportType. '/' . $dateFrom. '/' . $dateTo) }}" target="_blank">
+                                    Generar PDF</a>
 
-                                <a class="btn btn-dark btn-block {{count($data) < 1? 'disabled' : ''}}" href="{{ url('report/excel' . '/' . $userId . '/' . $reportType. '/' . $dateFrom. '/' . $dateTo) }}" target="_blank">Exportar a Excel</a>
                             </div>
                         </div>
                     </div>
@@ -149,7 +150,7 @@
                                                 <h6>{{$d->conductor}}</h6>
                                             </td>
                                             <td class="text-center">
-                                                
+
                                             </td>
                                         </tr>
                                         @endforeach
@@ -179,7 +180,7 @@
             @this.set('vehiculoselectedId', pId) // set vehiculo od selected
             @this.set('vehiculoselectedName', pName)
         });
-        
+
         //eventos
         window.livewire.on('show-modal', Msg => {
             $('#modalDetails').modal('show')

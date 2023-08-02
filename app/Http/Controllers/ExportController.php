@@ -11,6 +11,8 @@ use App\Models\Conductor;
 use App\Models\Vehiculos;
 use App\Models\Taller;
 use App\Models\tallerdetalle;
+use App\Models\Diagnostico_area_transporte;
+use App\Models\Diagnostico;
 use App\Models\accesoriostaller;
 use App\Models\Estadovehiculo;
 use App\Models\TrabajoRealizadoTaller;
@@ -224,6 +226,59 @@ class ExportController extends Controller
         ));
         //visualizar en el navegador
         return $pdf->stream('Trabjo-Realizado.pdf');
+        //para descargar el reporte en pdf
+        //return $pdf->download('salesReport.pdf');
+    }
+
+    public function reportResponsable($id, $reportType, $dateFrom = null, $dateTo = null)
+    {   
+        //dd($id, $reportType, $dateFrom, $dateTo);
+         //obtener las ventas del dia 
+         if($reportType == 0)// ventas del dia
+         {
+             //obtener fecha de hoy
+             $from = Carbon::parse(Carbon::now())->format('Y-m-d') . ' 00:00:00';
+             $to = Carbon::parse(Carbon::now())->format('Y-m-d') . ' 23:59:59';
+         } else {
+             //obtener fechas especificadas por el usuario
+             $from = Carbon::parse($dateFrom)->format('Y-m-d') . ' 00:00:00';
+             $to = Carbon::parse($dateTo)->format('Y-m-d') . ' 23:59:59';
+         }
+         //validar si el usuario esta usando un tipo de reporte
+         if($reportType == 1 && ($dateFrom == '' || $dateTo == '')) {
+             return;
+         }
+         //validar si seleccionamos algun usuario
+         if($id == 0){
+             //consulta
+             $data = Taller::leftJoin('diagnosticos as d', 'd.taller_id', 'tallers.id')
+             ->leftJoin('diagnostico_area_transportes as dt', 'dt.taller_id', 'tallers.id')
+             ->select('tallers.*', 'd.id as diagnostico', 'dt.id as diagnosticotransporte', 'd.tipo_taller')
+             ->whereBetween('tallers.fecha_ingreso', [$from,$to])
+             ->orderBy('tallers.id', 'desc')->get();
+ 
+             
+             //dd($data);
+         } else {
+             //dd($vehiculoselectedId);
+             $data = Taller::leftJoin('diagnosticos as d', 'd.taller_id', 'tallers.id')
+             ->leftJoin('diagnostico_area_transportes as dt', 'dt.taller_id', 'tallers.id')
+             ->select('tallers.*', 'd.id as diagnostico', 'dt.id as diagnosticotransporte', 'd.tipo_taller')
+             ->where('vehiculo_id', $id)
+             ->whereBetween('tallers.fecha_ingreso', [$from,$to])
+             ->orderBy('tallers.id', 'desc')->get();
+         }
+         $vehiculodato= Vehiculos::find($id);
+         //dd($vehiculodato);
+         $fecha = Carbon::parse(Carbon::now())->format('Y-m-d');
+        $pdf = PDF::loadView('pdf.reporte_responsable', compact(
+            'data',
+            'vehiculodato',
+            'fecha',
+            
+        ));
+        //visualizar en el navegador
+        return $pdf->stream('ReportResponsable.pdf');
         //para descargar el reporte en pdf
         //return $pdf->download('salesReport.pdf');
     }

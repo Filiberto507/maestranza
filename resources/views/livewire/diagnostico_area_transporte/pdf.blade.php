@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,41 +9,49 @@
 </head>
 
 <body>
-  <table class="tablaImage">
-    <tr>
-        <th><div class="imagen1"><img src="assets/img/Bolivia.png" alt="" ></div></th>
-        <th><div class="imagen2"><img src="assets/img/cochabamba.jpg" alt="" ></div></th>
-        <th><div class="imagen3"><img src="assets/img/img-go.png" alt="" ></div></th>
-    </tr>
-  </table>
-  <h1><u>ÁREA DE TRANSPORTES</u></h1>
-  <table class="tablaEncabezado">
-    <tr>
-        <th width="30%"><img src="assets/img/tallerlogo.png" class="logo"></th>
-        <th width="40%"><h2 class="encabezado">DIAGNÓSTICO VEHICULAR</h2></th>
-        <th width="30%"><label for="" class="fecha">Nro: {{$DiagnosticoAreaT->id}}</label></th>
-    </tr>
-    <tr>
-        <th width="35%"><label for="" class="nro" ><span class="bolded">A: </span>{{$DiagnosticoAreaT->dependencia}}</label></th>
-        <th width="35%"><label for="" class="nro" ><span class="bolded">DE: </span>Taller Maestranza</label></th>
-        <th width="30%"><label for="" class="fecha"><span class="bolded">FECHA: </span>{{$DiagnosticoAreaT->fecha}}</label></th>
-    </tr>
-  </table>
-  <p>Para su conocimiento, se remite a su autoridad el presente diagnóstico vehicular:</p> 
+    <table class="tablaImage">
+        <tr>
+            <th>
+                <div class="imagen1"><img src="assets/img/Bolivia.png" alt=""></div>
+            </th>
+            <th>
+                <div class="imagen2"><img src="assets/img/cochabamba.jpg" alt=""></div>
+            </th>
+            <th>
+                <div class="imagen3"><img src="assets/img/img-go.png" alt=""></div>
+            </th>
+        </tr>
+    </table>
+    <h1><u>ÁREA DE TRANSPORTES</u></h1>
+    <table class="tablaEncabezado">
+        <tr>
+            <th width="30%"><img src="assets/img/tallerlogo.png" class="logo"></th>
+            <th width="40%">
+                <h2 class="encabezado">DIAGNÓSTICO VEHICULAR</h2>
+            </th>
+            <th width="30%"><label for="" class="fecha">Nro: {{$DiagnosticoAreaT->id}}</label></th>
+        </tr>
+        <tr>
+            <th width="35%"><label for="" class="nro"><span class="bolded">A: </span>{{$DiagnosticoAreaT->dependencia}}</label></th>
+            <th width="35%"><label for="" class="nro"><span class="bolded">DE: </span>Taller Maestranza</label></th>
+            <th width="30%"><label for="" class="fecha"><span class="bolded">FECHA: </span>{{$DiagnosticoAreaT->fecha}}</label></th>
+        </tr>
+    </table>
+    <p>Para su conocimiento, se remite a su autoridad el presente diagnóstico vehicular:</p>
     <table class="tableDatos">
         <tbody>
             <tr>
-                <td colspan="1" width="60%" >
-                    <label for=""><span class="bolded">TIPO DE VEHÍCULO: </span> {{$DiagnosticoAreaT->tipo_vehiculo}}</label>
+                <td colspan="1" width="60%">
+                    <label for=""><span class="bolded">TIPO DE VEHÍCULO: </span> {{$DiagnosticoAreaT->clase}} {{$DiagnosticoAreaT->marca}} {{$DiagnosticoAreaT->tipo_vehiculo}}</label>
                 </td>
                 <td colspan="1" width="40%">
                     <label for=""><span class="bolded">CILINDRADA: </span>{{$DiagnosticoAreaT->cilindrada}}</label>
                 </td>
             </tr>
-            
+
             <tr>
                 <td>
-                    <label for=""><span class="bolded" >N° DE PLACA: </span>{{$DiagnosticoAreaT->placa}}</label>
+                    <label for=""><span class="bolded">N° DE PLACA: </span>{{$DiagnosticoAreaT->placa}}</label>
                 </td>
                 <td>
                     <label for=""><span class="bolded">CHASIS: </span>{{$DiagnosticoAreaT->chasis}}</label>
@@ -50,182 +59,258 @@
             </tr>
             <tr>
                 <td>
-                    <label for=""><span class="bolded" >DIR/UNID/PROY: </span>{{$DiagnosticoAreaT->dependencia}}</label>
+                    <label for=""><span class="bolded">DIR/UNID/PROY: </span>{{$DiagnosticoAreaT->dependencia}}</label>
                 </td>
                 <td>
                     <label for=""><span class="bolded">MOTOR: </span>{{$DiagnosticoAreaT->motor}}</label>
                 </td>
             </tr>
             <tr>
-                <td colspan="1" width="60%" >
+                <td colspan="1" width="60%">
                     <label for=""><span class="bolded">RESPONSABLE VEHÍCULO: </span> {{$DiagnosticoAreaT->conductor}}</label>
                 </td>
-                <td colspan="1" width="60%" >
+                <td colspan="1" width="60%">
                     <label for=""></label>
                 </td>
             </tr>
         </tbody>
     </table>
-        <p><span class="bolded">SERVICIO DE MANO DE OBRA:</span></p> 
-        <table class="tableItem">
-            <thead class="titulo" >
-                <tr>
-                    <th width="20%">
-                        ITEM
-                    </th>
-                    <th width="20%">
-                        CANTIDAD
-                    </th>
-                    <th width="60%">
-                        SERVICIO
-                    </th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-            @foreach ($Diagnostico_servicio as $di)
+    @if($contreque > 0)
+    <p><span class="bolded">REQUERIMIENTO:</span></p>
+    <table class="tableItem">
+        <thead class="titulo">
+            <tr>
+                <th width="20%">
+                    ITEM
+                </th>
+                <th width="20%">
+                    CANTIDAD
+                </th>
+                <th width="20%">
+                    UNIDAD
+                </th>
+                <th width="60%">
+                    SERVICIO
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($Diagnostico_requerimiento as $dr)
             <tr class="datos">
                 <td class="item">
-                    {{$di->item}} 
+                    {{$dr->item}}
                 </td>
                 <td class="cant">
-                    {{$di->cantidad}}
+                    {{$dr->cantidad}}
+                </td>
+                <td class="cant">
                 </td>
                 <td>
-                    {{$di->servicio}}
+                    {{$dr->servicio}}
                 </td>
-                
+
             </tr>
             @endforeach
-            </tbody>
-        </table>
-        <br>
-        <table class="conclusion">
-            <thead>
-                <tr>
-                    <td><span class="bolded">CONCLUSIÓN DEL DIAGNÓSTICO: </span> Verificado el vehiculo <span class="bolded">{{$DiagnosticoAreaT->tipo_vehiculo}}</span>, 
-                        con placa de circulacion <span class="bolded">{{$DiagnosticoAreaT->placa}}</span> en taller Maestranza.{{$DiagnosticoAreaT->conclusion}}</td>
-                </tr>
-            </thead>
-        </table>
+        </tbody>
+    </table>
+    @endif
+
+    @if($contobra > 0)
+    <p><span class="bolded">SERVICIO DE MANO DE OBRA:</span></p>
+    <table class="tableItem">
+        <thead class="titulo">
+            <tr>
+                <th width="20%">
+                    ITEM
+                </th>
+                <th width="20%">
+                    CANTIDAD
+                </th>
+                <th width="60%">
+                    SERVICIO
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($Diagnostico_obra as $do)
+            <tr class="datos">
+                <td class="item">
+                    {{$do->item}}
+                </td>
+                <td class="cant">
+                    {{$do->cantidad}}
+                </td>
+                <td>
+                    {{$do->servicio}}
+                </td>
+
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @endif
+    <br>
+    <table class="conclusion">
+        <thead>
+            <tr>
+                <td><span class="bolded">CONCLUSIÓN DEL DIAGNÓSTICO: </span> Realizada la revision técnica del vehiculo <span class="bolded">{{$DiagnosticoAreaT->clase}} {{$DiagnosticoAreaT->marca}} {{$DiagnosticoAreaT->tipo_vehiculo}}</span>,
+                    con placa de circulacion <span class="bolded">{{$DiagnosticoAreaT->placa}}</span> en taller de Maestranza de la Gobernación se remite el presente diagnóstico para {{$DiagnosticoAreaT->conclusion}}</td>
+            </tr>
+        </thead>
+    </table>
+    @if($DiagnosticoAreaT->tipo_taller == 2)
+    <h4><strong><ins>NOTA:</ins></strong> Taller Externo</h4>
+    @elseif ($DiagnosticoAreaT->tipo_taller == 1)
+    <h4><strong><ins>NOTA: </ins></strong> Para Su Compra</h4>
+    @endif
     <footer>
-        
+
         <div style="margin-top: 20px">
             <div style="float:left">
                 <font style="vertical-align: inherit">
                     <font style="vertical-align: inherit">--------------------------</font>
                 </font>
-                    <br>
+                <br>
                 <font style="vertical-align: inherit">
                     <font style="vertical-align: inherit">Responsable vehiculo</font>
                 </font>
             </div>
-            
+
             <div style="float:right">
-            <font style="vertical-align: inherit">
-                <font style="vertical-align: inherit">------------------------------</font>
-            </font>
+                <font style="vertical-align: inherit">
+                    <font style="vertical-align: inherit">------------------------------</font>
+                </font>
                 <br>
-            <font style="vertical-align: inherit">
-                <font style="vertical-align: inherit">Encargado de transportes</font>
-            </font>
+                <font style="vertical-align: inherit">
+                    <font style="vertical-align: inherit">Encargado de transportes</font>
+                </font>
             </div>
         </div>
     </footer>
 </body>
+
 </html>
 <style>
-    h1{
+    h1 {
         text-align: center;
     }
-.tablaImage{
-    width: 100%;
-}
-img{
-    width: 90px;
-    height: 90px;
-}
-.imagen1{
-    text-align: left;
-    
-}
-.imagen3{
-    text-align: right;
-}
-.tablaEncabezado{
-    width: 100%;
-    border-collapse: collapse;
-}
-.tablaEncabezado th{
-    border: 1px solid;
-}
-.nro{
-    text-align: left;
-}
-.encabezado{
-    text-align: center;
-}
-.fecha{
-    text-align: right;
-}
-.titulo{
-    background-color: black;
-    color: white;
-    font-size: 20px;
-}
-.logo{
-    width: 150px;
-    height: 100px;
-}
-.img1{
-    width: 200px;
-    height: 150px;
-    padding-left: 80px;
-}
-.img2{
-    width: 150px;
-    height: 90px;
-    padding-right: 100px;
-    padding-bottom: 20px;
-}
-.contenedorH {
-    padding-left: 15%;
-}
-.subtitulo{
-    text-align: center;
-    width: 80%;
-    padding: 0;
-}
-.tableDatos{
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid;
-}
-.bolded { font-weight: bold; }
-.tableItem{
-    width: 100%;
-    border-collapse: collapse;
-}
-.tableItem td{
-    border: 1px solid;
-}
-.datos{
-    text-align: left;
-}
-.item{
-    text-align: center;
-}
-.cant{
-    text-align: center;
-}
-.tableItem tfoot{
-    border: 1px solid;
-}
-.contImg{
-    height: 100px;
-}
-.conclusion{
-    width: 100%;
-    border-collapse: collapse;
-}
+
+    .tablaImage {
+        width: 100%;
+    }
+
+    img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .imagen1 {
+        text-align: left;
+
+    }
+
+    .imagen3 {
+        text-align: right;
+    }
+
+    .tablaEncabezado {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .tablaEncabezado th {
+        border: 1px solid;
+    }
+
+    .nro {
+        text-align: left;
+    }
+
+    .encabezado {
+        text-align: center;
+    }
+
+    .fecha {
+        text-align: right;
+    }
+
+    .titulo {
+        background-color: black;
+        color: white;
+        font-size: 20px;
+    }
+
+    .logo {
+        width: 150px;
+        height: 100px;
+    }
+
+    .img1 {
+        width: 200px;
+        height: 150px;
+        padding-left: 80px;
+    }
+
+    .img2 {
+        width: 150px;
+        height: 90px;
+        padding-right: 100px;
+        padding-bottom: 20px;
+    }
+
+    .contenedorH {
+        padding-left: 15%;
+    }
+
+    .subtitulo {
+        text-align: center;
+        width: 80%;
+        padding: 0;
+    }
+
+    .tableDatos {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid;
+    }
+
+    .bolded {
+        font-weight: bold;
+    }
+
+    .tableItem {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .tableItem td {
+        border: 1px solid;
+    }
+
+    .datos {
+        text-align: left;
+    }
+
+    .item {
+        text-align: center;
+    }
+
+    .cant {
+        text-align: center;
+    }
+
+    .tableItem tfoot {
+        border: 1px solid;
+    }
+
+    .contImg {
+        height: 100px;
+    }
+
+    .conclusion {
+        width: 100%;
+        border-collapse: collapse;
+    }
 </style>

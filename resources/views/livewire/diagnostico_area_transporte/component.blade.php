@@ -145,7 +145,8 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function(){
-
+        //fecha
+        var f1 = flatpickr(document.getElementById('basicFlatpickr'));
         //esta variable es para el modal 
         var isModalOpen = false;
         //     document.getElementById('miSelect').addEventListener('change', function(event) {
@@ -169,6 +170,7 @@
         //evento ocultar la ventana modal y notificar
         window.livewire.on('diagnostico_area_transporte-added', Msg => {
             $('#theModal').modal('hide')
+            location.reload()
         })
         //evento ocultar la ventana modal y notificar
         window.livewire.on('diagnostico_area_transporte-updated', Msg => {
@@ -178,6 +180,7 @@
         //evento  notificar
         window.livewire.on('diagnostico_area_transporte-deleted', Msg => {
             noty(Msg)
+            location.reload()
         })
         //evento notificar
         window.livewire.on('diagnostico_area_transporte-exists', Msg => {

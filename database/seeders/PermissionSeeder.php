@@ -32,7 +32,7 @@ class PermissionSeeder extends Seeder
         ]);
 
         permission::create([   
-            'name' => 'vista_dependencias',
+            'name' => 'vista_responsable',
             'guard_name' => 'web'
         ]);
 

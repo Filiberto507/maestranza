@@ -4,12 +4,13 @@
     <div class="col-sm-12 col-md-6">
         <div class="form-group">
             <label>Fecha</label>
-            <input type="date" wire:model.lazy="fecha" class="form-control flatpickr" placeholder="Click para elegir">
+            <input id="basicFlatpickr" wire:model.lazy="fecha" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." readonly="readonly">
             @error('fecha') <span class="text-danger er">{{ $message}} </span>
 
             @enderror
         </div>
     </div>
+
 
     <div class="col-sm-12 col-md-6">
         <div class="form-group">
@@ -50,7 +51,7 @@
 
 <div class="col-sm-12 col-md-12">
     <div class="form-group text-center">
-        <label >TIPO DE TALLER</label>
+        <label>TIPO DE TALLER</label>
         <select disabled wire:model.lazy="tipo_taller" class="form-control text-center">
             <option value="Elegir" selected> Elegir </option>
             <option value="1" selected> Taller Interno </option>
@@ -70,7 +71,7 @@
             <th class="col-sm-12 col-md-6">Servicio</th>
 
             <th>
-                
+
 
 
             </th>
@@ -129,9 +130,10 @@
         </div>
     </button>
 </div>
+<br>
 <div class="col-sm-12 col-md-8">
     <div class="form-group">
-        <label>Conclusion</label>
+        <h6><strong>Conclusion: la Gobernación se remite el presente diagnóstico para :</strong></h6>
         <textarea wire:model.lazy="conclusion" class="form-control" name="" id="" cols="100" rows="3" placeholder="...">hola</textarea>
         @error('conclusion') <span class="text-danger er">{{ $message}} </span>
 

@@ -106,9 +106,11 @@ class DiagnosticoController extends Component
             'dependencia' => 'required|min:3',
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
+            'tipo_taller' => 'required|not_in:Elegir',
         ];
         $messages = [
-            'fecha.required' => 'seleccione una fecha'
+            'fecha.required' => 'seleccione una fecha',
+            'tipo_taller' => 'Seleccione al Tipo de taller',
 
         ];
 
@@ -163,11 +165,13 @@ class DiagnosticoController extends Component
             'dependencia' => 'required|min:3',
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
+            'tipo_taller' => 'required|not_in:Elegir',
 
         ];
 
         $messages = [
-            'fecha.required' => 'ingresela fecha'
+            'fecha.required' => 'ingresela fecha',
+            'tipo_taller' => 'Seleccione al Tipo de taller',
 
         ];
 
@@ -307,7 +311,7 @@ class DiagnosticoController extends Component
         $findvehiculo = taller::where('id', $this->vehiculoselectedId)
             ->first();
         //dd($this->vehiculoselectedId);
-        $this->fecha = $findvehiculo->fecha_ingreso;
+        $this->fecha = Carbon::parse(Carbon::now())->format('Y-m-d');
         $this->conductor = $findvehiculo->conductor;
         $this->vehiculos_id = $findvehiculo->vehiculo_id;
         $this->dependencia = $findvehiculo->dependencia;

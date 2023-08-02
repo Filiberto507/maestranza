@@ -1,10 +1,10 @@
 @include('common.modalHead')
 
 <div class="row">
-    <div class="col-sm-12 col-md-6">
+<div class="col-sm-12 col-md-6">
         <div class="form-group">
             <label>Fecha</label>
-            <input type="date" wire:model.lazy="fecha" class="form-control flatpickr" placeholder="Click para elegir">
+            <input id="basicFlatpickr" wire:model.lazy="fecha" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." readonly="readonly">
             @error('fecha') <span class="text-danger er">{{ $message}} </span>
 
             @enderror
@@ -93,19 +93,12 @@
             <option value="1" selected> Taller Interno </option>
             <option value="2" selected> Taller Externo </option>
         </select>
-        @error('status') <span class="text-danger er">{{ $message}} </span>
+        @error('tipo_taller') <span class="text-danger er">{{ $message}} </span>
 
         @enderror
     </div>
 </div>
 
-<div class="form-group">
-    <label>Observaciones</label>
-    <textarea wire:model.lazy="observaciones" class="form-control" name="" id="" cols="100" rows="4" placeholder="..."></textarea>
-    @error('observaciones') <span class="text-danger er">{{ $message}} </span>
-
-    @enderror
-</div>
 
 
 <!-- tabla de solo uno -->

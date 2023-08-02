@@ -302,12 +302,17 @@ class DiagnosticoAreaTransporteController extends Component
     public function pdf($id)
     {
         $DiagnosticoAreaT = Diagnostico_area_transporte::join('Vehiculos as v', 'v.id', 'Diagnostico_area_transportes.vehiculos_id')
-            ->select('Diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.placa', 'v.marca','v.tipo_vehiculo','v.cilindrada','v.chasis','v.motor')
+            ->select('Diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.clase', 'v.placa', 'v.marca','v.tipo_vehiculo','v.cilindrada','v.chasis','v.motor')
             ->where('Diagnostico_area_transportes.id', $id)->first();
         //dd($Diagnostico);
-        $Diagnostico_servicio = Diagnostico_servicio::where('diagnostico_area_transportes_id', $id)->get();
+        $Diagnostico_requerimiento = Diagnostico_servicio::where('diagnostico_area_transportes_id', $id)->get();
+        $Diagnostico_obra = DiagnosticoObra::where('diagnostico_area_transportes_id', $id)->get();
+        $contreque= $Diagnostico_requerimiento->count();
+        $contobra = $Diagnostico_obra->count();
+        //dd($contobra);
+
         $Vehiculos = Vehiculos::all();
-        $pdf = Pdf::loadView('livewire.diagnostico_area_transporte.pdf', compact('DiagnosticoAreaT', 'Diagnostico_servicio', 'Vehiculos'));
+        $pdf = Pdf::loadView('livewire.diagnostico_area_transporte.pdf', compact('DiagnosticoAreaT', 'Diagnostico_obra', 'Vehiculos', 'Diagnostico_requerimiento', 'contreque', 'contobra'));
         return $pdf->stream();
         //si se quiere descargar
         //return $pdf->download('reporteDisagnostico.pdf');
@@ -427,7 +432,7 @@ class DiagnosticoAreaTransporteController extends Component
         $tipotalldiagnostico = Diagnostico::where('taller_id', $findvehiculo->id)->first();
         //dd($this->vehiculoselectedId);
         //dd($tipotalldiagnostico->tipo_taller);
-        
+        $this->fecha = Carbon::parse(Carbon::now())->format('Y-m-d');
         $this->conductor = $findvehiculo->conductor;
         $this->vehiculos_id = $findvehiculo->vehiculo_id;
         $this->dependencia = $findvehiculo->dependencia;

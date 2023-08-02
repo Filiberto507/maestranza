@@ -117,7 +117,9 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-
+        //fecha
+        var f1 = flatpickr(document.getElementById('basicFlatpickr'));
+        
         //esta variable es para el modal 
         var isModalOpen = false;
         //     document.getElementById('miSelect').addEventListener('change', function(event) {
