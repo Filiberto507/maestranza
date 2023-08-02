@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('dependencia',255);
             $table->string('conductor',255);
             $table->string('conclusion',450);
+            $table->integer('tipo_taller');
             $table->unsignedBigInteger('vehiculos_id');
             $table->foreign('vehiculos_id')->references('id')->on('vehiculos');
             $table->unsignedBigInteger('taller_id');

@@ -23,6 +23,8 @@ class DiagnosticoController extends Component
     public $filas = [];
     private $pagination = 6;
 
+    //tipo de taller
+    public $tipo_taller;
     //datos select2
     public $vehiculoselectedId, $vehiculoselectedName, $vehiculodatos;
 
@@ -38,6 +40,7 @@ class DiagnosticoController extends Component
         $this->componentName = 'Diagnostico';
         $this->vehiculos_id = 'Elegir';
         $this->vehiculoselectedName = 'Elegir';
+        $this->tipo_taller = 'Elegir';
     }
 
     public function render()
@@ -79,10 +82,10 @@ class DiagnosticoController extends Component
         $Diagnostico = Diagnostico::find($id);
         $this->selected_id = $Diagnostico->id;
         $this->fecha = $Diagnostico->fecha;
-        $this->observaciones = $Diagnostico->observaciones;
         $this->dependencia = $Diagnostico->dependencia;
         $this->conductor = $Diagnostico->conductor;
         $this->vehiculos_id = $Diagnostico->vehiculos_id;
+        $this->tipo_taller = $Diagnostico->tipo_taller;
         $DiagnosticoItem = DiagnosticoItem::where('diagnosticos_id', $id)->get();
         //dd($DiagnosticoItem);
         foreach ($DiagnosticoItem as $d) {
@@ -100,15 +103,12 @@ class DiagnosticoController extends Component
         //dd($this->filas);
         $rules = [
             'fecha' => 'required',
-            'observaciones' => 'required|min:3',
             'dependencia' => 'required|min:3',
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
         ];
         $messages = [
-            'fecha.required' => 'seleccione una fecha',
-            'observaciones.required' => 'Ingrese las Observaciones',
-            'Observaciones.min' => 'El campo tiene que tener al menos 3 caracteres',
+            'fecha.required' => 'seleccione una fecha'
 
         ];
 
@@ -120,7 +120,7 @@ class DiagnosticoController extends Component
             'dependencia' => $this->dependencia,
             'conductor' => $this->conductor,
             'vehiculos_id' => $this->vehiculos_id,
-            'observaciones' => $this->observaciones,
+            'tipo_taller' => $this->tipo_taller,
             'taller_id' => $this->taller_id
         ]);
         if ($Diagnostico) {
@@ -149,6 +149,7 @@ class DiagnosticoController extends Component
         $this->filas = [];
         $this->selected_id = 0;
         $this->taller_id = '';
+        $this->tipo_taller= '';
         $this->resetValidation();
         //para regresar a la pagina principal
         $this->resetPage();
@@ -159,7 +160,6 @@ class DiagnosticoController extends Component
         //dd($this->filas);
         $rules = [
             'fecha' => 'required',
-            'observaciones' => 'required|min:3',
             'dependencia' => 'required|min:3',
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
@@ -167,9 +167,7 @@ class DiagnosticoController extends Component
         ];
 
         $messages = [
-            'fecha.required' => 'ingresela fecha',
-            'observaciones.required' => 'ingrese las observaciones',
-            'observaciones.min' => 'El campo tiene que tener al menos 3 caracteres',
+            'fecha.required' => 'ingresela fecha'
 
         ];
 
@@ -177,9 +175,9 @@ class DiagnosticoController extends Component
         $Diagnostico = Diagnostico::find($this->selected_id);
         $Diagnostico->update([
             'fecha' => $this->fecha,
-            'observaciones' => $this->observaciones,
             'dependencia' => $this->dependencia,
             'conductor' => $this->conductor,
+            'tipo_taller' => $this->tipo_taller,
             'vehiculos_id' => $this->vehiculos_id
         ]);
 
@@ -309,7 +307,7 @@ class DiagnosticoController extends Component
         $findvehiculo = taller::where('id', $this->vehiculoselectedId)
             ->first();
         //dd($this->vehiculoselectedId);
-        
+        $this->fecha = $findvehiculo->fecha_ingreso;
         $this->conductor = $findvehiculo->conductor;
         $this->vehiculos_id = $findvehiculo->vehiculo_id;
         $this->dependencia = $findvehiculo->dependencia;

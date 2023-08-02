@@ -15,6 +15,7 @@ use App\Http\Livewire\DependenciasController;
 use App\Http\Livewire\AccesoriosController;
 use App\Http\Livewire\ReporteTallerController;
 use App\Http\Livewire\ReporteDiagnosticosController;
+use App\Http\Livewire\ReporteResponsableController;
 use App\Http\Livewire\TrabajoRealizadoTallerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,7 @@ Route::get('conductor', ConductorController::class);
 Route::get('trabajorealizadotaller', TrabajoRealizadoTallerController::class);
 Route::get('reportemaestranza', ReporteTallerController::class);
 Route::get('reporte_diagnosticos', ReporteDiagnosticosController::class);
+Route::get('reporte_responsable', ReporteResponsableController::class);
 //reporten PDF
 Route::get('report/pdf/{id}', [ExportController::class, 'reportPDF']);
 Route::get('reportrabajo/pdf/{id}', [ExportController::class, 'reportTrabajo']);
