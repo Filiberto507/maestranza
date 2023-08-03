@@ -27,7 +27,6 @@ class VehiculosController extends Component
     {
         $this->pageTitle ='Listado';
         $this->componentName = 'Vehiculos';
-        $this->dependencia_id ='Elegir';
         //$this->conductors_id='Elegir';
     }
 
@@ -35,23 +34,16 @@ class VehiculosController extends Component
     {
         if(strlen($this->search) > 0 )
 
-        $Vehiculos=Vehiculos::join('Dependencias as dep','dep.id','Vehiculos.dependencias_id')
-        //->join('Conductor as c','c.id','Vehiculos.conductors_id')
-        ->select('Vehiculos.*','dep.id as dependencias','dep.nombre')
-        ->where('Vehiculos.placa','like','%'.$this->search.'%')
+        $Vehiculos=Vehiculos::where('Vehiculos.placa','like','%'.$this->search.'%')
         ->orWhere('dep.id','like','%'.$this->search.'%')
         ->orderBy('Vehiculos.placa','asc')
         ->paginate($this->pagination);
         else
-        $Vehiculos=Vehiculos::join('Dependencias as dep','dep.id','Vehiculos.dependencias_id')
-        //->join('Conductor as c','c.id','Vehiculos.conductors_id','c.id as conductors')
-        ->select('Vehiculos.*','dep.id as dependencias','dep.nombre')
-        ->orderBy('Vehiculos.placa','asc')
+        $Vehiculos=Vehiculos::orderBy('Vehiculos.placa','asc')
         ->paginate($this->pagination);
 
         return view('livewire.vehiculos.component',[
-            'Vehiculos'=>$Vehiculos,
-            'Dependencias'=> Dependencia::orderBy('nombre','asc')->get(),
+            'Vehiculos'=>$Vehiculos
             //'Conductor'=> Conductor::orderBy('name','asc')->get()
         ])
         ->extends('layouts.theme.app')
@@ -73,14 +65,13 @@ class VehiculosController extends Component
         $this->chasis=$Vehiculos->chasis;
         $this->motor=$Vehiculos->motor;
         $this->estado = $Vehiculos->estado;
-        $this->dependencias_id=$Vehiculos->dependencias_id;
         $this->emit('show-modal', 'SHOW MODAL');
     }
     public function Store()
     {
-      
+      //dd($this->placa);
         $rules = [
-            'placa' => 'required|min:3|unique:vehiculos,placa',
+            'placa' => "required|min:3|unique:vehiculos,placa,{$this->placa}",
             'clase' => 'required|min:3',
             'marca' => 'required|min:3',
             'tipo_vehiculo' => 'required|min:3',
@@ -90,21 +81,19 @@ class VehiculosController extends Component
             'chasis' => '',
             'modelo' => 'required|min:3',
             'cilindrada' => '',
-            'estado' => 'required|min:3',
-            'dependencias_id' => 'required',
+            'estado' => 'required|min:3'
             //'conductors_id' => 'required',
         ];
 
-        $messages =[
+        $messages =[   
             'placa.required' => 'ingrese el nombre',
-            'placa.unique'=> 'ya existe el nombre de la placa',
-            'placa.min' => 'El nombre tiene que tener al menos 3 caracteres',     
-            
+            'placa.min' => 'El nombre tiene que tener al menos 3 caracteres',  
+            'placa.unique' => 'La PLACA ya existe en el sistema'
         ];
-
+        
         $this->validate($rules, $messages);
-
-        $Vehiculos=Vehiculos::create(['placa' => $this->placa,
+        //dd($this->placa);
+        $Vehiculos=Vehiculos::create(['placa' => strtoupper( $this->placa),
                                       'clase' => $this->clase,
                                       'marca'=>$this->marca,
                                       'tipo_vehiculo'=>$this->tipo_vehiculo,
@@ -114,8 +103,8 @@ class VehiculosController extends Component
                                       'chasis'=>$this->chasis,
                                       'modelo'=>$this->modelo,
                                       'cilindrada'=>$this->cilindrada,
-                                      'estado'=>$this->estado,
-                                      'dependencias_id' => $this->dependencias_id]);
+                                      'estado'=>$this->estado
+                                    ]);
                                       //'conductors_id' => $this->conductors_id]);
                                       
        // dd($Dependencias);
@@ -130,23 +119,21 @@ class VehiculosController extends Component
         $this->modelo ='';
         $this->marca ='';
         $this->color ='';
-        $this->año ='';
         $this->cilindrada ='';
         $this->chasis ='';
         $this->motor ='';
         $this->search ='';
-        $this->dependencias_id='Elegir';
         //$this->conductors_id='Elegir';
         $this->selected_id =0;
         $this->resetValidation();
         //para regresar a la pagina principal
         $this->resetPage();
-        $this->emit('vehiculo-close', 'vehiculo cerrar');
+        $this->emit('close', 'vehiculo cerrar');
     }
     public function Update()
     {
         $rules = [
-            'placa' => 'required|min:3',
+            'placa' => "required|min:3|unique:vehiculos,placa,{$this->placa}",
             'clase' => 'required|min:3',
             'marca' => 'required|min:3',
             'tipo_vehiculo' => 'required|min:3',
@@ -156,21 +143,20 @@ class VehiculosController extends Component
             'chasis' => '',
             'modelo' => 'required|min:3',
             'cilindrada' => '',
-            'estado' => 'required|min:3',
-            'dependencias_id' => 'required',
+            'estado' => 'required|min:3'
             //'conductors_id' => 'required',
         ];
 
         $messages =[
             'placa.required' => 'ingrese el nombre',
-            'placa.unique'=> 'ya existe el nombre de la placa',
-            'placa.min' => 'El nombre tiene que tener al menos 3 caracteres',     
+            'placa.min' => 'El nombre tiene que tener al menos 3 caracteres',  
+            'placa.unique' => 'La PLACA ya existe en el sistema'
             
         ];
 
         $this->validate($rules, $messages);
         $Vehiculos =Vehiculos::find($this->selected_id);
-        $Vehiculos ->update(['placa' => $this->placa,
+        $Vehiculos ->update(['placa' => strtoupper($this->placa),
                                 'clase' => $this->clase,
                                 'marca'=>$this->marca,
                                 'tipo_vehiculo'=>$this->tipo_vehiculo,
@@ -180,8 +166,8 @@ class VehiculosController extends Component
                                 'chasis'=>$this->chasis,
                                 'modelo'=>$this->modelo,
                                 'cilindrada'=>$this->cilindrada,
-                                'estado'=>$this->estado,
-                                'dependencias_id' => $this->dependencias_id]);
+                                'estado'=>$this->estado
+                            ]);
                                       //'conductors_id' => $this->conductors_id]);
                                       
        // dd($Dependencias);

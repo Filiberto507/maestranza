@@ -10,7 +10,7 @@ class Vehiculos extends Model
     use HasFactory;
 
     protected $fillable=['placa','clase','marca','tipo_vehiculo','color','combustible_capacidad',
-                         'motor','chasis','modelo','cilindrada','estado','dependencias_id'];
+                         'motor','chasis','modelo','cilindrada','estado'];
 
     public function diagnostico()
     {

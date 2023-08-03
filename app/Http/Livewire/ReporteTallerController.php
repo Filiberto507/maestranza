@@ -89,9 +89,7 @@ class ReporteTallerController extends Component
         ->orderBy('id', 'desc')->get();
         //dd($Diagnostico);
             
-        $this->vehiculodatos = Vehiculos::join('dependencias as d', 'd.id', 'vehiculos.dependencias_id')
-            ->select('vehiculos.*', 'd.nombre as dependencia')
-            ->orderby('id', 'desc')
+        $this->vehiculodatos = Vehiculos::orderby('id', 'desc')
             ->get();
 
         //dd($Taller);

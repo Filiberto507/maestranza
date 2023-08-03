@@ -26,8 +26,6 @@ return new class extends Migration
             $table->string('modelo',45)->nullable();
             $table->string('cilindrada',45)->nullable();
             $table->string('estado',45)->nullable();
-            $table->unsignedBigInteger('dependencias_id');
-            $table->foreign('dependencias_id')->references('id')->on('dependencias');
             //$table->unsignedBigInteger('conductors_id');
            //$table->foreign('conductors_id')->references('id')->on('conductors');
             $table->timestamps();

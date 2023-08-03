@@ -72,9 +72,7 @@ class TallerController extends Component
             $Taller = Taller::orderBy('id', 'desc')->paginate($this->pagination);
         $this->acctaller = accesoriostaller::orderBy('id', 'asc')->get();
 
-        $this->vehiculodatos = Vehiculos::join('dependencias as d', 'd.id', 'vehiculos.dependencias_id')
-            ->select('vehiculos.*', 'd.nombre as dependencia')
-            ->orderby('id', 'desc')
+        $this->vehiculodatos = Vehiculos::orderby('id', 'desc')
             ->get();
 
         //dd($this->vehiculodatos);
@@ -444,9 +442,8 @@ class TallerController extends Component
         $this->ingreso = Carbon::parse(Carbon::now())->format('H:i');
         //dd($this->vehiculoselectedId);
         //dd($this->vehiculoselectedName, $this->vehiculoselectedId);
-        $findvehiculo = Vehiculos::join('dependencias as d', 'd.id', 'vehiculos.dependencias_id')
-            ->select('vehiculos.*', 'd.nombre as dependencia')
-            ->where('vehiculos.id', $this->vehiculoselectedId)
+        $findvehiculo = Vehiculos::
+            where('vehiculos.id', $this->vehiculoselectedId)
             ->first();
         //dd($findvehiculo);
         $this->placa = $findvehiculo->placa;

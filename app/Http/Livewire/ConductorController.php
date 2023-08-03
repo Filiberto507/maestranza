@@ -10,7 +10,7 @@ use Livewire\Component;
 class ConductorController extends Component
 {
     public $componentName, $pageTitle, $search, $selected_id, $name, $telefono, $status;
-    public $filas = [], $filas2 =[];
+    public $filas = [], $filas2 = [];
 
     use WithPagination;
 
@@ -33,7 +33,7 @@ class ConductorController extends Component
         if (strlen($this->search) > 0)
             $conductor = Conductor::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
         else
-            $conductor = Conductor::orderby('id', 'asc')->paginate($this->pagination);
+            $conductor = Conductor::orderby('name', 'asc')->paginate($this->pagination);
 
         return view('livewire.conductor.component', [
             'conductor' => $conductor
@@ -44,7 +44,7 @@ class ConductorController extends Component
 
     public function Store()
     {
-        dd($this->filas);
+        //dd($this->filas);
         //validaciones
         $rules = ['name' => 'required|min:2|unique:conductors,name'];
 
@@ -132,35 +132,17 @@ class ConductorController extends Component
         $this->emit('conductor-close', 'conductor cerrar');
     }
 
-    public function agregarFila($variable)
+    protected $listeners = [
+        'deleteRow' => 'Destroy',
+        'resetUI' => 'resetUi'
+    ];
+    //metodo eliminar
+    public function Destroy(Conductor $conductor)
     {
-        if (count($this->filas) == 3) {
-            dd($this->filas, $this->filas2);
-        }
-
-        switch ($variable) {
-            case '1':
-                $this->filas[] = [
-                    'items' => '',
-                    'descriptions' => '',
-                ];
-                break;
-
-            case '2':
-                $this->filas2[] = [
-                    'items' => '',
-                    'descriptions' => '',
-                ];
-                break;
-            default:
-                # code...
-                break;
-        }
-    }
-
-    public function eliminarFila($index)
-    {
-        unset($this->filas[$index]);
-        $this->filas = array_values($this->filas); // Reindexar el arreglo
+        
+                $conductor->delete();
+                $this->resetUI();
+                $this->emit('user-deleted', 'Usuario Eliminado');
+        
     }
 }

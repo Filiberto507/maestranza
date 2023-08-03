@@ -33,9 +33,7 @@ class ReporteResponsableController extends Component
     public function render()
     {
 
-        $this->vehiculodatos = Vehiculos::join('dependencias as d', 'd.id', 'vehiculos.dependencias_id')
-            ->select('vehiculos.*', 'd.nombre as dependencia')
-            ->orderby('id', 'desc')
+        $this->vehiculodatos = Vehiculos::orderby('id', 'desc')
             ->get();
 
         return view('livewire.ReporteResponsable.component',[
