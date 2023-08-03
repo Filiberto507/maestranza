@@ -38,11 +38,11 @@
         </button>
 
         @if($selected_id < 1)
-        <button type="button" wire:click.prevent="CreateRole()" class="btn btn-dark close-modal" >
+        <button type="button" wire:click.prevent="CreateAccesorio()" class="btn btn-dark close-modal" >
           GUARDAR
         </button>
         @else
-        <button type="button" wire:click.prevent="UpdateRole()" class="btn btn-dark close-modal" >
+        <button type="button" wire:click.prevent="Update()" class="btn btn-dark close-modal" >
           ACTUALIZAR
         </button>
         @endif

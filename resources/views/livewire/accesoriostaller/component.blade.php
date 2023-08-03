@@ -76,25 +76,25 @@
 <script>
     document.addEventListener('DOMContentLoaded', function(){
         //evento ocultar la ventana modal y notificar
-        window.livewire.on('acctaller-added', Msg => {
+        window.livewire.on('accesorio-added', Msg => {
             $('#theModal').modal('hide')
         })
         //evento ocultar la ventana modal y notificar
-        window.livewire.on('acctaller-updated', Msg => {
+        window.livewire.on('accesorio-updated', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
         //evento  notificar
-        window.livewire.on('acctaller-deleted', Msg => {
+        window.livewire.on('accesorio-deleted', Msg => {
             noty(Msg)
         })
         //evento notificar
-        window.livewire.on('acctaller-exists', Msg => {
+        window.livewire.on('accesorio-exists', Msg => {
             noty(Msg)
         })
 
         //evento notificar
-        window.livewire.on('acctaller-error', Msg => {
+        window.livewire.on('accesorio-error', Msg => {
             noty(Msg)
         })
 
@@ -108,7 +108,7 @@
             $('#theModal').modal('show')
         });
         //cerrar
-        window.livewire.on('acctaller-close', Msg =>{
+        window.livewire.on('accesorio-close', Msg =>{
             $('#theModal').modal('hide')
             noty(Msg)
         });
@@ -128,7 +128,7 @@
             confirmButtonText: 'Aceptar'
         }).then(function(result){
             if(result.value){
-                window.livewire.emit('destroy', id)
+                window.livewire.emit('deleteRow', id)
                 swal.close()
             }
         })
