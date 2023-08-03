@@ -23,7 +23,7 @@ class VehiculoSeeder extends Seeder
             'clase' => 'VAGONETA',
             'tipo_vehiculo' => 'PATROL',
             'color' => 'BEIGE',
-            'dependencias_id' => '1'
+            
         ]);
         
         /*Vehiculos::create([   
@@ -31,7 +31,7 @@ class VehiculoSeeder extends Seeder
             'modelo' => '',
             'marca' => '',
             'color' => '',
-            'dependencias_id' => ''
+            
         ]);
 
         Vehiculos::create([   
@@ -39,7 +39,7 @@ class VehiculoSeeder extends Seeder
             'modelo' => '',
             'marca' => '',
             'color' => '',
-            'dependencias_id' => ''
+            
         ]);
 
         Vehiculos::create([   
@@ -47,7 +47,7 @@ class VehiculoSeeder extends Seeder
             'modelo' => '',
             'marca' => '',
             'color' => '',
-            'dependencias_id' => ''
+            
         ]);*/
         //gabinete
         Vehiculos::create([   
@@ -57,7 +57,7 @@ class VehiculoSeeder extends Seeder
             'clase' => 'JEEP',
             'tipo_vehiculo' => 'JIMNY',
             'color' => 'AZUL',
-            'dependencias_id' => '2'
+            
         ]);
         //ASESORIA DE GESTION INSTITUCIONAL Y RELACIONAMIENTO
         Vehiculos::create([   
@@ -67,7 +67,7 @@ class VehiculoSeeder extends Seeder
             'clase' => 'VAGONETA',
             'tipo_vehiculo' => 'X-TRAIL',
             'color' => 'ROJO',
-            'dependencias_id' => '3'
+            
         ]);
 
         

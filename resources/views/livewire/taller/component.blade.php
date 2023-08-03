@@ -60,6 +60,10 @@
                                 <th class="table-th text-while">
                                     ACCTIONS
                                 </th>
+
+                                <th class="table-th text-while">
+                                    SALIDA
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -107,6 +111,12 @@
                                             <rect x="6" y="14" width="12" height="8"></rect>
                                         </svg>
                                     </a>
+                                </td>
+
+                                <td>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" wire:click="salida({{$tall->id}})" type="button">SALIDA</button>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
@@ -166,13 +176,13 @@
 
         window.livewire.on('taller-nodeleted', Msg => {
             // Escucha el evento 'taller-deleted'
-                // Muestra el Swal
-                Swal.fire({
-                    title: 'Taller No eliminado.',
-                    text: 'El taller No se puede eliminar.',
-                    icon: 'success',
-                    timer: 3000 // Opcional: tiempo en milisegundos para que el mensaje se cierre automáticamente
-                })
+            // Muestra el Swal
+            Swal.fire({
+                title: 'Taller No eliminado.',
+                text: 'El taller No se puede eliminar.',
+                icon: 'success',
+                timer: 3000 // Opcional: tiempo en milisegundos para que el mensaje se cierre automáticamente
+            })
             noty(Msg)
         })
 

@@ -260,7 +260,6 @@ class TrabajoRealizadoTallerController extends Component
     {
 
 
-        $this->fecha_ingreso = Carbon::parse(Carbon::now())->format('Y-m-d');
         //dd($this->vehiculoselectedId);
         //dd($this->vehiculoselectedName, $this->vehiculoselectedId);
         $findvehiculo = taller::where('id', $this->vehiculoselectedId)
@@ -271,7 +270,9 @@ class TrabajoRealizadoTallerController extends Component
         $this->dependencia = $findvehiculo->dependencia;
         $this->taller_id = $findvehiculo->id;
         $this->km_ingreso = $findvehiculo->kilometraje;
-
+        $this->fecha_ingreso = $findvehiculo->fecha_ingreso;
+        $this->fecha_salida = $findvehiculo->fecha_salida;
+        
         $diagnostico_taller = Diagnostico::where('taller_id', $this->vehiculoselectedId)->first();
         //dd($diagnostico_taller);
         $this->diagnostico_item = DiagnosticoItem::where('diagnosticos_id', $diagnostico_taller->id)->get();

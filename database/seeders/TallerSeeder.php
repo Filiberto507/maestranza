@@ -17,7 +17,7 @@ class TallerSeeder extends Seeder
     {
         //taller 
         Taller::create([ 
-            'ingreso' => '18:44:05',
+            'ingreso' => '18:44',
             'fecha_ingreso' => '2023-07-11',
             'conductor' => 'ROMAN TOMAS MATIAS',
             'vehiculo' => 'SUZUKI',
@@ -33,7 +33,7 @@ class TallerSeeder extends Seeder
         ]);
 
         Taller::create([ 
-            'ingreso' => '17:35:51',
+            'ingreso' => '17:35',
             'fecha_ingreso' => '2023-07-11',
             'conductor' => 'LUIS BRUNO MONTESINOS VARGAS',
             'vehiculo' => 'NISSAN',
