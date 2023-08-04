@@ -178,6 +178,18 @@
             $('#theModal').modal('hide')
             noty(Msg)
         });
+        //no eliminar
+        window.livewire.on('vehiculo-nodeleted', Msg => {
+            // Escucha el evento 'taller-deleted'
+            // Muestra el Swal
+            Swal.fire({
+                title: 'VEHICULO No eliminado.',
+                text: 'El VEHICULO No se puede eliminar por que esta en uso.',
+                icon: 'success',
+                timer: 3000 // Opcional: tiempo en milisegundos para que el mensaje se cierre automáticamente
+            })
+            noty(Msg)
+        })
 
         window.livewire.on('close', Msg => {
             console.log('hola')

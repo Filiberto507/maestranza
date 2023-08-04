@@ -105,7 +105,7 @@
                     <td align="center">{{$item->kilometraje}}</td>
                     <td align="center">{{$item->descripcion}}</td>
                     @if($item->tipo_taller == 1)
-                    <td align="center">x</td>
+                    <td align="center">X</td>
                     @else
                     <td align="center"></td>
                     @endif

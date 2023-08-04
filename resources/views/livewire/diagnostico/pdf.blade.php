@@ -68,6 +68,9 @@
                 <th width="20%">
                     ITEM
                 </th>
+                <th width="20%">
+                    CANTIDAD
+                </th>
                 <th width="80%">
                     DESCRIPCIÓN
                 </th>
@@ -75,8 +78,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($DiagnosticoItem as $di)
+            @foreach ($DiagnosticoItem as $index => $di)
             <tr class="datos">
+            <td class="item">
+                    {{$index+1}}
+                </td>
                 <td class="item">
                     {{$di->item}}
                 </td>
@@ -90,13 +96,13 @@
         @if($Diagnostico->tipo_taller == 1)
         <tfoot class="tfoot">
             <tr>
-                <td colspan="2"><strong>OBSERVACIONES: PARA SU COMPRA. Se requiere hacer la compra de dichos repuestos para su cambio</strong></td>
+                <td colspan="3"><strong>OBSERVACIONES: PARA SU COMPRA. Se requiere hacer la compra de dichos repuestos para su cambio</strong></td>
             </tr>
         </tfoot>
         @elseif($Diagnostico->tipo_taller == 2)
         <tfoot class="tfoot">
             <tr>
-                <td colspan="2"><strong>OBSERVACIONES: TALLER EXTERNO. Se requiere hacer el mantenimiento del vehiculo para su buen funcionamiento.</strong></td>
+                <td colspan="3"><strong>OBSERVACIONES: TALLER EXTERNO. Se requiere hacer el mantenimiento del vehiculo para su buen funcionamiento.</strong></td>
             </tr>
         </tfoot>
         @endif

@@ -51,12 +51,12 @@ class DiagnosticoController extends Component
                 ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa')
                 ->where('Diagnosticos.fecha', 'like', '%' . $this->search . '%')
                 ->orWhere('v.id', 'like', '%' . $this->search . '%')
-                ->orderBy('Diagnostico.id', 'asc')
+                ->orderBy('Diagnostico.id', 'desc')
                 ->paginate($this->pagination);
         else
             $Diagnostico = Diagnostico::join('Vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
                 ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa')
-                ->orderBy('Diagnosticos.id', 'asc')
+                ->orderBy('Diagnosticos.id', 'desc')
                 ->paginate($this->pagination);
         //dd($Diagnostico);
 

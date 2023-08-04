@@ -8,6 +8,7 @@ use App\Models\Vehiculos;
 use App\Models\Dependencia;
 use App\Models\Conductor;
 use App\Models\Diagnostico;
+use App\Models\Taller;
 use DB;
 
 class VehiculosController extends Component
@@ -133,7 +134,7 @@ class VehiculosController extends Component
     public function Update()
     {
         $rules = [
-            'placa' => "required|min:3|unique:vehiculos,placa,{$this->placa}",
+            'placa' => "required|min:3|unique:vehiculos,placa,{$this->selected_id},id",
             'clase' => 'required|min:3',
             'marca' => 'required|min:3',
             'tipo_vehiculo' => 'required|min:3',
@@ -179,10 +180,10 @@ class VehiculosController extends Component
     public function Destroy(Vehiculos $Vehiculos)
     {
         if($Vehiculos){
-            $data = Diagnostico::where('vehiculos_id', $Vehiculos->id)->count();
+            $data = Taller::where('vehiculo_id', $Vehiculos->id)->count();
             //validar si tiene vehiculos asignados
             if($data > 0 ) {
-                $this->emit('vehiculo-deleted','No es posible eliminar el vehiculo por que tiene diagnosticos ');
+                $this->emit('vehiculo-nodeleted','No es posible eliminar el vehiculo por que se uso ');
             } else {
                 $Vehiculos->delete();
                 $this->resetUI();

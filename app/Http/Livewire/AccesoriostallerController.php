@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\accesoriostaller;
+use App\Models\tallerdetalle;
 use Livewire\WithPagination;
 use DB;
 
@@ -105,10 +106,18 @@ class AccesoriostallerController extends Component
     }
     protected $listeners = ['deleteRow' => 'Destroy'];
     public function Destroy(accesoriostaller $accesorio)
-    {
+    {   
+        if($accesorio){
+            $data = tallerdetalle::where('acctaller_id', $accesorio->id)->count();
+            //validar si tiene vehiculos asignados
+            if($data > 0 ) {
+                $this->emit('accesorio-nodeleted','No es posible eliminar el accesorio por que se uso ');
+            } else {
+                $accesorio->delete();
+                $this->resetUI();
+                $this->emit('accesorio-deleted', 'Accesorio Eliminado');
+            }
+        }
 
-        $accesorio->delete();
-        $this->resetUI();
-        $this->emit('accesorio-deleted', 'Accesorio Eliminado');
     }
 }

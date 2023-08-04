@@ -112,6 +112,18 @@
             $('#theModal').modal('hide')
             noty(Msg)
         });
+         //no eliminar
+         window.livewire.on('accesorio-nodeleted', Msg => {
+            // Escucha el evento 'taller-deleted'
+            // Muestra el Swal
+            Swal.fire({
+                title: 'ACCESORIO No eliminado.',
+                text: 'El ACCESORIO No se puede eliminar por que esta en uso.',
+                icon: 'success',
+                timer: 3000 // Opcional: tiempo en milisegundos para que el mensaje se cierre automáticamente
+            })
+            noty(Msg)
+        })
     });
     //confimar eliminar
     function Confirm(id)

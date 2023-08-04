@@ -108,7 +108,7 @@
                             @endforeach
                         </tbody>
                     </table>
-
+                    {{$Diagnosticos->links()}}
                 </div>
             </div>
         </div>

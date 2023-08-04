@@ -72,14 +72,15 @@ class ConductorController extends Component
 
     //metodo editar
 
-    public function Edit(Conductor $role)
+    public function Edit(Conductor $conductor)
     {
         //buscar el rol con el metodo antiguo
-        //$role = Role::find($id);
+        //$conductor = con$conductor::find($id);
         //mandar los datos a los propiedades
-        $this->selected_id = $role->id;
-        $this->name = $role->name;
-        $this->telefono = $role->telefono;
+        $this->selected_id = $conductor->id;
+        $this->name = $conductor->name;
+        $this->telefono = $conductor->telefono;
+        $this->status = $conductor->status;
 
         //emitir un evento a una ventada modal
         $this->emit('show-modal', ' Show modal');

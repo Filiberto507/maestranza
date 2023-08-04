@@ -50,7 +50,7 @@
 <table class="table  table-bordered table-hover mt-1">
     <thead>
         <tr>
-            <th>Items</th>
+            <th>Cantidad</th>
             <th>Descripción</th>
 
             <th>
