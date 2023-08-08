@@ -105,6 +105,7 @@
                     {{$dr->cantidad}}
                 </td>
                 <td class="cant">
+                    {{$dr->unidad}}
                 </td>
                 <td>
                     {{$dr->servicio}}
@@ -175,6 +176,9 @@
                 <br>
                 <font style="vertical-align: inherit">
                     <font style="vertical-align: inherit">Responsable vehiculo</font>
+                    <br>
+                    
+                <font style="vertical-align: inherit">{{$DiagnosticoAreaT->conductor}}</font>
                 </font>
             </div>
 
