@@ -35,7 +35,7 @@
                     @endphp
                 </td>
                 <td class="columna2">
-                    SECR./DIR./UNIDAD: 
+                    SECR./DIR./UNIDAD: GOBERNACION DE COCHABAMBA Y OTROS 
 
                 </td>
             </tr>
@@ -50,7 +50,7 @@
 
             <tr>
                 <td>
-                    IMORESION EN FECHA : {{$fecha}}
+                    IMPRESION EN FECHA : {{$fecha}}
                 </td>
                 <td>
                     CHASIS : {{$vehiculodato->chasis}}

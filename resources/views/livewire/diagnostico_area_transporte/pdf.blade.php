@@ -90,7 +90,7 @@
                     UNIDAD
                 </th>
                 <th width="60%">
-                    SERVICIO
+                    REQUERIMIENTO
                 </th>
 
             </tr>
