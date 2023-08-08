@@ -101,6 +101,7 @@ class DiagnosticoAreaTransporteController extends Component
             $this->requerimiento[] = [
                 'item'=>$d->item,
                 'cantidad' => $d->cantidad,
+                'unidad' => $d->unidad,
                 'servicio' => $d->servicio,
             ];
         }
@@ -153,6 +154,7 @@ class DiagnosticoAreaTransporteController extends Component
                     'item'=>$cont,
                     'cantidad' => $f['cantidad'],
                     'servicio' => $f['servicio'],
+                    'unidad' => $f['unidad'],
                     'diagnostico_area_transportes_id' => $DiagnosticoAreaT->id
                 ]);
                 $cont++;
@@ -259,6 +261,7 @@ class DiagnosticoAreaTransporteController extends Component
                 $this->requerimiento[] = [
                     'item'=>'',
                     'cantidad' => '',
+                    'unidad' => '',
                     'servicio' => '',
                 ];
                 break;
@@ -339,6 +342,7 @@ class DiagnosticoAreaTransporteController extends Component
                     'item'=>$key2+1,
                     'cantidad' => $value['cantidad'],
                     'servicio' => $value['servicio'],
+                    'unidad' => $value['unidad'],
                     'diagnostico_area_transportes_id' => $iditem
                 ]);
             }
@@ -363,6 +367,7 @@ class DiagnosticoAreaTransporteController extends Component
                     'item'=>$key+1,
                     'cantidad' => $item['cantidad'],
                     'servicio' => $item['servicio'],
+                    'unidad' => $item['unidad'],
                     'diagnostico_area_transportes_id' => $iditem
                 ]);
             }

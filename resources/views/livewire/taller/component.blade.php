@@ -131,10 +131,16 @@
 </div>
 
 <script>
+    function openFlatpickr(inputId) {
+        // Abre el selector de fechas al hacer clic en el input.
+        flatpickr(`#${inputId}`, {
+            enableTime: false,
+            dateFormat: 'Y-m-d',
+            // Otras opciones de configuración de flatpickr...
+        });
+    }
     document.addEventListener('DOMContentLoaded', function() {
 
-        var f1 = flatpickr(document.getElementById('basicFlatpickr'));
-        var f2 = flatpickr(document.getElementById('basicFlatpickr2'));
 
         //esta variable es para el modal 
         var isModalOpen = false;
@@ -221,16 +227,15 @@
         var modal = document.getElementById('modal');
 
         // Capturar el evento de clic fuera del modal
-        document.addEventListener('click', function(event) {
+       document.addEventListener('click', function(event) {
             //console.log(isModalOpen);
             // Verificar si el clic ocurrió fuera del modal
-            if (isModalOpen == true && !modal.contains(event.target)) {
+            // Verificar si el clic ocurrió en el input dentro del modal
+            if (isModalOpen == true && !modal.contains(event.target && event.target.tagName != 'INPUT')) {
                 // Llamamos a la funcion limpiar para que se cierre correctamente
-                //console.log(isModalOpen);
-                limpiar()
-                isModalOpen = false
+                limpiar();
+                isModalOpen = false;
             }
-
         });
 
     });

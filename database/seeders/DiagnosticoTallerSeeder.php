@@ -18,32 +18,20 @@ class DiagnosticoTallerSeeder extends Seeder
     public function run()
     {
         $fechaIngreso = Carbon::parse('2023-02-26');
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 1; $i <= 40; $i++) {
+            $taller = Taller::find( $i);
             $ingreso = $fechaIngreso->addWeek(); // Aumenta un día por cada iteración.
             $kilometraje = 3658 + ($i * 1000); // Aumenta 1000 km por cada iteración.
-            $id = $i+1;
-            if($i % 2 == 0)
-            {
-                $tipo_taller = 2;
-            }
-            else{
-                $tipo_taller = 1;
-            }
-            if($i > 8)
-            {
-                $conductor = 'GUSTAVO MELENDES CAMACHO';
-            }
-            else{
-                $conductor = 'LUIS BRUNO MONTESINOS VARGAS';
-            }
+            
+                $tipo_taller = rand(1, 2);
 
             Diagnostico::create([ 
-                'fecha' => $ingreso->format('Y-m-d'), // Formato de fecha 'YYYY-MM-DD'.
-                'dependencia' => 'GABINETE',
-                'conductor' => $conductor,
+                'fecha' => $taller->fecha_ingreso,
+                'dependencia' => $taller->dependencia,
+                'conductor' => $taller->conductor,
                 'tipo_taller' => $tipo_taller,
-                'vehiculos_id' => 3,
-                'taller_id' => $id      
+                'vehiculos_id' => $taller->vehiculo_id,
+                'taller_id' => $taller->id      
             ]);
         }
     }

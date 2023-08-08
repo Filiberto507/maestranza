@@ -258,6 +258,7 @@ class TallerController extends Component
         $this->vehiculo = $taller->vehiculo;
         $this->color = $taller->color;
         $this->dependencia = $taller->dependencia;
+        //dd($this->dependencia);
         $this->placa = $taller->placa;
         $this->kilometraje = $taller->kilometraje;
         $this->ordentrabajo = $taller->ordentrabajo;

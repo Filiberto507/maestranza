@@ -17,7 +17,23 @@ class TallerDetallerSeeder extends Seeder
     {
         //accesorios detalles
 
-        tallerdetalle::create([ 
+        for($i = 1; $i <=40; $i++)
+        {
+
+            for($j = 1; $j <=rand(8,25); $j++)
+            {   
+                
+                tallerdetalle::create([ 
+                    'acctaller_id' => rand(1,30),
+                    'taller_id' => $i,       
+                ]);
+            }
+        }
+
+
+
+
+       /* tallerdetalle::create([ 
             'acctaller_id' => 1,
             'taller_id' => 1,       
         ]);
@@ -85,6 +101,6 @@ class TallerDetallerSeeder extends Seeder
         tallerdetalle::create([ 
             'acctaller_id' => 27,
             'taller_id' => 2,       
-        ]);
+        ]);*/
     }
 }

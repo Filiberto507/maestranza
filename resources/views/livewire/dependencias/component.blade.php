@@ -49,7 +49,7 @@
                                             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                         </svg>
                                     </a>
-
+                                    @can('vista_eliminar')
                                     <a href="javascript:void(0)"
                                         onclick="Confirm('{{$d->id}}')"
                                         class="btn btn-dark" title="Eliminar Registro">
@@ -60,6 +60,7 @@
                                             <line x1="14" y1="11" x2="14" y2="17"></line>
                                         </svg>
                                     </a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

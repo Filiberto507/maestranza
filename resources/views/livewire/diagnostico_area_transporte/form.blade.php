@@ -4,7 +4,7 @@
     <div class="col-sm-12 col-md-6">
         <div class="form-group">
             <label>Fecha</label>
-            <input id="basicFlatpickr" wire:model.lazy="fecha" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." readonly="readonly">
+            <input id="basicFlatpickr" wire:model.lazy="fecha" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." onclick="openFlatpickr()">
             @error('fecha') <span class="text-danger er">{{ $message}} </span>
 
             @enderror
@@ -68,7 +68,8 @@
     <thead>
         <tr>
             <th class="col-sm-12 col-md-3">Cantidad</th>
-            <th class="col-sm-12 col-md-6">Servicio</th>
+            <th class="col-sm-12 col-md-3">Unidad</th>
+            <th class="col-sm-12 col-md-6">Requerimiento</th>
 
             <th>
 
@@ -80,7 +81,8 @@
     <tbody>
         @foreach ($requerimiento as $index => $req)
         <tr>
-            <td><input type="text" class="form-control" wire:model="requerimiento.{{ $index }}.cantidad" /></td>
+            <td><input type="number" class="form-control" wire:model="requerimiento.{{ $index }}.cantidad" /></td>
+            <td><input type="text" class="form-control" wire:model="requerimiento.{{ $index }}.unidad" /></td>
             <td><textarea class="form-control" wire:model="requerimiento.{{ $index }}.servicio" name="" id="" col="100" rows="2"></textarea></td>
             <td><button class="btn btn-danger" wire:click="eliminarRequerimiento({{ $index }})">Eliminar</button></td>
         </tr>
@@ -113,7 +115,7 @@
     <tbody>
         @foreach ($obra as $index => $ob)
         <tr>
-            <td><input type="text" class="form-control" wire:model="obra.{{ $index }}.cantidad" /></td>
+            <td><input type="number" class="form-control" wire:model="obra.{{ $index }}.cantidad" /></td>
             <td><textarea class="form-control" wire:model="obra.{{ $index }}.servicio" name="" id="" col="100" rows="2"></textarea></td>
             <td><button class="btn btn-danger" wire:click="eliminarObra({{ $index }})">Eliminar</button></td>
         </tr>

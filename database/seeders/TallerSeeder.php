@@ -21,8 +21,10 @@ class TallerSeeder extends Seeder
         //taller 
         
         $fechaIngreso = Carbon::parse('2023-02-26');
+        $fechaIngreso2 = Carbon::parse('2023-03-03');
         for ($i = 0; $i < 20; $i++) {
             $ingreso = $fechaIngreso->addWeek(); // Aumenta un día por cada iteración.
+            $ingreso2 = $fechaIngreso2->addWeek();
             $kilometraje = 3658 + ($i * 1000); // Aumenta 1000 km por cada iteración.
             if($i > 8)
             {
@@ -45,23 +47,25 @@ class TallerSeeder extends Seeder
                 'clase' => 'JEEP',
                 'tipo_vehiculo' => 'MAZDA',          
             ]);
+
+            Taller::create([ 
+                'ingreso' => '18:44',
+                'fecha_ingreso' => $ingreso2->format('Y-m-d'),
+                'conductor' => 'ROMAN TOMAS MATIAS',
+                'vehiculo' => 'SUZUKI',
+                'color' => 'AZUL',
+                'dependencia' => 'GOBERNACION',
+                'placa' => '4756-YUH',
+                'kilometraje' => $kilometraje,
+                'ordentrabajo' => 'Refacciones a realizar
+                cambio de aceite',
+                'vehiculo_id' => 2,
+                'clase' => 'VAGONETA',
+                'tipo_vehiculo' => 'PATROL',         
+            ]);
         }
 
-        Taller::create([ 
-            'ingreso' => '18:44',
-            'fecha_ingreso' => '2023-04-03',
-            'conductor' => 'ROMAN TOMAS MATIAS',
-            'vehiculo' => 'SUZUKI',
-            'color' => 'AZUL',
-            'dependencia' => 'GOBERNACION',
-            'placa' => '4756-YUH',
-            'kilometraje' => '1526',
-            'ordentrabajo' => 'Refacciones a realizar
-            cambio de aceite',
-            'vehiculo_id' => 2,
-            'clase' => 'VAGONETA',
-            'tipo_vehiculo' => 'PATROL',         
-        ]);
+        
 
 
 

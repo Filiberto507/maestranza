@@ -4,7 +4,7 @@
 <div class="col-sm-12 col-md-6">
         <div class="form-group">
             <label>Fecha</label>
-            <input id="basicFlatpickr" wire:model.lazy="fecha" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." readonly="readonly">
+            <input id="basicFlatpickr" wire:model.lazy="fecha" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." onclick="openFlatpickr()">
             @error('fecha') <span class="text-danger er">{{ $message}} </span>
 
             @enderror

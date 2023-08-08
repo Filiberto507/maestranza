@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Diagnostico_servicio extends Model
 {
     use HasFactory;
-    protected $fillable=['item','cantidad','servicio','diagnostico_area_transportes_id'];
+    protected $fillable=['item','cantidad', 'unidad', 'servicio','diagnostico_area_transportes_id'];
 
     public function diagnostico_area_transporte()
     {
