@@ -18,6 +18,7 @@ class DiagnosticoTallerSeeder extends Seeder
     public function run()
     {
         $fechaIngreso = Carbon::parse('2023-02-26');
+        $observacion='';
         for ($i = 1; $i <= 40; $i++) {
             $taller = Taller::find( $i);
             $ingreso = $fechaIngreso->addWeek(); // Aumenta un día por cada iteración.
@@ -30,6 +31,7 @@ class DiagnosticoTallerSeeder extends Seeder
                 'dependencia' => $taller->dependencia,
                 'conductor' => $taller->conductor,
                 'tipo_taller' => $tipo_taller,
+                'observacion' => $observacion,
                 'vehiculos_id' => $taller->vehiculo_id,
                 'taller_id' => $taller->id      
             ]);

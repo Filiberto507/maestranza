@@ -73,7 +73,7 @@
                                     <h6>{{$diag->conductor}}</h6>
                                 </td>
                                 <td class="text-center">
-                                    <h6>{{$diag->observaciones}}</h6>
+                                    <h6>{{$diag->observacion}}</h6>
                                 </td>
                                 <td class="text-center">
                                     <h6>{{$diag->placa}}</h6>

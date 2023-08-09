@@ -52,7 +52,6 @@
         <tr>
             <th>Cantidad</th>
             <th>Descripción</th>
-
             <th>
 
 
@@ -94,6 +93,15 @@
             <option value="2" selected> Taller Externo </option>
         </select>
         @error('tipo_taller') <span class="text-danger er">{{ $message}} </span>
+
+        @enderror
+    </div>
+</div>
+<div class="col-sm-12 col-md-12">
+    <div class="form-group">
+        <label>Observaciones:</label>
+        <textarea wire:model.lazy="observacion" class="form-control" name="" id="" cols="100" rows="3" placeholder="...">hola</textarea>
+        @error('observacion') <span class="text-danger er">{{ $message}} </span>
 
         @enderror
     </div>

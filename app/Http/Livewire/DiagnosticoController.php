@@ -18,7 +18,7 @@ class DiagnosticoController extends Component
 {
     use WithPagination;
 
-    public $fecha, $observaciones, $dependencia, $conductor, $vehiculos_id,
+    public $fecha, $observacion, $dependencia, $conductor, $vehiculos_id,
         $search, $selected_id, $pageTitle, $componentName, $taller_id;
     public $filas = [];
     private $pagination = 6;
@@ -86,6 +86,7 @@ class DiagnosticoController extends Component
         $this->conductor = $Diagnostico->conductor;
         $this->vehiculos_id = $Diagnostico->vehiculos_id;
         $this->tipo_taller = $Diagnostico->tipo_taller;
+        $this->observacion = $Diagnostico->observacion;
         $DiagnosticoItem = DiagnosticoItem::where('diagnosticos_id', $id)->get();
         //dd($DiagnosticoItem);
         foreach ($DiagnosticoItem as $d) {
@@ -123,6 +124,7 @@ class DiagnosticoController extends Component
             'conductor' => $this->conductor,
             'vehiculos_id' => $this->vehiculos_id,
             'tipo_taller' => $this->tipo_taller,
+            'observacion' => $this->observacion,
             'taller_id' => $this->taller_id
         ]);
         if ($Diagnostico) {
@@ -152,6 +154,7 @@ class DiagnosticoController extends Component
         $this->selected_id = 0;
         $this->taller_id = '';
         $this->tipo_taller= '';
+        $this->observacion= '';
         $this->resetValidation();
         //para regresar a la pagina principal
         $this->resetPage();
@@ -182,6 +185,7 @@ class DiagnosticoController extends Component
             'dependencia' => $this->dependencia,
             'conductor' => $this->conductor,
             'tipo_taller' => $this->tipo_taller,
+            'observacion' => $this->observacion,
             'vehiculos_id' => $this->vehiculos_id
         ]);
 

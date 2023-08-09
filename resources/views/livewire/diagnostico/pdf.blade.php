@@ -96,16 +96,17 @@
         @if($Diagnostico->tipo_taller == 1)
         <tfoot class="tfoot">
             <tr>
-                <td colspan="3"><strong>OBSERVACIONES: PARA SU COMPRA. Se requiere hacer la compra de dichos repuestos para su cambio</strong></td>
+                <td colspan="3"><strong>OBSERVACIONES: PARA SU COMPRA.  </strong>{{$Diagnostico->observacion}}</td>
             </tr>
         </tfoot>
         @elseif($Diagnostico->tipo_taller == 2)
         <tfoot class="tfoot">
             <tr>
-                <td colspan="3"><strong>OBSERVACIONES: TALLER EXTERNO. Se requiere hacer el mantenimiento del vehiculo para su buen funcionamiento.</strong></td>
+                <td colspan="3"><strong>OBSERVACIONES: TALLER EXTERNO.  </strong>{{$Diagnostico->observacion}}</td>
             </tr>
         </tfoot>
         @endif
+        
     </table>
     <footer>
         <div style="text-align: center;  margin-top:30px;">

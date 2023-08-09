@@ -20,7 +20,7 @@ class ReporteResponsableController extends Component
     public $vehiculoselectedId, $vehiculoselectedName, $vehiculodatos;
     //propiedades de las vistas
     public function mount(){
-        $this->componentName = 'Reportes de Ventas';
+        $this->componentName = 'Reportes Area de Transportes';
         $this->data = [];
         $this->details = [];
         $this->sumDetails = 0;
