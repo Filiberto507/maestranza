@@ -86,9 +86,20 @@
             <td><textarea class="form-control" wire:model="requerimiento.{{ $index }}.servicio" name="" id="" col="100" rows="2"></textarea></td>
             <td><button class="btn btn-danger" wire:click="eliminarRequerimiento({{ $index }})">Eliminar</button></td>
         </tr>
+        @if ($errors->has("requerimiento.{$index}.cantidad"))
+    <tr>
+        <td colspan="4">
+            <span class="text-danger er">{{ $errors->first("requerimiento.{$index}.cantidad") }}</span>
+        </td>
+    </tr>
+    @endif
+
         @endforeach
     </tbody>
 </table>
+@error('requerimiento.{0}.cantidad') <span class="text-danger er">{{ $message}} </span>
+
+@enderror
 
 <div class="col-sm-12 col-md-8 text-center">
     <button class="btn btn-primary" wire:click="agregarRequerimiento({{1}})">
@@ -122,6 +133,9 @@
         @endforeach
     </tbody>
 </table>
+@error('obra.{0}.cantidad') <span class="text-danger er">{{ $message}} </span>
+
+@enderror
 <div class="col-sm-12 col-md-8 text-center">
     <button class="btn btn-primary" wire:click="agregarObra({{1}})">
         <div class="base-icons">

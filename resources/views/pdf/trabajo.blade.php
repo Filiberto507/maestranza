@@ -71,49 +71,37 @@
     $firstColumn = array_slice($trabajorealizado, 0, $halfItems);
     $secondColumn = array_slice($trabajorealizado, $halfItems);
     @endphp
-    <table class="custom-table">
+    <table class="table-check">
         <tr>
-            @if($totalItems < 6) <td>
-                <table>
-
-
-                    @foreach ($trabajorealizado as $tra)
-                    <tr>
-                        <td class="dashed-border">
-                            {{ $tra }}
-                        </td>
-                    </tr>
-                    @endforeach
-                </table>
-                </td>
-                @else
-
-                <td class="second-table">
-                    <table>
-
-
-                        @foreach ($firstColumn as $tra)
-                        <tr>
-                            <td class="dashed-border">
-                                {{ $tra }}
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
-                </td>
-                <td>
-                    <table>
-                        @foreach ($secondColumn as $tra)
-                        <tr>
-                            <td class="dashed-border">
-                                {{ $tra }}
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
-                </td>
-                @endif
+            <td class="check-column">
+                @foreach($primeros10 as $pr)
+                <div class="checkbox-item">
+                    <input type="checkbox" id="checkbox1" name="checkbox1" {{ $pr->checked == 1 ? 'checked': '' }}>
+                    <label for="checkbox1">{{$pr->name}}</label>
+                </div>
+                @endforeach
+                <!-- Repite las siguientes líneas de código para agregar más elementos -->
+            </td>
+            <td class="check-column">
+                @foreach($segundos10 as $se)
+                <div class="checkbox-item">
+                    <input type="checkbox" id="checkbox5" name="checkbox5" {{ $se->checked == 1 ? 'checked': '' }}>
+                    <label for="checkbox5">{{$se->name}}</label>
+                </div>
+                @endforeach
+                <!-- Repite las siguientes líneas de código para agregar más elementos -->
+            </td>
+            <td class="check-column">
+                @foreach($ultimos10 as $ul)
+                <div class="checkbox-item">
+                    <input type="checkbox" id="checkbox9" name="checkbox9" {{ $ul->checked == 1 ? 'checked': '' }}>
+                    <label for="checkbox9">{{$ul->name}}</label>
+                </div>
+                @endforeach
+                <!-- Repite las siguientes líneas de código para agregar más elementos -->
+            </td>
         </tr>
+    
         <tfoot>
             @if($totalItems < 6)
             <tr>

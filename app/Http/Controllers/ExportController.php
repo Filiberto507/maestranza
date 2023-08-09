@@ -200,6 +200,66 @@ class ExportController extends Controller
         }*/
         $trabajorealizado = explode('-', $descripcion);
         $trabajorealizado = array_filter($trabajorealizado);
+
+        //obtener los checks
+        $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
+
+        //dd($acctaller);
+        //foreach para agregar si tiene el checked
+        foreach ($acctalleres as $tall) {
+            //buscado el id del taller
+            //dd($tallerherr->id);
+            //obtenemos todos los id de las herramientas que tiene el taller id
+            $tallerherramientas = tallerdetalle::where('taller_id', $tallerdatos->id)->get();
+            //dd($tallerherramientas);
+
+            //buscamos si existe esa herramienta agregado o no
+            $obtenercheck = $tallerherramientas->where('acctaller_id', $tall->id)->first();
+            //dump($obtenercheck);
+            //exists sirve para obtener valor en boleano
+            //$this->roles()->where('nombre', $nombreRol)->exists();
+
+            // verificar si tenemos datos en obtenercheck
+            if ($obtenercheck) {
+                //dump($obtenercheck->acctaller_id);
+                $addcheck = accesoriostaller::find($obtenercheck->acctaller_id);
+                //dump($addcheck);
+                $tall->checked = 1;
+                $this->check[] =
+                    $addcheck->id . ", " .
+                    $addcheck->name;
+
+                //$acctalleres->pull($tall->id);
+            }
+        }
+
+        //dd($acctalleres);
+
+        // Colecciones separadas
+        $primeros10 = collect();
+        $segundos10 = collect();
+        $ultimos10 = collect();
+        $a = 0;
+        $b = 1;
+        $c = 2;
+        foreach ($acctalleres as $key => $value) {
+            if ($key == $a) {
+                $primeros10->push($value);
+                $a = $a + 3;
+            }
+
+            if ($key == $b) {
+                $segundos10->push($value);
+                $b = $b + 3;
+            }
+
+            if ($key == $c) {
+                $ultimos10->push($value);
+                $c = $c + 3;
+            }
+        }
+
+
         //dd($trabajorealizado);
        //dd($trabajorealizado);
         //dd($taller->clase);

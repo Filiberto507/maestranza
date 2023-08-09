@@ -97,4 +97,40 @@ table {
   }
 
 
-  
+  /* checkbox */
+
+
+.table-check {
+  background-color: #cdd2cb;
+  /*#cdd2cb*/
+  padding: 5px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.table-check td {
+  width: 33.33%;
+  vertical-align: top;
+}
+
+.checkbox-item {
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+input[type="checkbox"] {
+  width: 50px;
+  height: 23px;
+  margin-right: 0px;
+  margin-bottom: -10px;
+  appearance: none;
+  border: 1px solid #000;
+background-color: #fff;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #000;
+}
+input[type="checkbox"]::before {
+  display: none;
+}
