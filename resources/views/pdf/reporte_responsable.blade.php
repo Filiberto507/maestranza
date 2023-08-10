@@ -35,7 +35,7 @@
                     @endphp
                 </td>
                 <td class="columna2">
-                    SECR./DIR./UNIDAD: GOBERNACION DE COCHABAMBA Y OTROS 
+                    COLOR: {{$vehiculodato->color}}
 
                 </td>
             </tr>
@@ -88,7 +88,7 @@
                     <th class="textleft" width="15%">Nº DIAGNOSTICO TALLER DE MAESTRANZA</th>
                     <th class="textleft" width="15%">Nº DIAGNOSTICO AREA DE TRANSPORTES</th>
                     <th class="textleft" width="15%">KILOMETRAJE</th>
-                    <th class="textright" width="15%">DESCRIPCION</th>
+                    <th class="textright" width="40%">DESCRIPCION</th>
                     <th class="textright" width="12%"> TALLER INTERNO</th>
                     <th class="textright" width="12%"> TALLER EXTERNO</th>
                     <th class="textcenter" width="50%"> CONDUCTOR</th>
@@ -103,7 +103,7 @@
                     <td align="center">{{$item->diagnostico}}</td>
                     <td align="center">{{$item->diagnosticotransporte}}</td>
                     <td align="center">{{$item->kilometraje}}</td>
-                    <td align="center">{{$item->descripcion}}</td>
+                    <td align="center">{{$item->observacion}}</td>
                     @if($item->tipo_taller == 1)
                     <td align="center">X</td>
                     @else

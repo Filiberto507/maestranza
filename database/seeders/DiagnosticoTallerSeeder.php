@@ -23,7 +23,8 @@ class DiagnosticoTallerSeeder extends Seeder
             $taller = Taller::find( $i);
             $ingreso = $fechaIngreso->addWeek(); // Aumenta un día por cada iteración.
             $kilometraje = 3658 + ($i * 1000); // Aumenta 1000 km por cada iteración.
-            
+            $palabras = ["Cambio de aceite y mantenimiento", "Mantenimiento de las buguias", "cambio de aceite y otros", "Mantenimiento del muelle y frenos del vehiculo"];
+            $textoAleatorio = $palabras[array_rand($palabras)];
                 $tipo_taller = rand(1, 2);
 
             Diagnostico::create([ 
@@ -31,7 +32,7 @@ class DiagnosticoTallerSeeder extends Seeder
                 'dependencia' => $taller->dependencia,
                 'conductor' => $taller->conductor,
                 'tipo_taller' => $tipo_taller,
-                'observacion' => $observacion,
+                'observacion' => $textoAleatorio,
                 'vehiculos_id' => $taller->vehiculo_id,
                 'taller_id' => $taller->id      
             ]);

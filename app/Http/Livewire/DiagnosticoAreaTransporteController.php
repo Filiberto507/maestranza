@@ -120,63 +120,41 @@ class DiagnosticoAreaTransporteController extends Component
         $this->emit('show-modal', 'SHOW MODAL');
     }
 
-    
+
     public function Store()
     {
 
-        //dd($this->requerimiento);
-        if (empty($this->requerimiento) && empty($this->obra)) {
-            $rules = [
-                'fecha' => 'required',
-                'conclusion' => 'required|min:3',
-                'dependencia' => 'required|min:3',
-                'conductor' => 'required|min:3',
-                'vehiculos_id' => 'required',
-            ];
-            $messages = [
-                'fecha.required' => 'seleccione una fecha',
-                'conclusion.required' => 'Ingrese las conclusion',
-                'conclusion.min' => 'El campo tiene que tener al menos 3 caracteres',
-
-            ];
-
-            $customAttributes = [
-                'requerimiento' => 'dato',
-            ];
-
-            $validationData = $this->validate($rules, $messages, $customAttributes);
-
-            $this->validate($rules, $messages);
-        } else {
-           //dd($this->requerimiento);
-            $rules = [
-                'fecha' => 'required',
-                'conclusion' => 'required|min:3',
-                'dependencia' => 'required|min:3',
-                'conductor' => 'required|min:3',
-                'vehiculos_id' => 'required',
-                "requerimiento.{0}.cantidad" => 'required',
-                "obra.{0}.cantidad" => 'required',
-            ];
-            $messages = [
-                'fecha.required' => 'seleccione una fecha',
-                'conclusion.required' => 'Ingrese las conclusion',
-                'conclusion.min' => 'El campo tiene que tener al menos 3 caracteres',
-                "requerimiento.{0}.cantidad" => 'llene dato requerimiento',
-                "obra.{0}.cantidad" => 'llene dato obra',
-
-            ];
-
-            $customAttributes = [
-                'requerimiento' => 'dato',
-            ];
-
-           $this->validate($rules, $messages, $customAttributes);
-
-            //$this->validate($rules, $messages);
+        foreach ($this->requerimiento as $key => $value) {
+            if ($value['cantidad'] == '' || $value['servicio'] == '') {
+                unset($this->requerimiento[$key]);
+            }
         }
+
+        foreach ($this->obra as $key => $value) {
+            if ($value['cantidad'] == '' || $value['servicio'] == '') {
+                unset($this->obra[$key]);
+            }
+        }
+
+
+        $rules = [
+            'fecha' => 'required',
+            'conclusion' => 'required|min:3',
+            'dependencia' => 'required|min:3',
+            'conductor' => 'required|min:3',
+            'vehiculos_id' => 'required',
+        ];
+        $messages = [
+            'fecha.required' => 'seleccione una fecha',
+            'conclusion.required' => 'Ingrese las conclusion',
+            'conclusion.min' => 'El campo tiene que tener al menos 3 caracteres',
+
+        ];
+
+
+        $this->validate($rules, $messages);
         //dd($this->requerimiento);
-        dd($this->requerimiento);
+        //dd($this->requerimiento);
         $DiagnosticoAreaT = Diagnostico_area_transporte::create([
             'fecha' => $this->fecha,
             'dependencia' => $this->dependencia,
@@ -234,6 +212,17 @@ class DiagnosticoAreaTransporteController extends Component
     }
     public function Update()
     {
+        foreach ($this->requerimiento as $key => $value) {
+            if ($value['cantidad'] == '' || $value['servicio'] == '') {
+                unset($this->requerimiento[$key]);
+            }
+        }
+
+        foreach ($this->obra as $key => $value) {
+            if ($value['cantidad'] == '' || $value['servicio'] == '') {
+                unset($this->obra[$key]);
+            }
+        }
         //dd($this->requerimiento);
         $rules = [
             'fecha' => 'required',
@@ -277,7 +266,10 @@ class DiagnosticoAreaTransporteController extends Component
         $this->emit('diagnostico_area_transporte-updated', 'Se actualizo el diagnostico con exito');
     }
 
-    protected $listeners = ['destroy' => 'Destroy'];
+    protected $listeners = [
+    'destroy' => 'Destroy',
+    'resetUI' => 'resetUI'
+    ];
 
     public function Destroy($id)
     {
@@ -291,9 +283,9 @@ class DiagnosticoAreaTransporteController extends Component
 
     public function agregarRequerimiento($variable)
     {
-        if (count($this->requerimiento) == 30) {
+        /*if (count($this->requerimiento) == 30) {
             dd($this->requerimiento);
-        }
+        }*/
         switch ($variable) {
             case '1':
                 $this->requerimiento[] = [
@@ -317,9 +309,9 @@ class DiagnosticoAreaTransporteController extends Component
 
     public function agregarObra($variable)
     {
-        if (count($this->obra) == 30) {
+        /*if (count($this->obra) == 30) {
             dd($this->obra);
-        }
+        }*/
         switch ($variable) {
             case '1':
                 $this->obra[] = [
@@ -501,5 +493,15 @@ class DiagnosticoAreaTransporteController extends Component
                 'servicio' => $d->descripcion,
             ];
         }
+    }
+
+    public function resetRequerimientos()
+    {
+        $this->requerimiento = [];
+    }
+
+    public function resetObra()
+    {
+        $this->obra = [];
     }
 }

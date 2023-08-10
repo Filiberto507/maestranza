@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TallerDetallerSeeder::class);
         $this->call(EstadoVehiculoSeeder::class);
         $this->call(DiagnosticoTallerSeeder::class);
+        $this->call(DiagnosticoItemSeeder::class);
 
     }
 }

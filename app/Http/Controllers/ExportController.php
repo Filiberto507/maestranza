@@ -14,6 +14,7 @@ use App\Models\tallerdetalle;
 use App\Models\Diagnostico_area_transporte;
 use App\Models\Diagnostico;
 use App\Models\accesoriostaller;
+use App\Models\DiagnosticoItem;
 use App\Models\Estadovehiculo;
 use App\Models\TrabajoRealizadoTaller;
 
@@ -62,8 +63,8 @@ class ExportController extends Controller
 
         //obtener los checks
         $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
-
-        //dd($acctaller);
+        
+        //dd($acctalleres);
         //foreach para agregar si tiene el checked
         foreach ($acctalleres as $tall) {
             //buscado el id del taller
@@ -92,7 +93,7 @@ class ExportController extends Controller
             }
         }
 
-        //dd($acctalleres);
+       //dd($acctalleres);
 
         // Colecciones separadas
         $primeros10 = collect();
@@ -200,21 +201,31 @@ class ExportController extends Controller
         }*/
         $trabajorealizado = explode('-', $descripcion);
         $trabajorealizado = array_filter($trabajorealizado);
+        $checktrabajo = collect();
 
+       
+        foreach ($trabajorealizado as $key => $value) {
+            $checktrabajo->push([
+                'servicio' => $value,
+                'checked' => '',
+            ]);
+        }
+        //dd($checktrabajo);
         //obtener los checks
-        $acctalleres = accesoriostaller::orderBy('id', 'asc')->get();
+        $diagnostico_id = Diagnostico::find($taller->id);
+        $checksdiagnostico = DiagnosticoItem::where('diagnosticos_id',$diagnostico_id->id)->get();
 
-        //dd($acctaller);
+        //dd($checksdiagnostico);
         //foreach para agregar si tiene el checked
-        foreach ($acctalleres as $tall) {
+        foreach ($checksdiagnostico as $tall) {
             //buscado el id del taller
             //dd($tallerherr->id);
             //obtenemos todos los id de las herramientas que tiene el taller id
-            $tallerherramientas = tallerdetalle::where('taller_id', $tallerdatos->id)->get();
+            //$tallerherramientas = tallerdetalle::where('taller_id', $tallerdatos->id)->get();
             //dd($tallerherramientas);
 
             //buscamos si existe esa herramienta agregado o no
-            $obtenercheck = $tallerherramientas->where('acctaller_id', $tall->id)->first();
+            $obtenercheck = $checktrabajo->where('servicio', $tall->descripcion)->first();
             //dump($obtenercheck);
             //exists sirve para obtener valor en boleano
             //$this->roles()->where('nombre', $nombreRol)->exists();
@@ -222,18 +233,15 @@ class ExportController extends Controller
             // verificar si tenemos datos en obtenercheck
             if ($obtenercheck) {
                 //dump($obtenercheck->acctaller_id);
-                $addcheck = accesoriostaller::find($obtenercheck->acctaller_id);
+                //$addcheck = accesoriostaller::find($obtenercheck->acctaller_id);
                 //dump($addcheck);
                 $tall->checked = 1;
-                $this->check[] =
-                    $addcheck->id . ", " .
-                    $addcheck->name;
-
+                
                 //$acctalleres->pull($tall->id);
             }
         }
 
-        //dd($acctalleres);
+        //dd($checksdiagnostico);
 
         // Colecciones separadas
         $primeros10 = collect();
@@ -242,23 +250,19 @@ class ExportController extends Controller
         $a = 0;
         $b = 1;
         $c = 2;
-        foreach ($acctalleres as $key => $value) {
+        foreach ($checksdiagnostico as $key => $value) {
             if ($key == $a) {
                 $primeros10->push($value);
-                $a = $a + 3;
+                $a = $a + 2;
             }
 
             if ($key == $b) {
                 $segundos10->push($value);
-                $b = $b + 3;
+                $b = $b + 2;
             }
 
-            if ($key == $c) {
-                $ultimos10->push($value);
-                $c = $c + 3;
-            }
         }
-
+        //dd($primeros10, $segundos10);   
 
         //dd($trabajorealizado);
        //dd($trabajorealizado);
@@ -270,7 +274,7 @@ class ExportController extends Controller
         //loadView = pasando la vista
         // tamaño oficio -> 609.45, 935.43
         //ajuste perfecto en 73 al imprimir
-        $pdf = PDF::loadView('pdf.trabajo', compact(
+        $pdf = PDF::setPaper([0, 0, 680, 900])->loadView('pdf.trabajo', compact(
             'fecha_ingreso',
             'fecha_salida',
             'vehiculo',
@@ -282,7 +286,10 @@ class ExportController extends Controller
             'trabajorealizado',
             'observaciones',
             'taller',
-            'tallerdatos'
+            'tallerdatos',
+            'primeros10',
+            'segundos10',
+            'ultimos10'
         ));
         //visualizar en el navegador
         return $pdf->stream('Trabjo-Realizado.pdf');
@@ -313,7 +320,7 @@ class ExportController extends Controller
              //consulta
              $data = Taller::leftJoin('diagnosticos as d', 'd.taller_id', 'tallers.id')
              ->leftJoin('diagnostico_area_transportes as dt', 'dt.taller_id', 'tallers.id')
-             ->select('tallers.*', 'd.id as diagnostico', 'dt.id as diagnosticotransporte', 'd.tipo_taller')
+             ->select('tallers.*', 'd.id as diagnostico', 'dt.id as diagnosticotransporte', 'd.tipo_taller', 'd.observacion')
              ->whereBetween('tallers.fecha_ingreso', [$from,$to])
              ->orderBy('tallers.id', 'desc')->get();
  
@@ -323,7 +330,7 @@ class ExportController extends Controller
              //dd($vehiculoselectedId);
              $data = Taller::leftJoin('diagnosticos as d', 'd.taller_id', 'tallers.id')
              ->leftJoin('diagnostico_area_transportes as dt', 'dt.taller_id', 'tallers.id')
-             ->select('tallers.*', 'd.id as diagnostico', 'dt.id as diagnosticotransporte', 'd.tipo_taller')
+             ->select('tallers.*', 'd.id as diagnostico', 'dt.id as diagnosticotransporte', 'd.tipo_taller', 'd.observacion')
              ->where('vehiculo_id', $id)
              ->whereBetween('tallers.fecha_ingreso', [$from,$to])
              ->orderBy('tallers.id', 'desc')->get();
@@ -331,7 +338,7 @@ class ExportController extends Controller
          $vehiculodato= Vehiculos::find($id);
          //dd($vehiculodato);
          $fecha = Carbon::parse(Carbon::now())->format('Y-m-d');
-        $pdf = PDF::loadView('pdf.reporte_responsable', compact(
+        $pdf = PDF::setPaper([0, 0, 680, 1000])->loadView('pdf.reporte_responsable', compact(
             'data',
             'vehiculodato',
             'fecha',

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('item');
             $table->integer('cantidad');
-            $table->string('unidad',255);
+            $table->string('unidad',255)->nullable();
             $table->string('servicio',255);
             $table->unsignedBigInteger('diagnostico_area_transportes_id');
             $table->foreign('diagnostico_area_transportes_id')->references('id')->on('diagnostico_area_transportes');

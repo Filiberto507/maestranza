@@ -102,6 +102,13 @@ class DiagnosticoController extends Component
     public function Store()
     {
         //dd($this->filas);
+        foreach ($this->filas as $key => $value) {
+            if($value['items'] == '' || $value['descriptions'] == '')
+            {
+                unset($this->filas[$key]);
+            }
+            
+        }
         $rules = [
             'fecha' => 'required',
             'dependencia' => 'required|min:3',
@@ -162,6 +169,13 @@ class DiagnosticoController extends Component
     }
     public function Update()
     {
+        foreach ($this->filas as $key => $value) {
+            if($value['items'] == '' || $value['descriptions'] == '')
+            {
+                unset($this->filas[$key]);
+            }
+            
+        }
         //dd($this->filas);
         $rules = [
             'fecha' => 'required',
@@ -203,7 +217,7 @@ class DiagnosticoController extends Component
 
     protected $listeners =[
         'destroy' => 'Destroy',
-        'resetUI' => 'resetUi'
+        'resetUI' => 'resetUI'
     ];
 
     public function Destroy($id)
@@ -217,9 +231,9 @@ class DiagnosticoController extends Component
 
     public function agregarFila($variable)
     {
-        if (count($this->filas) == 10) {
+        /*if (count($this->filas) == 10) {
             dd($this->filas);
-        }
+        }*/
 
         switch ($variable) {
             case '1':
@@ -247,7 +261,7 @@ class DiagnosticoController extends Component
         //dd($Diagnostico);
         $DiagnosticoItem = DiagnosticoItem::where('diagnosticos_id', $id)->get();
         $Vehiculos = Vehiculos::all();
-        $pdf = Pdf::loadView('livewire.diagnostico.pdf', compact('Diagnostico', 'DiagnosticoItem', 'Vehiculos'));
+        $pdf = PDF::setPaper([0, 0, 680, 1000])->loadView('livewire.diagnostico.pdf', compact('Diagnostico', 'DiagnosticoItem', 'Vehiculos'));
         return $pdf->stream();
         //si se quiere descargar
         //return $pdf->download('reporteDisagnostico.pdf');

@@ -97,9 +97,7 @@
         @endforeach
     </tbody>
 </table>
-@error('requerimiento.{0}.cantidad') <span class="text-danger er">{{ $message}} </span>
 
-@enderror
 
 <div class="col-sm-12 col-md-8 text-center">
     <button class="btn btn-primary" wire:click="agregarRequerimiento({{1}})">
@@ -110,7 +108,10 @@
             </svg>
         </div>
     </button>
+
+    <button class="btn btn-danger" wire:click="resetRequerimientos">Eliminar Requerimientos</button>
 </div>
+<br>
 
 <label>Servicio de Mano de Obra</label>
 <table class="table  table-bordered table-hover mt-1">
@@ -133,9 +134,7 @@
         @endforeach
     </tbody>
 </table>
-@error('obra.{0}.cantidad') <span class="text-danger er">{{ $message}} </span>
 
-@enderror
 <div class="col-sm-12 col-md-8 text-center">
     <button class="btn btn-primary" wire:click="agregarObra({{1}})">
         <div class="base-icons">
@@ -145,6 +144,8 @@
             </svg>
         </div>
     </button>
+
+    <button class="btn btn-danger" wire:click="resetObra">Eliminar Obras</button>
 </div>
 <br>
 <div class="col-sm-12 col-md-8">

@@ -206,6 +206,7 @@
 
         //evento mostrar
         window.livewire.on('show-modal', msg =>{
+            isModalOpen = true
             $('#theModal').modal('show')
         });
         //cerrar
@@ -223,7 +224,7 @@
             //console.log(isModalOpen);
             // Verificar si el clic ocurrió fuera del modal
             // Verificar si el clic ocurrió en el input dentro del modal
-            if (isModalOpen == true && !modal.contains(event.target && event.target.tagName != 'INPUT')) {
+            if (isModalOpen == true && !modal.contains(event.target)) {
                 // Llamamos a la funcion limpiar para que se cierre correctamente
                 limpiar();
                 isModalOpen = false;
