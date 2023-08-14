@@ -212,7 +212,9 @@ class ExportController extends Controller
         }
         //dd($checktrabajo);
         //obtener los checks
-        $diagnostico_id = Diagnostico::find($taller->id);
+        //dd($taller->id);
+        $diagnostico_id = Diagnostico::where('taller_id', $taller->id)->first();
+        //dd($diagnostico_id->id);
         $checksdiagnostico = DiagnosticoItem::where('diagnosticos_id',$diagnostico_id->id)->get();
 
         //dd($checksdiagnostico);

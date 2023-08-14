@@ -53,8 +53,8 @@
             <label>Estado</label>
             <select wire:model.lazy="status" class="form-control">
                 <option value="Elegir" selected> Elegir </option>
-                <option value="Active" selected> Activo </option>
-                <option value="Locked" selected> Bloqueado </option>
+                <option value="ACTIVE" selected> Activo </option>
+                <option value="LOCKED" selected> Bloqueado </option>
             </select>
             @error('status') <span class="text-danger er">{{ $message}} </span>
 

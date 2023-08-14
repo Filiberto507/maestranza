@@ -66,10 +66,11 @@ class UsersController extends Component
         $this->selected_id = $user->id;
         $this->name = $user->name;
         $this->phone = $user->phone;
-        $this->profile = $this->profile;
+        $this->profile = $user->profile;
         $this->status = $user->status;
         $this->email = $user->email;
-        $this->password ='';
+        $this->password = '';
+
 
         $this->emit('show-modal', 'open!');
     }
