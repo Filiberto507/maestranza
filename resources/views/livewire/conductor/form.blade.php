@@ -12,7 +12,7 @@
     </div>
     <div class="col-sm-12 col-md-4">
         <div class="form-group">
-            <label>C.i.</label>
+            <label>Ci.</label>
             <input type="text" wire:model.lazy="ci" class="form-control" placeholder="ej: 70985745" maxlength="15">
             @error('ci') <span class="text-danger er">{{ $message}} </span>
 
@@ -34,8 +34,8 @@
             <label>Estado</label>
             <select wire:model.lazy="status" class="form-control">
                 <option value="Elegir" selected> Elegir </option>
-                <option value="ACTIVO" selected> ACTIVO </option>
-                <option value="BLOQUEADO" selected> BLOQUEADO </option>
+                <option value="ACTIVE" selected> ACTIVO </option>
+                <option value="LOCKED" selected> BLOQUEADO </option>
             </select>
             @error('status') <span class="text-danger er">{{ $message}} </span>
 

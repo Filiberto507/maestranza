@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class ConductorController extends Component
 {
-    public $componentName, $pageTitle, $search, $selected_id, $name, $telefono, $status;
+    public $componentName, $pageTitle, $search, $selected_id, $name,$ci, $telefono, $status;
     public $filas = [], $filas2 = [];
 
     use WithPagination;
@@ -57,14 +57,16 @@ class ConductorController extends Component
 
         //validar si estan bien 
         $this->validate($rules, $messages);
+        //dd($this->ci,$this->status);
+        
         //crear el rol
         $conductor = Conductor::create([
             'name' => $this->name,
+            'ci' => $this->ci,
             'telefono' => $this->telefono,
-            'status' => $this->status
+            'status' => $this->status,
 
         ]);
-
 
         $this->emit('conductor-added', 'Se registro el conductor con exito');
         $this->resetUI();
@@ -79,6 +81,7 @@ class ConductorController extends Component
         //mandar los datos a los propiedades
         $this->selected_id = $conductor->id;
         $this->name = $conductor->name;
+        $this->ci = $conductor->ci;
         $this->telefono = $conductor->telefono;
         $this->status = $conductor->status;
 
@@ -111,6 +114,7 @@ class ConductorController extends Component
         $Conductor = Conductor::find($this->selected_id);
         $Conductor->Update([
             'name' => $this->name,
+            'ci' => $this->ci,
             'telefono' => $this->telefono,
             'status' => $this->status
         ]);
@@ -125,6 +129,7 @@ class ConductorController extends Component
     public function resetUI()
     {
         $this->name = '';
+        $this->ci = '';
         $this->telefono = '';
         $this->status = '';
         $this->search = '';
