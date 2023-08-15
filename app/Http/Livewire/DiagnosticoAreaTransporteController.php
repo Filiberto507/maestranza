@@ -20,7 +20,7 @@ class DiagnosticoAreaTransporteController extends Component
 {
     use WithPagination;
 
-    public $fecha, $conclusion, $dependencia, $conductor, $vehiculos_id, $taller_id,
+    public $fecha, $fechataller, $conclusion, $dependencia, $conductor, $vehiculos_id, $taller_id,
         $search, $selected_id, $pageTitle, $componentName;
 
     //TIPO DE TALLER
@@ -151,11 +151,36 @@ class DiagnosticoAreaTransporteController extends Component
 
         ];
 
-
         $this->validate($rules, $messages);
-        //dd($this->requerimiento);
+
+        //por año el numero se reiniciara 
+        $ultimadiagnostico = Diagnostico_area_transporte::orderby('id', 'desc')->first();
+        //dd($ultimadiagnostico); //2023-07-21
+
+        if($ultimadiagnostico)
+        {
+            $fechaultimadiagnostico=Carbon::parse($ultimadiagnostico->fecha)->format('Y');
+        }
+        else
+        {
+            $fechaultimadiagnostico = Carbon::parse(Carbon::now())->format('Y');
+        }
+
+        dd($ultimadiagnostico);
+
+        if ($ultimadiagnostico && $fechaultimadiagnostico == $this->fechataller ) {
+            // Continuar incrementando el contador de números de diagnostico
+            $numerodiagnostico = $ultimadiagnostico->numero_diagtransporte + 1;
+        } else {
+            // Comenzó un nuevo año, reiniciar el contador de números
+            $numerodiagnostico = 1;
+        }
+
+       
+        dd($numerodiagnostico);
         //dd($this->requerimiento);
         $DiagnosticoAreaT = Diagnostico_area_transporte::create([
+            'numero_diagtransporte' => $numerodiagnostico,
             'fecha' => $this->fecha,
             'dependencia' => $this->dependencia,
             'conductor' => $this->conductor,
@@ -464,6 +489,7 @@ class DiagnosticoAreaTransporteController extends Component
         //dd($this->vehiculoselectedId);
         //dd($tipotalldiagnostico->tipo_taller);
         $this->fecha = Carbon::parse(Carbon::now())->format('Y-m-d');
+        $this->fechataller = Carbon::parse($findvehiculo->fecha_ingreso)->format('Y');
         $this->conductor = $findvehiculo->conductor;
         $this->vehiculos_id = $findvehiculo->vehiculo_id;
         $this->dependencia = $findvehiculo->dependencia;

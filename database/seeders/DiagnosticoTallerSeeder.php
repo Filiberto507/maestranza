@@ -28,6 +28,7 @@ class DiagnosticoTallerSeeder extends Seeder
                 $tipo_taller = rand(1, 2);
 
             Diagnostico::create([ 
+                'numero_diagnostico' => $i,
                 'fecha' => $taller->fecha_ingreso,
                 'dependencia' => $taller->dependencia,
                 'conductor' => $taller->conductor,

@@ -34,7 +34,7 @@
                         <thead class="text-white">
                             <tr>
                                 <th class="table-th text-while">
-                                    ID
+                                    Nº
                                 </th>
                                 <th class="table-th text-while">
                                     FECHA
@@ -61,7 +61,7 @@
                             @foreach($Diagnosticos as $diag )
                             <tr>
                                 <td>
-                                    <h6>{{$diag->id}}</h6>
+                                    <h6>{{$diag->numero_diagnostico}}</h6>
                                 </td>
                                 <td class="text-center">
                                     <h6>{{$diag->fecha}}</h6>

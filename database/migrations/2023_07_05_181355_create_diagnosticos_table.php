@@ -16,6 +16,7 @@ return new class extends Migration
         
         Schema::create('diagnosticos', function (Blueprint $table) {
             $table->id();
+            $table->integer('numero_diagnostico');
             $table->date('fecha');
             $table->string('dependencia',255);
             $table->string('conductor',255);

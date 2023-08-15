@@ -18,7 +18,7 @@ class DiagnosticoController extends Component
 {
     use WithPagination;
 
-    public $fecha, $observacion, $dependencia, $conductor, $vehiculos_id,
+    public $fecha, $fechataller, $observacion, $dependencia, $conductor, $vehiculos_id,
         $search, $selected_id, $pageTitle, $componentName, $taller_id;
     public $filas = [];
     private $pagination = 6;
@@ -125,7 +125,24 @@ class DiagnosticoController extends Component
         $this->validate($rules, $messages);
         //dd($this->filas);
 
+        $ultimadiagnostico = Diagnostico::orderby('id', 'desc')->first();
+        //dd($ultimadiagnostico->fecha); 2023-07-21
+
+        $fechaultimadiagnostico=Carbon::parse($ultimadiagnostico->fecha)->format('Y');
+        
+        //dd($this->fechataller);
+
+        if ($ultimadiagnostico && $fechaultimadiagnostico == $this->fechataller ) {
+            // Continuar incrementando el contador de números de diagnostico
+            $numerodiagnostico = $ultimadiagnostico->numero_diagnostico + 1;
+        } else {
+            // Comenzó un nuevo año, reiniciar el contador de números
+            $numerodiagnostico = 1;
+        }
+
+        //dd($numerodiagnostico);
         $Diagnostico = Diagnostico::create([
+            'numero_diagnostico' => $numerodiagnostico,
             'fecha' => $this->fecha,
             'dependencia' => $this->dependencia,
             'conductor' => $this->conductor,
@@ -330,6 +347,7 @@ class DiagnosticoController extends Component
             ->first();
         //dd($this->vehiculoselectedId);
         $this->fecha = Carbon::parse(Carbon::now())->format('Y-m-d');
+        $this->fechataller = Carbon::parse($findvehiculo->fecha_ingreso)->format('Y');
         $this->conductor = $findvehiculo->conductor;
         $this->vehiculos_id = $findvehiculo->vehiculo_id;
         $this->dependencia = $findvehiculo->dependencia;

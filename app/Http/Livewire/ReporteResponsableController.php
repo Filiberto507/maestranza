@@ -65,7 +65,7 @@ class ReporteResponsableController extends Component
             //consulta
             $this->data = Taller::leftJoin('diagnosticos as d', 'd.taller_id', 'tallers.id')
             ->leftJoin('diagnostico_area_transportes as dt', 'dt.taller_id', 'tallers.id')
-            ->select('tallers.*', 'd.id as diagnostico', 'dt.id as diagnosticotransporte', 'd.tipo_taller')
+            ->select('tallers.*', 'd.numero_diagnostico as diagnostico', 'dt.numero_diagtransporte as diagnosticotransporte', 'd.tipo_taller')
             ->whereBetween('tallers.fecha_ingreso', [$from,$to])
             ->orderBy('tallers.id', 'desc')->get();
 
@@ -75,7 +75,7 @@ class ReporteResponsableController extends Component
             //dd($this->vehiculoselectedId);
             $this->data = Taller::leftJoin('diagnosticos as d', 'd.taller_id', 'tallers.id')
             ->leftJoin('diagnostico_area_transportes as dt', 'dt.taller_id', 'tallers.id')
-            ->select('tallers.*', 'd.id as diagnostico', 'dt.id as diagnosticotransporte', 'd.tipo_taller')
+            ->select('tallers.*', 'd.numero_diagnostico as diagnostico', 'dt.numero_diagtransporte as diagnosticotransporte', 'd.tipo_taller')
             ->where('vehiculo_id', $this->vehiculoselectedId)
             ->whereBetween('tallers.fecha_ingreso', [$from,$to])
             ->orderBy('tallers.id', 'desc')->get();

@@ -322,7 +322,7 @@ class ExportController extends Controller
              //consulta
              $data = Taller::leftJoin('diagnosticos as d', 'd.taller_id', 'tallers.id')
              ->leftJoin('diagnostico_area_transportes as dt', 'dt.taller_id', 'tallers.id')
-             ->select('tallers.*', 'd.id as diagnostico', 'dt.id as diagnosticotransporte', 'd.tipo_taller', 'd.observacion')
+             ->select('tallers.*', 'd.numero_diagnostico as diagnostico', 'dt.numero_diagtransporte as diagnosticotransporte', 'd.tipo_taller', 'd.observacion')
              ->whereBetween('tallers.fecha_ingreso', [$from,$to])
              ->orderBy('tallers.id', 'desc')->get();
  
@@ -332,7 +332,7 @@ class ExportController extends Controller
              //dd($vehiculoselectedId);
              $data = Taller::leftJoin('diagnosticos as d', 'd.taller_id', 'tallers.id')
              ->leftJoin('diagnostico_area_transportes as dt', 'dt.taller_id', 'tallers.id')
-             ->select('tallers.*', 'd.id as diagnostico', 'dt.id as diagnosticotransporte', 'd.tipo_taller', 'd.observacion')
+             ->select('tallers.*', 'd.numero_diagnostico as diagnostico', 'dt.numero_diagtransporte as diagnosticotransporte', 'd.tipo_taller', 'd.observacion')
              ->where('vehiculo_id', $id)
              ->whereBetween('tallers.fecha_ingreso', [$from,$to])
              ->orderBy('tallers.id', 'desc')->get();

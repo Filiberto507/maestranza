@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('diagnostico_area_transportes', function (Blueprint $table) {
             $table->id();
+            $table->integer('numero_diagtransporte');
             $table->date('fecha');
             $table->string('dependencia',255);
             $table->string('conductor',255);
