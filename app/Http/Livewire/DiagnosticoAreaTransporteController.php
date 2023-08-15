@@ -166,7 +166,7 @@ class DiagnosticoAreaTransporteController extends Component
             $fechaultimadiagnostico = Carbon::parse(Carbon::now())->format('Y');
         }
 
-        dd($ultimadiagnostico);
+       //dd($ultimadiagnostico);
 
         if ($ultimadiagnostico && $fechaultimadiagnostico == $this->fechataller ) {
             // Continuar incrementando el contador de números de diagnostico
@@ -177,7 +177,7 @@ class DiagnosticoAreaTransporteController extends Component
         }
 
        
-        dd($numerodiagnostico);
+        //dd($numerodiagnostico);
         //dd($this->requerimiento);
         $DiagnosticoAreaT = Diagnostico_area_transporte::create([
             'numero_diagtransporte' => $numerodiagnostico,

@@ -25,6 +25,9 @@
                                     
                                 </th>
                                 <th class="table-th text-white text-center">
+                                    CI
+                                </th>
+                                <th class="table-th text-white text-center">
                                     TELEFONO
                                 </th>
                                 <th class="table-th text-white text-center">
@@ -42,6 +45,9 @@
                             <tr>
                                 <td>
                                     <h6> {{ $c->name }} </h6>
+                                </td>
+                                <td class="text-center" >
+                                    <h6> {{ $c->ci }} </h6>
                                 </td>
                                 <td class="text-center" >
                                     <h6> {{ $c->telefono }} </h6>
