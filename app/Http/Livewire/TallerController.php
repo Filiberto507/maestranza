@@ -181,11 +181,34 @@ class TallerController extends Component
         ];
         //validar los datos
         $this->validate($rules, $messages);
-        //dd($this->conductorname);
+
+        //por año el numero se reiniciara 
+        $ultimotaller = Taller::orderby('id', 'desc')->first();
+        //dd($ultimotaller); //2023-07-21
+
+        if($ultimotaller)
+        {
+            $fechaultimotaller=Carbon::parse($ultimotaller->fecha_ingreso)->format('Y');
+        }
+        else
+        {
+            $fechaultimotaller = Carbon::parse(Carbon::now())->format('Y');
+        }
+        //dd(Carbon::parse($this->fecha_ingreso)->format('Y'));
+       //dd($fechaultimotaller);   
+
+        if ($ultimotaller && $fechaultimotaller == Carbon::parse($this->fecha_ingreso)->format('Y') ) {
+            // Continuar incrementando el contador de números de diagnostico
+            $numerotaller = $ultimotaller->numero_taller + 1;
+        } else {
+            // Comenzó un nuevo año, reiniciar el contador de números
+            $numerotaller = 1;
+        }
+        //dd($numerotaller);
         try {
             //guardar
             $talleres = Taller::create([
-
+                'numero_taller' => $numerotaller,
                 'ingreso' => $this->ingreso,
                 'fecha_ingreso' => $this->fecha_ingreso,
                 'conductor' => $this->conductorname,

@@ -22,6 +22,8 @@ class TallerSeeder extends Seeder
         
         $fechaIngreso = Carbon::parse('2023-02-26');
         $fechaIngreso2 = Carbon::parse('2023-03-03');
+        $c=1;
+        $c2=2;
         for ($i = 0; $i < 20; $i++) {
             $ingreso = $fechaIngreso->addWeek(); // Aumenta un día por cada iteración.
             $ingreso2 = $fechaIngreso2->addWeek();
@@ -33,7 +35,10 @@ class TallerSeeder extends Seeder
             else{
                 $conductor = 'LUIS BRUNO MONTESINOS VARGAS';
             }
+
+            
             Taller::create([ 
+                'numero_taller' => $c,
                 'ingreso' => '09:35',
                 'fecha_ingreso' => $ingreso->format('Y-m-d'), // Formato de fecha 'YYYY-MM-DD'.
                 'conductor' => $conductor,
@@ -49,6 +54,7 @@ class TallerSeeder extends Seeder
             ]);
 
             Taller::create([ 
+                'numero_taller' => $c2,
                 'ingreso' => '18:44',
                 'fecha_ingreso' => $ingreso2->format('Y-m-d'),
                 'conductor' => 'ROMAN TOMAS MATIAS',
@@ -63,6 +69,8 @@ class TallerSeeder extends Seeder
                 'clase' => 'VAGONETA',
                 'tipo_vehiculo' => 'PATROL',         
             ]);
+            $c = $c+2;
+            $c2= $c2+2;
         }
 
         

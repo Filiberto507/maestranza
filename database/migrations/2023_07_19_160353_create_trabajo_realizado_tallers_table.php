@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('trabajo_realizado_tallers', function (Blueprint $table) {
             $table->id();
+            $table->integer('numero_trabajo');
             $table->string('vehiculo', 255);
             $table->string('placa', 255);
             $table->string('dependencia', 255);

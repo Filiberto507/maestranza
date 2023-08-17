@@ -24,7 +24,7 @@
     </table>
     <table class="tablaEncabezado">
         <tr>
-            <th width="18%"><label for="" class="nro">Nro: {{$Diagnostico->id}}</label></th>
+            <th width="18%"><label for="" class="nro">Nro: {{$Diagnostico->numero_diagnostico}}</label></th>
             <th width="60%">
                 <h1 class="encabezado"><u>TALLER MAESTRANZA</u></h1>
             </th>

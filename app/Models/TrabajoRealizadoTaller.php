@@ -10,7 +10,7 @@ class TrabajoRealizadoTaller extends Model
     use HasFactory;
 
     protected $fillable = [
-        'vehiculo', 'placa', 'dependencia', 'responsable', 'km_ingreso', 'km_salida', 
+        'numero_trabajo', 'vehiculo', 'placa', 'dependencia', 'responsable', 'km_ingreso', 'km_salida', 
         'fecha_ingreso','fecha_salida', 'descripcion', 'observaciones', 'taller_id'
      ];
 

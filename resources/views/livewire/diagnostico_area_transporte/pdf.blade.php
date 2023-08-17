@@ -29,7 +29,7 @@
             <th width="40%">
                 <h2 class="encabezado">DIAGNÓSTICO VEHICULAR</h2>
             </th>
-            <th width="30%"><label for="" class="fecha">Nro: {{$DiagnosticoAreaT->id}}</label></th>
+            <th width="30%"><label for="" class="fecha">Nro: {{$DiagnosticoAreaT->numero_diagtransporte}}</label></th>
         </tr>
         <tr>
             <th width="35%"><label for="" class="nro"><span class="bolded">A: </span>{{$DiagnosticoAreaT->dependencia}}</label></th>

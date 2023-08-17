@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('tallers', function (Blueprint $table) {
             $table->id();
+            $table->integer('numero_taller');
             $table->time('ingreso');
             $table->time('salida')->nullable();
             $table->date('fecha_ingreso');

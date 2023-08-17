@@ -54,7 +54,7 @@
                                 <thead class="text-white" style="background:#3b3f5c;">
                                     <tr>
                                         <th class="table-th text-white text-center">
-                                            ID
+                                            Nº
                                         </th>
                                         <th class="table-th text-white text-center">
                                             VEHICULO
@@ -87,7 +87,7 @@
                                         @foreach ($data as $d)
                                         <tr>
                                             <td class="text-center">
-                                                <h6>{{$d->id}}</h6>
+                                                <h6>{{$d->numero_taller}}</h6>
                                             </td>
                                             <td class="text-center">
                                                 <h6>{{$d->vehiculo}} - {{$d->placa}}</h6>
@@ -122,7 +122,7 @@
                                             @foreach ($diagnostico_taller as $di)
                                             <tr>
                                                 <td class="text-center">
-                                                    <h6>{{$di->id}}</h6>
+                                                    <h6>{{$di->numero_diagnostico}}</h6>
                                                 </td>
                                                 <td class="text-center">
                                                     <h6>{{$di->marca}} - {{$di->placa}}</h6>
@@ -159,7 +159,7 @@
                                                 @foreach ($trabajo_taller as $tr)
                                                 <tr>
                                                     <td class="text-center">
-                                                        <h6>{{$tr->id}}</h6>
+                                                        <h6>{{$tr->numero_trabajo}}</h6>
                                                     </td>
                                                     <td class="text-center">
                                                         <h6>{{$tr->vehiculo}} - {{$tr->placa}}</h6>

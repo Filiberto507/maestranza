@@ -40,7 +40,7 @@
                         <thead class="text-white">
                             <tr>
                                 <th class="table-th text-while">
-                                    ID
+                                    Nº
                                 </th>
                                 <th class="table-th text-while text-center">
                                     VEHICULO
@@ -65,7 +65,7 @@
                             @foreach($trabajor as $tall )
                             <tr>
                                 <td>
-                                    <h6>{{$tall->id}}</h6>
+                                    <h6>{{$tall->numero_trabajo}}</h6>
                                 </td>
                                 <td class="text-center">
                                     <h6>{{$tall->vehiculo}} - {{$tall->placa}}</h6>

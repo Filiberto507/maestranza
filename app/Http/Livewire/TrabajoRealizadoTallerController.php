@@ -19,7 +19,7 @@ class TrabajoRealizadoTallerController extends Component
 {
     use WithPagination;
 
-    public $TrabajoName, $search, $selected_id, $pageTitle, $componentName, $checkdiagnostico = []
+    public $TrabajoName, $fechataller, $search, $selected_id, $pageTitle, $componentName, $checkdiagnostico = []
     , $diagnostico_item;
 
     public $fecha_ingreso, $fecha_salida, $name, $vehiculo, $responsable, $taller_id,
@@ -197,8 +197,33 @@ class TrabajoRealizadoTallerController extends Component
         //validar los datos
         $this->validate($rules, $messages);
         
+         //por año el numero se reiniciara 
+         $ultimotrabajo = TrabajoRealizadoTaller::orderby('id', 'desc')->first();
+         //dd($ultimotrabajo); //2023-07-21
+ 
+         if($ultimotrabajo)
+         {
+             $fechaultimotrabajo=Carbon::parse($ultimotrabajo->fecha_ingreso)->format('Y');
+         }
+         else
+         {
+             $fechaultimotrabajo = Carbon::parse(Carbon::now())->format('Y');
+         }
+ 
+        //dd($fechaultimotrabajo);
+ 
+         if ($ultimotrabajo && $fechaultimotrabajo == $this->fechataller ) {
+             // Continuar incrementando el contador de números de diagnostico
+             $numerotrabajo = $ultimotrabajo->numero_trabajo + 1;
+         } else {
+             // Comenzó un nuevo año, reiniciar el contador de números
+             $numerotrabajo = 1;
+         }
+
+        //dd($numerotrabajo);
           //crear el usuario
         $trabajosr = TrabajoRealizadoTaller::create([
+            'numero_trabajo' => $numerotrabajo,
             'vehiculo' => $this->vehiculo,
             'placa' => $this->placa,
             'responsable' => $this->responsable,
@@ -265,6 +290,7 @@ class TrabajoRealizadoTallerController extends Component
         $findvehiculo = taller::where('id', $this->vehiculoselectedId)
             ->first();
         //dd($findvehiculo);
+        $this->fechataller = Carbon::parse($findvehiculo->fecha_ingreso)->format('Y');
         $this->placa = $findvehiculo->placa;
         $this->vehiculo = $findvehiculo->clase . ' '. $findvehiculo->vehiculo . ' '. $findvehiculo->tipo_vehiculo;
         $this->dependencia = $findvehiculo->dependencia;

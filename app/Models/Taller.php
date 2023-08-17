@@ -10,8 +10,8 @@ class Taller extends Model
     use HasFactory;
 
     protected $fillable = [
-       'ingreso', 'salida', 'fecha_ingreso','fecha_salida', 'conductor','vehiculo','color','dependencia','placa',
-       'kilometraje','ordentrabajo', 'vehiculo_id', 'clase', 'tipo_vehiculo'
+        'numero_taller','ingreso', 'salida', 'fecha_ingreso','fecha_salida', 'conductor','vehiculo','color',
+       'dependencia', 'placa', 'kilometraje','ordentrabajo', 'vehiculo_id', 'clase', 'tipo_vehiculo'
     ];
 
     public function tallerdetalle()

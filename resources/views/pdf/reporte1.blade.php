@@ -50,7 +50,7 @@
                     </tr>
                     <tr>
                         <td class="fecha-td">
-                            <p>{{$tallerdatos->id}}</p>
+                            <p>{{$tallerdatos->numero_taller}}</p>
                         </td>
                         <td class="fecha-td">
                             <p>{{substr($fecha_ingreso, 8, 2)}}</p>
