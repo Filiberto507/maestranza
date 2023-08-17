@@ -99,7 +99,7 @@
 
                     <div class="col-sm-6 ">
                         <div class="form-group">
-                            <label>RESPONSABLE</label>
+                            <label>RESPONSABLE *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -119,7 +119,7 @@
 
                     <div class="col-sm-4 ">
                         <div class="form-group">
-                            <label>KM INGRESP</label>
+                            <label>KM INGRESO</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">

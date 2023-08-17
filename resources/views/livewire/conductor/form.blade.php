@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-sm-12 col-md-8">
         <div class="form-group">
-            <label>Nombre</label>
+            <label>Nombre *</label>
             <input type="text" wire:model.lazy="name" class="form-control" placeholder="ej: Crismar Rodrigo">
             @error('name') <span class="text-danger er">{{ $message}} </span>
 
@@ -12,7 +12,7 @@
     </div>
     <div class="col-sm-12 col-md-4">
         <div class="form-group">
-            <label>Ci.</label>
+            <label>Ci. *</label>
             <input type="text" wire:model.lazy="ci" class="form-control" placeholder="ej: 70985745" maxlength="15">
             @error('ci') <span class="text-danger er">{{ $message}} </span>
 
@@ -21,7 +21,7 @@
     </div>
     <div class="col-sm-12 col-md-4">
         <div class="form-group">
-            <label>Telefono</label>
+            <label>Telefono *</label>
             <input type="text" wire:model.lazy="telefono" class="form-control" placeholder="ej: 66985745" maxlength="10">
             @error('telefono') <span class="text-danger er">{{ $message}} </span>
 
@@ -31,7 +31,7 @@
 
     <div class="col-sm-12 col-md-6">
         <div class="form-group">
-            <label>Estado</label>
+            <label>Estado *</label>
             <select wire:model.lazy="status" class="form-control">
                 <option value="Elegir" selected> Elegir </option>
                 <option value="ACTIVE" selected> ACTIVO </option>

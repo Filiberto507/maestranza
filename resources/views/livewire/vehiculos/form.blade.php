@@ -14,7 +14,7 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
 
-                            <label for="maskxd">Placa</label>
+                            <label for="maskxd">Placa *</label>
                             <input wire:model.lazy="placa" type="text" class="form-control" placeholder="ej: 2344-XDY">
                             @error('placa') <span class="text-danger er">{{ $message}} </span>
 
@@ -24,7 +24,7 @@
 
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            <label class="form-label">Clase</label>
+                            <label class="form-label">Clase *</label>
                             <input type="text" wire:model.lazy="clase" class="form-control" placeholder="ej: vagoneta" maxlength="10">
                             @error('clase') <span class="text-danger er">{{ $message}} </span>
 
@@ -34,7 +34,7 @@
 
                     <div class="col-sm-12 col-md-8">
                         <div class="form-group">
-                            <label>Marca</label>
+                            <label>Marca *</label>
                             <input type="text" wire:model.lazy="marca" class="form-control" placeholder="ej: nissan" maxlength="10">
                             @error('marca') <span class="text-danger er">{{ $message}} </span>
 
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-sm-12 col-md-4">
                         <div class="form-group">
-                            <label>Tipo de vehiculo</label>
+                            <label>Tipo de vehiculo *</label>
                             <input type="text" wire:model.lazy="tipo_vehiculo" class="form-control" placeholder="ej: x-trail" maxlength="10">
                             @error('tipo_vehiculo') <span class="text-danger er">{{ $message}} </span>
 
@@ -61,7 +61,7 @@
                     </div>
                     <div class="col-sm-12 col-md-4">
                         <div class="form-group">
-                            <label>Combustible y capacidad</label>
+                            <label>Combustible y capacidad *</label>
                             <input type="text" wire:model.lazy="combustible_capacidad" class="form-control" placeholder="ej: 65 litros" maxlength="10">
                             @error('combustible_capacidad') <span class="text-danger er">{{ $message}} </span>
 
@@ -70,7 +70,7 @@
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            <label>Numero de motor</label>
+                            <label>Numero de motor *</label>
                             <input type="text" wire:model.lazy="motor" class="form-control" placeholder="ej: 52WBC10338" maxlength="10">
                             @error('motor') <span class="text-danger er">{{ $message}} </span>
 
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            <label>Numero de chasis</label>
+                            <label>Numero de chasis *</label>
                             <input type="text" wire:model.lazy="chasis" class="form-control" placeholder="ej: 1HGBH41JXMN109186" maxlength="10">
                             @error('chasis') <span class="text-danger er">{{ $message}} </span>
 
@@ -88,7 +88,7 @@
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            <label>Modelo</label>
+                            <label>Modelo *</label>
                             <input type="text" wire:model.lazy="modelo" class="form-control" placeholder="ej: 1999" maxlength="10">
                             @error('modelo') <span class="text-danger er">{{ $message}} </span>
 
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-sm-12 col-md-8">
                         <div class="form-group">
-                            <label>Cilindrada</label>
+                            <label>Cilindrada *</label>
                             <input type="text" wire:model.lazy="cilindrada" class="form-control" placeholder="ej: 2.500 CC" maxlength="10">
                             @error('cilindrada') <span class="text-danger er">{{ $message}} </span>
 
@@ -106,7 +106,7 @@
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            <label>Estado</label>
+                            <label>Estado *</label>
                             <select wire:model.lazy="estado" class="form-control" id="select2-dropdown">
                                 <option value="Elegir" selected> Elegir </option>
                                 <option value="Bueno" selected> Bueno </option>
