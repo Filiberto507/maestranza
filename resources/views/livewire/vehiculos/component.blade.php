@@ -64,7 +64,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($Vehiculos as $v )
+                            @foreach($vehiculos as $v )
                             <tr>
                                 <td>
                                     <h6>{{$v->id}}</h6>
@@ -127,7 +127,7 @@
                             @endforeach
                         </tbody>
                     </table>
-
+                    {{$vehiculos->links()}}
                 </div>
             </div>
         </div>

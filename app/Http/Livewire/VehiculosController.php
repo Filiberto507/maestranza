@@ -35,16 +35,16 @@ class VehiculosController extends Component
     {
         if(strlen($this->search) > 0 )
 
-        $Vehiculos=Vehiculos::where('Vehiculos.placa','like','%'.$this->search.'%')
+        $Vehiculos=Vehiculos::where('vehiculos.placa','like','%'.$this->search.'%')
         ->orWhere('dep.id','like','%'.$this->search.'%')
-        ->orderBy('Vehiculos.placa','asc')
+        ->orderBy('vehiculos.placa','asc')
         ->paginate($this->pagination);
         else
-        $Vehiculos=Vehiculos::orderBy('Vehiculos.placa','asc')
+        $Vehiculos=Vehiculos::orderBy('vehiculos.placa','asc')
         ->paginate($this->pagination);
 
         return view('livewire.vehiculos.component',[
-            'Vehiculos'=>$Vehiculos
+            'vehiculos'=>$Vehiculos
             //'Conductor'=> Conductor::orderBy('name','asc')->get()
         ])
         ->extends('layouts.theme.app')
@@ -72,7 +72,7 @@ class VehiculosController extends Component
     {
       //dd($this->placa);
         $rules = [
-            'placa' => "required|min:3|unique:vehiculos,placa,{$this->placa}",
+            'placa' => 'required|min:3|unique:vehiculos,placa',
             'clase' => 'required|min:3',
             'marca' => 'required|min:3',
             'tipo_vehiculo' => 'required|min:3',
@@ -117,19 +117,21 @@ class VehiculosController extends Component
     public function resetUI()
     {
         $this->placa ='';
-        $this->modelo ='';
+        $this->clase ='';
         $this->marca ='';
+        $this->tipo_vehiculo ='';
         $this->color ='';
-        $this->cilindrada ='';
-        $this->chasis ='';
+        $this->combustible_capacidad ='';
         $this->motor ='';
+        $this->chasis ='';
+        $this->modelo ='';
+        $this->cilindrada ='';
+        $this->estado ='';
         $this->search ='';
-        //$this->conductors_id='Elegir';
         $this->selected_id =0;
         $this->resetValidation();
-        //para regresar a la pagina principal
         $this->resetPage();
-        $this->emit('close', 'vehiculo cerrar');
+        $this->emit('vehiculo-close', 'vehiculo cerrar');
     }
     public function Update()
     {
@@ -175,7 +177,10 @@ class VehiculosController extends Component
         $this->resetUI();
         $this->emit('vehiculo-updated', 'Se actualizo el vehiculo con exito');
     }
-    protected $listeners=['destroy'=>'Destroy'];
+    protected $listeners = [
+        'destroy' => 'Destroy',
+        'resetUI' => 'resetUi'
+    ];
 
     public function Destroy(Vehiculos $Vehiculos)
     {
