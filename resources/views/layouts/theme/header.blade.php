@@ -1,5 +1,5 @@
 <div class="header-container fixed-top" >
-    <header class="header navbar navbar-expand-sm" style="background: #4FC3F7">
+    <header class="header navbar navbar-expand-sm" style="background: #3867d6">
         <ul class="navbar-item flex-row" >
             <li class="nav-item theme-logo">
                 <a href="{{url('/home')}}">

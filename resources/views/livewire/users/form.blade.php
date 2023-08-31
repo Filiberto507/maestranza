@@ -18,6 +18,16 @@
         </div>
     </div>
 
+    <div class="col-sm-12 col-md-8">
+        <div class="form-group">
+            <label>Nombre Usuario *</label>
+            <input type="text" wire:model.lazy="username" class="form-control" placeholder="ej: Crismar Rodrigo">
+            @error('username') <span class="text-danger er">{{ $message}} </span>
+
+            @enderror
+        </div>
+    </div>
+
     <div class="col-sm-12 col-md-4">
         <div class="form-group">
             <label>Telefono *</label>

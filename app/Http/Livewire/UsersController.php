@@ -13,7 +13,7 @@ class UsersController extends Component
     use WithFileUploads;
     use WithPagination;
 
-    public $name, $phone, $email, $status, $image, $password, $selected_id, $fileLoaded, $profile;
+    public $name, $username, $phone, $email, $status, $image, $password, $selected_id, $fileLoaded, $profile;
     public $pageTitle, $componentName, $search;
     private $pagination = 3;
 
@@ -48,6 +48,7 @@ class UsersController extends Component
     public function resetUI()
     {
         $this->name ='';
+        $this->username ='';
         $this->email ='';
         $this->password ='';
         $this->phone ='';
@@ -65,6 +66,7 @@ class UsersController extends Component
     {
         $this->selected_id = $user->id;
         $this->name = $user->name;
+        $this->username = $user->username;
         $this->phone = $user->phone;
         $this->profile = $user->profile;
         $this->status = $user->status;
@@ -85,7 +87,8 @@ class UsersController extends Component
     {
         $rules = [
             'name' => 'required|min:3',
-            'email' => 'required|unique:users|email',
+            'username' => 'required|min:3|unique:users,username',
+            'email' => 'required|unique:users,email',
             'status' => 'required|not_in:Elegir',
             'profile' => 'required|not_in:Elegir',
             'password' => 'required|min:3'
@@ -93,7 +96,10 @@ class UsersController extends Component
 
         $messages =[
             'name.required' => 'ingrese el nombre',
-            'name.min' => 'El binvre dek usuarios tiene que tener al menos 3 caracteres',
+            'name.min' => 'El nombre tiene que tener al menos 3 caracteres',
+            'username.required' => 'ingrese el nombre usuario',
+            'username.min' => 'El nombre usuario tiene que tener al menos 3 caracteres',
+            'username.unique' => 'El nombre usuario ya existe en el sistema',
             'email.required' => 'Ingrese el corre',
             'email.email' => 'Ingrese un correo valido',
             'email.unique' => 'El email ya existe en el sistema',
@@ -109,6 +115,7 @@ class UsersController extends Component
         //crear el usuario
         $user = User::create([
             'name' => $this->name,
+            'username' => $this->username,
             'email' => $this->email,
             'phone' => $this->phone,
             'status' => $this->status,
@@ -138,6 +145,7 @@ class UsersController extends Component
             //validar para que no exista el mismo correo
             'email' => "required|email|unique:users,email,{$this->selected_id}",
             'name' => 'required|min:3',
+            'username' => "required|min:3|unique:users,username,{$this->selected_id}",
             'status' => 'required|not_in:Elegir',
             'profile' => 'required|not_in:Elegir',
             'password' => 'required|min:3'
@@ -146,6 +154,9 @@ class UsersController extends Component
         $messages =[
             'name.required' => 'ingrese el nombre',
             'name.min' => 'El binvre dek usuarios tiene que tener al menos 3 caracteres',
+            'username.required' => 'ingrese el nombre usuario',
+            'username.min' => 'El nombre usuario tiene que tener al menos 3 caracteres',
+            'username.unique' => 'El nombre usuario ya existe en el sistema',
             'email.required' => 'Ingrese el corre',
             'email.email' => 'Ingrese un correo valido',
             'email.unique' => 'El email ya existe en el sistema',
@@ -162,6 +173,7 @@ class UsersController extends Component
         $user = User::find($this->selected_id);
         $user->Update([
             'name' => $this->name,
+            'username' => $this->username,
             'email' => $this->email,
             'phone' => $this->phone,
             'status' => $this->status,

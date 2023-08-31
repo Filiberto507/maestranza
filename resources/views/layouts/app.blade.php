@@ -25,7 +25,7 @@
 
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container" style="background-color: #4FC3F7;">
+            <div class="container" style="background-color: #3867d6;">
                 <img src="assets/img/escudo.png" alt="" width="50px" height="50px">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     MAESTRANZA

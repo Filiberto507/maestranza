@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
         //creacion de usuarios
         User::create([
             'name' => 'Administrador',
+            'username' => 'admin',
             'phone' => '78896354',
             'email' => 'admin@gmail.com',
             'profile' => 'Admin',
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
         
         User::create([
             'name' => 'Grover Angel Solares Baltazar',
+            'username' => 'grover',
             'phone' => '78896369',
             'email' => 'grover@gmail.com',
             'profile' => 'Responsable de Transporte',
@@ -34,6 +36,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'Rodrigo Sánchez Gamboa',
+            'username' => 'rodrigo',
             'phone' => '78896385',
             'email' => 'rodrigo@gmail.com',
             'profile' => 'Tecnico-Mecanico',
@@ -42,6 +45,7 @@ class UserSeeder extends Seeder
         ]);
         User::create([
             'name' => 'Sergio Pinto Lacato',
+            'username' => 'sergio',
             'phone' => '78896385',
             'email' => 'sergio@gmail.com',
             'profile' => 'Tecnico-Mecanico',
