@@ -54,14 +54,14 @@ class DiagnosticoAreaTransporteController extends Component
     {
         if (strlen($this->search) > 0)
 
-            $DiagnosticoAreaT = Diagnostico_area_transporte::join("Vehiculos as v", "v.id", "Diagnostico_area_transportes.vehiculos_id")
+            $DiagnosticoAreaT = Diagnostico_area_transporte::join("vehiculos as v", "v.id", "Diagnostico_area_transportes.vehiculos_id")
                 ->select('Diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.placa', 'v.tipo_vehiculo', 'v.cilindrada', 'v.chasis', 'v.motor')
                 ->where('Diagnostico_area_transportes.fecha', 'like', '%' . $this->search . '%')
                 ->orWhere('v.id', 'like', '%' . $this->search . '%')
                 ->orderBy('Diagnostico_area_transportes.id', 'desc')
                 ->paginate($this->pagination);
         else
-            $DiagnosticoAreaT = Diagnostico_area_transporte::join("Vehiculos as v", "v.id", "Diagnostico_area_transportes.vehiculos_id")
+            $DiagnosticoAreaT = Diagnostico_area_transporte::join("vehiculos as v", "v.id", "Diagnostico_area_transportes.vehiculos_id")
                 ->select('Diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.placa', 'v.tipo_vehiculo', 'v.cilindrada', 'v.chasis', 'v.motor')
                 ->orderBy('Diagnostico_area_transportes.id', 'desc')
                 ->paginate($this->pagination);
@@ -77,7 +77,7 @@ class DiagnosticoAreaTransporteController extends Component
 
         return view('livewire.diagnostico_area_transporte.component', [
             'Diagnostico_area_transportes' => $DiagnosticoAreaT,
-            'Vehiculos' => Vehiculos::orderBy('id', 'asc')->get(),
+            'vehiculos' => Vehiculos::orderBy('id', 'asc')->get(),
             'vehiculodatos' => $this->vehiculodatos
             //'Conductor'=> Conductor::orderBy('name','asc')->get()
         ])

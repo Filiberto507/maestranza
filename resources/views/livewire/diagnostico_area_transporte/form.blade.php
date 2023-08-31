@@ -38,7 +38,7 @@
             <label>Asignar Vehiculo</label>
             <select wire:model.lazy="vehiculos_id" disabled class="form-control" id="select2-dropdown">
                 <option value="Elegir" selected> Elegir </option>
-                @foreach($Vehiculos as $v)
+                @foreach($vehiculos as $v)
                 <option value="{{$v->id}}" selected> {{$v->placa}} | {{$v->marca}}</option>
                 @endforeach
             </select>

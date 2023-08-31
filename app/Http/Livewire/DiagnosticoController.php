@@ -47,14 +47,14 @@ class DiagnosticoController extends Component
     {
         if (strlen($this->search) > 0)
 
-            $Diagnostico = Diagnostico::join('Vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
+            $Diagnostico = Diagnostico::join('vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
                 ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa')
                 ->where('Diagnosticos.fecha', 'like', '%' . $this->search . '%')
                 ->orWhere('v.id', 'like', '%' . $this->search . '%')
                 ->orderBy('Diagnostico.id', 'desc')
                 ->paginate($this->pagination);
         else
-            $Diagnostico = Diagnostico::join('Vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
+            $Diagnostico = Diagnostico::join('vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
                 ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa')
                 ->orderBy('Diagnosticos.id', 'desc')
                 ->paginate($this->pagination);
@@ -68,7 +68,7 @@ class DiagnosticoController extends Component
 
         return view('livewire.diagnostico.component', [
             'Diagnosticos' => $Diagnostico,
-            'Vehiculos' => Vehiculos::orderBy('id', 'asc')->get(),
+            'vehiculos' => Vehiculos::orderBy('id', 'asc')->get(),
             'vehiculodatos' => $this->vehiculodatos
             //'Conductor'=> Conductor::orderBy('name','asc')->get()
         ])

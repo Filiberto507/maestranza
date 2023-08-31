@@ -84,7 +84,7 @@ class ReporteTallerController extends Component
         
         $algo = TrabajoRealizadoTaller::where('taller_id', 4)->get();
         //dd($Taller);
-        $Diagnostico = Diagnostico::join('Vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
+        $Diagnostico = Diagnostico::join('vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
         ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa', 'v.marca')
         ->orderBy('id', 'desc')->get();
         //dd($Diagnostico);
