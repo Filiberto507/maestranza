@@ -194,10 +194,10 @@
                                 <tbody>
 
                                     <tr>
-                                        <td><img class="img-go" src="assets/img/iz-1.jpg" alt="Imagen del vehículo" width="150px"></td>
-                                        <td><img class="img-go" src="assets/img/cen-1.jpg" alt="Imagen del vehículo" width="150px"></td>
-                                        <td><img class="img-go" src="assets/img/der-1.jpg" alt="Imagen del vehículo" width="150px"></td>
-                                        <td><img class="img-go" src="assets/img/par-1.jpg" alt="Imagen del vehículo" width="150px"></td>
+                                        <td><img class="img-go" src="assets/img/iz-1.JPG" alt="Imagen del vehículo" width="150px"></td>
+                                        <td><img class="img-go" src="assets/img/cen-1.JPG" alt="Imagen del vehículo" width="150px"></td>
+                                        <td><img class="img-go" src="assets/img/der-1.JPG" alt="Imagen del vehículo" width="150px"></td>
+                                        <td><img class="img-go" src="assets/img/par-1.JPG" alt="Imagen del vehículo" width="150px"></td>
                                     </tr>
 
                                     <tr>
@@ -209,10 +209,10 @@
                                     </tr>
 
                                     <tr>
-                                        <td><img class="img-go" src="assets/img/iz-2.jpg" alt="Imagen del vehículo" width="150px"></td>
-                                        <td><img class="img-go" src="assets/img/cen-2.jpg" alt="Imagen del vehículo" width="150px"></td>
-                                        <td><img class="img-go" src="assets/img/der-2.jpg" alt="Imagen del vehículo" width="150px"></td>
-                                        <td><img class="img-go" src="assets/img/par-2.jpg" alt="Imagen del vehículo" width="150px"></td>
+                                        <td><img class="img-go" src="assets/img/iz-2.JPG" alt="Imagen del vehículo" width="150px"></td>
+                                        <td><img class="img-go" src="assets/img/cen-2.JPG" alt="Imagen del vehículo" width="150px"></td>
+                                        <td><img class="img-go" src="assets/img/der-2.JPG" alt="Imagen del vehículo" width="150px"></td>
+                                        <td><img class="img-go" src="assets/img/par-2.JPG" alt="Imagen del vehículo" width="150px"></td>
                                     </tr>
 
                                     <tr>
@@ -223,9 +223,9 @@
                                     </tr>
 
                                     <tr>
-                                        <td><img class="img-go" src="assets/img/iz-3.jpg" alt="Imagen del vehículo" width="150px"></td>
-                                        <td><img class="img-go" src="assets/img/cen-3.jpg" alt="Imagen del vehículo" width="150px"></td>
-                                        <td><img class="img-go" src="assets/img/der-3.jpg" alt="Imagen del vehículo" width="150px"></td>
+                                        <td><img class="img-go" src="assets/img/iz-3.JPG" alt="Imagen del vehículo" width="150px"></td>
+                                        <td><img class="img-go" src="assets/img/cen-3.JPG" alt="Imagen del vehículo" width="150px"></td>
+                                        <td><img class="img-go" src="assets/img/der-3.JPG" alt="Imagen del vehículo" width="150px"></td>
                                     </tr>
 
                                     <tr>

@@ -203,10 +203,10 @@
             <th class="auto-th">PARACHOQUES</th>
         </tr>
         <tr>
-            <td class="auto-td-img"><img class="car-image" src="assets/img/iz-1.jpg" alt="Imagen 2"></td>
-            <td class="auto-td-img"><img class="car-image" src="assets/img/cen-1.jpg" alt="Imagen 2"></td>
-            <td class="auto-td-img"><img class="car-image" src="assets/img/der-1.jpg" alt="Imagen 2"></td>
-            <td class="auto-td-img"><img class="car-image" src="assets/img/par-1.jpg" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/iz-1.JPG" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/cen-1.JPG" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/der-1.JPG" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/par-1.JPG" alt="Imagen 2"></td>
         </tr>
 
         <tr>
@@ -217,7 +217,7 @@
                 {{$datosestadovehiculo[0]['descripcion']}}
                 @endif
             </td>
-            <!-- <td class="auto-td"><img class="car-image" src="imagen2.jpg" alt="Imagen 2"></td> -->
+            <!-- <td class="auto-td"><img class="car-image" src="imagen2.JPG" alt="Imagen 2"></td> -->
             <td class="auto-td">
                 @if($datosestadovehiculo[1] == [])
                 sin novedad
@@ -245,10 +245,10 @@
         </tr>
 
         <tr>
-            <td class="auto-td-img"><img class="car-image" src="assets/img/iz-2.jpg" alt="Imagen 2"></td>
-            <td class="auto-td-img"><img class="car-image" src="assets/img/cen-2.jpg" alt="Imagen 2"></td>
-            <td class="auto-td-img"><img class="car-image" src="assets/img/der-2.jpg" alt="Imagen 2"></td>
-            <td class="auto-td-img"><img class="car-image" src="assets/img/par-2.jpg" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/iz-2.JPG" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/cen-2.JPG" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/der-2.JPG" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/par-2.JPG" alt="Imagen 2"></td>
         </tr>
 
         <tr>
@@ -259,7 +259,7 @@
                 {{$datosestadovehiculo[4]['descripcion']}}
                 @endif
             </td>
-            <!-- <td class="auto-td"><img class="car-image" src="imagen2.jpg" alt="Imagen 2"></td> -->
+            <!-- <td class="auto-td"><img class="car-image" src="imagen2.JPG" alt="Imagen 2"></td> -->
             <td class="auto-td">
                 @if($datosestadovehiculo[5] == [])
                 sin novedad
@@ -287,9 +287,9 @@
         </tr>
 
         <tr>
-            <td class="auto-td-img"><img class="car-image" src="assets/img/iz-3.jpg" alt="Imagen 2"></td>
-            <td class="auto-td-img"><img class="car-image" src="assets/img/cen-3.jpg" alt="Imagen 2"></td>
-            <td class="auto-td-img"><img class="car-image" src="assets/img/der-3.jpg" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/iz-3.JPG" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/cen-3.JPG" alt="Imagen 2"></td>
+            <td class="auto-td-img"><img class="car-image" src="assets/img/der-3.JPG" alt="Imagen 2"></td>
         </tr>
 
         <tr>
@@ -300,7 +300,7 @@
                 {{$datosestadovehiculo[8]['descripcion']}}
                 @endif
             </td>
-            <!-- <td class="auto-td"><img class="car-image" src="imagen2.jpg" alt="Imagen 2"></td> -->
+            <!-- <td class="auto-td"><img class="car-image" src="imagen2.JPG" alt="Imagen 2"></td> -->
             <td class="auto-td">
                 @if($datosestadovehiculo[9] == [])
                 sin novedad
