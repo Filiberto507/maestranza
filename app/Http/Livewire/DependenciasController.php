@@ -31,9 +31,11 @@ class DependenciasController extends Component
     public function render()
     {
         if(strlen($this->search) > 0 )
-            $Data = Dependencia::where('nombre', 'like', '%' . $this->search . '%')->paginate($this->pagination);
+            $Data = Dependencia::where('dependencia.nombre', 'like', '%' .strtoupper($this->search) . '%')
+            ->orderBy('dependencia.id','desc')
+            ->paginate($this->pagination);
         else
-            $Data= Dependencia::orderBy('id', 'asc')->paginate($this->pagination);
+            $Data= Dependencia::orderBy('id', 'desc')->paginate($this->pagination);
 
         
 

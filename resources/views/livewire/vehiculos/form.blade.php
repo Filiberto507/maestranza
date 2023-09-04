@@ -71,7 +71,7 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
                             <label>Numero de motor *</label>
-                            <input type="text" wire:model.lazy="motor" class="form-control" placeholder="ej: 52WBC10338" maxlength="10">
+                            <input type="text" wire:model.lazy="motor" class="form-control" placeholder="ej: 52WBC10338" maxlength="20">
                             @error('motor') <span class="text-danger er">{{ $message}} </span>
 
                             @enderror
@@ -80,7 +80,7 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
                             <label>Numero de chasis *</label>
-                            <input type="text" wire:model.lazy="chasis" class="form-control" placeholder="ej: 1HGBH41JXMN109186" maxlength="10">
+                            <input type="text" wire:model.lazy="chasis" class="form-control" placeholder="ej: 1HGBH41JXMN109186" maxlength="20">
                             @error('chasis') <span class="text-danger er">{{ $message}} </span>
 
                             @enderror
@@ -98,7 +98,7 @@
                     <div class="col-sm-12 col-md-8">
                         <div class="form-group">
                             <label>Cilindrada *</label>
-                            <input type="text" wire:model.lazy="cilindrada" class="form-control" placeholder="ej: 2.500 CC" maxlength="10">
+                            <input type="text" wire:model.lazy="cilindrada" class="form-control" placeholder="ej: 2.500 CC" maxlength="15">
                             @error('cilindrada') <span class="text-danger er">{{ $message}} </span>
 
                             @enderror

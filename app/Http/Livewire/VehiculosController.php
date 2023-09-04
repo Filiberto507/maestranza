@@ -36,11 +36,10 @@ class VehiculosController extends Component
         if(strlen($this->search) > 0 )
 
         $Vehiculos=Vehiculos::where('vehiculos.placa','like','%'.$this->search.'%')
-        ->orWhere('dep.id','like','%'.$this->search.'%')
-        ->orderBy('vehiculos.placa','asc')
+        ->orderBy('vehiculos.id','desc')
         ->paginate($this->pagination);
         else
-        $Vehiculos=Vehiculos::orderBy('vehiculos.placa','asc')
+        $Vehiculos=Vehiculos::orderBy('vehiculos.id','desc')
         ->paginate($this->pagination);
 
         return view('livewire.vehiculos.component',[

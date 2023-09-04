@@ -66,7 +66,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    
+                    {{$Dependencias->links()}}
                 </div>
             </div>
         </div>

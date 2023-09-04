@@ -47,16 +47,16 @@ class DiagnosticoController extends Component
     {
         if (strlen($this->search) > 0)
 
-            $Diagnostico = Diagnostico::join('vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
-                ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa')
-                ->where('Diagnosticos.fecha', 'like', '%' . $this->search . '%')
+            $Diagnostico = Diagnostico::join('vehiculos as v', 'v.id', 'diagnosticos.vehiculos_id')
+                ->select('diagnosticos.*', 'v.id as vehiculos', 'v.placa')
+                ->where('diagnosticos.fecha', 'like', '%' . $this->search . '%')
                 ->orWhere('v.id', 'like', '%' . $this->search . '%')
-                ->orderBy('Diagnostico.id', 'desc')
+                ->orderBy('diagnosticos.id', 'desc')
                 ->paginate($this->pagination);
         else
-            $Diagnostico = Diagnostico::join('vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
-                ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa')
-                ->orderBy('Diagnosticos.id', 'desc')
+            $Diagnostico = Diagnostico::join('vehiculos as v', 'v.id', 'diagnosticos.vehiculos_id')
+                ->select('diagnosticos.*', 'v.id as vehiculos', 'v.placa')
+                ->orderBy('diagnosticos.id', 'desc')
                 ->paginate($this->pagination);
         //dd($Diagnostico);
 
@@ -68,7 +68,7 @@ class DiagnosticoController extends Component
 
         return view('livewire.diagnostico.component', [
             'Diagnosticos' => $Diagnostico,
-            'vehiculos' => Vehiculos::orderBy('id', 'asc')->get(),
+            'Vehiculos' => Vehiculos::orderBy('id', 'asc')->get(),
             'vehiculodatos' => $this->vehiculodatos
             //'Conductor'=> Conductor::orderBy('name','asc')->get()
         ])
@@ -272,9 +272,9 @@ class DiagnosticoController extends Component
     }
     public function pdf($id)
     {
-        $Diagnostico = Diagnostico::join('Vehiculos as v', 'v.id', 'Diagnosticos.vehiculos_id')
-            ->select('Diagnosticos.*', 'v.id as vehiculos', 'v.placa', 'v.marca')
-            ->where('Diagnosticos.id', $id)->first();
+        $Diagnostico = Diagnostico::join('vehiculos as v', 'v.id', 'diagnosticos.vehiculos_id')
+            ->select('diagnosticos.*', 'v.id as vehiculos', 'v.placa', 'v.marca')
+            ->where('diagnosticos.id', $id)->first();
         //dd($Diagnostico);
         $DiagnosticoItem = DiagnosticoItem::where('diagnosticos_id', $id)->get();
         $Vehiculos = Vehiculos::all();

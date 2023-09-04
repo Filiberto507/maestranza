@@ -53,17 +53,17 @@ class DiagnosticoAreaTransporteController extends Component
     public function render()
     {
         if (strlen($this->search) > 0)
-
-            $DiagnosticoAreaT = Diagnostico_area_transporte::join("vehiculos as v", "v.id", "Diagnostico_area_transportes.vehiculos_id")
-                ->select('Diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.placa', 'v.tipo_vehiculo', 'v.cilindrada', 'v.chasis', 'v.motor')
-                ->where('Diagnostico_area_transportes.fecha', 'like', '%' . $this->search . '%')
+        
+            $DiagnosticoAreaT = Diagnostico_area_transporte::join("vehiculos as v", "v.id", "diagnostico_area_transportes.vehiculos_id")
+                ->select('diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.placa', 'v.tipo_vehiculo', 'v.cilindrada', 'v.chasis', 'v.motor')
+                ->where('diagnostico_area_transportes.fecha', 'like', '%' . $this->search . '%')
                 ->orWhere('v.id', 'like', '%' . $this->search . '%')
-                ->orderBy('Diagnostico_area_transportes.id', 'desc')
+                ->orderBy('diagnostico_area_transportes.id', 'desc')
                 ->paginate($this->pagination);
         else
-            $DiagnosticoAreaT = Diagnostico_area_transporte::join("vehiculos as v", "v.id", "Diagnostico_area_transportes.vehiculos_id")
-                ->select('Diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.placa', 'v.tipo_vehiculo', 'v.cilindrada', 'v.chasis', 'v.motor')
-                ->orderBy('Diagnostico_area_transportes.id', 'desc')
+            $DiagnosticoAreaT = Diagnostico_area_transporte::join("vehiculos as v", "v.id", "diagnostico_area_transportes.vehiculos_id")
+                ->select('diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.placa', 'v.tipo_vehiculo', 'v.cilindrada', 'v.chasis', 'v.motor')
+                ->orderBy('diagnostico_area_transportes.id', 'desc')
                 ->paginate($this->pagination);
         //dd($Diagnostico);
 
@@ -359,9 +359,9 @@ class DiagnosticoAreaTransporteController extends Component
 
     public function pdf($id)
     {
-        $DiagnosticoAreaT = Diagnostico_area_transporte::join('Vehiculos as v', 'v.id', 'Diagnostico_area_transportes.vehiculos_id')
-            ->select('Diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.clase', 'v.placa', 'v.marca', 'v.tipo_vehiculo', 'v.cilindrada', 'v.chasis', 'v.motor')
-            ->where('Diagnostico_area_transportes.id', $id)->first();
+        $DiagnosticoAreaT = Diagnostico_area_transporte::join('vehiculos as v', 'v.id', 'diagnostico_area_transportes.vehiculos_id')
+            ->select('diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.clase', 'v.placa', 'v.marca', 'v.tipo_vehiculo', 'v.cilindrada', 'v.chasis', 'v.motor')
+            ->where('diagnostico_area_transportes.id', $id)->first();
         //dd($Diagnostico);
         $Diagnostico_requerimiento = Diagnostico_servicio::where('diagnostico_area_transportes_id', $id)->get();
         $Diagnostico_obra = DiagnosticoObra::where('diagnostico_area_transportes_id', $id)->get();
