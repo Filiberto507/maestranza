@@ -49,8 +49,9 @@
                     <div class="widget-content">
                         <!-- TABLA -->
                         <div class="table-responsive">
-                            <!-- Anterior table: table table-bordered border-primary table striped mt-1  -->
-                            <table class="table table-bordered d-none d-sm-table-cell">
+                            <!-- Anterior table: table table-bordered d-none d-sm-table-cell  -->
+                            <table class="table table-hover mb-4">
+                                
                                 <thead class="text-white" style="background:#3b3f5c;">
                                     <tr>
                                         <th class="table-th text-white text-center">
@@ -134,7 +135,7 @@
                                                     <h6></h6>
                                                 </td>
                                                 <td class="text-center">
-                                                    <h6>DIAGNOSCTICO</h6>
+                                                    <h6>DIAGNOSTICO</h6>
                                                 </td>
                                                 <td class="text-center">
                                                     <h6>{{($di->fecha)}}</h6>

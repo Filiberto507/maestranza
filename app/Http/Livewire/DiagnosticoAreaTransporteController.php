@@ -56,8 +56,8 @@ class DiagnosticoAreaTransporteController extends Component
         
             $DiagnosticoAreaT = Diagnostico_area_transporte::join("vehiculos as v", "v.id", "diagnostico_area_transportes.vehiculos_id")
                 ->select('diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.placa', 'v.tipo_vehiculo', 'v.cilindrada', 'v.chasis', 'v.motor')
-                ->where('diagnostico_area_transportes.fecha', 'like', '%' . $this->search . '%')
-                ->orWhere('v.id', 'like', '%' . $this->search . '%')
+                ->orWhere('v.placa', 'like', '%' . $this->search . '%')
+                ->orWhere('diagnostico_area_transportes.id', 'like', '%' . $this->search . '%')
                 ->orderBy('diagnostico_area_transportes.id', 'desc')
                 ->paginate($this->pagination);
         else

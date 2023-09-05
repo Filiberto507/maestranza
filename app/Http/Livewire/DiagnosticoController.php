@@ -49,8 +49,8 @@ class DiagnosticoController extends Component
 
             $Diagnostico = Diagnostico::join('vehiculos as v', 'v.id', 'diagnosticos.vehiculos_id')
                 ->select('diagnosticos.*', 'v.id as vehiculos', 'v.placa')
-                ->where('diagnosticos.fecha', 'like', '%' . $this->search . '%')
-                ->orWhere('v.id', 'like', '%' . $this->search . '%')
+                ->orWhere('v.placa', 'like', '%' . $this->search . '%')
+                ->orWhere('diagnosticos.id', 'like', '%' . $this->search . '%')
                 ->orderBy('diagnosticos.id', 'desc')
                 ->paginate($this->pagination);
         else
@@ -127,9 +127,14 @@ class DiagnosticoController extends Component
 
         $ultimadiagnostico = Diagnostico::orderby('id', 'desc')->first();
         //dd($ultimadiagnostico->fecha); 2023-07-21
-
-        $fechaultimadiagnostico=Carbon::parse($ultimadiagnostico->fecha)->format('Y');
-        
+        if($ultimadiagnostico)
+        {
+            $fechaultimadiagnostico=Carbon::parse($ultimadiagnostico->fecha)->format('Y');
+        }
+        else
+        {
+            $fechaultimadiagnostico = Carbon::parse(Carbon::now())->format('Y');
+        }
         //dd($this->fechataller);
 
         if ($ultimadiagnostico && $fechaultimadiagnostico == $this->fechataller ) {

@@ -25,12 +25,12 @@
 
             <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="assets/img/90x90.jpg" alt="admin-profile" class="img-fluid">
+                    <img src="assets/img/user1.png" alt="admin-profile" class="img-fluid">
                 </a>
                 <div class="dropdown-menu position-absolute animated fadeInUp" aria-labelledby="userProfileDropdown">
                     <div class="user-profile-section">
                         <div class="media mx-auto">
-                            <img src="assets/img/90x90.jpg" class="img-fluid mr-2" alt="avatar">
+                            
                             <div class="media-body">
                                 <!-- integracion de los nombres en el perfil  -->
                                 @if(Auth::user()=='')
@@ -49,13 +49,9 @@
                     </div>
                     <div class="dropdown-item">
                         @if(Auth::user()=='')
-                            <a href=""  >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span>Mi Perfil</span>
-                            </a>
+                            
                         @else
-                            <a href="{{ url('component' . '/' . Auth::user()->id) }}"  >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span>Mi Perfil</span>
-                            </a>
+                           
                         @endif
                     </div>
                  

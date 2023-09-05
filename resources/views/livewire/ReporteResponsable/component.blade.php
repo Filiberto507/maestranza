@@ -41,14 +41,14 @@
                             <div class="col-sm-12 mt-2">
                                 <h6>Fecha Entrada</h6>
                                 <div class="form-group">
-                                    <input id="basicFlatpickr" wire:model="dateFrom" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." readonly="readonly">
+                                    <input id="basicFlatpickr" wire:model="dateFrom" class="form-control flatpickr flatpickr-input active" type="date" placeholder="Seleccione la fecha.." >
                                 </div>
                             </div>
 
                             <div class="col-sm-12 mt-2">
-                                <h6>Fecha Entrada</h6>
+                                <h6>Fecha Salida</h6>
                                 <div class="form-group">
-                                    <input id="basicFlatpickr2" wire:model="dateTo" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." readonly="readonly">
+                                    <input id="basicFlatpickr2" wire:model="dateTo" class="form-control flatpickr flatpickr-input active" type="date" placeholder="Seleccione la fecha.." >
                                 </div>
                             </div>
                             <div class="col-sm-12">
