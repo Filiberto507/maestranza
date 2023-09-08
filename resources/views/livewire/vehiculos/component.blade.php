@@ -56,9 +56,6 @@
                                     ESTADO
                                 </th>
                                 <th class="table-th text-while">
-                                    DEPENDENCIA
-                                </th>
-                                <th class="table-th text-while">
                                     ACCTIONS
                                 </th>
                             </tr>
@@ -101,9 +98,6 @@
                                 </td>
                                 <td class="text-center">
                                     <h6>{{$v->estado}}</h6>
-                                </td>
-                                <td class="text-center">
-                                    <h6>{{$v->nombre}}</h6>
                                 </td>
                                 <td class="text-center">
                                     <a href="javascript:void(0)" wire:click="Edit({{$v->id}})" class="btn btn-dark mtmoble" title="Editar Registro">

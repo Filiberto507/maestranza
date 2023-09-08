@@ -28,7 +28,7 @@
             <div class="container" style="background-color: #3867d6;">
                 <img src="assets/img/escudo.png" alt="" width="50px" height="50px">
                 <a class="navbar-brand" href="{{ url('/') }}" style="color: #fff;">
-                    MAESTRANZA
+                    TRANSPORTES
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

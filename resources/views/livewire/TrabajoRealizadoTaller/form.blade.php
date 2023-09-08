@@ -15,7 +15,7 @@
                     <div class="col-sm-6 mt-2">
                         <h6>Fecha Entrada</h6>
                         <div class="form-group">
-                            <input id="basicFlatpickr" wire:model.lazy="fecha_ingreso" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." disabled readonly="readonly">
+                            <input id="basicFlatpickr" disabled wire:model.lazy="fecha_ingreso" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." disabled readonly="readonly">
                         </div>
                     </div>
 
@@ -23,7 +23,7 @@
                         <h6>Fecha Salida</h6>
                         <div class="form-group">
 
-                            <input id="basicFlatpickr2" wire:model.lazy="fecha_salida" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." disabled readonly="readonly">
+                            <input id="basicFlatpickr2" disabled wire:model.lazy="fecha_salida" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha.." disabled readonly="readonly">
                         </div>
                         @error('fecha_salida')
                         <span class="text-danger er"> {{ $message }} </span>

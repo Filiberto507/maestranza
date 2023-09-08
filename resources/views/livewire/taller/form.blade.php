@@ -15,13 +15,13 @@
                     <div class="col-sm-4 mt2">
                         <div class="form-group">
                             <label>Entrada</label>
-                            <input type="time" wire:model.lazy="ingreso" class="form-control" />
+                            <input type="time" disabled wire:model.lazy="ingreso" class="form-control" />
                         </div>
                     </div>
                     <div class="col-sm-4 mt2">
                         <div class="form-group">
                             <label>Salida</label>
-                            <input type="time" wire:model.lazy="salida" class="form-control" />
+                            <input type="time" disabled wire:model.lazy="salida" class="form-control" />
                         </div>
                     </div>
 
@@ -29,7 +29,7 @@
                         <h6>Fecha Entrada</h6>
                         <div class="form-group">
                             <label for="fecha_ingreso">Fecha de Ingreso</label>
-                            <input id="fecha_ingreso" wire:model.lazy="fecha_ingreso" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha de ingreso.." onclick="openFlatpickr('fecha_ingreso')">
+                            <input id="fecha_ingreso" disabled wire:model.lazy="fecha_ingreso" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha de ingreso.." onclick="openFlatpickr('fecha_ingreso')">
                         </div>
                     </div>
 
@@ -37,7 +37,7 @@
                         <h6>Fecha Salida</h6>
                         <div class="form-group">
                             <label for="fecha_salida">Fecha de Salida</label>
-                            <input id="fecha_salida" wire:model.lazy="fecha_salida" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha de salida.." onclick="openFlatpickr('fecha_salida')">
+                            <input id="fecha_salida" disabled wire:model.lazy="fecha_salida" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Seleccione la fecha de salida.." onclick="openFlatpickr('fecha_salida')">
                         </div>
                     </div>
                         <!-- <div class="col-sm-12 mt2">
