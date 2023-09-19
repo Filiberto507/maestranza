@@ -46,15 +46,24 @@ class ConductorController extends Component
     {
         //dd($this->filas);
         //validaciones
-        $rules = ['name' => 'required|min:2|unique:conductors,name'];
+        $rules = [
+            'name' => 'required|min:2|unique:conductors,name',
+            'ci' => 'required|min:5',
+            'telefono' => 'required|min:7',
+            'status' => 'required|not_in:Elegir'
+                ];
 
         //mensajes
         $messages = [
             'name.required' => 'El nombre del conductor es requerido',
             'name.unique' => 'El role ya existe',
-            'name.min' => 'el nombre del conductor debe tener al menos 2 catacteres'
+            'name.min' => 'el nombre del conductor debe tener al menos 2 catacteres',
+            'ci.required' => 'Agregar CI',
+            'ci.min' => 'mayor a 5 caracteres',
+            'telefono.required' => 'Agregar telefono',
+            'telefono.min' => 'mayor a 7 caracteres',
+            'ci' => 'debe ser diferente a elegir',
         ];
-
         //validar si estan bien 
         $this->validate($rules, $messages);
         //dd($this->ci,$this->status);
@@ -99,13 +108,23 @@ class ConductorController extends Component
     public function Update()
     {
         //validaciones
-        $rules = ['name' => "required|min:2|unique:roles,name, {$this->selected_id}"];
+        $rules = [
+                    'name' => "required|min:2|unique:roles,name, {$this->selected_id}",
+                    'ci' => 'required|min:5',
+                    'telefono' => 'required|min:7',
+                    'status' => 'required|not_in:Elegir'
+    ];
 
         //mensajes
         $messages = [
             'name.required' => 'El nombre del conductor es requerido',
             'name.unique' => 'El conductor ya existe',
-            'name.min' => 'el nombre del conductor debe tener al menos 2 catacteres'
+            'name.min' => 'el nombre del conductor debe tener al menos 2 catacteres',
+            'ci.required' => 'Agregar CI',
+            'ci.min' => 'mayor a 5 caracteres',
+            'telefono.required' => 'Agregar telefono',
+            'telefono.min' => 'mayor a 7 caracteres',
+            'ci' => 'debe ser diferente a elegir',
         ];
 
         $this->validate($rules, $messages);

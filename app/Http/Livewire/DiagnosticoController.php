@@ -115,11 +115,13 @@ class DiagnosticoController extends Component
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
             'tipo_taller' => 'required|not_in:Elegir',
+            'observacion' => 'required|min:3',
         ];
         $messages = [
             'fecha.required' => 'seleccione una fecha',
             'tipo_taller' => 'Seleccione al Tipo de taller',
-
+            'observacion.required' => 'agregar observacion',
+            'observacion.min' => 'mayor a 3 caracteres',
         ];
 
         $this->validate($rules, $messages);
@@ -205,13 +207,14 @@ class DiagnosticoController extends Component
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
             'tipo_taller' => 'required|not_in:Elegir',
-
+            'observacion' => 'required|min:3',
         ];
 
         $messages = [
             'fecha.required' => 'ingresela fecha',
             'tipo_taller' => 'Seleccione al Tipo de taller',
-
+            'observacion.required' => 'agregar observacion',
+            'observacion.min' => 'mayor a 3 caracteres',
         ];
 
         $this->validate($rules, $messages);

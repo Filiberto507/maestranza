@@ -331,17 +331,31 @@
         @endforeach
 
     </div>
-
-
-
+    @if($fecha_salida != null)
     <table class="firma">
+        <tr>
+            <th>{{$nombre}}</th>
+            <th>{{Auth::user()->name}}</th>
+            <th>{{$nombre}}</th>
+        </tr>
         <tr>
             <th>CONDUCTOR DE VEHICULO INGRESO</th>
             <th>MECANICO DE MAESTRANZA</th>
             <th>CONDUCTOR DE VEHICULO SALIDA</th>
         </tr>
     </table>
-
+    @else
+    <table class="firma">
+        <tr>
+            <th>{{$nombre}}</th>
+            <th>{{Auth::user()->name}}</th>
+        </tr>
+        <tr>
+            <th>CONDUCTOR DE VEHICULO INGRESO</th>
+            <th>MECANICO DE MAESTRANZA</th>
+        </tr>
+    </table>
+    @endif
     <!-- <div class="container">
             <span class="label">Nombre:</span>
             <div class="text">

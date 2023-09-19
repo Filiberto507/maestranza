@@ -13,7 +13,7 @@
     <div class="col-sm-12 col-md-4">
         <div class="form-group">
             <label>Ci. *</label>
-            <input type="text" wire:model.lazy="ci" class="form-control" placeholder="ej: 70985745" maxlength="15">
+            <input type="number" wire:model.lazy="ci" class="form-control" placeholder="ej: 70985745" maxlength="15">
             @error('ci') <span class="text-danger er">{{ $message}} </span>
 
             @enderror
@@ -22,7 +22,7 @@
     <div class="col-sm-12 col-md-4">
         <div class="form-group">
             <label>Telefono *</label>
-            <input type="text" wire:model.lazy="telefono" class="form-control" placeholder="ej: 66985745" maxlength="10">
+            <input type="number" wire:model.lazy="telefono" class="form-control" placeholder="ej: 66985745" maxlength="10">
             @error('telefono') <span class="text-danger er">{{ $message}} </span>
 
             @enderror

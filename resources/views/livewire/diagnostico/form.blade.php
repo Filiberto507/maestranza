@@ -62,7 +62,7 @@
     <tbody>
         @foreach ($filas as $index => $fila)
         <tr>
-            <td><input type="text" class="form-control" wire:model="filas.{{ $index }}.items" /></td>
+            <td><input type="number" class="form-control" wire:model="filas.{{ $index }}.items" /></td>
             <td><textarea class="form-control" wire:model="filas.{{ $index }}.descriptions" name="" id="" col="100" rows="2"></textarea></td>
             <td><button class="btn btn-danger" wire:click="eliminarFila({{ $index }})">Eliminar</button></td>
         </tr>

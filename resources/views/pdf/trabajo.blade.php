@@ -111,14 +111,15 @@
     </table>
 
     <table class="firma">
+        
+        <tr>
+            <td>{{Auth::user()->name}}</td>
+            <td>{{$taller->conductor}}</td>
+        </tr>
         <tr>
             <th>TECNICO MECANICO</th>
             <th>CONDUCTOR
             </th>
-        </tr>
-        <tr>
-            <td></td>
-            <td>{{$taller->conductor}}</td>
         </tr>
     </table>
 

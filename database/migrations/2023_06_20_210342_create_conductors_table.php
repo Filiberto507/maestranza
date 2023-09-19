@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('conductors', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->string('ci', 255);
-            $table->string('telefono',255);
+            $table->string('ci', 255)->nullable();
+            $table->string('telefono',255)->nullable();
             $table->enum('status',['ACTIVE','LOCKED'])->default('ACTIVE');
             $table->timestamps();
         });

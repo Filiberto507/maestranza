@@ -126,7 +126,11 @@
                 </font>
                 <br>
                 <font style="vertical-align: inherit">
+                    <font style="vertical-align: inherit">{{Auth::user()->name}}</font>
+                    
+                    <br>
                     <font style="vertical-align: inherit">Tecnico Mecanico</font>
+
                 </font>
             </div>
 
@@ -136,9 +140,9 @@
                 </font>
                 <br>
                 <font style="vertical-align: inherit">
-                    <font style="vertical-align: inherit; margin-left: 0px;">Conductor</font>
+                    <font style="vertical-align: inherit; margin-left: -50px;">{{$Diagnostico->conductor}}</font>
                     <br>
-                    <font style="margin-left: -100px;">{{$Diagnostico->conductor}}</font>
+                    <font style="vertical-align: inherit; margin-left: 0px;">Conductor</font>
                 </font>
             </div>
         </div>

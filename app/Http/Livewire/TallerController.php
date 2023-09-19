@@ -368,7 +368,26 @@ class TallerController extends Component
                 });
             }
         }
+        $rules = [
+            'conductorname' => 'required|not_in:Elegir',
+            'dependencia' => 'required|min:3|not_in:Elegir',
+            'kilometraje' => 'required|min:3',
+            'ordentrabajo' => 'required|min:3'
+        ];
 
+        $messages = [
+            'conductorname.required' => 'ingrese el nombre',
+            'conductorname.not_in' => 'Seleccione el conductor',
+            'dependencia.required' => 'Ingrese la dependencia',
+            'dependencia.min' => 'Dependencia debe tener al menos 3 caracteres',
+            'dependencia.not_in' => 'Seleccione la dependencia',
+            'kilometraje.required' => 'Agregue el kilometraje',
+            'kilometraje.min' => 'Kilometraje debe tener al menos 3 caracteres',
+            'ordentrabajo.required' => 'Es requerido la orden de trabajo a realizar',
+            'ordentrabajo.min' => 'Orden de Trabajo debe tener al menos 3 caracteres'
+        ];
+        //validar los datos
+        $this->validate($rules, $messages);
         //dd($this->estadovehiculo);
         //buscar por el id
         $talleres = Taller::find($this->selected_id);

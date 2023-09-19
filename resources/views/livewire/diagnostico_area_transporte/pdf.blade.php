@@ -175,10 +175,10 @@
                 </font>
                 <br>
                 <font style="vertical-align: inherit">
-                    <font style="vertical-align: inherit">Responsable vehiculo</font>
+                    <font style="vertical-align: inherit">{{$DiagnosticoAreaT->conductor}}</font>
                     <br>
                     
-                <font style="vertical-align: inherit">{{$DiagnosticoAreaT->conductor}}</font>
+                <font style="vertical-align: inherit">Responsable vehiculo</font>
                 </font>
             </div>
 
@@ -188,7 +188,10 @@
                 </font>
                 <br>
                 <font style="vertical-align: inherit">
-                    <font style="vertical-align: inherit">Encargado de transportes</font>
+                    <font style="vertical-align: inherit">{{Auth::user()->name}}</font>
+                    <br>
+                    
+                    <font style="vertical-align: inherit">Encargado de transporte</font>
                 </font>
             </div>
         </div>
