@@ -540,7 +540,17 @@ class TallerController extends Component
                     'descripcion' => $value->descripcion,
                 ];
             }
+        } 
+        else{
+            
+            foreach ($acctalleres as $tall){
+                $this->check[] =
+                        $tall->id . ", " .
+                        $tall->name;
+            }
+            //dd($this->check);
         }
+        $this->emit('show-modal', 'open!');
     }
 
     //funcion para eliminar los checks que se quitaron

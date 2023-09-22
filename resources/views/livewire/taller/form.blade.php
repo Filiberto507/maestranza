@@ -229,9 +229,9 @@
                                     </tr>
 
                                     <tr>
+                                        <td><textarea placeholder="Descripcion" wire:model="estadovehiculo.{{ 8 }}.descripcion" name="" id="" rows="3"></textarea></td>
                                         <td><textarea placeholder="Descripcion" wire:model="estadovehiculo.{{ 9 }}.descripcion" name="" id="" rows="3"></textarea></td>
                                         <td><textarea placeholder="Descripcion" wire:model="estadovehiculo.{{ 10 }}.descripcion" name="" id="" rows="3"></textarea></td>
-                                        <td><textarea placeholder="Descripcion" wire:model="estadovehiculo.{{ 11 }}.descripcion" name="" id="" rows="3"></textarea></td>
                                     </tr>
 
 

@@ -10,16 +10,15 @@
 </head>
 
 <body>
-    <table>
+    <table class="encabezado">
         <tr>
-            <td class="">
-                <img class="img-bo" src="assets/img/Bolivia.png" alt="Imagen bolivia">
-            </td>
-            <td class="">
+            <td class="colenca1">
                 <img class="img-co" src="assets/img/cochabamba.jpg" alt="Imagen del cochabamba">
             </td>
-            <td class="">
-                <img class="img-go" src="assets/img/img-go.png" alt="Imagen del gobernacion">
+            <td class="colenca2">
+                AREA DE TRANSPORTES
+                <BR></BR>
+                TRABAJO REALIZADOS
             </td>
         </tr>
     </table>

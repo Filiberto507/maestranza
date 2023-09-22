@@ -3,6 +3,18 @@ table {
     width: 100%;
     margin: auto;
   }
+.encabezado {
+  border: solid black 2px;
+  padding: 10px;
+}
+
+.colenca1{
+  width: 30%;
+}
+.colenca2{
+  text-align: center;
+  font-size: 30px;
+}
   
 .img-go{
     width: 150px;

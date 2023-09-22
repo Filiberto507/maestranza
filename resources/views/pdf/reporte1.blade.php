@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Reporte de Ventas</title>
+    <title>REPORTE TRANSPORTES</title>
     <link rel="stylesheet" href="{{ asset('assets/css/Report-pdf.css') }}">
 </head>
 
@@ -86,7 +86,7 @@
                         <td>Curso</td>
                         <td></td>
                         @endif
-                        
+
                         <td>
                             <p class="fecha-title">salida</p>
                         </td>
@@ -167,16 +167,27 @@
                 @foreach($primeros10 as $pr)
                 <div class="checkbox-item">
                     <input type="checkbox" id="checkbox1" name="checkbox1" {{ $pr->checked == 1 ? 'checked': '' }}>
-                    <label for="checkbox1">{{$pr->name}}</label>
+                    <label for="checkbox1" class="custom-checkbox-label">
+                        <span class="custom-checkbox">{{ $pr->checked == 1 ? '✓' : 'X' }}</span>
+                        <input type="checkbox" id="checkbox1" class="checkmark" name="checkbox1" {{ $pr->checked == 1 ? 'checked': '' }}>
+                        <span class="checkmark"></span> <!-- Capa adicional para el check original -->
+                        {{$pr->name}}
+                    </label>
                 </div>
+
                 @endforeach
                 <!-- Repite las siguientes líneas de código para agregar más elementos -->
             </td>
             <td class="check-column">
                 @foreach($segundos10 as $se)
                 <div class="checkbox-item">
-                    <input type="checkbox" id="checkbox5" name="checkbox5" {{ $se->checked == 1 ? 'checked': '' }}>
-                    <label for="checkbox5">{{$se->name}}</label>
+                    <input type="checkbox" id="checkbox1" name="checkbox1" {{ $se->checked == 1 ? 'checked': '' }}>
+                    <label for="checkbox1" class="custom-checkbox-label">
+                        <span class="custom-checkbox">{{ $se->checked == 1 ? '✓' : 'X' }}</span>
+                        <input type="checkbox" id="checkbox1" class="checkmark" name="checkbox1" {{ $se->checked == 1 ? 'checked': '' }}>
+                        <span class="checkmark"></span> <!-- Capa adicional para el check original -->
+                        {{$se->name}}
+                    </label>
                 </div>
                 @endforeach
                 <!-- Repite las siguientes líneas de código para agregar más elementos -->
@@ -184,8 +195,13 @@
             <td class="check-column">
                 @foreach($ultimos10 as $ul)
                 <div class="checkbox-item">
-                    <input type="checkbox" id="checkbox9" name="checkbox9" {{ $ul->checked == 1 ? 'checked': '' }}>
-                    <label for="checkbox9">{{$ul->name}}</label>
+                    <input type="checkbox" id="checkbox1" name="checkbox1" {{ $ul->checked == 1 ? 'checked': '' }}>
+                    <label for="checkbox1" class="custom-checkbox-label">
+                        <span class="custom-checkbox">{{ $ul->checked == 1 ? '✓' : 'X' }}</span>
+                        <input type="checkbox" id="checkbox1" class="checkmark" name="checkbox1" {{ $ul->checked == 1 ? 'checked': '' }}>
+                        <span class="checkmark"></span> <!-- Capa adicional para el check original -->
+                        {{$ul->name}}
+                    </label>
                 </div>
                 @endforeach
                 <!-- Repite las siguientes líneas de código para agregar más elementos -->

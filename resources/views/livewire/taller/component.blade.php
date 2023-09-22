@@ -19,7 +19,7 @@
 
                     @if($vehiculoselectedName != "Elegir")
                     <div class="input-group-append" style="margin-left: 60px; margin-top:25px; padding-top: 10px;">
-                        <button class="btn btn-dark" wire:click="showDatos" data-toggle="modal" data-target="#theModal" type="button">Agregar</button>
+                        <button class="btn btn-dark" wire:click="showDatos" type="button">Agregar</button>
                     </div>
                     @else
                     <div class="input-group-append" style="margin-left: 60px; margin-top:25px; padding-top: 10px;">
@@ -225,13 +225,13 @@
 
         //limpiar bug de saltado
         var modal = document.getElementById('modal');
-
+        //console.log("isModalOpen");
         // Capturar el evento de clic fuera del modal
        document.addEventListener('click', function(event) {
-            //console.log(isModalOpen);
+            console.log(isModalOpen);
             // Verificar si el clic ocurrió fuera del modal
-            // Verificar si el clic ocurrió en el input dentro del modal
-            if (isModalOpen == true && !modal.contains(event.target) && event.target.tagName !== 'INPUT') {
+            // Verificar si el clic ocurrió en el input dentro del modal -> && event.target.tagName !== 'INPUT'
+            if (isModalOpen == true && !modal.contains(event.target)) {
                 // Llamamos a la funcion limpiar para que se cierre correctamente
                 limpiar();
                 isModalOpen = false;
