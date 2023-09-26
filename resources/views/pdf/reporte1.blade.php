@@ -11,7 +11,7 @@
     <table>
         <tr>
             <td class="columna1">
-                <img class="img-go" src="assets/img/img-go.png" alt="Imagen del vehículo">
+                <img class="img-go" src="assets/img/cochabamba.jpg" alt="Imagen del vehículo">
             </td>
             <td class="columna2">
                 <h3>Recepción de vehículo</h2>

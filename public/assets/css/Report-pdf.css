@@ -13,22 +13,19 @@ h3{
 margin: 0;
 text-align: center;
 padding: 10px;
-background-color: #333;
-color: white;
+/*background-color: #333;
+color: white;*/
 }
 
 h2{
   margin: 0;
   text-align: center;
   padding: 10px;
-  background-color: #333;
-  color: white;
   }
 .fecha-title{
 margin: 0;
 padding: 5px;
-background-color: #333;
-color: white;
+
 }
 
 td {
@@ -44,7 +41,7 @@ td {
 }
 
 .columna3 {
-  background: cornflowerblue;
+  /*background: cornflowerblue;*/
   width: 25%;
   vertical-align: top;
 }
@@ -63,7 +60,7 @@ td {
 
 /*fecha*/
 .fecha-td{
-  border: solid 4px cornflowerblue;
+  /*border: solid 4px cornflowerblue;*/
   background-color: #fff;
 }
 
@@ -188,8 +185,6 @@ input[type="checkbox"]::before {
 .title-auto{
   width: 245px;
   padding: 3px 10px;
-  background-color: #333;
-  color: white;
   margin: 10px 0;
 }
 .auto {
@@ -249,8 +244,6 @@ input[type="checkbox"]::before {
 .title-orden{
   width: 170px;
   padding: 3px 10px;
-  background-color: #333;
-  color: white;
   margin: 5px 0;
 }
 .container-parrafo {

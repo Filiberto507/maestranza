@@ -13,10 +13,13 @@ use App\Http\Livewire\DiagnosticoController;
 use App\Http\Livewire\DiagnosticoAreaTransporteController;
 use App\Http\Livewire\DependenciasController;
 use App\Http\Livewire\AccesoriosController;
+use App\Http\Livewire\DiagnosticoAreaTransportentController;
+use App\Http\Livewire\DiagnosticontController;
 use App\Http\Livewire\ReporteTallerController;
 use App\Http\Livewire\ReporteDiagnosticosController;
 use App\Http\Livewire\ReporteResponsableController;
 use App\Http\Livewire\TrabajoRealizadoTallerController;
+use App\Models\DiagnosticoAreaTransportent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -49,7 +52,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('dependencias', DependenciasController::class);
 Route::get('vehiculos', VehiculosController::class);
 Route::get('diagnostico',DiagnosticoController::class);
+Route::get('diagnosticont',DiagnosticontController::class);
 Route::get('diagnostico_area_transporte',DiagnosticoAreatransporteController::class);
+Route::get('diagnostico_area_transportent',DiagnosticoAreaTransportentController::class);
 Route::get('roles', RolesController::class)->middleware('role:Admin');
 Route::get('permisos', PermisosController::class)->middleware('role:Admin');
 Route::get('users', UsersController::class)->middleware('role:Admin');

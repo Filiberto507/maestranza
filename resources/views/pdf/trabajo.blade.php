@@ -27,7 +27,7 @@
     <table class="datos">
         <tr>
             <td class="columna1">
-                Tipo Vehiculo: {{$vehiculo}} 
+                Tipo Vehiculo: {{$vehiculo}}
                 @php
                 //dd($taller->clase, $vehiculo, $taller->tipo_vehiculo);
                 @endphp
@@ -76,41 +76,51 @@
                 @foreach($primeros10 as $pr)
                 <div class="checkbox-item">
                     <input type="checkbox" id="checkbox1" name="checkbox1" {{ $pr->checked == 1 ? 'checked': '' }}>
-                    <label for="checkbox1">{{$pr->descripcion}}</label>
+                    <label for="checkbox1" class="custom-checkbox-label">
+                        <span class="custom-checkbox">{{ $pr->checked == 1 ? '✓' : 'X' }}</span>
+                        <input type="checkbox" id="checkbox1" class="checkmark" name="checkbox1" {{ $pr->checked == 1 ? 'checked': '' }}>
+                        <span class="checkmark"></span> <!-- Capa adicional para el check original -->
+                        {{$pr->descripcion}}
+                    </label>
                 </div>
+
                 @endforeach
                 <!-- Repite las siguientes líneas de código para agregar más elementos -->
             </td>
             <td class="check-column">
                 @foreach($segundos10 as $se)
                 <div class="checkbox-item">
-                    <input type="checkbox" id="checkbox5" name="checkbox5" {{ $se->checked == 1 ? 'checked': '' }}>
-                    <label for="checkbox5">{{$se->descripcion}}</label>
+                    <input type="checkbox" id="checkbox1" name="checkbox1" {{ $se->checked == 1 ? 'checked': '' }}>
+                    <label for="checkbox1" class="custom-checkbox-label">
+                        <span class="custom-checkbox">{{ $se->checked == 1 ? '✓' : 'X' }}</span>
+                        <input type="checkbox" id="checkbox1" class="checkmark" name="checkbox1" {{ $se->checked == 1 ? 'checked': '' }}>
+                        <span class="checkmark"></span> <!-- Capa adicional para el check original -->
+                        {{$se->descripcion}}
+                    </label>
                 </div>
                 @endforeach
                 <!-- Repite las siguientes líneas de código para agregar más elementos -->
             </td>
         </tr>
-    
-        
+
+
     </table>
 
     <table class="footer">
-    <tfoot>
-            @if($totalItems < 6)
-            <tr>
-            <td colspan="3"> <strong>Observaciones: </strong> {{$tallerdatos->observaciones}}</td>
-            </tr>
-            @else
-            <tr>
-                <td colspan="2">Observaciones: {{ $tallerdatos->observaciones }}</td>
-            </tr>
-            @endif
+        <tfoot>
+            @if($totalItems < 6) <tr>
+                <td colspan="3"> <strong>Observaciones: </strong> {{$tallerdatos->observaciones}}</td>
+                </tr>
+                @else
+                <tr>
+                    <td colspan="2">Observaciones: {{ $tallerdatos->observaciones }}</td>
+                </tr>
+                @endif
         </tfoot>
     </table>
 
     <table class="firma">
-        
+
         <tr>
             <td>{{Auth::user()->name}}</td>
             <td>{{$taller->conductor}}</td>
