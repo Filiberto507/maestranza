@@ -20,6 +20,7 @@ use App\Http\Livewire\ReporteDiagnosticosController;
 use App\Http\Livewire\ReporteResponsableController;
 use App\Http\Livewire\TrabajoRealizadoTallerController;
 use App\Models\DiagnosticoAreaTransportent;
+use App\Models\Diagnosticont;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,7 +48,9 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('diagnostico/pdf/{id}', [DiagnosticoController::class, 'pdf']);
+Route::get('diagnosticont/pdf/{id}', [DiagnosticontController::class, 'pdf']);
 Route::get('diagnostico_area_transporte/pdf/{id}', [DiagnosticoAreaTransporteController::class, 'pdf']);
+Route::get('diagnostico_transportent/pdf/{id}', [DiagnosticoAreaTransportentController::class, 'pdft']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('dependencias', DependenciasController::class);
 Route::get('vehiculos', VehiculosController::class);

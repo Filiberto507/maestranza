@@ -157,7 +157,21 @@
                             </div>
                         </div>
 
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>ASIGNAR RESPONSABLE *</label>
+                                <select wire:model.lazy="responsable" class="form-control">
+                                    <option value="Elegir" selected> Elegir </option>
+                                    @foreach($responsableu as $r)
+                                    <option value="{{$r->name}}" selected> {{$r->name}} </option>
+                                    @endforeach
+                                </select>
+                                @error('responsable') <span class="text-danger er">{{ $message}} </span>
 
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
 
                         @foreach($acctaller as $tall)
                         <div class="col-sm-4">

@@ -361,20 +361,21 @@ class DiagnosticoAreaTransportentController extends Component
         $this->obra = $this->obra; // Reindexar el arreglo
     }
 
-    public function pdf($id)
+    public function pdft($id)
     {
-        $DiagnosticoAreaT = Diagnostico_area_transporte::join('vehiculos as v', 'v.id', 'diagnostico_area_transportes.vehiculos_id')
-            ->select('diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.clase', 'v.placa', 'v.marca', 'v.tipo_vehiculo', 'v.cilindrada', 'v.chasis', 'v.motor')
-            ->where('diagnostico_area_transportes.id', $id)->first();
-        //dd($Diagnostico);
-        $Diagnostico_requerimiento = Diagnostico_servicio::where('diagnostico_area_transportes_id', $id)->get();
-        $Diagnostico_obra = DiagnosticoObra::where('diagnostico_area_transportes_id', $id)->get();
+        //dd('hola');
+        $DiagnosticoAreaT = DiagnosticoAreaTransportent::join('vehiculos as v', 'v.id', 'diagnostico_area_transportents.vehiculos_id')
+            ->select('diagnostico_area_transportents.*', 'v.id as vehiculos', 'v.clase', 'v.placa', 'v.marca', 'v.tipo_vehiculo', 'v.cilindrada', 'v.chasis', 'v.motor')
+            ->where('diagnostico_area_transportents.id', $id)->first();
+        //dd($DiagnosticoAreaT);
+        $Diagnostico_requerimiento = DiagnosticoServiciont::where('diagnostico_area_transportent_id', $id)->get();
+        $Diagnostico_obra = DiagnosticoObrant::where('diagnostico_area_transportent_id', $id)->get();
         $contreque = $Diagnostico_requerimiento->count();
         $contobra = $Diagnostico_obra->count();
         //dd($contobra);
 
         $Vehiculos = Vehiculos::all();
-        $pdf = Pdf::loadView('livewire.diagnostico_area_transporte.pdf', compact('DiagnosticoAreaT', 'Diagnostico_obra', 'Vehiculos', 'Diagnostico_requerimiento', 'contreque', 'contobra'));
+        $pdf = Pdf::loadView('livewire.diagnostico_area_transportent.pdf', compact('DiagnosticoAreaT', 'Diagnostico_obra', 'Vehiculos', 'Diagnostico_requerimiento', 'contreque', 'contobra'));
         return $pdf->stream();
         //si se quiere descargar
         //return $pdf->download('reporteDisagnostico.pdf');

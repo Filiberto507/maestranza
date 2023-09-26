@@ -12,6 +12,7 @@ use App\Models\DiagnosticoItem;
 use App\Models\Diagnosticont;
 use App\Models\DiagnosticontItem;
 use App\Models\Vehiculos;
+use App\Models\User;
 use App\Models\Dependencia;
 use Carbon\Carbon;
 use App\Models\Taller;
@@ -32,6 +33,8 @@ class DiagnosticontController extends Component
     public $vehiculoselectedId, $vehiculoselectedName, $vehiculodatos;
     //dependencias y conductores
     public $conductoresnt, $dependenciant;
+    //responsable
+    public $responsable, $responsableu;
 
     function paginationView()
     {
@@ -64,6 +67,10 @@ class DiagnosticontController extends Component
                 ->paginate($this->pagination);
         //dd($Diagnostico);
 
+        $this->responsableu= User::where('profile','like','%'.'Tecnico-Mecanico'.'%')
+        ->orderby('name', 'asc')
+        ->get();
+
         $this->vehiculodatos = Vehiculos::orderby('id', 'desc')
         ->get();
 
@@ -77,6 +84,7 @@ class DiagnosticontController extends Component
             'Vehiculos' => Vehiculos::orderBy('id', 'asc')->get(),
             'dependenciant' => $this->dependenciant,
             'conductoresnt' => $this->conductoresnt,
+            'responsableu'=>$this->responsableu,
             'vehiculodatos' => $this->vehiculodatos
             //'Conductor'=> Conductor::orderBy('name','asc')->get()
         ])
@@ -95,6 +103,7 @@ class DiagnosticontController extends Component
         $this->vehiculos_id = $Diagnostico->vehiculos_id;
         $this->tipo_taller = $Diagnostico->tipo_taller;
         $this->observacion = $Diagnostico->observacion;
+        $this->responsable = $Diagnostico->responsable;
         $DiagnosticoItem = DiagnosticontItem::where('diagnosticosnt_id', $id)->get();
         //dd($DiagnosticoItem);
         foreach ($DiagnosticoItem as $d) {
@@ -124,6 +133,7 @@ class DiagnosticontController extends Component
             'vehiculos_id' => 'required',
             'tipo_taller' => 'required|not_in:Elegir',
             'observacion' => 'required|min:3',
+            'responsable' => 'required|not_in:Elegir'
         ];
         $messages = [
             'fecha.required' => 'seleccione una fecha',
@@ -132,6 +142,8 @@ class DiagnosticontController extends Component
             'tipo_taller' => 'Seleccione al Tipo de taller',
             'observacion.required' => 'agregar observacion',
             'observacion.min' => 'mayor a 3 caracteres',
+            'responsable.required' => 'Ingrese el responsable',
+            'responsable.not_in' => 'Seleccione el responsable'
         ];
 
         $this->validate($rules, $messages);
@@ -165,7 +177,8 @@ class DiagnosticontController extends Component
             'conductor' => strtoupper($this->conductor),
             'vehiculos_id' => $this->vehiculos_id,
             'tipo_taller' => $this->tipo_taller,
-            'observacion' => $this->observacion
+            'observacion' => $this->observacion,
+            'responsable'=>$this->responsable
         ]);
         if ($Diagnostico) {
 
@@ -194,6 +207,7 @@ class DiagnosticontController extends Component
         $this->taller_id = '';
         $this->tipo_taller= '';
         $this->observacion= '';
+        $this->responsable='';
         $this->resetValidation();
         //para regresar a la pagina principal
         $this->resetPage();
@@ -216,6 +230,7 @@ class DiagnosticontController extends Component
             'vehiculos_id' => 'required',
             'tipo_taller' => 'required|not_in:Elegir',
             'observacion' => 'required|min:3',
+            'responsable' => 'required|not_in:Elegir'
         ];
 
         $messages = [
@@ -223,6 +238,8 @@ class DiagnosticontController extends Component
             'tipo_taller' => 'Seleccione al Tipo de taller',
             'observacion.required' => 'agregar observacion',
             'observacion.min' => 'mayor a 3 caracteres',
+            'responsable.required' => 'Ingrese el responsable',
+            'responsable.not_in' => 'Seleccione el responsable'
         ];
 
         $this->validate($rules, $messages);
@@ -233,7 +250,8 @@ class DiagnosticontController extends Component
             'conductor' => $this->conductor,
             'tipo_taller' => $this->tipo_taller,
             'observacion' => $this->observacion,
-            'vehiculos_id' => $this->vehiculos_id
+            'vehiculos_id' => $this->vehiculos_id,
+            'responsable'=>$this->responsable
         ]);
 
         if ($Diagnostico) {
@@ -293,6 +311,7 @@ class DiagnosticontController extends Component
             ->where('diagnosticonts.id', $id)->first();
         //dd($Diagnostico);
         $DiagnosticoItem = DiagnosticontItem::where('diagnosticosnt_id', $id)->get();
+        //dd($DiagnosticoItem);
         $Vehiculos = Vehiculos::all();
         $pdf = PDF::setPaper([0, 0, 680, 1000])->loadView('livewire.diagnosticont.pdf', compact('Diagnostico', 'DiagnosticoItem', 'Vehiculos'));
         return $pdf->stream();

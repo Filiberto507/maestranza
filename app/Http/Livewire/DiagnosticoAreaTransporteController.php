@@ -359,6 +359,7 @@ class DiagnosticoAreaTransporteController extends Component
 
     public function pdf($id)
     {
+        //dd('algo');
         $DiagnosticoAreaT = Diagnostico_area_transporte::join('vehiculos as v', 'v.id', 'diagnostico_area_transportes.vehiculos_id')
             ->select('diagnostico_area_transportes.*', 'v.id as vehiculos', 'v.clase', 'v.placa', 'v.marca', 'v.tipo_vehiculo', 'v.cilindrada', 'v.chasis', 'v.motor')
             ->where('diagnostico_area_transportes.id', $id)->first();

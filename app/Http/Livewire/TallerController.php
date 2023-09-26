@@ -35,6 +35,8 @@ class TallerController extends Component
 
     //estado de vehiculo img
     public $estadovehiculo = [];
+    //responsable
+    public $responsable, $responsableu;
 
 
     //numero de filas por pagina
@@ -75,6 +77,9 @@ class TallerController extends Component
         $this->vehiculodatos = Vehiculos::orderby('id', 'desc')
             ->get();
 
+        $this->responsableu= User::where('profile','like','%'.'Tecnico-Mecanico'.'%')
+        ->orderby('name', 'asc')
+        ->get();
         //dd($this->vehiculodatos);
 
         //dd($this->vehiculoselectedName);
@@ -84,6 +89,7 @@ class TallerController extends Component
             'acctaller' => $this->acctaller,
             'vehiculodatos' => $this->vehiculodatos,
             'conductor' => Conductor::orderby('name', 'asc')->get(),
+            'responsableu'=> $this->responsableu,
             'dependencias' => Dependencia::orderby('nombre', 'asc')->get()
         ])
             //extender de layouts
@@ -118,6 +124,7 @@ class TallerController extends Component
         $this->estadovehiculo = [];
         $this->clase = '';
         $this->tipo_vehiculo = '';
+        $this->responsable='';
 
         $this->resetValidation();
         $this->resetPage();
@@ -165,7 +172,8 @@ class TallerController extends Component
             'conductorname' => 'required|not_in:Elegir',
             'dependencia' => 'required|min:3|not_in:Elegir',
             'kilometraje' => 'required|min:3',
-            'ordentrabajo' => 'required|min:3'
+            'ordentrabajo' => 'required|min:3',
+            'responsable' => 'required|not_in:Elegir'
         ];
 
         $messages = [
@@ -177,7 +185,9 @@ class TallerController extends Component
             'kilometraje.required' => 'Agregue el kilometraje',
             'kilometraje.min' => 'Kilometraje debe tener al menos 3 caracteres',
             'ordentrabajo.required' => 'Es requerido la orden de trabajo a realizar',
-            'ordentrabajo.min' => 'Orden de Trabajo debe tener al menos 3 caracteres'
+            'ordentrabajo.min' => 'Orden de Trabajo debe tener al menos 3 caracteres',
+            'responsable.required' => 'Ingrese el responsable',
+            'responsable.not_in' => 'Seleccione el responsable'
         ];
         //validar los datos
         $this->validate($rules, $messages);
@@ -220,7 +230,9 @@ class TallerController extends Component
                 'ordentrabajo' => $this->ordentrabajo,
                 'vehiculo_id' => $this->vehiculoselectedId,
                 'clase' => $this->clase,
-                'tipo_vehiculo' => $this->tipo_vehiculo
+                'tipo_vehiculo' => $this->tipo_vehiculo,
+                'responsable'=>$this->responsable,
+
                 //'user_id' => Auth()->user()->id
             ]);
             //dd($talleres);
@@ -287,6 +299,7 @@ class TallerController extends Component
         $this->ordentrabajo = $taller->ordentrabajo;
         $this->clase = $taller->clase;
         $this->tipo_vehiculo = $taller->tipo_vehiculo;
+        $this->responsable=$taller->responsable;
         //separar el texto para el pdf
         $separador = "\n"; // Usar salto de línea
         $separada = explode($separador, $this->ordentrabajo);
@@ -372,7 +385,8 @@ class TallerController extends Component
             'conductorname' => 'required|not_in:Elegir',
             'dependencia' => 'required|min:3|not_in:Elegir',
             'kilometraje' => 'required|min:3',
-            'ordentrabajo' => 'required|min:3'
+            'ordentrabajo' => 'required|min:3',
+            'responsable' => 'required|not_in:Elegir'
         ];
 
         $messages = [
@@ -384,7 +398,9 @@ class TallerController extends Component
             'kilometraje.required' => 'Agregue el kilometraje',
             'kilometraje.min' => 'Kilometraje debe tener al menos 3 caracteres',
             'ordentrabajo.required' => 'Es requerido la orden de trabajo a realizar',
-            'ordentrabajo.min' => 'Orden de Trabajo debe tener al menos 3 caracteres'
+            'ordentrabajo.min' => 'Orden de Trabajo debe tener al menos 3 caracteres',
+            'responsable.required' => 'Ingrese el responsable',
+            'responsable.not_in' => 'Seleccione el responsable'
         ];
         //validar los datos
         $this->validate($rules, $messages);
@@ -408,7 +424,8 @@ class TallerController extends Component
                 'kilometraje' => $this->kilometraje,
                 'ordentrabajo' => $this->ordentrabajo,
                 'clase' => $this->clase,
-                'tipo_vehiculo' => $this->tipo_vehiculo
+                'tipo_vehiculo' => $this->tipo_vehiculo,
+                'responsable'=>$this->responsable,
                 //'user_id' => Auth()->user()->id
             ]);
             //dd($talleres->id);

@@ -12,6 +12,7 @@ use App\Models\DiagnosticoItem;
 use App\Models\Vehiculos;
 use Carbon\Carbon;
 use App\Models\Taller;
+use App\Models\User;
 use DB;
 
 class DiagnosticoController extends Component
@@ -27,7 +28,8 @@ class DiagnosticoController extends Component
     public $tipo_taller;
     //datos select2
     public $vehiculoselectedId, $vehiculoselectedName, $vehiculodatos;
-
+    //responsable
+    public $responsable, $responsableu;
 
     function paginationView()
     {
@@ -65,10 +67,15 @@ class DiagnosticoController extends Component
         ->whereNull('taller_id')
         ->orderby('id', 'desc')
         ->get();
+        
+        $this->responsableu= User::where('profile','like','%'.'Tecnico-Mecanico'.'%')
+        ->orderby('name', 'asc')
+        ->get();
 
         return view('livewire.diagnostico.component', [
             'Diagnosticos' => $Diagnostico,
             'Vehiculos' => Vehiculos::orderBy('id', 'asc')->get(),
+            'responsableu'=>$this->responsableu,
             'vehiculodatos' => $this->vehiculodatos
             //'Conductor'=> Conductor::orderBy('name','asc')->get()
         ])
@@ -87,6 +94,7 @@ class DiagnosticoController extends Component
         $this->vehiculos_id = $Diagnostico->vehiculos_id;
         $this->tipo_taller = $Diagnostico->tipo_taller;
         $this->observacion = $Diagnostico->observacion;
+        $this->responsable = $Diagnostico->responsable;
         $DiagnosticoItem = DiagnosticoItem::where('diagnosticos_id', $id)->get();
         //dd($DiagnosticoItem);
         foreach ($DiagnosticoItem as $d) {
@@ -116,12 +124,15 @@ class DiagnosticoController extends Component
             'vehiculos_id' => 'required',
             'tipo_taller' => 'required|not_in:Elegir',
             'observacion' => 'required|min:3',
+            'responsable' => 'required|not_in:Elegir'
         ];
         $messages = [
             'fecha.required' => 'seleccione una fecha',
             'tipo_taller' => 'Seleccione al Tipo de taller',
             'observacion.required' => 'agregar observacion',
             'observacion.min' => 'mayor a 3 caracteres',
+            'responsable.required' => 'Ingrese el responsable',
+            'responsable.not_in' => 'Seleccione el responsable'
         ];
 
         $this->validate($rules, $messages);
@@ -156,7 +167,8 @@ class DiagnosticoController extends Component
             'vehiculos_id' => $this->vehiculos_id,
             'tipo_taller' => $this->tipo_taller,
             'observacion' => $this->observacion,
-            'taller_id' => $this->taller_id
+            'taller_id' => $this->taller_id,
+            'responsable'=>$this->responsable
         ]);
         if ($Diagnostico) {
 
@@ -186,6 +198,7 @@ class DiagnosticoController extends Component
         $this->taller_id = '';
         $this->tipo_taller= '';
         $this->observacion= '';
+        $this->responsable='';
         $this->resetValidation();
         //para regresar a la pagina principal
         $this->resetPage();
@@ -208,6 +221,7 @@ class DiagnosticoController extends Component
             'vehiculos_id' => 'required',
             'tipo_taller' => 'required|not_in:Elegir',
             'observacion' => 'required|min:3',
+            'responsable' => 'required|not_in:Elegir'
         ];
 
         $messages = [
@@ -215,6 +229,8 @@ class DiagnosticoController extends Component
             'tipo_taller' => 'Seleccione al Tipo de taller',
             'observacion.required' => 'agregar observacion',
             'observacion.min' => 'mayor a 3 caracteres',
+            'responsable.required' => 'Ingrese el responsable',
+            'responsable.not_in' => 'Seleccione el responsable'
         ];
 
         $this->validate($rules, $messages);
@@ -225,7 +241,8 @@ class DiagnosticoController extends Component
             'conductor' => $this->conductor,
             'tipo_taller' => $this->tipo_taller,
             'observacion' => $this->observacion,
-            'vehiculos_id' => $this->vehiculos_id
+            'vehiculos_id' => $this->vehiculos_id,
+            'responsable'=>$this->responsable
         ]);
 
         if ($Diagnostico) {

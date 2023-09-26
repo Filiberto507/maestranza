@@ -11,7 +11,7 @@ class Taller extends Model
 
     protected $fillable = [
         'numero_taller','ingreso', 'salida', 'fecha_ingreso','fecha_salida', 'conductor','vehiculo','color',
-       'dependencia', 'placa', 'kilometraje','ordentrabajo', 'vehiculo_id', 'clase', 'tipo_vehiculo'
+       'dependencia', 'placa', 'kilometraje','ordentrabajo','responsable','vehiculo_id', 'clase', 'tipo_vehiculo'
     ];
 
     public function tallerdetalle()

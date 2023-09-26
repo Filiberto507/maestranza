@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <h2>AREA DE TRANSPORTE - TALLER DE MAESTRANZA</h2>
     <table>
         <tr>
             <td class="columna1">
@@ -113,7 +114,6 @@
             </td>
         </tr>
     </table>
-    <h2>AREA DE TRANSPORTE - TALLER DE MAESTRANZA</h2>
 
     <table class="info">
 
@@ -350,12 +350,11 @@
     @if($fecha_salida != null)
     <table class="firma">
         <tr>
-            <th>{{$nombre}}</th>
-            <th>{{Auth::user()->name}}</th>
+            
+            <th>{{$tallerdatos->responsable}}</th>
             <th>{{$nombre}}</th>
         </tr>
         <tr>
-            <th>CONDUCTOR DE VEHICULO INGRESO</th>
             <th>MECANICO DE MAESTRANZA</th>
             <th>CONDUCTOR DE VEHICULO SALIDA</th>
         </tr>
@@ -364,7 +363,7 @@
     <table class="firma">
         <tr>
             <th>{{$nombre}}</th>
-            <th>{{Auth::user()->name}}</th>
+            <th>{{$tallerdatos->responsable}}</th>
         </tr>
         <tr>
             <th>CONDUCTOR DE VEHICULO INGRESO</th>

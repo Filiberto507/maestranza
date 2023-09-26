@@ -6,6 +6,7 @@ use App\Models\TrabajoRealizadoTaller;
 use App\Models\Taller;
 use App\Models\accesoriostaller;
 use App\Models\Conductor;
+use App\Models\User;
 use App\Models\Vehiculos;
 use App\Models\tallerdetalle;
 use App\Models\Diagnostico;
@@ -22,7 +23,7 @@ class TrabajoRealizadoTallerController extends Component
     public $TrabajoName, $fechataller, $search, $selected_id, $pageTitle, $componentName, $checkdiagnostico = []
     , $diagnostico_item;
 
-    public $fecha_ingreso, $fecha_salida, $name, $vehiculo, $responsable, $taller_id,
+    public $fecha_ingreso, $fecha_salida, $name, $vehiculo, $responsable,$responsableu, $taller_id,
         $dependencia, $placa, $km_ingreso, $km_salida, $descripcion, $observacion;
 
     //vehiculo
@@ -69,6 +70,9 @@ class TrabajoRealizadoTallerController extends Component
         ->orderby('id', 'desc')
         ->get();
 
+        $this->responsableu= User::where('profile','like','%'.'Tecnico-Mecanico'.'%')
+        ->orderby('name', 'asc')
+        ->get();
      //dd($this->vehiculodatos);
 
     //dd($this->diagnostico_item);
@@ -76,6 +80,7 @@ class TrabajoRealizadoTallerController extends Component
      return view('livewire.TrabajoRealizadoTaller.component', [
          'trabajor' => $trabajo,
          'vehiculodatos' => $this->vehiculodatos,
+         'responsableu'=>$this->responsableu,
          'conductor' => Conductor::orderby('name', 'asc')->get()
      ])
          //extender de layouts

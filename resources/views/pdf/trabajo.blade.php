@@ -122,7 +122,7 @@
     <table class="firma">
 
         <tr>
-            <td>{{Auth::user()->name}}</td>
+            <td>{{$responsable}}</td>
             <td>{{$taller->conductor}}</td>
         </tr>
         <tr>
