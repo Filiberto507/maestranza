@@ -17,6 +17,8 @@ use App\Http\Livewire\DiagnosticoAreaTransportentController;
 use App\Http\Livewire\DiagnosticontController;
 use App\Http\Livewire\ReporteTallerController;
 use App\Http\Livewire\ReporteDiagnosticosController;
+use App\Http\Livewire\ReporteNTController;
+use App\Http\Livewire\ReporteNTResponsableController;
 use App\Http\Livewire\ReporteResponsableController;
 use App\Http\Livewire\TrabajoRealizadoTallerController;
 use App\Models\DiagnosticoAreaTransportent;
@@ -69,6 +71,8 @@ Route::get('trabajorealizadotaller', TrabajoRealizadoTallerController::class);
 Route::get('reportemaestranza', ReporteTallerController::class);
 Route::get('reporte_diagnosticos', ReporteDiagnosticosController::class);
 Route::get('reporte_responsable', ReporteResponsableController::class);
+Route::get('reportetallernt', ReporteNTController::class);
+Route::get('reporteresponsablent', ReporteNTResponsableController::class);
 //reporten PDF
 Route::get('report/pdf/{id}', [ExportController::class, 'reportPDF']);
 Route::get('reportrabajo/pdf/{id}', [ExportController::class, 'reportTrabajo']);

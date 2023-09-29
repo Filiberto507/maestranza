@@ -8,12 +8,20 @@
 </head>
 
 <body>
-    <h2>AREA DE TRANSPORTE - TALLER DE MAESTRANZA</h2>
+    <table class="encabezado">
+        <tr>
+            <td>
+            <img class="img-go" src="assets/img/cochabamba.jpg" alt="Imagen del vehículo">
+            </td>
+            <td>
+            <h1 class="encabezado">ÁREA DE TRANSPORTES</h1>
+                <h2>TALLER DE MAESTRANZA</h2>
+            </td>
+        </tr>
+    </table>
     <table>
         <tr>
-            <td class="columna1">
-                <img class="img-go" src="assets/img/cochabamba.jpg" alt="Imagen del vehículo">
-            </td>
+
             <td class="columna2">
                 <h3>Recepción de vehículo</h2>
                     <table>
