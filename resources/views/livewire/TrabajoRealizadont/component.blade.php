@@ -119,7 +119,7 @@
 
         </div>
     </div>
-    @include('livewire.TrabajoRealizadoTaller.form')
+    @include('livewire.TrabajoRealizadont.form')
 </div>
 
 <script>

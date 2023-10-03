@@ -16,9 +16,9 @@
                 <img class="img-co" src="assets/img/cochabamba.jpg" alt="Imagen del cochabamba">
             </td>
             <td class="colenca2">
-                <strong>ÁREA DE TRANSPORTES</strong>
+                AREA DE TRANSPORTES
                 <BR></BR>
-                <strong>TRABAJO REALIZADOS</strong>
+                TRABAJO REALIZADOS
             </td>
         </tr>
     </table>

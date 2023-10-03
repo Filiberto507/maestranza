@@ -48,7 +48,7 @@
                     <label for="">N° de placa: {{$Diagnostico->placa}}</label>
                 </td>
                 <td>
-                    <label for="">Tipo de vehiculo: {{$Diagnostico->marca}}</label>
+                    <label for="">Tipo de vehiculo: {{$Diagnostico->clase}} {{$Diagnostico->marca}} {{$Diagnostico->tipo_vehiculo}}</label>
                 </td>
             </tr>
         </tbody>
@@ -115,26 +115,20 @@
                 <font style="vertical-align: inherit">Cochabamba-Bolivia</font>
             </font>
         </div>
-        <div style="margin-top: 60px">
-            <div style="float:left">
-                <font style="vertical-align: inherit">
-                    <font style="vertical-align: inherit">{{$Diagnostico->responsable}}</font>
-                    
-                    <br>
-                    <font style="vertical-align: inherit"><b>TÉCNICO MECÁNICO</b></font>
-
-                </font>
-            </div>
-
-            <div style="float:right">
-                <font style="vertical-align: inherit">
-                    <font style="vertical-align: inherit; margin-left: -50px;">{{$Diagnostico->conductor}}</font>
-                    <br>
-                    <font style="vertical-align: inherit; margin-left: 0px;"><b>CONDUCTOR</b></font>
-                </font>
-            </div>
-        </div>
     </footer>
+
+    <table class="firma">
+
+        <tr>
+            <td>{{$Diagnostico->responsable}}</td>
+            <td>{{$Diagnostico->conductor}}</td>
+        </tr>
+        <tr>
+            <th>TECNICO MECANICO</th>
+            <th>CONDUCTOR
+            </th>
+        </tr>
+    </table>
 </body>
 
 </html>
@@ -240,5 +234,21 @@
 
     .contImg {
         height: 100px;
+    }
+       /* firma */
+    
+       .firma{
+        border-collapse: collapse;
+        width: 100%;
+        margin: auto;
+        margin-top: 100px;
+    }
+
+    .firma th{
+        width: 50%;
+    }
+
+    .firma td{
+        text-align: center;
     }
 </style>

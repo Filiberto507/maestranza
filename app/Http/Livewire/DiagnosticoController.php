@@ -123,14 +123,11 @@ class DiagnosticoController extends Component
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
             'tipo_taller' => 'required|not_in:Elegir',
-            'observacion' => 'required|min:3',
             'responsable' => 'required|not_in:Elegir'
         ];
         $messages = [
             'fecha.required' => 'seleccione una fecha',
             'tipo_taller' => 'Seleccione al Tipo de taller',
-            'observacion.required' => 'agregar observacion',
-            'observacion.min' => 'mayor a 3 caracteres',
             'responsable.required' => 'Ingrese el responsable',
             'responsable.not_in' => 'Seleccione el responsable'
         ];
@@ -220,15 +217,12 @@ class DiagnosticoController extends Component
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
             'tipo_taller' => 'required|not_in:Elegir',
-            'observacion' => 'required|min:3',
             'responsable' => 'required|not_in:Elegir'
         ];
 
         $messages = [
             'fecha.required' => 'ingresela fecha',
             'tipo_taller' => 'Seleccione al Tipo de taller',
-            'observacion.required' => 'agregar observacion',
-            'observacion.min' => 'mayor a 3 caracteres',
             'responsable.required' => 'Ingrese el responsable',
             'responsable.not_in' => 'Seleccione el responsable'
         ];
@@ -298,7 +292,7 @@ class DiagnosticoController extends Component
     public function pdf($id)
     {
         $Diagnostico = Diagnostico::join('vehiculos as v', 'v.id', 'diagnosticos.vehiculos_id')
-            ->select('diagnosticos.*', 'v.id as vehiculos', 'v.placa', 'v.marca')
+            ->select('diagnosticos.*', 'v.id as vehiculos', 'v.placa', 'v.marca', 'v.clase', 'v.tipo_vehiculo')
             ->where('diagnosticos.id', $id)->first();
         //dd($Diagnostico);
         $DiagnosticoItem = DiagnosticoItem::where('diagnosticos_id', $id)->get();

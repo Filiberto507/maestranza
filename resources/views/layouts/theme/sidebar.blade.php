@@ -190,7 +190,7 @@
                 </a>
             </li>
 
-            <li class="">
+            <!--<li class="">
                 <a href="{{url('reporteresponsablent')}}" class="menu-toggle" data-active="false">
                     <div class="base-menu">
                         <div class="base-icons">
@@ -205,7 +205,7 @@
                          SIN TALLER</span>
                     </div>
                 </a>
-            </li>
+            </li>-->
             
             <li class="">
                 <a href="{{url('conductor')}}" class="menu-toggle" data-active="false">
@@ -277,6 +277,21 @@
                             </svg>
                         </div>
                         <span>TRABAJO REALIZADO</span>
+                    </div>
+                </a>
+            </li>
+
+            <li class="">
+                <a href="{{url('trabajorealizant')}}" class="menu-toggle" data-active="false">
+                    <div class="base-menu">
+                        <div class="base-icons">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <circle cx="12" cy="12" r="6"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                            </svg>
+                        </div>
+                        <span>TRABAJO REALIZADO <br> SIN TALLER</span>
                     </div>
                 </a>
             </li>

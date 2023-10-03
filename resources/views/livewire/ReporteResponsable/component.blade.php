@@ -55,8 +55,7 @@
                                 <button wire:click="SalesByDate" class="btn btn-dark btn-block">
                                     Consultar
                                 </button>
-
-                                <a class="btn btn-dark btn-block {{count($data) < 1? 'disabled' : ''}}" 
+                                <a class="btn btn-dark btn-block {{(count($data) < 1 && count($diagnosnt) < 1) ? 'disabled' : ''}}" 
                                 href="{{ url('report_responsable/pdf' . '/' . $vehiculoselectedId . '/' . $reportType. '/' . $dateFrom. '/' . $dateTo) }}" target="_blank">
                                     Generar PDF</a>
 

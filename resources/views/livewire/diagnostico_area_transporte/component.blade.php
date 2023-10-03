@@ -11,7 +11,7 @@
                         <select class="form-control basic" wire:model="vehiculoselectedName" id="select2-dropdown">
                             <option value="Elegir" selected>Elegir</option>
                             @foreach ($vehiculodatos as $ve)
-                            <option value="{{ $ve->id }}">{{ $ve->placa }} | {{ $ve->conductor }} </option>
+                            <option value="{{ $ve->id }}">{{ $ve->id }} | {{ $ve->placa }} | {{ $ve->conductor }} </option>
                             @endforeach
                         </select>
                     </div>

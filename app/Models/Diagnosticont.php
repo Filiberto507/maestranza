@@ -26,4 +26,10 @@ class Diagnosticont extends Model
         return $this->belongsTo(DiagnosticoAreaTransportent::class);
 
     }
+
+    public function trabajoreazliado()
+    {
+        return $this->belongsTo(TrabajoRealizadoTaller::class);
+
+    }
 }

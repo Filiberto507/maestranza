@@ -6,17 +6,19 @@ use App\Models\TrabajoRealizadoTaller;
 use App\Models\Taller;
 use App\Models\accesoriostaller;
 use App\Models\Conductor;
+use App\Models\DiagnosticoItem;
 use App\Models\User;
 use App\Models\Vehiculos;
 use App\Models\tallerdetalle;
-use App\Models\Diagnostico;
-use App\Models\DiagnosticoItem;
+use App\Models\Diagnosticont;
+use App\Models\DiagnosticontItem;
+use App\Models\TrabajoRealizadont;
 use Livewire\WithPagination;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
-class TrabajoRealizadoTallerController extends Component
+class TrabajoRealizadontController extends Component
 {
     use WithPagination;
 
@@ -45,7 +47,7 @@ class TrabajoRealizadoTallerController extends Component
     public function mount()
     {
         $this->pageTitle = 'Listado';
-        $this->componentName = 'Trabajo Realizado';
+        $this->componentName = 'Trabajo Realizado Sin Taller';
         $this->vehiculoselectedName = 'Elegir';
 
     }
@@ -54,21 +56,19 @@ class TrabajoRealizadoTallerController extends Component
     {
          //validar si el usuario ingreso informacion
          if (strlen($this->search) > 0)
-         $trabajo = TrabajoRealizadoTaller::where('placa', 'like', '%' . $this->search . '%')
+         $trabajo = TrabajoRealizadont::where('placa', 'like', '%' . $this->search . '%')
          ->orderBy('id', 'desc')
          ->paginate($this->pagination);
         else
-         $trabajo = TrabajoRealizadoTaller::orderBy('id', 'desc')->paginate($this->pagination);
+         $trabajo = TrabajoRealizadont::orderBy('id', 'desc')->paginate($this->pagination);
 
 
-     $this->vehiculodatos = Taller::leftJoin('trabajo_realizado_tallers as tr', 'tr.taller_id', 'tallers.id')
-        ->join('diagnosticos as di', 'di.taller_id', 'tallers.id')
-        ->select('tallers.*')
-        ->whereNotNull('tallers.fecha_salida')
-        ->whereNotNull('di.taller_id')
-        ->whereNull('tr.taller_id')
-        ->orderby('id', 'desc')
-        ->get();
+     $this->vehiculodatos = Diagnosticont::leftJoin('trabajo_realizadonts as dt', 'dt.diagnosticont_id', 'diagnosticonts.id')
+     ->join('vehiculos as v', 'v.id', 'diagnosticonts.id')
+     ->select('diagnosticonts.*', 'v.id as vehiculos', 'v.placa', 'v.tipo_vehiculo')
+     ->whereNull('diagnosticont_id')
+     ->orderby('id', 'desc')
+     ->get();
 
         $this->responsableu= User::where('profile','like','%'.'Tecnico-Mecanico'.'%')
         ->orderby('name', 'asc')
@@ -77,7 +77,7 @@ class TrabajoRealizadoTallerController extends Component
 
     //dd($this->diagnostico_item);
 
-     return view('livewire.TrabajoRealizadoTaller.component', [
+     return view('livewire.TrabajoRealizadont.component', [
          'trabajor' => $trabajo,
          'vehiculodatos' => $this->vehiculodatos,
          'responsableu'=>$this->responsableu,
@@ -138,7 +138,7 @@ class TrabajoRealizadoTallerController extends Component
         'resetUI' => 'resetUI'
     ];
 
-    public function Edit(TrabajoRealizadoTaller $trabajosr)
+    public function Edit(TrabajoRealizadont $trabajosr)
     {
         $this->selected_id = $trabajosr->id;
         $this->vehiculo = $trabajosr->vehiculo;
@@ -152,11 +152,11 @@ class TrabajoRealizadoTallerController extends Component
         //$this->descripcion = $trabajosr->descripcion;
         $this->observacion = $trabajosr->observaciones;
 
-        $diagnostico_taller = Diagnostico::where('taller_id', $trabajosr->taller_id)->first();
+        $diagnostico_taller = Diagnosticont::where('id', $trabajosr->id)->first();
         //dd($diagnostico_taller);
         $this->checkdiagnostico = explode('-', $trabajosr->descripcion);
         //dd($this->checkdiagnostico);
-        $this->diagnostico_item = DiagnosticoItem::where('diagnosticos_id', $diagnostico_taller->id)->get();
+        $this->diagnostico_item = DiagnosticontItem::where('diagnosticosnt_id', $diagnostico_taller->id)->get();
         //dd($this->diagnostico_item);
         $this->emit('show-modal', 'open!');
     }
@@ -200,7 +200,7 @@ class TrabajoRealizadoTallerController extends Component
         $this->validate($rules, $messages);
         
          //por año el numero se reiniciara 
-         $ultimotrabajo = TrabajoRealizadoTaller::orderby('id', 'desc')->first();
+         $ultimotrabajo = TrabajoRealizadont::orderby('id', 'desc')->first();
          //dd($ultimotrabajo); //2023-07-21
  
          if($ultimotrabajo)
@@ -224,7 +224,7 @@ class TrabajoRealizadoTallerController extends Component
 
         //dd($numerotrabajo);
           //crear el usuario
-        $trabajosr = TrabajoRealizadoTaller::create([
+        $trabajosr = TrabajoRealizadont::create([
             'numero_trabajo' => $numerotrabajo,
             'vehiculo' => $this->vehiculo,
             'placa' => $this->placa,
@@ -236,7 +236,7 @@ class TrabajoRealizadoTallerController extends Component
             'km_salida' => $this->km_salida,
             'descripcion' => $this->descripcion,
             'observaciones' => $this->observacion,
-            'taller_id' => $this->taller_id,
+            'diagnosticont_id' => $this->taller_id,
         ]);
 
         $this->resetUI();
@@ -268,7 +268,7 @@ class TrabajoRealizadoTallerController extends Component
 
         //validamos 
         $this->validate($rules, $messages);
-        $trabajosr = TrabajoRealizadoTaller::find($this->selected_id);
+        $trabajosr = TrabajoRealizadont::find($this->selected_id);
         $trabajosr->Update([
             'responsable' => $this->responsable,
             'fecha_ingreso' => $this->fecha_ingreso,
@@ -292,21 +292,24 @@ class TrabajoRealizadoTallerController extends Component
 
         //dd($this->vehiculoselectedId);
         //dd($this->vehiculoselectedName, $this->vehiculoselectedId);
-        $findvehiculo = taller::where('id', $this->vehiculoselectedId)
+        $findvehiculo = Diagnosticont::where('id', $this->vehiculoselectedId)
             ->first();
+        $vehiculo = Vehiculos::where('vehiculos.id', $findvehiculo->vehiculos_id)
+        ->first();
         //dd($findvehiculo);
         $this->fechataller = Carbon::parse($findvehiculo->fecha_ingreso)->format('Y');
-        $this->placa = $findvehiculo->placa;
-        $this->vehiculo = $findvehiculo->clase . ' '. $findvehiculo->vehiculo . ' '. $findvehiculo->tipo_vehiculo;
+        $this->placa = $vehiculo->placa;
+        $this->vehiculo = $vehiculo->clase . ' '. $vehiculo->marca . ' '. $vehiculo->tipo_vehiculo;
         $this->dependencia = $findvehiculo->dependencia;
         $this->taller_id = $findvehiculo->id;
-        $this->km_ingreso = $findvehiculo->kilometraje;
-        $this->fecha_ingreso = $findvehiculo->fecha_ingreso;
-        $this->fecha_salida = $findvehiculo->fecha_salida;
+        //dd($this->taller_id);
+        //$this->km_ingreso = $findvehiculo->kilometraje;
+        $this->fecha_ingreso = $findvehiculo->fecha;
+        $this->fecha_salida = Carbon::parse(Carbon::now())->format('Y-m-d');
         
-        $diagnostico_taller = Diagnostico::where('taller_id', $this->vehiculoselectedId)->first();
+        $diagnostico_taller = Diagnosticont::where('id', $this->vehiculoselectedId)->first();
         //dd($diagnostico_taller);
-        $this->diagnostico_item = DiagnosticoItem::where('diagnosticos_id', $diagnostico_taller->id)->get();
+        $this->diagnostico_item = DiagnosticontItem::where('diagnosticosnt_id', $diagnostico_taller->id)->get();
         //$this->diagnostico_item = accesoriostaller::orderBy('id', 'desc')->get();
         //dd($this->diagnostico_item);
 

@@ -7,13 +7,15 @@ use App\Models\Taller;
 use App\Models\Diagnostico;
 use App\Models\Diagnostico_area_transporte;
 use App\Models\TrabajoRealizadoTaller;
+use App\Models\Diagnosticont;
+use App\Models\DiagnosticoAreaTransportent;
 use App\Models\Vehiculos;
 use Carbon\Carbon;
 
 class ReporteResponsableController extends Component
 {
     public $componentName, $data, $details, $sumDetails, $countDetails, 
-    $reportType, $userId, $dateFrom, $dateTo, $saleId;
+    $reportType, $userId, $dateFrom, $dateTo, $saleId, $diagnosnt;
 
 
     //select2
@@ -22,6 +24,7 @@ class ReporteResponsableController extends Component
     public function mount(){
         $this->componentName = 'Reportes Area de Transportes';
         $this->data = [];
+        $this->diagnosnt = [];
         $this->details = [];
         $this->sumDetails = 0;
         $this->countDetails = 0;
@@ -69,7 +72,11 @@ class ReporteResponsableController extends Component
             ->whereBetween('tallers.fecha_ingreso', [$from,$to])
             ->orderBy('tallers.id', 'desc')->get();
 
-            
+            $this->diagnosnt = Diagnosticont::leftJoin('diagnostico_area_transportents as da', 'da.diagnosticont_id', 'diagnosticonts.id')
+             ->select('diagnosticonts.*', 'da.numero_diagtransporte as diagnosticotransporte')
+             ->whereBetween('diagnosticonts.fecha', [$from,$to])
+             ->orderBy('diagnosticonts.id', 'desc')->get();
+             //dd(count($this->diagnosnt));
             //dd($this->data);
         } else {
             //dd($this->vehiculoselectedId);
@@ -79,6 +86,13 @@ class ReporteResponsableController extends Component
             ->where('vehiculo_id', $this->vehiculoselectedId)
             ->whereBetween('tallers.fecha_ingreso', [$from,$to])
             ->orderBy('tallers.id', 'desc')->get();
+
+            $this->diagnosnt = Diagnosticont::leftJoin('diagnostico_area_transportents as da', 'da.diagnosticont_id', 'diagnosticonts.id')
+             ->select('diagnosticonts.*', 'da.numero_diagtransporte as diagnosticotransporte')
+             ->where('diagnosticonts.vehiculos_id', $this->vehiculoselectedId)
+             ->whereBetween('diagnosticonts.fecha', [$from,$to])
+             ->orderBy('diagnosticonts.id', 'desc')->get();
+            //dd(count($this->diagnosnt));
         }
     }
 }

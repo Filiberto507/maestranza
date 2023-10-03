@@ -25,11 +25,7 @@ h2{
   text-align: center;
   padding: 10px;
   }
-.fecha-title{
-margin: 0;
-padding: 5px;
 
-}
 
 td {
   padding: 5px;
@@ -41,12 +37,14 @@ td {
 
 .columna2 {
   width: 30%;
+  border: solid 2px black;
 }
 
 .columna3 {
   /*background: cornflowerblue;*/
   width: 25%;
   vertical-align: top;
+  border: solid 2px black;
 }
 
 .columna3 div {
@@ -62,8 +60,15 @@ td {
 }
 
 /*fecha*/
+.fecha-title{
+  margin: 0;
+  padding: 5px;
+  border: solid 2px black;
+
+}
 .fecha-td{
   /*border: solid 4px cornflowerblue;*/
+
   background-color: #fff;
 }
 

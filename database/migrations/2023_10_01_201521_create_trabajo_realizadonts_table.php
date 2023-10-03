@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('trabajo_realizado_tallers', function (Blueprint $table) {
+        Schema::create('trabajo_realizadonts', function (Blueprint $table) {
             $table->id();
             $table->integer('numero_trabajo');
             $table->string('vehiculo', 255);
@@ -26,8 +26,8 @@ return new class extends Migration
             $table->date('fecha_salida');
             $table->longText('descripcion')->nullable();
             $table->longText('observaciones')->nullable();
-            $table->unsignedBigInteger('taller_id');
-            $table->foreign('taller_id')->references('id')->on('tallers');
+            $table->unsignedBigInteger('diagnosticont_id');
+            $table->foreign('diagnosticont_id')->references('id')->on('diagnosticonts');
             $table->timestamps();
         });
     }
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trabajo_realizado_tallers');
+        Schema::dropIfExists('trabajo_realizadonts');
     }
 };

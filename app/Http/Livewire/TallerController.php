@@ -172,7 +172,6 @@ class TallerController extends Component
             'conductorname' => 'required|not_in:Elegir',
             'dependencia' => 'required|min:3|not_in:Elegir',
             'kilometraje' => 'required|min:3',
-            'ordentrabajo' => 'required|min:3',
             'responsable' => 'required|not_in:Elegir'
         ];
 
@@ -184,8 +183,6 @@ class TallerController extends Component
             'dependencia.not_in' => 'Seleccione la dependencia',
             'kilometraje.required' => 'Agregue el kilometraje',
             'kilometraje.min' => 'Kilometraje debe tener al menos 3 caracteres',
-            'ordentrabajo.required' => 'Es requerido la orden de trabajo a realizar',
-            'ordentrabajo.min' => 'Orden de Trabajo debe tener al menos 3 caracteres',
             'responsable.required' => 'Ingrese el responsable',
             'responsable.not_in' => 'Seleccione el responsable'
         ];
@@ -385,7 +382,6 @@ class TallerController extends Component
             'conductorname' => 'required|not_in:Elegir',
             'dependencia' => 'required|min:3|not_in:Elegir',
             'kilometraje' => 'required|min:3',
-            'ordentrabajo' => 'required|min:3',
             'responsable' => 'required|not_in:Elegir'
         ];
 
@@ -397,8 +393,6 @@ class TallerController extends Component
             'dependencia.not_in' => 'Seleccione la dependencia',
             'kilometraje.required' => 'Agregue el kilometraje',
             'kilometraje.min' => 'Kilometraje debe tener al menos 3 caracteres',
-            'ordentrabajo.required' => 'Es requerido la orden de trabajo a realizar',
-            'ordentrabajo.min' => 'Orden de Trabajo debe tener al menos 3 caracteres',
             'responsable.required' => 'Ingrese el responsable',
             'responsable.not_in' => 'Seleccione el responsable'
         ];

@@ -132,7 +132,6 @@ class DiagnosticontController extends Component
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
             'tipo_taller' => 'required|not_in:Elegir',
-            'observacion' => 'required|min:3',
             'responsable' => 'required|not_in:Elegir'
         ];
         $messages = [
@@ -140,8 +139,6 @@ class DiagnosticontController extends Component
             'dependencia.required' => 'seleccione un conductor',
             'conductor.required' => 'seleccione una dependencia',
             'tipo_taller' => 'Seleccione al Tipo de taller',
-            'observacion.required' => 'agregar observacion',
-            'observacion.min' => 'mayor a 3 caracteres',
             'responsable.required' => 'Ingrese el responsable',
             'responsable.not_in' => 'Seleccione el responsable'
         ];
@@ -229,15 +226,12 @@ class DiagnosticontController extends Component
             'conductor' => 'required|min:3',
             'vehiculos_id' => 'required',
             'tipo_taller' => 'required|not_in:Elegir',
-            'observacion' => 'required|min:3',
             'responsable' => 'required|not_in:Elegir'
         ];
 
         $messages = [
             'fecha.required' => 'ingresela fecha',
             'tipo_taller' => 'Seleccione al Tipo de taller',
-            'observacion.required' => 'agregar observacion',
-            'observacion.min' => 'mayor a 3 caracteres',
             'responsable.required' => 'Ingrese el responsable',
             'responsable.not_in' => 'Seleccione el responsable'
         ];
@@ -307,11 +301,11 @@ class DiagnosticontController extends Component
     public function pdf($id)
     {
         $Diagnostico = Diagnosticont::join('vehiculos as v', 'v.id', 'diagnosticonts.vehiculos_id')
-            ->select('diagnosticonts.*', 'v.id as vehiculos', 'v.placa', 'v.marca')
+            ->select('diagnosticonts.*', 'v.id as vehiculos', 'v.placa', 'v.marca', 'v.clase', 'v.tipo_vehiculo')
             ->where('diagnosticonts.id', $id)->first();
         //dd($Diagnostico);
         $DiagnosticoItem = DiagnosticontItem::where('diagnosticosnt_id', $id)->get();
-        //dd($DiagnosticoItem);
+        //dd($Diagnostico);
         $Vehiculos = Vehiculos::all();
         $pdf = PDF::setPaper([0, 0, 680, 1000])->loadView('livewire.diagnosticont.pdf', compact('Diagnostico', 'DiagnosticoItem', 'Vehiculos'));
         return $pdf->stream();

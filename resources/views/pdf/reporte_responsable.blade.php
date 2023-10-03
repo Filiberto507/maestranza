@@ -79,8 +79,12 @@
 
 		</tr>
 	</table>-->
-
-        <table id="factura_detalle" width="100%">
+        @if(count($data) < 1)
+        
+            <h3 style="text-align: center;">NO SE TIENE DATOS CON TALLER</h3>
+        
+        @else
+            <table id="factura_detalle" width="100%">
             <thead>
                 <tr>
                     <th width="5%">Nº</th>
@@ -103,6 +107,52 @@
                     <td align="center">{{$item->diagnostico}}</td>
                     <td align="center">{{$item->diagnosticotransporte}}</td>
                     <td align="center">{{$item->kilometraje}}</td>
+                    <td align="center">{{$item->observacion}}</td>
+                    @if($item->tipo_taller == 1)
+                    <td align="center">X</td>
+                    @else
+                    <td align="center"></td>
+                    @endif
+
+                    @if($item->tipo_taller == 2)
+                    <td align="center">X</td>
+                    @else
+                    <td align="center"></td>
+                    @endif
+                    <td style="font-size:12px;" >{{$item->conductor}}</td>
+
+
+                </tr>
+                @endforeach
+            </tbody>
+
+        </table>
+        
+        @endif
+        
+
+        <h3 style="text-align: center;">SIN TALLER</h3>
+        <table id="factura_detalle" width="100%">
+            <thead>
+                <tr>
+                    <th width="5%">Nº</th>
+                    <th class="textleft" width="20%">FECHA</th>
+                    <th class="textleft" width="15%">Nº DIAGNOSTICO</th>
+                    <th class="textleft" width="15%">Nº DIAGNOSTICO AREA DE TRANSPORTES</th>
+                    <th class="textright" width="40%">DESCRIPCION</th>
+                    <th class="textright" width="12%"> TALLER INTERNO</th>
+                    <th class="textright" width="12%"> TALLER EXTERNO</th>
+                    <th class="textcenter" width="50%"> CONDUCTOR</th>
+                </tr>
+
+            </thead>
+            <tbody id="detalle_productos">
+                @foreach($diagnosnt as $index => $item)
+                <tr>
+                    <td align="center">{{$index+1}}</td>
+                    <td align="center">{{$item->fecha}}</td>
+                    <td align="center">{{$item->numero_diagnostico}}</td>
+                    <td align="center">{{$item->diagnosticotransporte}}</td>
                     <td align="center">{{$item->observacion}}</td>
                     @if($item->tipo_taller == 1)
                     <td align="center">X</td>
