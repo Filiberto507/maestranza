@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('placa', 255);
             $table->string('dependencia', 255);
             $table->string('responsable', 255);
-            $table->string('km_ingreso', 255);
-            $table->string('km_salida', 255);
-            $table->date('fecha_ingreso');
-            $table->date('fecha_salida');
+            $table->string('km_ingreso', 255)->nullable();
+            $table->string('km_salida', 255)->nullable();
+            $table->date('fecha_ingreso')->nullable();
+            $table->date('fecha_salida')->nullable();
             $table->longText('descripcion')->nullable();
             $table->longText('observaciones')->nullable();
             $table->unsignedBigInteger('diagnosticont_id');

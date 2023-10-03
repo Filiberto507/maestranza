@@ -377,4 +377,12 @@ class DiagnosticontController extends Component
         
         
     }
+    public function salida($id)
+    {
+        $talleres = Diagnosticont::find($id);
+
+        //dd('hola');
+        //return view('home');
+        return redirect('trabajorealizant');
+    }
 }

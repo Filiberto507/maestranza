@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Livewire\DiagnosticontController;
 use Illuminate\Http\Request;
 //importar todo lo requerido para el pdf
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -306,13 +307,13 @@ class ExportController extends Controller
     public function reportTrabajoNT($id)
     {
 
-        $tallerdatos = TrabajoRealizadoTaller::find($id);
+        $tallerdatos = TrabajoRealizadont::find($id);
         //datos para el reporte
         /*$cadena = $tallerdatos->fecha_ingreso;
         $separador = "-";
         $s = explode($separador, $cadena);*/
         //dd($tallerdatos);
-        $taller=Taller::find($tallerdatos->taller_id);
+        
         //dd($taller);
         //$conductor = $taller->name;
         $fecha_ingreso = $tallerdatos->fecha_ingreso;
@@ -356,9 +357,9 @@ class ExportController extends Controller
         //dd($checktrabajo);
         //obtener los checks
         //dd($taller->id);
-        $diagnostico_id = Diagnostico::where('taller_id', $taller->id)->first();
+        $diagnostico_id = Diagnosticont::where('id', $tallerdatos->id)->first();
         //dd($diagnostico_id->id);
-        $checksdiagnostico = DiagnosticoItem::where('diagnosticos_id',$diagnostico_id->id)->get();
+        $checksdiagnostico = DiagnosticontItem::where('diagnosticosnt_id',$diagnostico_id->id)->get();
 
         //dd($checksdiagnostico);
         //foreach para agregar si tiene el checked
@@ -419,7 +420,7 @@ class ExportController extends Controller
         //loadView = pasando la vista
         // tamaño oficio -> 609.45, 935.43
         //ajuste perfecto en 73 al imprimir
-        $pdf = PDF::setPaper([0, 0, 680, 900])->loadView('pdf.trabajo', compact(
+        $pdf = PDF::setPaper([0, 0, 680, 900])->loadView('pdf.trabajont', compact(
             'fecha_ingreso',
             'fecha_salida',
             'vehiculo',
@@ -430,7 +431,7 @@ class ExportController extends Controller
             'km_salida',
             'trabajorealizado',
             'observaciones',
-            'taller',
+            'diagnostico_id',
             'tallerdatos',
             'primeros10',
             'segundos10',

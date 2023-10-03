@@ -123,7 +123,7 @@
 
         <tr>
             <td>{{$responsable}}</td>
-            <td>{{$taller->conductor}}</td>
+            <td>{{$diagnostico_id->conductor}}</td>
         </tr>
         <tr>
             <th>TECNICO MECANICO</th>

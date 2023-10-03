@@ -55,6 +55,9 @@
                                 <th class="table-th text-while">
                                     ACCTIONS
                                 </th>
+                                <th class="table-th text-while">
+                                    TRABAJO REALIZADO
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,6 +106,11 @@
                                             <rect x="6" y="14" width="12" height="8"></rect>
                                         </svg>
                                     </a>
+                                </td>
+                                <td>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" wire:click="salida({{$diag->id}})" type="button">TR</button>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach

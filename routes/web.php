@@ -84,4 +84,7 @@ Route::get('report_responsable/pdf/{user}/{type}/{fi}/{f2}', [ExportController::
 Route::get('report_responsable/pdf/{user}/{type}', [ExportController::class, 'reportResponsable']);
 //redirect de taller cuando este habilitado salida
 Route::get('/trabajotaller', TrabajoRealizadoTallerController::class);
+//trabajo realizado sin taller pdf
+Route::get('reportrabajont/pdf/{id}', [ExportController::class, 'reportTrabajoNT']);
+
 

@@ -182,7 +182,6 @@ class TrabajoRealizadontController extends Component
         $rules = [
             'dependencia' => 'required|min:3',
             'responsable' => 'required|min:3',
-            'km_salida' => 'required|min:3',
             'fecha_salida' => 'required|min:3'
         ];
 
@@ -191,8 +190,6 @@ class TrabajoRealizadontController extends Component
             'dependencia.min' => 'Dependencia debe tener al menos 3 caracteres',
             'responsable.required' => 'Agregue el responsable',
             'responsable.min' => 'responsable debe tener al menos 3 caracteres',
-            'km_salida.required' => 'Es requerido km_salida a realizar',
-            'km_salida.min' => 'km_salida debe tener al menos 3 caracteres',
             'fecha_salida.required' => 'Es requerido Fecha Salida a realizar',
             'fecha_salida.min' => 'Fecha Salida debe tener al menos 3 caracteres',
         ];
@@ -254,7 +251,6 @@ class TrabajoRealizadontController extends Component
         $rules = [
             'dependencia' => 'required|min:3',
             'responsable' => 'required|min:3',
-            'km_salida' => 'required|min:3',
         ];
 
         $messages =[
@@ -262,8 +258,6 @@ class TrabajoRealizadontController extends Component
             'dependencia.min' => 'Dependencia debe tener al menos 3 caracteres',
             'responsable.required' => 'Agregue el responsable',
             'responsable.min' => 'responsable debe tener al menos 3 caracteres',
-            'km_salida.required' => 'Es requerido km_salida a realizar',
-            'km_salida.min' => 'km_salida debe tener al menos 3 caracteres',
         ];
 
         //validamos 
